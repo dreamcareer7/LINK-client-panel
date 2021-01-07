@@ -1,0 +1,69 @@
+@import "src/styles/index";
+
+.logo {
+  width: 170px;
+  margin-bottom: 15px;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  margin: auto;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  max-width: 270px;
+  min-width: 170px;
+}
+
+.form--detail-container {
+  display: flex;
+  align-items: center;
+  height: 37px;
+  width: 100%;
+  margin-top: 10px;
+  background-color: $secondary-color;
+  border-radius: 5px;
+  overflow: hidden;
+
+  input {
+    width: calc(100% - 70px);
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+}
+
+.detail-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 40px;
+  background-color: $primary-color;
+
+  img {
+    width: 13px;
+  }
+}
+
+.authButtonStyle {
+  margin: 25px auto 10px auto;
+}
+.show-hide-eye-btn{
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: inherit;
+}
