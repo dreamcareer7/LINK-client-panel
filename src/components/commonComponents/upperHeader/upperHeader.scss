@@ -21,6 +21,7 @@
   font-weight: 500;
   background-color: $background-primary-color;
   border-radius: 20px;
+  cursor: pointer;
 
   label {
     width: calc(100% - 80px);
@@ -74,6 +75,13 @@
   }
 }
 
+.logout-area{
+  position: relative;
+  display: inline-block;
+}
+.logout-area:hover .user-dropdown{
+  display: block;
+}
 .user-dropdown {
   display: none;
   position: absolute;
@@ -87,7 +95,7 @@
   z-index: 1;
 }
 
-.down-arrow,.user-dropdown {
+.down-arrow:hover .user-dropdown {
   display: block;
 }
 
