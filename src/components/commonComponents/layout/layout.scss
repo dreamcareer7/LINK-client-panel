@@ -1,0 +1,92 @@
+@import "src/styles/index";
+
+.dashboard {
+  display: flex;
+  height: 100vh;
+}
+
+.dashboard * {
+  box-sizing: border-box;
+}
+
+.dashboard--left-part {
+  width: 225px;
+  background-color: $primary-color;
+}
+
+.dashboard--right-part {
+  width: calc(100% - 225px);
+}
+
+.dashboard--upperHeader {
+  display: flex;
+  height: 60px;
+  width: 100%;
+}
+
+.common-area {
+  height: calc(100vh - 60px);
+  width: 100%;
+  padding: 10px 30px;
+  overflow-y: auto;
+}
+
+
+.action-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap-reverse;
+}
+
+.filter-label {
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: $primary-font-color;
+}
+
+.filters {
+  display: flex;
+}
+
+.filter-action {
+  display: flex;
+  align-items: center;
+  margin-right: 30px;
+  color: $secondary-font-color;
+
+  input {
+    min-width: 150px;
+    height: 25px;
+    padding: 0px 15px;
+    color: $secondary-font-color;
+    background-color: $secondary-variant-color;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+  }
+
+  input:nth-child(1) {
+    margin-right: 10px;
+  }
+
+  select {
+    min-width: 150px;
+    height: 25px;
+    color: $secondary-font-color;
+    background-color: $secondary-variant-color;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+  }
+}
+
+.action-buttons  {
+  display: flex;
+  align-items: center;
+
+  .success-button {
+    margin-right: 20px;
+  }
+}

@@ -1,15 +1,14 @@
 import React from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import linkfluencer from '../../../../src/assets/linkfluencer.png';
-import home from '../../../../src/assets/home.png';
-import group from '../../../../src/assets/group.png';
-import rightQuote from '../../../../src/assets/right-quote-sign.png';
-import gear from '../../../../src/assets/gear.png';
+import './sidebar.scss'
+import { NavLink } from 'react-router-dom';
+import linkfluencer from '../../../assets/linkfluencer.png';
+import home from '../../../assets/home.png';
+import group from '../../../assets/group.png';
+import rightQuote from '../../../assets/right-quote-sign.png';
+import gear from '../../../assets/gear.png';
 
 function SideBar() {
-    const dispatch = useDispatch();
-    const history = useHistory();
+
     return (
         <div>
             <div className="">

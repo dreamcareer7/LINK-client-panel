@@ -1,0 +1,203 @@
+@import "color-palette";
+
+/* scrollbar starts here */
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $secondary-color;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $primary-color;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $primary-variant-color;
+}
+/* scrollbar ends here */
+
+input {
+  font-size: 14px;
+  font-weight: 500;
+  color: #464646;
+}
+
+.buttons-row {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin: 20px 0 30px 0;
+}
+
+.button {
+  min-width: 140px;
+  width: fit-content;
+  padding: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  cursor: pointer;
+}
+
+.success-button {
+  color: white;
+  background-color: $success-color;
+}
+
+.primary-button {
+  color: white;
+  background-color: $primary-variant-color;
+}
+
+.danger-button {
+  color: white;
+  background-color: $danger-color;
+}
+
+.common-select {
+  min-width: 150px;
+  height: 26px;
+  background-color: $secondary-variant-color;
+  font-size: 12px;
+  font-weight: 600;
+  color: $secondary-font-color;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+
+.common-select option {
+  font-size: 14px;
+  font-weight: 600;
+  color: $secondary-font-color;
+}
+
+.common-input, .common-text-background {
+  width: 100%;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: $secondary-font-color;
+  background-color: $secondary-variant-color;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  resize: none;
+}
+
+.common-input::placeholder {
+  font-size: 12px;
+  font-weight: 500;
+  color: $secondary-font-color;
+}
+
+.common-content {
+  font-size: 14px;
+  font-weight: 500;
+  color: $secondary-font-color;
+}
+
+.breadcrumb {
+  color: $primary-font-color;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.breadcrumb span:last-child {
+  color: $placeholder-color;
+  cursor: text;
+}
+
+.common-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: $primary-font-color;
+  margin-bottom: 30px;
+}
+
+.common-subtitle {
+  font-size: 12px;
+  font-weight: 700;
+  color: $primary-font-color;
+}
+
+input::placeholder {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+.placeholder-font {
+  color: $placeholder-color !important;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.font-500 {
+  font-weight: 500 !important;
+}
+
+.font-600 {
+  font-weight: 600 !important;
+}
+
+.f-12 {
+  font-size: 12px !important;
+}
+
+.f-14 {
+  font-size: 14px !important;
+}
+
+.info-text-color {
+  color: $info-color!important;
+}
+
+.d-flex {
+  display: flex !important;
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
+.mb-5 {
+  margin-bottom: 5px !important;
+}
+
+.mt-5 {
+  margin-top: 5px !important;
+}
+
+.mt-10 {
+  margin-top: 10px !important;
+}
+
+.mr-5 {
+  margin-right: 5px !important;
+}
+
+.mr-10 {
+  margin-right: 10px !important;
+}
+
+.mr-15 {
+  margin-right: 15px !important;
+}
+
+.mr-20 {
+  margin-right: 20px !important;
+}
