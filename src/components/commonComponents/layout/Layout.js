@@ -1,11 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import SideBar from '../sideBar/SideBar';
 import UpperHeader from '../upperHeader/UpperHeader';
 import './layout.scss';
 
-const Layout =() => {
-  // eslint-disable-next-line react/prop-types
-
+const Layout = props => {
+  const { children } = props;
   return (
     <div>
       <div className="dashboard">
@@ -16,11 +16,14 @@ const Layout =() => {
           <div className="dashboard--upperHeader">
             <UpperHeader />
           </div>
-          <div className="common-area">hello</div>
+          <div className="common-area">{children}</div>
         </div>
       </div>
     </div>
   );
+};
+Layout.propTypes = {
+  children: PropTypes.element.isRequired,
 };
 
 export default Layout;
