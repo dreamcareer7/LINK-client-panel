@@ -1,10 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import './upperHeader.scss';
-import search from '../../../assets/search.png';
-import user from '../../../assets/dummy-user.jpg';
-import downArrow from '../../../assets/arrow_down.png';
-import logout from '../../../assets/logout.svg';
+import search from '../../../assets/images/search.png';
+import user from '../../../assets/images/dummy-user.jpg';
+import downArrow from '../../../assets/images/arrow_down.png';
+import logout from '../../../assets/images/logout.svg';
 
 function UpperHeader() {
   const history = useHistory();

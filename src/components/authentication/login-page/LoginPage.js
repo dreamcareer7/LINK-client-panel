@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-import linkFluencer from '../../../assets/linkfluencer.png';
+import linkFluencer from '../../../assets/images/linkfluencer.png';
 import './login.scss';
-import user from '../../../assets/user.png';
-import padlock from '../../../assets/padlock.png';
-import hideInterface from '../../../assets/hide-interface-symbol.png';
+import user from '../../../assets/images/user.png';
+import padlock from '../../../assets/images/padlock.png';
+import hideInterface from '../../../assets/images/hide-interface-symbol.png';
 import {
   checkForEmail,
   errorNotification,
