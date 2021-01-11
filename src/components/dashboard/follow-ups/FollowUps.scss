@@ -1,0 +1,7 @@
+@import "src/styles/index";
+
+.follow-ups-container {
+  display: grid;
+  grid-template-columns: calc(80% - 10px) calc(20% - 10px);
+  column-gap: 20px;
+}

@@ -32,6 +32,9 @@
   display: flex;
   align-items: center;
   height: 40px;
+  text-decoration: none;
+  opacity: 0.5;
+  color: white;
 
   img {
     height: 15px;
@@ -41,20 +44,15 @@
     margin-left: 10px;
     font-size: 14px;
     font-weight: 500;
-    color: #696b9d;
   }
-  .menu-link {
-    text-decoration: none;
-     span:hover {
-      color: #ffffff;
-    }
-  }
-  .active{
-    span{
-      color: #ffffff
-    }
-  }
+}
 
+.menu-item:hover {
+  opacity: 1;
+}
+
+.menu-item.active {
+  opacity: 1;
 }
 
 .copyright {

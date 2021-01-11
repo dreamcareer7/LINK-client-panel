@@ -41,7 +41,7 @@ input {
   min-width: 140px;
   width: fit-content;
   padding: 10px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   text-align: center;
   white-space: nowrap;
@@ -103,10 +103,16 @@ input {
   color: $secondary-font-color;
 }
 
-.common-content {
+.checkbox {
+  display: flex;
+  align-items: center;
   font-size: 14px;
   font-weight: 500;
   color: $secondary-font-color;
+}
+
+.white-input {
+  background-color: white;
 }
 
 .breadcrumb {
@@ -120,16 +126,32 @@ input {
   cursor: text;
 }
 
+.heading {
+  font-size: 16px;
+  font-weight: 700;
+}
+
 .common-title {
   font-size: 14px;
   font-weight: 700;
   color: $primary-font-color;
-  margin-bottom: 30px;
 }
 
 .common-subtitle {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
+  color: $primary-font-color;
+}
+
+.common-content {
+  font-size: 14px;
+  font-weight: 500;
+  color: $secondary-font-color;
+}
+
+.content-title {
+  font-size: 14px;
+  font-weight: 600;
   color: $primary-font-color;
 }
 
@@ -138,12 +160,26 @@ input::placeholder {
   font-weight: 500 !important;
 }
 
-.placeholder-font {
+.placeholder-color {
   color: $placeholder-color !important;
 }
 
+/* HTML date picker changes starts here */
+.unstyled::-webkit-inner-spin-button,
+.unstyled::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+/* HTML date picker changes ends here */
+
 .cursor-pointer {
   cursor: pointer !important;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .font-500 {
@@ -166,6 +202,10 @@ input::placeholder {
   color: $info-color!important;
 }
 
+.gray-text-color {
+  color: #797979 !important;
+}
+
 .d-flex {
   display: flex !important;
 }
@@ -178,12 +218,20 @@ input::placeholder {
   margin-bottom: 5px !important;
 }
 
+.mb-10 {
+  margin-bottom: 10px !important;
+}
+
 .mt-5 {
   margin-top: 5px !important;
 }
 
 .mt-10 {
   margin-top: 10px !important;
+}
+
+.mt-20 {
+  margin-top: 20px !important;
 }
 
 .mr-5 {

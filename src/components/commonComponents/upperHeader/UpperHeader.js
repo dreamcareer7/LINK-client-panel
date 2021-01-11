@@ -5,6 +5,7 @@ import search from '../../../assets/images/search.png';
 import user from '../../../assets/images/dummy-user.jpg';
 import downArrow from '../../../assets/images/arrow_down.png';
 import logout from '../../../assets/images/logout.svg';
+import notification from '../../../assets/bell.svg';
 
 function UpperHeader() {
   const history = useHistory();
@@ -18,6 +19,9 @@ function UpperHeader() {
         <button type="button">
           <img src={search} />{' '}
         </button>
+      </div>
+      <div title="Notifications" className="notification-container" onClick="">
+        <img src={notification} />
       </div>
       <div className="logout-area">
         <div className="upper-header--rounded-block">

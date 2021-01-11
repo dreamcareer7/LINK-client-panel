@@ -2,11 +2,11 @@ import React from 'react';
 import './sidebar.scss';
 import { NavLink } from 'react-router-dom';
 import linkfluencer from '../../../assets/images/linkfluencer.png';
-import home from '../../../assets/images/home.png';
+import home from '../../../assets/home.svg';
 /* import group from '../../../assets/group.png'; */
-import rightQuote from '../../../assets/images/right-quote-sign.png';
-import gear from '../../../assets/images/gear.png';
-import calender from '../../../assets/images/calender.png';
+import crm from '../../../assets/crm.svg';
+import reporting from '../../../assets/reporting.svg';
+import calendar from '../../../assets/calendar.svg';
 
 function SideBar() {
   return (
@@ -18,28 +18,24 @@ function SideBar() {
       </div>
       <div className="menu-bar">
         <div className="menu">
-          <div className="menu-item">
-            <NavLink className="menu-link" to="/home" replace>
-              <img alt="home" src={home} /> <span>Home</span>
-            </NavLink>
-          </div>
+          <NavLink className="menu-item menu-link" to="/home" replace>
+            <img alt="home" src={home} /> <span>Home</span>
+          </NavLink>
+
+          <NavLink className="menu-item menu-link" to="/followUps" replace>
+            <img alt="followups" src={calendar} /> <span>Follow ups</span>
+          </NavLink>
+
+          <NavLink className="menu-item menu-link" to="/crm" replace>
+            <img alt="crm" src={crm} /> <span>CRM</span>
+          </NavLink>
+
+          <NavLink className="menu-item menu-link" to="/reporting" replace>
+            <img alt="reporting" src={reporting} /> <span>Reporting</span>
+          </NavLink>
 
           <div className="menu-item">
-            <NavLink className="menu-link" to="/followUps" replace>
-              <img alt="followups" src={calender} /> <span>Follow ups</span>
-            </NavLink>
-          </div>
-
-          <div className="menu-item">
-            <NavLink className="menu-link" to="/crm" replace>
-              <img alt="crm" src={rightQuote} /> <span>CRM</span>
-            </NavLink>
-          </div>
-
-          <div className="menu-item">
-            <NavLink className="menu-link" to="/reporting" replace>
-              <img alt="reporting" src={gear} /> <span>Reporting</span>
-            </NavLink>
+            <button type="button">Logout</button>
           </div>
         </div>
         <div className="copyright">Copyright 2021. Linkfluencer Pvt. Ltd.</div>

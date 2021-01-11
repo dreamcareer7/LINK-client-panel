@@ -1,0 +1,17 @@
+@import "src/styles/index";
+
+.filters-container {
+  height: 100%;
+  margin-top: 15px;
+  padding: 15px;
+  background-color: $secondary-variant-color;
+  border-radius: 10px;
+
+  button {
+    width: 100%;
+  }
+}
+
+.filter-date {
+  margin-top: 10px
+}
