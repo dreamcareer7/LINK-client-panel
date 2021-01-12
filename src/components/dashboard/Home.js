@@ -1,8 +1,8 @@
 import React from 'react';
-import FollowUps from './follow-ups/FollowUps';
 
 function Home() {
-  return <div>{FollowUps}</div>;
+
+  return <div>home</div>;
 }
 
 export default Home;

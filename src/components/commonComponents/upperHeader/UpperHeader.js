@@ -6,11 +6,13 @@ import user from '../../../assets/images/dummy-user.jpg';
 import downArrow from '../../../assets/images/arrow_down.png';
 import logout from '../../../assets/images/logout.svg';
 import notification from '../../../assets/bell.svg';
+import {clearAuthToken} from "../../../helpers/LocalStorageHelper";
 
 function UpperHeader() {
   const history = useHistory();
   const onLogOut = () => {
-    history.push('/login');
+    clearAuthToken();
+    history.push('/signUp');
   };
   return (
     <div className="upper-header-block">

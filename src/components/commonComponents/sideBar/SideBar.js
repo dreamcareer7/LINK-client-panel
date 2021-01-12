@@ -34,9 +34,6 @@ function SideBar() {
             <img alt="reporting" src={reporting} /> <span>Reporting</span>
           </NavLink>
 
-          <div className="menu-item">
-            <button type="button">Logout</button>
-          </div>
         </div>
         <div className="copyright">Copyright 2021. Linkfluencer Pvt. Ltd.</div>
       </div>
