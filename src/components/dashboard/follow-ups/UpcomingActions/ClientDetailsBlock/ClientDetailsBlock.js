@@ -1,6 +1,6 @@
-import React from 'react';
-import './ClientDetailsBlock.scss';
-import user from '../../../../../assets/images/dummy-user.jpg';
+import React from "react";
+import "./ClientDetailsBlock.scss";
+import user from "../../../../../assets/images/dummy-user.jpg";
 
 function ClientDetailsBlock() {
   return (
@@ -19,18 +19,14 @@ function ClientDetailsBlock() {
           </div>
         </div>
         <div className="client-other-details">
-          <div className="content-title">
-            <div className="ellipsis">PHONE</div>
-            <div className="ellipsis">EMAIL</div>
-            <div className="ellipsis">STAGE</div>
-            <div className="">FOLLOW-UP DATE</div>
-          </div>
-          <div className="common-content placeholder-color">
-            <div className="ellipsis">636-986-9895</div>
-            <div className="ellipsis">tracy@magnatech.co</div>
-            <div className="ellipsis">Meeting Booked</div>
-            <div className="ellipsis">11th January 2021</div>
-          </div>
+          <div className="content-title ellipsis">PHONE</div>
+          <div className="common-content placeholder-color ellipsis">636-986-9895</div>
+          <div className="content-title ellipsis">EMAIL</div>
+          <div className="common-content placeholder-color ellipsis">tracy@magnatech.co</div>
+          <div className="content-title ellipsis">STAGE</div>
+          <div className="common-content placeholder-color ellipsis">Meeting Booked</div>
+          <div className="content-title">FOLLOW-UP DATE</div>
+          <div className="common-content placeholder-color ellipsis">11th January 2021</div>
         </div>
       </div>
     </div>

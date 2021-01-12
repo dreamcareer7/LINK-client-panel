@@ -36,7 +36,8 @@
 
 .client-other-details {
   display: grid;
-  grid-template-columns: 50% calc(50% - 10px);
+  grid-template-columns: 120px calc(100% - 130px);
+  grid-template-rows: repeat(4, 1fr);
   gap: 10px;
   margin: 20px 0 0 10px;
 }

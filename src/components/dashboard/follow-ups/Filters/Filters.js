@@ -9,8 +9,8 @@ function Filters() {
       <div className="heading placeholder-color">Filters</div>
       <div className="filters-container">
         <div className="common-title">Follow-up Date</div>
-        {/* <input placeholder="From" className="common-input white-input filter-date" type="date" onFocus={"this.type='date'"} id="date"/> */}
-        <DatePicker />
+        <DatePicker className="mt-10" placeholderText="From" dateFormat="MM-DD-YYYY" />
+        <DatePicker className="mt-10" placeholderText="To" dateFormat="MM-DD-YYYY" />
         <div className="common-title mt-20 mb-5">Stage</div>
         <input id="intial-contact" type="checkbox" />
         <label htmlFor="intial-contact" className="checkbox mb-10">
