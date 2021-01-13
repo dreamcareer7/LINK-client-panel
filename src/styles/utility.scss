@@ -34,13 +34,16 @@ input {
   display: flex;
   justify-content: left;
   align-items: center;
-  margin: 20px 0 30px 0;
+
+  button:last-child {
+    margin-left: 10px;
+  }
 }
 
 .button {
   min-width: 140px;
   width: fit-content;
-  padding: 10px;
+  padding: 10px 30px;
   font-size: 14px;
   font-weight: 500;
   text-align: center;
@@ -49,6 +52,10 @@ input {
   border-radius: 20px;
   outline: none;
   cursor: pointer;
+}
+
+.slim-button {
+  padding: 5px 20px;
 }
 
 .success-button {
@@ -69,6 +76,7 @@ input {
 .common-select {
   min-width: 150px;
   height: 26px;
+  padding: 0 5px;
   background-color: $secondary-variant-color;
   font-size: 12px;
   font-weight: 600;
@@ -101,6 +109,11 @@ input {
   font-size: 12px;
   font-weight: 500;
   color: $secondary-font-color;
+}
+
+.common-select-white, .common-input-white {
+  width: 100%;
+  background-color: white;
 }
 
 .checkbox {
@@ -249,3 +262,35 @@ input::placeholder {
 .mr-20 {
   margin-right: 20px !important;
 }
+
+/* common block starts here */
+.common-block {
+  border-radius: 7px;
+
+  &.red {
+    background: linear-gradient(180deg, $danger-color 50%, $secondary-variant-color 50%);
+  }
+
+  &.green {
+    background: linear-gradient(180deg, $success-color 50%, $secondary-variant-color 50%);
+  }
+
+  &.yellow {
+    background: linear-gradient(180deg, $warning-color 50%, $secondary-variant-color 50%);
+  }
+  &.blue {
+    background: linear-gradient(180deg, $info-color 50%, $secondary-variant-color 50%);
+  }
+}
+
+.status-color {
+  height: 7px;
+}
+
+.common-block--detail-container {
+  height: calc(100% - 7px);
+  padding: 25px 25px 40px 25px;
+  background-color: $secondary-variant-color;
+  border-radius: 7px;
+}
+/* common block ends here */

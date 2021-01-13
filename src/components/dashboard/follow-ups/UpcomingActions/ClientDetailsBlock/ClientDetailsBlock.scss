@@ -1,33 +1,5 @@
 @import "src/styles/index";
 
-.client-detail-block {
-  background: linear-gradient(180deg, $danger-color 50%, $secondary-variant-color 50%);
-  border-radius: 7px;
-}
-
-.status-color {
-  height: 7px;
-
-  &.red {
-    background: linear-gradient(180deg, $danger-color 50%, $secondary-variant-color 50%);
-  }
-
-  &.green {
-    background: linear-gradient(180deg, $success-color 50%, $secondary-variant-color 50%);
-  }
-
-  &.yellow {
-    background: linear-gradient(180deg, $warning-color 50%, $secondary-variant-color 50%);
-  }
-}
-
-.client-detail-container {
-  height: calc(100% - 7px);
-  padding: 25px 25px 40px 25px;
-  background-color: $secondary-variant-color;
-  border-radius: 7px;
-}
-
 .DP-name-container {
   display: grid;
   grid-template-columns: 40px calc(100% - 40px);

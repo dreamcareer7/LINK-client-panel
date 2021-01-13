@@ -18,9 +18,9 @@ function ClientDetailsBlock({ opportunity }) {
   } = opportunity;
 
   return (
-    <div className="client-detail-block">
+    <div className="common-block cursor-pointer blue">
       <div className="status-color" />
-      <div className="client-detail-container">
+      <div className="common-block--detail-container">
         <div className="DP-name-container">
           <img className="user-dp" src={profilePicUrl} />
           <div>

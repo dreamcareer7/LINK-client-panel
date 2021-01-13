@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './UpcomingActions.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import ClientDetailsBlock from './ClientDetailsBlock/ClientDetailsBlock';

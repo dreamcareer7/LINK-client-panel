@@ -1,5 +1,9 @@
 @import "color-palette";
 
+.react-datepicker-wrapper {
+  width: 100% !important;
+}
+
 .react-datepicker__input-container input {
   height: 25px;
   width: inherit;
@@ -21,7 +25,6 @@ input[type="checkbox"] + label:before {
   height: 14px;
   margin: 0 10px 0 0;
   padding: 0;
-  font: 14px/1em Roboto;
   background-color: #cccccc;
   border: none;
   border-radius: 2px;
@@ -37,6 +40,10 @@ input[type="checkbox"]:focus + label::before {
 }
 /* HTML Checkbox modification ends here */
 
-/* date picker changes start here */
+@media (max-width: 1500px) {
+  /* date picker changes start here */
+  .react-datepicker__triangle {left: 100px!important;}
 
-/* date picker changes end here */
+  .react-datepicker-popper {left: -80px !important}
+  /* date picker changes end here */
+}
