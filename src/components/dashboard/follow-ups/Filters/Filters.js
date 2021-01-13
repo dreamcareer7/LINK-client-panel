@@ -2,7 +2,10 @@ import React, { useCallback, useReducer, useState } from 'react';
 import './Filters.scss';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useDispatch } from 'react-redux';
 import FollowUpCheckBox from './FollowUpCheckBox';
+import PotentialCkeckBox from './PotentialCkeckBox';
+import { getUpcomingActions } from '../../../../redux/actions/followUpAction/FollowUpAction';
 
 const stageInitialState = {
   INITIAL_CONTACT: {
@@ -34,6 +37,21 @@ const stageInitialState = {
     value: false,
   },
 };
+const potentialInitialState = {
+  VERY_LIKELY: {
+    name: 'Very Likely Deals',
+    value: false,
+  },
+  LIKELY: {
+    name: 'Likely Deals',
+    value: false,
+  },
+  NOT_LIKELY: {
+    name: 'Not Likely Deals',
+    value: false,
+  },
+};
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'UPDATE_CHECKBOX':
@@ -45,20 +63,52 @@ const reducer = (state, action) => {
       return state;
   }
 };
+
 function Filters() {
+  const dispatch = useDispatch();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
   const [stageCheckBox, setStageCheckBox] = useReducer(reducer, stageInitialState);
-
+  const [potentialCheckBox, setPotentialCheckBox] = useReducer(reducer, potentialInitialState);
+  console.log(startDate && startDate.toISOString());
   console.log(
     Object.entries(stageCheckBox)
       .filter(e => e[1].value)
       .map(e => e[0])
   );
+  console.log(
+    Object.entries(potentialCheckBox)
+      .filter(e => e[1].value)
+      .map(e => e[0])
+  );
+  const applyFilters = () => {
+    console.log('applay filter');
+    const data = {
+      stages: Object.entries(stageCheckBox)
+        .filter(e => e[1].value)
+        .map(e => e[0]),
+      likelyHoods: Object.entries(potentialCheckBox)
+        .filter(e => e[1].value)
+        .map(e => e[0]),
+      startDeal: 13,
+      endDeal: 1000,
+      startDate: startDate ? startDate.toISOString() : undefined,
+      endDate: endDate ? endDate.toISOString() : undefined,
+    };
 
+    dispatch(getUpcomingActions(data));
+  };
   const onChangeCheckbox = useCallback(e => {
     setStageCheckBox({
+      type: 'UPDATE_CHECKBOX',
+      name: e.target.name,
+      value: e.target.checked,
+    });
+  }, []);
+
+  const onChangePotential = useCallback(e => {
+    setPotentialCheckBox({
       type: 'UPDATE_CHECKBOX',
       name: e.target.name,
       value: e.target.checked,
@@ -97,22 +147,11 @@ function Filters() {
         </select>
 
         <div className="common-title mt-20 mb-5">Potential</div>
-        <input id="very-likely-deals" type="checkbox" />
-        <label htmlFor="very-likely-deals" className="checkbox mb-10">
-          Very Likely Deals
-        </label>
+        {Object.entries(potentialCheckBox).map(data => (
+          <PotentialCkeckBox key={Math.random()} onChange={onChangePotential} data={data} />
+        ))}
 
-        <input id="likely-deals" type="checkbox" />
-        <label htmlFor="likely-deals" className="checkbox mb-10">
-          Likely Deals
-        </label>
-
-        <input id="not-likely-deals" type="checkbox" />
-        <label htmlFor="not-likely-deals" className="checkbox mb-10">
-          Not Likely Deals
-        </label>
-
-        <button type="submit" className="button success-button mt-20">
+        <button type="submit" className="button success-button mt-20" onClick={applyFilters}>
           Apply Filters
         </button>
         <button type="button" className="button primary-button mt-10">
