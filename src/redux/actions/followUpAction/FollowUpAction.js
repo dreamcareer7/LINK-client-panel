@@ -7,7 +7,6 @@ export const getUpcomingActions = data => {
   return dispatch => {
     FollowUpService.getUpcomingActions(1, 1000, data)
       .then(response => {
-        console.log('response in  upcoming action=>', response);
         if (response.data.status === 'SUCCESS') {
           dispatch({
             type: FOLLOW_UP_REDUX_CONSTANT.GET_FILTERED_FOLLOW_UPS,

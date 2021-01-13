@@ -71,19 +71,8 @@ function Filters() {
 
   const [stageCheckBox, setStageCheckBox] = useReducer(reducer, stageInitialState);
   const [potentialCheckBox, setPotentialCheckBox] = useReducer(reducer, potentialInitialState);
-  console.log(startDate && startDate.toISOString());
-  console.log(
-    Object.entries(stageCheckBox)
-      .filter(e => e[1].value)
-      .map(e => e[0])
-  );
-  console.log(
-    Object.entries(potentialCheckBox)
-      .filter(e => e[1].value)
-      .map(e => e[0])
-  );
+
   const applyFilters = () => {
-    console.log('applay filter');
     const data = {
       stages: Object.entries(stageCheckBox)
         .filter(e => e[1].value)
@@ -114,7 +103,7 @@ function Filters() {
       value: e.target.checked,
     });
   }, []);
-  // console.log(document.getElementById('intial-contact').value);
+
   return (
     <div>
       <div className="heading placeholder-color">Filters</div>
