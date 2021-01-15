@@ -12,6 +12,9 @@ export const getUpcomingActions = data => {
             type: FOLLOW_UP_REDUX_CONSTANT.GET_FILTERED_FOLLOW_UPS,
             data: response.data.data,
           });
+          if (response.data.data.docs.docs.length === 0) {
+            errorNotification('It seems data not available for this category');
+          }
         }
       })
       .catch(e => {

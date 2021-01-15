@@ -25,10 +25,13 @@ function UpcomingActions() {
     <div>
       <div className="heading">Upcoming Actions</div>
       <div className="client-detail-blocks-container">
-        {upComingActions &&
+        {upComingActions ? (
           upComingActions.map(opportunity => (
             <ClientDetailsBlock key={opportunity._id} opportunity={opportunity} />
-          ))}
+          ))
+        ) : (
+          <div>There is no data available</div>
+        )}
       </div>
     </div>
   );
