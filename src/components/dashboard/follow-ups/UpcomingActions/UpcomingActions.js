@@ -16,8 +16,9 @@ function UpcomingActions() {
     };
     dispatch(getUpcomingActions(1, data));
   }, []);
-  const onOpportunityClick = () => {
-    history.push('./opportunityDetails');
+  const onOpportunityClick = id => {
+    console.log('id=>', id);
+    history.push(`/opportunityDetails/${id}`);
   };
   const handlePageChange = page => {
     const data = {
@@ -37,10 +38,12 @@ function UpcomingActions() {
   return (
     <div>
       <div className="heading">Upcoming Actions</div>
-      <div className="client-detail-blocks-container" onClick={onOpportunityClick}>
+      <div className="client-detail-blocks-container">
         {upComingActions ? (
           upComingActions.map(opportunity => (
-            <ClientDetailsBlock key={opportunity._id} opportunity={opportunity} />
+            <div onClick={() => onOpportunityClick(opportunity._id)}>
+              <ClientDetailsBlock key={opportunity._id} opportunity={opportunity} />
+            </div>
           ))
         ) : (
           <div>There is no data available</div>

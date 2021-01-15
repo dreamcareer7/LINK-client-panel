@@ -48,7 +48,7 @@ function App() {
               <PrivateRoute exact path="/followUps" component={FollowUps} />
               <PrivateRoute exact path="/crm" component={Crm} />
               <PrivateRoute exact path="/reporting" component={Reporting} />
-              <PrivateRoute exact path="/opportunityDetails" component={OpportunityDetails} />
+              <PrivateRoute exact path="/opportunityDetails/:id" component={OpportunityDetails} />
             </Layout>
           </Switch>
         </Route>
