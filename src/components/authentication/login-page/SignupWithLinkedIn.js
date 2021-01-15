@@ -4,9 +4,10 @@ import linkFluencer from '../../../assets/images/linkfluencer.png';
 import './login.scss';
 
 function SignupWithLinkedIn() {
-    const onClickSignUp = () =>{
-        window.location = "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77ugsdksaaa1rf&redirect_uri=https://2a0d824dbdaf.ngrok.io/client-auth/sign-up&state=fooobar&scope=r_emailaddress,r_liteprofile"
-    }
+  const onClickSignUp = () => {
+    window.location =
+      'https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77ugsdksaaa1rf&redirect_uri=https://aba638186a45.ngrok.io/client-auth/sign-up&state=fooobar&scope=r_emailaddress,r_liteprofile';
+  };
 
   return (
     <div className="login-content-container">
