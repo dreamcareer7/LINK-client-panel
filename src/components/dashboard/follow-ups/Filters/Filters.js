@@ -2,7 +2,7 @@ import React, { useCallback, useReducer, useState } from 'react';
 import './Filters.scss';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import FollowUpCheckBox from './FollowUpCheckBox';
 import PotentialCkeckBox from './PotentialCkeckBox';
 import { getUpcomingActions } from '../../../../redux/actions/followUpAction/FollowUpAction';
@@ -69,6 +69,8 @@ function Filters() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
+  const followupData = useSelector(state => state.followUps);
+
   const [stageCheckBox, setStageCheckBox] = useReducer(reducer, stageInitialState);
   const [potentialCheckBox, setPotentialCheckBox] = useReducer(reducer, potentialInitialState);
 
@@ -86,7 +88,7 @@ function Filters() {
       endDate: endDate ? endDate.toISOString() : undefined,
     };
 
-    dispatch(getUpcomingActions(data));
+    dispatch(getUpcomingActions(followupData.docs.page, data));
   };
   const onChangeCheckbox = useCallback(e => {
     setStageCheckBox({

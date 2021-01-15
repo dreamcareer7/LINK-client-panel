@@ -3,9 +3,9 @@ import { errorNotification } from '../../../constants/Toast';
 import FOLLOW_UP_REDUX_CONSTANT from '../../constants/FollowUpReduxConstant';
 
 // eslint-disable-next-line import/prefer-default-export
-export const getUpcomingActions = data => {
+export const getUpcomingActions = (page, data) => {
   return dispatch => {
-    FollowUpService.getUpcomingActions(1, 1000, data)
+    FollowUpService.getUpcomingActions(page, 9, data)
       .then(response => {
         if (response.data.status === 'SUCCESS') {
           dispatch({
