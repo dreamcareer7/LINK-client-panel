@@ -90,6 +90,15 @@ function Filters() {
 
     dispatch(getUpcomingActions(followupData.docs.page, data));
   };
+  const resetFilters = () => {
+    setStartDate(null);
+    setEndDate(null);
+    const data = {
+      stages: [],
+      likelyHoods: [],
+    };
+    dispatch(getUpcomingActions(1, data));
+  };
   const onChangeCheckbox = useCallback(e => {
     setStageCheckBox({
       type: 'UPDATE_CHECKBOX',
@@ -99,6 +108,8 @@ function Filters() {
   }, []);
 
   const onChangePotential = useCallback(e => {
+    setStartDate(null);
+    setEndDate(null);
     setPotentialCheckBox({
       type: 'UPDATE_CHECKBOX',
       name: e.target.name,
@@ -145,7 +156,7 @@ function Filters() {
         <button type="submit" className="button success-button mt-20" onClick={applyFilters}>
           Apply Filters
         </button>
-        <button type="button" className="button primary-button mt-10">
+        <button type="button" className="button primary-button mt-10" onClick={resetFilters}>
           Reset Filters
         </button>
       </div>
