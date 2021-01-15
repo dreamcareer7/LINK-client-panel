@@ -103,24 +103,13 @@
 
   img {
     height: 16px;
-    margin-right: 5px;
     cursor: pointer;
   }
-}
 
-.close-circle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 18px;
-  width: 18px;
-  line-height: 1;
-  font-size: 14px;
-  font-weight: 500;
-  color: $placeholder-color;
-  border-radius: 50%;
-  border:1.4px solid $placeholder-color;
-  cursor: pointer;
+  img:last-of-type {
+    height: 18px;
+    margin-left: 5px;
+  }
 }
 
 .opportunity-right {

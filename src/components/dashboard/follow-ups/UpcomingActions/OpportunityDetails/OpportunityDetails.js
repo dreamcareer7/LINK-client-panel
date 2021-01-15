@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import user from '../../../../../assets/images/dummy-user.jpg';
 import edit from '../../../../../assets/images/edit.svg';
+import close from '../../../../../assets/images/cancel.svg';
 
 function OpportunityDetails() {
   const history = useHistory();
@@ -97,9 +98,7 @@ function OpportunityDetails() {
               </span>
                 <div className='note-action'>
                   <img alt='edit' src={edit} title="Edit Note" />
-                  <div className='close-circle' title="Delete Note">
-                    x
-                  </div>
+                  <img className="close-circle" src={close}/>
                 </div>
                 <div className='note-time-stamp'>25-01-2021 | 2:35 AM</div>
 
@@ -110,9 +109,7 @@ function OpportunityDetails() {
               </span>
                 <div className='note-action'>
                   <img alt='edit' src={edit} title="Edit Note" />
-                  <div className='close-circle' title="Delete Note">
-                    x
-                  </div>
+                  <img className="close-circle" src={close}/>
                 </div>
                 <div className='note-time-stamp'>25-01-2021 | 2:35 AM</div>
 
