@@ -120,6 +120,7 @@
   color: $placeholder-color;
   border-radius: 50%;
   border:1.4px solid $placeholder-color;
+  cursor: pointer;
 }
 
 .opportunity-right {
@@ -127,12 +128,13 @@
 }
 
 .chat-history {
-  padding: 20px 15px 50px 15px;
+  padding: 20px 10px 50px 15px;
 }
 
 .chat-container {
   max-height: calc(100% - 50px);
   margin-top: 10px;
+  padding-right: 5px;
   overflow-y: auto;
 }
 

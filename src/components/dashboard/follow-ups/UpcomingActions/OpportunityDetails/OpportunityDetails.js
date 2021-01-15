@@ -96,8 +96,8 @@ function OpportunityDetails() {
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </span>
                 <div className='note-action'>
-                  <img alt='edit' src={edit} />
-                  <div className='close-circle'>
+                  <img alt='edit' src={edit} title="Edit Note" />
+                  <div className='close-circle' title="Delete Note">
                     x
                   </div>
                 </div>
@@ -109,8 +109,8 @@ function OpportunityDetails() {
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </span>
                 <div className='note-action'>
-                  <img alt='edit' src={edit} />
-                  <div className='close-circle'>
+                  <img alt='edit' src={edit} title="Edit Note" />
+                  <div className='close-circle' title="Delete Note">
                     x
                   </div>
                 </div>
