@@ -1,29 +1,32 @@
 import React, { useEffect } from 'react';
 import './OpportunityDetails.scss';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import user from '../../../../../assets/images/dummy-user.jpg';
 import edit from '../../../../../assets/images/edit.svg';
 import close from '../../../../../assets/images/cancel.svg';
-import FollowUpService from '../../../../../services/follow-up-service/FollowUpSevice';
+import { getOpportunity } from '../../../../../redux/actions/followUpAction/FollowUpAction';
 
 function OpportunityDetails() {
   const history = useHistory();
+  const dispatch = useDispatch();
   const onBack = () => {
     history.push('/followUps');
   };
   const { id } = useParams();
-  console.log('opportunity detail -> ', id);
+  // console.log('opportunity detail -> ', id);
+  const opportunity = useSelector(state => state.opportunityDetail);
+  console.log('opportunity=>', opportunity);
 
   useEffect(() => {
-    FollowUpService.getOpportunity(id)
-      .then(r => {
-        if (r.data.status === 'SUCCESS') {
-          console.log(r.data.data);
-        }
-      })
-      .catch(e => console.log(e));
-  });
+    dispatch(getOpportunity(id));
+  }, []);
+  const goToLinkedInProfile = () => {
+    console.log('linked in url=>', opportunity.linkedInUrl);
+    window.location = `${opportunity.linkedInUrl}`;
+  };
+
   return (
     <>
       <div className="opportunity-header">
@@ -54,14 +57,23 @@ function OpportunityDetails() {
             <div className="common-block--detail-container">
               <div className="opportunity-detail">
                 <div className="DP-name-container">
-                  <img className="user-dp" src={user} />
+                  <img
+                    className="user-dp"
+                    src={opportunity && opportunity.profilePicUrl && opportunity.profilePicUrl}
+                  />
                   <div>
                     <div>
-                      <div className="common-subtitle client-name ellipsis">TRACY SMITH</div>
-                      <div className="common-content client-designation placeholder-color">
-                        Director, Magnatech Media
+                      <div className="common-subtitle client-name ellipsis">
+                        {opportunity && opportunity.firstName && opportunity.firstName}
                       </div>
-                      <button type="button" className="button primary-button slim-button mt-10">
+                      <div className="common-content client-designation placeholder-color">
+                        {opportunity && opportunity.title && opportunity.title}
+                      </div>
+                      <button
+                        type="button"
+                        className="button primary-button slim-button mt-10"
+                        onClick={goToLinkedInProfile}
+                      >
                         LinkedIn Profile
                       </button>
                     </div>
@@ -72,7 +84,7 @@ function OpportunityDetails() {
                   <div className="common-content placeholder-color ellipsis">636-986-9895</div>
                   <div className="content-title ellipsis">EMAIL</div>
                   <div className="common-content placeholder-color ellipsis">
-                    tracy@magnatech.co
+                    {opportunity && opportunity.email && opportunity.email}
                   </div>
                   <div className="content-title ellipsis">LOCATION</div>
                   <div className="common-content placeholder-color ellipsis">Sydney</div>
@@ -90,7 +102,10 @@ function OpportunityDetails() {
                 </div>
                 <div>
                   <div className="common-subtitle">DEAL SIZE</div>
-                  <input className="common-input common-input-white mt-5" placeholder="$500" />
+                  <input
+                    className="common-input common-input-white mt-5"
+                    placeholder={opportunity && opportunity.dealSize && opportunity.dealSize}
+                  />
                 </div>
                 <div>
                   <div className="common-subtitle">POTENTIAL</div>

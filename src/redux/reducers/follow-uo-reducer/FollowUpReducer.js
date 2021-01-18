@@ -9,3 +9,11 @@ export const followUps = (state = null, action) => {
       return state;
   }
 };
+export const opportunityDetail = (state = null, action) => {
+  switch (action.type) {
+    case FOLLOW_UP_REDUX_CONSTANT.GET_OPPORTUNITY_DETAIL:
+      return action.data;
+    default:
+      return state;
+  }
+};

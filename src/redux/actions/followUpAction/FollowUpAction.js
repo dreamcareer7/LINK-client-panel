@@ -26,3 +26,24 @@ export const getUpcomingActions = (page, data) => {
       });
   };
 };
+export const getOpportunity = id => {
+  return dispatch => {
+    FollowUpService.getOpportunity(id)
+      .then(response => {
+        if (response.data.status === 'SUCCESS') {
+          dispatch({
+            type: FOLLOW_UP_REDUX_CONSTANT.GET_OPPORTUNITY_DETAIL,
+            data: response.data.data,
+          });
+        }
+      })
+      .catch(e => {
+        console.log(e);
+        if (e.response.data.status === undefined) {
+          errorNotification('It seems like server is down, Please try after sometime.');
+        } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
+          errorNotification('Internal server error');
+        }
+      });
+  };
+};
