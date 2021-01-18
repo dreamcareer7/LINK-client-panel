@@ -1,4 +1,5 @@
-export const BASE_URL = 'https://a8c3dc4fd310.ngrok.io/';
+export const BASE_URL = 'https://link.dev.gradlesol.com/app/';
+export const LINKEDIN_CLIENT_ID = '77ugsdksaaa1rf';
 export const API_METHODS = {
   GET: 'GET',
   POST: 'POST',
@@ -7,5 +8,5 @@ export const API_METHODS = {
 };
 export const FOLLOW_UP_URL = {
   FOLLOW_UP_FILTER_URL: `${BASE_URL}client-follow-ups/filters/`,
-  GET_INDIVIDUAL_OPPRTUNITY_URL: `${BASE_URL}opportunity/get-opportunity/`,
+  GET_INDIVIDUAL_OPPORTUNITY_URL: `${BASE_URL}opportunity/get-opportunity/`,
 };

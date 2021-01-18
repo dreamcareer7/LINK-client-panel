@@ -13,6 +13,8 @@ export const opportunityDetail = (state = null, action) => {
   switch (action.type) {
     case FOLLOW_UP_REDUX_CONSTANT.GET_OPPORTUNITY_DETAIL:
       return action.data;
+    case FOLLOW_UP_REDUX_CONSTANT.CLEAR_OPPORTUNITY_DETAIL:
+      return null;
     default:
       return state;
   }

@@ -1,0 +1,142 @@
+import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
+
+import '../OpportunityDetails.scss';
+import PropTypes from 'prop-types';
+import moment from 'moment';
+
+function OpportunityData({ opportunityData, goToLinkedIn }) {
+  const {
+    profilePicUrl,
+    firstName,
+    lastName,
+    title,
+    email,
+    dealSize,
+    followUp,
+    stage,
+    likelyHood,
+    location,
+  } = opportunityData;
+  const [followUpDate, setFollowUpDate] = useState(followUp);
+  const [phone, setPhone] = useState('');
+  const [mail, setMail] = useState(email);
+  const [stageValue, setStageValue] = useState(stage);
+  const [potentialValue, setPotentialValue] = useState(likelyHood);
+  const [locationVal, setLocationVal] = useState(location);
+  return (
+    <div className="common-block blue">
+      <div className="status-color" />
+      <div className="common-block--detail-container">
+        <div className="opportunity-detail">
+          <div className="DP-name-container">
+            <img className="user-dp" src={profilePicUrl && profilePicUrl} />
+            <div>
+              <div>
+                <div className="common-subtitle client-name ellipsis">
+                  {firstName}
+                  {lastName}
+                </div>
+                <div className="common-content client-designation placeholder-color">{title}</div>
+                <button
+                  type="button"
+                  className="button primary-button slim-button mt-10"
+                  onClick={goToLinkedIn}
+                >
+                  LinkedIn Profile
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="opportunity-other-details">
+            <div className="content-title ellipsis">PHONE</div>
+            <input
+              type="text"
+              className="common-content placeholder-color ellipsis input-text-value"
+              value={phone}
+              onChange={e => setPhone(e.target.value)}
+            />
+            <div className="content-title ellipsis">EMAIL</div>
+            <input
+              type="text"
+              className="common-content placeholder-color ellipsis input-text-value"
+              value={mail}
+              onChange={e => setMail(e.target.value)}
+            />
+            <div className="content-title ellipsis">LOCATION</div>
+            <input
+              type="text"
+              className="common-content placeholder-color ellipsis input-text-value"
+              value={locationVal}
+              onChange={e => setLocationVal(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="opportunity--get-detail-container">
+          <div>
+            <div className="common-subtitle">STAGE</div>
+            <select
+              className="common-select common-select-white mt-5"
+              value={stageValue}
+              onChange={e => setStageValue(e.target.value)}
+            >
+              <option value="INITIAL_CONTACT">Initial Contact</option>
+              <option value="IN_CONVERSION"> In Conversation</option>
+              <option value="MEETING_BOOKED">Meeting Booked</option>
+              <option value="FOLLOW_UP">Follow Up</option>
+              <option value="POTENTIAL_DEAL">Potential Deal</option>
+              <option value="CLOSED">Closed</option>
+              <option value="LOST">Lost</option>
+            </select>
+          </div>
+          <div>
+            <div className="common-subtitle">DEAL SIZE</div>
+            <input className="common-input common-input-white mt-5" placeholder={dealSize} />
+          </div>
+          <div>
+            <div className="common-subtitle">POTENTIAL</div>
+            <select
+              className="common-select common-select-white mt-5"
+              value={potentialValue}
+              onChange={e => setPotentialValue(e.target.value)}
+            >
+              <option value="VERY_LIKELY">Very Likely Deals</option>
+              <option value="LIKELY">Likely Deals</option>
+              <option value="NOT_LIKELY">Not Likely Deals</option>
+            </select>
+          </div>
+          <div>
+            <div className="common-subtitle">FOLLOW UP DATE</div>
+            <DatePicker
+              className="mt-5"
+              placeholderText="From"
+              value={moment(followUpDate).format('MM/DD/YYYY')}
+              onChange={date => setFollowUpDate(date)}
+            />
+          </div>
+        </div>
+        <button type="submit" className="button success-button mt-20">
+          SAVE
+        </button>
+      </div>
+    </div>
+  );
+}
+OpportunityData.propTypes = {
+  opportunityData: PropTypes.shape({
+    _id: PropTypes.string,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    profilePicUrl: PropTypes.string.isRequired,
+    stage: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    dealSize: PropTypes.string.isRequired,
+    followUp: PropTypes.string.isRequired,
+    likelyHood: PropTypes.string.isRequired,
+    location: PropTypes.string,
+  }).isRequired,
+  goToLinkedIn: PropTypes.func.isRequired,
+};
+
+export default OpportunityData;

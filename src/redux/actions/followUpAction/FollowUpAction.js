@@ -26,8 +26,12 @@ export const getUpcomingActions = (page, data) => {
       });
   };
 };
+export const clearOpportunity = {
+  type: FOLLOW_UP_REDUX_CONSTANT.CLEAR_OPPORTUNITY_DETAIL,
+};
 export const getOpportunity = id => {
   return dispatch => {
+    dispatch(clearOpportunity);
     FollowUpService.getOpportunity(id)
       .then(response => {
         if (response.data.status === 'SUCCESS') {

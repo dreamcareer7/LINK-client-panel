@@ -112,7 +112,7 @@ input {
 
 .common-select {
   min-width: 150px;
-  height: 26px;
+  height: 25px;
   padding: 0 5px;
   font-size: 12px;
   font-weight: 600;
@@ -196,6 +196,11 @@ input {
   font-size: 14px;
   font-weight: 500;
   color: $secondary-font-color;
+}
+.input-text-value{
+  border:none;
+  outline: none;
+  border-radius: 5px;
 }
 
 .content-title {

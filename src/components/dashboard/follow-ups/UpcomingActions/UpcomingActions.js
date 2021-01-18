@@ -17,7 +17,7 @@ function UpcomingActions() {
     dispatch(getUpcomingActions(1, data));
   }, []);
   const onOpportunityClick = id => {
-    history.push(`/opportunityDetails/${id}`);
+    history.push(`/followUps/opportunityDetails/${id}`);
   };
   const handlePageChange = page => {
     const data = {

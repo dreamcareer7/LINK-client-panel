@@ -2,11 +2,11 @@ import React from 'react';
 import linkFluencer from '../../../assets/images/linkfluencer.png';
 
 import './login.scss';
-import { BASE_URL } from '../../../constants/UrlConstant';
+import { BASE_URL, LINKEDIN_CLIENT_ID } from '../../../constants/UrlConstant';
 
 function SignupWithLinkedIn() {
   const onClickSignUp = () => {
-    window.location = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77ugsdksaaa1rf&redirect_uri=${BASE_URL}client-auth/sign-up&state=fooobar&scope=r_emailaddress,r_liteprofile`;
+    window.location = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${LINKEDIN_CLIENT_ID}&redirect_uri=${BASE_URL}client-auth/sign-up&state=fooobar&scope=r_emailaddress,r_liteprofile`;
   };
 
   return (

@@ -49,7 +49,11 @@ function App() {
               <PrivateRoute exact path="/followUps" component={FollowUps} />
               <PrivateRoute exact path="/crm" component={Crm} />
               <PrivateRoute exact path="/reporting" component={Reporting} />
-              <PrivateRoute exact path="/opportunityDetails/:id" component={OpportunityDetails} />
+              <PrivateRoute
+                exact
+                path="/followUps/opportunityDetails/:id"
+                component={OpportunityDetails}
+              />
               <PrivateRoute exact path="/account" component={Account} />
             </Layout>
           </Switch>
