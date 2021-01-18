@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://aba638186a45.ngrok.io/';
+export const BASE_URL = 'https://a8c3dc4fd310.ngrok.io/';
 export const API_METHODS = {
   GET: 'GET',
   POST: 'POST',
