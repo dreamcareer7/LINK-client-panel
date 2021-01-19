@@ -7,8 +7,8 @@ import {
   getOpportunity,
 } from '../../../../../redux/actions/followUpAction/FollowUpAction';
 import OpportunityData from './opprotunity-data/OpportunityData';
-import Notes from './notes/Notes';
 import History from './history/History';
+import Notes from './notes/Notes';
 
 function OpportunityDetails() {
   const history = useHistory();
@@ -56,7 +56,7 @@ function OpportunityDetails() {
           {opportunity && (
             <>
               <OpportunityData opportunityData={opportunity} goToLinkedIn={goToLinkedInProfile} />
-              <Notes opprotunityNotes={opportunity.notes} />
+              <Notes />
             </>
           )}
         </div>
