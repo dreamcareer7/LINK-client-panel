@@ -1,17 +1,19 @@
 @import "src/styles/index";
 
 .account-container {
-  display: flex;
+  display: inline-flex;
   justify-content: space-between;
+  gap: 30px;
   width: 100%;
 }
 
 .account-left {
-  width: calc(60% - 15px);
+  width: calc(55% - 15px);
 }
 
 .account-right {
-  width: calc(40% - 15px);
+  width: calc(45% - 15px);
+  min-width: 550px;
 }
 
 .dashed-container {
@@ -19,20 +21,161 @@
   width: 100%;
   margin-bottom: 40px;
   padding: 20px;
+  font-size: 14px;
   border-radius: 5px;
   border: 1px dashed #d9d9d9;
 }
 
-.dashed-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+.dashed-flex {
+  display: inline-flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
   min-width: 100%;
-  padding: 20px 0;
+  padding-top: 20px;
+
+  div {
+    flex: 1;
+    width: 33%;
+    min-width: 150px;
+    max-width: 215px;
+  }
 }
 
 .field-title {
   margin-bottom: 5px;
   font-size: 14px;
   font-weight: 500;
+}
+
+.notifications-container {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.notification--radio-button-row {
+  display: flex;
+  align-items: center;
+
+  span {
+    margin-right: 20px;
+  }
+}
+
+.subscription-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 500;
+
+  button {
+    padding: 5px 10px;
+    font-weight: 500;
+    background-color: $secondary-variant-color;
+    outline: none;
+    border-radius: 5px;
+    border: none;
+  }
+}
+
+.subscription-status {
+  display: flex;
+  align-items: center;
+
+  div {
+    height: 10px;
+    width: 10px;
+    min-width: 10px;
+    margin-right: 5px;
+    border-radius: 50%;
+  }
+}
+
+.subscription-status div.active {
+  background-color: $success-color;
+}
+
+.subscription-status div.inactive {
+  background-color: $danger-color;
+}
+
+.date-range-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.date-picker {
+  max-width: 150px;
+  margin-right: 20px;
+}
+
+.transaction-history-table-row {
+  display: inline-flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  margin-top: 20px;
+  padding: 5px 10px;
+  font-weight: 500;
+  div:nth-child(1) {
+    width: calc(25% - 15px);
+    min-width: 80px;
+  }
+
+  div:nth-child(2) {
+    width: 20%;
+    min-width: 70px;
+  }
+
+  div:nth-child(3) {
+    width: calc(25% - 15px);
+    min-width: 70px;
+  }
+
+  div:nth-child(4) {
+    width: calc(30% - 30px);
+    min-width: 100px;
+  }
+
+}
+
+.actions {
+  display: flex;
+  width: 60px;
+
+  img {
+    height: 20px;
+  }
+
+  img:first-of-type {
+    margin-right: 10px;
+  }
+}
+
+
+.table-row {
+  margin: 0 0 10px 0;
+  padding: 10px;
+  font-weight: 500;
+  color: $placeholder-color;
+  background-color: $secondary-variant-color;
+  border-radius: 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@media (max-width: 1600px) {
+  .date-range-button-container {
+    flex-wrap: wrap;
+
+    button {
+      margin-top: 10px;
+    }
+  }
 }

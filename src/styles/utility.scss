@@ -75,7 +75,7 @@ input {
 
 .absolute-position-title {
   position: absolute;
-  top: -14px;
+  top: -16px;
   left: 10px;
   padding: 5px 10px;
   font-size: 16px;
@@ -114,13 +114,13 @@ input {
   min-width: 150px;
   height: 26px;
   padding: 0 5px;
-  background-color: $secondary-variant-color;
   font-size: 12px;
   font-weight: 600;
   color: $secondary-font-color;
+  background-color: $secondary-variant-color;
+  border-radius: 5px;
   border: none;
   outline: none;
-  border-radius: 5px;
 }
 
 .common-select option {
@@ -143,9 +143,8 @@ input {
 }
 
 .common-input::placeholder {
-  font-size: 12px;
-  font-weight: 500;
-  color: $secondary-font-color;
+  font-size: 14px!important;
+  color: $placeholder-color;
 }
 
 .common-select-white, .common-input-white {
