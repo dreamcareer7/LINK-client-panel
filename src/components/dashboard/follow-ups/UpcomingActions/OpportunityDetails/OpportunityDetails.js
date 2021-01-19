@@ -18,7 +18,6 @@ function OpportunityDetails() {
   };
   const { id } = useParams();
   const opportunity = useSelector(state => state.opportunityDetail);
-
   useEffect(() => {
     dispatch(getOpportunity(id));
     return () => {

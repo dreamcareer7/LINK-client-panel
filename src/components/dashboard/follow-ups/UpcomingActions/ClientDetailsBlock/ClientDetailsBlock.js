@@ -10,13 +10,13 @@ function ClientDetailsBlock({ opportunity }) {
     profilePicUrl,
     email,
     companyName,
-    createdAt,
+    followUp,
     firstName,
     lastName,
     stage,
     title,
+    phone,
   } = opportunity;
-
   return (
     <div className="common-block cursor-pointer blue">
       <div className="status-color" />
@@ -36,14 +36,14 @@ function ClientDetailsBlock({ opportunity }) {
         </div>
         <div className="client-other-details">
           <div className="content-title ellipsis">PHONE</div>
-          <div className="common-content placeholder-color ellipsis">636-986-9895</div>
+          <div className="common-content placeholder-color ellipsis">{phone}</div>
           <div className="content-title ellipsis">EMAIL</div>
           <div className="common-content placeholder-color ellipsis">{email}</div>
           <div className="content-title ellipsis">STAGE</div>
           <div className="common-content placeholder-color ellipsis">{stage}</div>
           <div className="content-title">FOLLOW-UP DATE</div>
           <div className="common-content placeholder-color ellipsis">
-            {moment(createdAt).format('MM/DD/YYYY')}
+            {moment(followUp).format('MM/DD/YYYY')}
           </div>
         </div>
       </div>
@@ -59,8 +59,9 @@ ClientDetailsBlock.propTypes = {
     email: PropTypes.string,
     profilePicUrl: PropTypes.string,
     stage: PropTypes.string,
-    createdAt: PropTypes.string,
     title: PropTypes.string,
+    followUp: PropTypes.string,
+    phone: PropTypes.string,
   }).isRequired,
 };
 

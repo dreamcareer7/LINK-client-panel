@@ -4,6 +4,8 @@ import DatePicker from 'react-datepicker';
 import '../OpportunityDetails.scss';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
+import { updateOpportunity } from '../../../../../../redux/actions/followUpAction/FollowUpAction';
 
 function OpportunityData({ opportunityData, goToLinkedIn }) {
   const {
@@ -17,27 +19,52 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
     stage,
     likelyHood,
     location,
+    _id,
+    phone,
+    companyName,
   } = opportunityData;
+  const dispatch = useDispatch();
   const [followUpDate, setFollowUpDate] = useState(followUp);
-  const [phone, setPhone] = useState('');
+  const [phoneVal, setPhoneVal] = useState(phone);
   const [mail, setMail] = useState(email);
   const [stageValue, setStageValue] = useState(stage);
   const [potentialValue, setPotentialValue] = useState(likelyHood);
   const [locationVal, setLocationVal] = useState(location);
+  const [dealSizeVal, setDealSizeVal] = useState(dealSize);
+  const onSaveOpportunityData = () => {
+    const data = {
+      firstName,
+      lastName,
+      title,
+      companyName,
+      stage: stageValue,
+      phone: phoneVal,
+      email: mail,
+      dealSize: dealSizeVal,
+      likelyHood: potentialValue,
+      location: locationVal,
+      followUp: followUpDate,
+    };
+    dispatch(updateOpportunity(_id, data));
+  };
   return (
     <div className="common-block blue">
       <div className="status-color" />
       <div className="common-block--detail-container">
         <div className="opportunity-detail">
           <div className="DP-name-container">
-            <img className="user-dp" src={profilePicUrl && profilePicUrl} />
+            <img className="user-dp" src={profilePicUrl} />
             <div>
               <div>
                 <div className="common-subtitle client-name ellipsis">
                   {firstName}
                   {lastName}
                 </div>
-                <div className="common-content client-designation placeholder-color">{title}</div>
+                <div className="common-content client-designation placeholder-color">
+                  {title}
+                  {`${title && companyName ? ', ' : ''}`}
+                  {companyName}
+                </div>
                 <button
                   type="button"
                   className="button primary-button slim-button mt-10"
@@ -53,8 +80,8 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             <input
               type="text"
               className="common-content placeholder-color ellipsis input-text-value"
-              value={phone}
-              onChange={e => setPhone(e.target.value)}
+              value={phoneVal}
+              onChange={e => setPhoneVal(e.target.value)}
             />
             <div className="content-title ellipsis">EMAIL</div>
             <input
@@ -91,7 +118,13 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
           </div>
           <div>
             <div className="common-subtitle">DEAL SIZE</div>
-            <input className="common-input common-input-white mt-5" placeholder={dealSize} />
+            <input
+              className="common-input common-input-white mt-5"
+              placeholder={dealSizeVal}
+              onChange={e => {
+                setDealSizeVal(e.target.value);
+              }}
+            />
           </div>
           <div>
             <div className="common-subtitle">POTENTIAL</div>
@@ -115,7 +148,11 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             />
           </div>
         </div>
-        <button type="submit" className="button success-button mt-20">
+        <button
+          type="submit"
+          className="button success-button mt-20"
+          onClick={onSaveOpportunityData}
+        >
           SAVE
         </button>
       </div>
@@ -131,10 +168,12 @@ OpportunityData.propTypes = {
     profilePicUrl: PropTypes.string.isRequired,
     stage: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    companyName: PropTypes.string,
     dealSize: PropTypes.string.isRequired,
     followUp: PropTypes.string.isRequired,
     likelyHood: PropTypes.string.isRequired,
     location: PropTypes.string,
+    phone: PropTypes.string,
   }).isRequired,
   goToLinkedIn: PropTypes.func.isRequired,
 };

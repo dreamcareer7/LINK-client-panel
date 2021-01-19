@@ -1,5 +1,5 @@
 import FollowUpService from '../../../services/follow-up-service/FollowUpSevice';
-import { errorNotification } from '../../../constants/Toast';
+import { errorNotification, successNotification } from '../../../constants/Toast';
 import FOLLOW_UP_REDUX_CONSTANT from '../../constants/FollowUpReduxConstant';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -39,6 +39,28 @@ export const getOpportunity = id => {
             type: FOLLOW_UP_REDUX_CONSTANT.GET_OPPORTUNITY_DETAIL,
             data: response.data.data,
           });
+        }
+      })
+      .catch(e => {
+        console.log(e);
+        if (e.response.data.status === undefined) {
+          errorNotification('It seems like server is down, Please try after sometime.');
+        } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
+          errorNotification('Internal server error');
+        }
+      });
+  };
+};
+export const updateOpportunity = (id, data) => {
+  return dispatch => {
+    FollowUpService.updateOpportunity(id, data)
+      .then(response => {
+        if (response.data.status === 'SUCCESS') {
+          dispatch({
+            type: FOLLOW_UP_REDUX_CONSTANT.UPDATE_OPPORTUNITY_DETAIL,
+            data: response.data.data,
+          });
+          successNotification('Opportunity data updated successfully');
         }
       })
       .catch(e => {
