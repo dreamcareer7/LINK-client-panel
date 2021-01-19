@@ -41,7 +41,7 @@
 
 .opportunity-detail {
   display: grid;
-  grid-template-columns: 45% 55%;
+  grid-template-columns: calc(45% - 25px) 55%;
   gap: 20px;
 }
 

@@ -79,21 +79,21 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             <div className="content-title ellipsis">PHONE</div>
             <input
               type="text"
-              className="common-content placeholder-color ellipsis input-text-value"
+              className="common-input common-input-white placeholder-color ellipsis"
               value={phoneVal}
               onChange={e => setPhoneVal(e.target.value)}
             />
             <div className="content-title ellipsis">EMAIL</div>
             <input
               type="text"
-              className="common-content placeholder-color ellipsis input-text-value"
+              className="common-input common-input-white placeholder-color ellipsis"
               value={mail}
               onChange={e => setMail(e.target.value)}
             />
             <div className="content-title ellipsis">LOCATION</div>
             <input
               type="text"
-              className="common-content placeholder-color ellipsis input-text-value"
+              className="common-input common-input-white placeholder-color ellipsis"
               value={locationVal}
               onChange={e => setLocationVal(e.target.value)}
             />

@@ -14,4 +14,6 @@ export const FOLLOW_UP_URL = {
 export const NOTES_URL = {
   GET_NOTES_URL: `${BASE_URL}opportunity-note/get-opportunity-note/`,
   ADD_NOTE_URL: `${BASE_URL}opportunity-note/add-opportunity-note/`,
+  DELETE_NOTE_URL: `${BASE_URL}opportunity-note/delete-opportunity-note/`,
+  UPDATE_NOTE_URL: `${BASE_URL}opportunity-note/update-opportunity-note/`,
 };
