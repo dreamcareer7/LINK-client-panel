@@ -12,6 +12,7 @@ import Reporting from './components/dashboard/reporting/Reporting';
 import AuthRedirect from './components/dashboard/AuthRedirect';
 import OpportunityDetails from './components/dashboard/follow-ups/UpcomingActions/OpportunityDetails/OpportunityDetails';
 import Account from './components/commonComponents/upperHeader/Account/Account';
+import PopUp from './components/commonComponents/PopUp/PopUp';
 
 const PrivateRoute = ({ component, ...options }) => {
   const isLoggedIn =
@@ -51,6 +52,7 @@ function App() {
               <PrivateRoute exact path="/reporting" component={Reporting} />
               <PrivateRoute exact path="/opportunityDetails/:id" component={OpportunityDetails} />
               <PrivateRoute exact path="/account" component={Account} />
+              <PrivateRoute exact path="/popUp" component={PopUp} />
             </Layout>
           </Switch>
         </Route>

@@ -19,6 +19,9 @@ function UpperHeader() {
   const onAccountClick = () => {
     history.replace('/account');
   };
+  const onHelpClick = () => {
+
+  };
   return (
     <div className="upper-header-block">
       <div className="upper-header--rounded-block search-block">
@@ -41,7 +44,7 @@ function UpperHeader() {
                 <img src={account} />
                 <span>Account</span>
               </div>
-              <div className="dropdown-option">
+              <div className="dropdown-option" onClick={onHelpClick}>
                 <img src={help} />
                 <span>Help & Support</span>
               </div>
