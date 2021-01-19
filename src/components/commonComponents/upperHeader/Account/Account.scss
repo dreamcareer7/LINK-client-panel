@@ -1,0 +1,38 @@
+@import "src/styles/index";
+
+.account-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.account-left {
+  width: calc(60% - 15px);
+}
+
+.account-right {
+  width: calc(40% - 15px);
+}
+
+.dashed-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 40px;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px dashed #d9d9d9;
+}
+
+.dashed-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  min-width: 100%;
+  padding: 20px 0;
+}
+
+.field-title {
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: 500;
+}
