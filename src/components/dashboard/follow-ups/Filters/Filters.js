@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useDispatch, useSelector } from 'react-redux';
 import FollowUpCheckBox from './FollowUpCheckBox';
-import PotentialCkeckBox from './PotentialCkeckBox';
+import PotentialCheckBox from './PotentialCheckBox';
 import { getUpcomingActions } from '../../../../redux/actions/followUpAction/FollowUpAction';
 
 const stageInitialState = {
@@ -150,7 +150,7 @@ function Filters() {
 
         <div className="common-title mt-20 mb-5">Potential</div>
         {Object.entries(potentialCheckBox).map(data => (
-          <PotentialCkeckBox key={Math.random()} onChange={onChangePotential} data={data} />
+          <PotentialCheckBox key={Math.random()} onChange={onChangePotential} data={data} />
         ))}
 
         <button type="submit" className="button success-button mt-20" onClick={applyFilters}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function PotentialCkeckBox({ onChange, data }) {
+function PotentialCheckBox({ onChange, data }) {
   return (
     <div>
       <input
@@ -17,8 +17,8 @@ function PotentialCkeckBox({ onChange, data }) {
     </div>
   );
 }
-PotentialCkeckBox.propTypes = {
+PotentialCheckBox.propTypes = {
   onChange: PropTypes.func.isRequired,
   data: PropTypes.arrayOf.isRequired,
 };
-export default PotentialCkeckBox;
+export default PotentialCheckBox;

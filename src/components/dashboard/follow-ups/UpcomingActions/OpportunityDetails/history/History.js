@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 /* import PropTypes from 'prop-types'; */
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import user from '../../../../../../assets/images/dummy-user.jpg';
+import { fetchConversation } from '../../../../../../redux/actions/followUpAction/historyAction/HistoryAction';
 
 function History() {
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  useEffect(() => {
+    dispatch(fetchConversation(id));
+  }, []);
   return (
     <div className="opportunity-right common-block blue">
       <div className="status-color" />

@@ -17,3 +17,6 @@ export const NOTES_URL = {
   DELETE_NOTE_URL: `${BASE_URL}opportunity-note/delete-opportunity-note/`,
   UPDATE_NOTE_URL: `${BASE_URL}opportunity-note/update-opportunity-note/`,
 };
+export const HISTORY_URL = {
+  FETCH_CONVERSATION_URL: `${BASE_URL}opportunity/fetch-conversation/`,
+};
