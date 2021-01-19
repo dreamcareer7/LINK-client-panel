@@ -73,17 +73,54 @@ input {
   background-color: $danger-color;
 }
 
+.absolute-position-title {
+  position: absolute;
+  top: -16px;
+  left: 10px;
+  padding: 5px 10px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #ffffff;
+}
+
+.success-message {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1;
+  background-color: $primary-color;
+  border-radius: 10px;
+  span:first-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    min-width: 30px;
+    min-height: 30px;
+    margin-right: 10px;
+    font-size: 24px;
+    font-weight: 600;
+    color: $primary-color;
+    background-color: $info-color;
+    border-radius: 50%;
+  }
+}
+
 .common-select {
   min-width: 150px;
   height: 26px;
   padding: 0 5px;
-  background-color: $secondary-variant-color;
   font-size: 12px;
   font-weight: 600;
   color: $secondary-font-color;
+  background-color: $secondary-variant-color;
+  border-radius: 5px;
   border: none;
   outline: none;
-  border-radius: 5px;
 }
 
 .common-select option {
@@ -106,9 +143,8 @@ input {
 }
 
 .common-input::placeholder {
-  font-size: 12px;
-  font-weight: 500;
-  color: $secondary-font-color;
+  font-size: 14px!important;
+  color: $placeholder-color;
 }
 
 .common-select-white, .common-input-white {
