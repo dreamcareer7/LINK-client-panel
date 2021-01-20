@@ -20,7 +20,7 @@ function UpperHeader() {
     history.replace('/account');
   };
   const onHelpClick = () => {
-
+    history.replace('/popUp');
   };
   return (
     <div className="upper-header-block">
