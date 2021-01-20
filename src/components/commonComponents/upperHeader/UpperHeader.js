@@ -25,7 +25,7 @@ function UpperHeader() {
   return (
     <div className="upper-header-block">
       <div className="upper-header--rounded-block search-block">
-        <input placeholder="Search Subscriber" />
+        <input placeholder="Search Opportunity" />
         <button type="button">
           <img src={search} />{' '}
         </button>

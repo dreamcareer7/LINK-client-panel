@@ -55,6 +55,7 @@ input {
 }
 
 .slim-button {
+  min-width: fit-content;
   padding: 5px 20px;
 }
 
@@ -259,8 +260,28 @@ input::placeholder {
   display: flex !important;
 }
 
+.jc-bet {
+  justify-content: space-between !important;
+}
+
+.ai-center {
+  align-items: center !important;
+}
+
+.ai-f-end {
+  align-items: flex-end !important;
+}
+
 .w-100 {
   width: 100% !important;
+}
+
+.ml-5 {
+  margin-left: 5px !important;
+}
+
+.ml-10 {
+  margin-left: 10px !important;
 }
 
 .mb-5 {
