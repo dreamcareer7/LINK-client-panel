@@ -73,3 +73,20 @@ export const updateOpportunity = (id, data) => {
       });
   };
 };
+
+export const deleteOpportunity = (id, cb) => {
+  FollowUpService.deleteOpportunity(id)
+    .then(response => {
+      if (response.data.status === 'SUCCESS') {
+        cb();
+        successNotification('Opportunity deleted successfully');
+      }
+    })
+    .catch(e => {
+      if (e.response.data.status === undefined) {
+        errorNotification('It seems like server is down, Please try after sometime.');
+      } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
+        errorNotification('Internal server error');
+      }
+    });
+};
