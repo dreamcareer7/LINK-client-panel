@@ -3,6 +3,7 @@ import './CRM.scss';
 import { Bar } from 'react-chartjs-2';
 import 'chartjs-plugin-datalabels';
 import moment from 'moment';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Pagination from 'react-js-pagination';
 import DatePicker from 'react-datepicker';
@@ -13,6 +14,7 @@ import {
   getCRMGraphData,
   getFilteredCRMSAction,
 } from '../../../redux/actions/crmActions/CRMAction';
+import { deleteOpportunity } from '../../../redux/actions/followUpAction/FollowUpAction';
 
 const initialFilterState = {
   stage: null,
@@ -63,6 +65,7 @@ function Crm() {
   const dispatch = useDispatch();
 
   const [page, setPage] = useState(1);
+  const history = useHistory();
   const [filter, dispatchFilter] = useReducer(filterReducer, initialFilterState);
   const crmsData = useSelector(({ crms }) => crms);
   const crmsChartState = useSelector(({ crmsGraphData }) => crmsGraphData);
@@ -197,21 +200,7 @@ function Crm() {
     });
   };
 
-  const handlePageChange = pageNum => {
-    setPage(pageNum);
-    const data = {
-      stage,
-      likelyHoods,
-      startDeal,
-      endDeal,
-      location,
-      startDate,
-      endDate,
-    };
-    dispatch(getFilteredCRMSAction(pageNum, data));
-  };
-
-  const handleFilterApplyClick = () => {
+  const reloadCRMData = pageNum => {
     const data = {
       stage: stage || undefined,
       likelyHoods: likelyHoods && likelyHoods.length ? [likelyHoods] : undefined,
@@ -221,7 +210,16 @@ function Crm() {
       startDate: startDate || undefined,
       endDate: endDate || undefined,
     };
-    dispatch(getFilteredCRMSAction(page, data));
+    dispatch(getFilteredCRMSAction(pageNum, data));
+  };
+
+  const handlePageChange = pageNum => {
+    setPage(pageNum);
+    reloadCRMData(pageNum);
+  };
+
+  const handleFilterApplyClick = () => {
+    reloadCRMData(page);
   };
 
   const handleResetClick = () => {
@@ -229,6 +227,14 @@ function Crm() {
       type: CRM_FILTER_REDUCER_ACTIONS.RESET_STATE,
     });
     dispatch(getFilteredCRMSAction(page));
+  };
+
+  const handleEditCRMUser = id => {
+    history.push(`/followUps/opportunityDetails/${id}`);
+  };
+
+  const handleDeleteCRMUser = id => {
+    deleteOpportunity(id, () => reloadCRMData(page));
   };
 
   return (
@@ -306,8 +312,8 @@ function Crm() {
       <div className="applied-filter-container">
         {docs && (
           <div>
-            Showing {(docs.page - 1) * (docs.limit + 1)}-{docs.page * docs.limit} of {docs.total}{' '}
-            results
+            Showing {(docs.page - 1) * (docs.limit + 1)}-
+            {docs.total < docs.limit ? docs.total : docs.page * docs.limit} of {docs.total} results
           </div>
         )}
         {stageIndex &&
@@ -346,6 +352,7 @@ function Crm() {
           </div>
           {crmsArray.map(singleCrm => {
             const {
+              _id,
               profilePicUrl,
               firstName,
               lastName,
@@ -366,8 +373,13 @@ function Crm() {
                 <div>High Likely</div>
                 <div>{dealSize}</div>
                 <div className="table-action-field">
-                  <img src={edit} className="mr-10" title="Edit" />
-                  <img src={bin} title="Delete" />
+                  <img
+                    src={edit}
+                    className="mr-10"
+                    title="Edit"
+                    onClick={() => handleEditCRMUser(_id)}
+                  />
+                  <img src={bin} title="Delete" onClick={() => handleDeleteCRMUser(_id)} />
                 </div>
               </div>
             );
