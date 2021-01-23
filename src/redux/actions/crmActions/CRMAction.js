@@ -11,9 +11,6 @@ export const getFilteredCRMSAction = (page, data) => {
             type: CRM_REDUX_CONSTANT.GET_FILTERED_CRMS,
             data: response.data.data,
           });
-          if (response.data.data.docs.docs.length === 0) {
-            errorNotification('It seems data not available for this category');
-          }
         }
       })
       .catch(e => {
@@ -35,9 +32,6 @@ export const getCRMGraphData = () => {
             type: CRM_REDUX_CONSTANT.GET_CRMS_GRAPH_DATA,
             data: response.data.data,
           });
-          if (response.data.data.length === 0) {
-            errorNotification('It seems data not available for this category');
-          }
         }
       })
       .catch(e => {
