@@ -20,3 +20,7 @@ export const NOTES_URL = {
 export const HISTORY_URL = {
   FETCH_CONVERSATION_URL: `${BASE_URL}opportunity/fetch-conversation/`,
 };
+
+export const CRM_URL = {
+  GET_FILTERED_CRM_URL: `${BASE_URL}client-crm/filters`,
+};
