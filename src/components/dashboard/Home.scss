@@ -1,0 +1,46 @@
+@import '../../styles/index.scss';
+
+.graph-container {
+  width: 100%;
+  margin: 10px 0 40px 0;
+  padding: 30px;
+  background-color: $secondary-variant-color;
+  border-radius: 10px;
+}
+
+.text-content p {
+  text-align: center !important;
+}
+.btn-width {
+  width: 250px !important;
+  padding: 13px !important;
+  margin: 7px !important;
+}
+.p-left {
+  padding-left: 7px !important;
+}
+.text-transform {
+  text-transform: uppercase;
+  color: #1d1d51;
+}
+.m-top {
+  margin-top: 40px !important;
+}
+.quote-text {
+  color: #b8b8b8;
+}
+
+.justify {
+  text-align: justify !important;
+  text-justify: inter-word !important;
+}
+
+.paragraph {
+  margin: auto;
+  font-size: 21px;
+  text-align: center;
+  max-width: 648px;
+  word-wrap: break-word;
+  word-break: break-all;
+  text-align-last: center;
+}

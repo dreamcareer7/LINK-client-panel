@@ -27,3 +27,15 @@ export const CRM_URL = {
   GET_FILTERED_CRM_URL: `${BASE_URL}client-crm/filters`,
   GET_CRM_GRAPH_URL: `${BASE_URL}client-dashboard/opportunities`,
 };
+export const DASHBOARD_URL = {
+  OPPORTUNITY_URL: `${BASE_URL}client-dashboard/opportunities`,
+  PIPELINE_VALUE: `${BASE_URL}client-dashboard/pipeline-value`,
+  CLIENT_QUOTE: `${BASE_URL}organization/client-today-quote`,
+};
+
+export const ACCOUNTS_URL = {
+  GET_CLIENT_INFO: `${BASE_URL}client-auth/get-client`,
+  UPDATE_CLIENT: `${BASE_URL}client-auth/update`,
+  GET_COMPANY_SIZE: `${BASE_URL}organization/client-companysize`,
+  GET_INDUSTRY: `${BASE_URL}organization/client-industries`,
+};

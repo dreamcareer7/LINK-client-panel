@@ -1,66 +1,179 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './Account.scss';
 import DatePicker from 'react-datepicker';
 import eye from '../../../../assets/images/visibility.svg';
 import download from '../../../../assets/images/down-arrow.svg';
+import {
+  getClientInfo,
+  getCompanySize,
+  getIndutries,
+  updateClientInfo,
+} from '../../../../redux/actions/accountAction/AccountAction';
 
 function Account() {
+  const [form, setFormValue] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    title: '',
+    location: '',
+    company: '',
+    company_size: '',
+    industry: '',
+  });
+  const dispatch = useDispatch();
+  const { company, client, industries } = useSelector(state => state.AccountReducer);
+  console.log(company, industries, client);
+
+  const onHandleSubmit = () => {
+    const formData = {
+      firstName: form.name,
+      email: form.email,
+      phone: form.phone,
+      title: form.title,
+      industry: form.industry,
+      companyName: form.company,
+      companySize: form.company_size,
+      companyLocation: form.location,
+    };
+    console.log('work', formData);
+
+    dispatch(updateClientInfo(formData));
+  };
+
+  useEffect(() => {
+    dispatch(getClientInfo());
+    dispatch(getCompanySize());
+    dispatch(getIndutries());
+    if (client && client.data && client.data) {
+      setFormValue({
+        name: client.data.firstName && client.data.firstName,
+        email: client.data.email && client.data.email,
+        phone: client.data.phone && client.data.phone,
+        title: client.data.title && client.data.title,
+        location: client.data.companyLocation && client.data.companyLocation,
+        company: client.data.companyName && client.data.companyName,
+        company_size: client.data.companySize && client.data.companySize,
+        industry: client.data.industry && client.data.industry,
+      });
+      console.log(form.industry);
+    }
+  }, [
+    client && client.data && client.data.firstName,
+    client && client.data && client.data.email,
+    client && client.data && client.data.phone,
+    client && client.data && client.data.title,
+    client && client.data && client.data.companyName,
+    client && client.data && client.data.companyLocation,
+    client && client.data && client.data.companySize,
+    client && client.data && client.data.industry,
+  ]);
+
+  const onHandleChange = e => {
+    console.log(e.target.value);
+    setFormValue({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
     <div className="account-container">
       <div className="account-left">
         <div className="dashed-container">
           <div className="absolute-position-title">USER DETAILS</div>
-          <div className="success-message">
+          {/* <div className='success-message'>
             <span>!</span>
             <span>Account uploaded Successfully.</span>
-          </div>
+          </div> */}
 
           <div className="dashed-flex">
             <div>
               <span className="field-title">Name</span>
-              <input className="common-input" placeholder="Michelle Obama" />
+              <input
+                className="common-input"
+                value={form.name}
+                onChange={onHandleChange}
+                name="name"
+                placeholder="Michelle Obama"
+              />
             </div>
             <div>
               <span className="field-title">Email</span>
-              <input className="common-input" placeholder="michelle@abcmedia.com" />
+              <input
+                onChange={onHandleChange}
+                value={form.email}
+                className="common-input"
+                name="email"
+                placeholder="michelle@abcmedia.com"
+              />
             </div>
             <div>
               <span className="field-title">Phone</span>
-              <input className="common-input" placeholder="(+61)545-789-963" />
+              <input
+                onChange={onHandleChange}
+                value={form.phone}
+                className="common-input"
+                name="phone"
+                placeholder="(+61)545-789-963"
+              />
             </div>
           </div>
           <div className="dashed-flex">
             <div>
               <span className="field-title">Title</span>
-              <input className="common-input" placeholder="ABC News" />
+              <input
+                onChange={onHandleChange}
+                value={form.title}
+                className="common-input"
+                name="title"
+                placeholder="ABC News"
+              />
             </div>
             <div>
               <span className="field-title">Location</span>
-              <input className="common-input" placeholder="Melbourne" />
+              <input
+                onChange={onHandleChange}
+                value={form.location}
+                name="location"
+                className="common-input"
+                placeholder="Melbourne"
+              />
             </div>
             <div />
           </div>
           <div className="dashed-flex">
             <div>
               <span className="field-title">Company</span>
-              <input className="common-input" placeholder="ABC News" />
+              <input
+                className="common-input"
+                onChange={onHandleChange}
+                value={form.company}
+                name="company"
+                placeholder="ABC News"
+              />
             </div>
             <div>
               <span className="field-title">Company Size</span>
-              <input className="common-input" placeholder="50 - 100" />
+              <select className="common-input" value={form.company_size} onChange={onHandleChange} name="company_size">
+                {company && company.data && company.data.map(value => <option key={value}>{value}</option>)}
+              </select>
             </div>
             <div>
               <span className="field-title">Industry</span>
-              <input className="common-input" placeholder="News" />
+              <select className="common-input" value={form.industry} onChange={onHandleChange} name="industry">
+                {industries && industries.data && industries.data.map(value => <option key={value}>{value}</option>)}
+              </select>
             </div>
           </div>
-          <button type="submit" className="button success-button mt-20">
+          <button type="button" onClick={onHandleSubmit} className="button success-button mt-20">
             UPDATE
           </button>
         </div>
-        <div className="dashed-container">
-          <div className="absolute-position-title">CHANGED PASSWORD</div>
-          <div className="success-message">
+        {/* <div className='dashed-container'>
+          <div className='absolute-position-title'>CHANGED PASSWORD</div>
+          <div className='success-message'>
             <span>!</span>
             <span>Password updated Successfully.</span>
           </div>
@@ -82,11 +195,12 @@ function Account() {
           <button type="submit" className="button success-button mt-20">
             UPDATE
           </button>
-        </div>
+        </div> */}
+
         <div className="dashed-container notifications-container">
           <div className="absolute-position-title">NOTIFICATIONS</div>
-          <div className="notification--radio-button-row">
-            <input type="radio" className="mr-10" />
+          {/* <div className='notification--radio-button-row'>
+            <input type='radio' className='mr-10' />
             <span>Daily</span>
             <input type="radio" className="mr-10" />
             <span>Weekly</span>
@@ -96,7 +210,7 @@ function Account() {
           <div className="notification--radio-button-row mt-10">
             <input type="radio" className="mr-10" />
             <span>Custom</span>
-          </div>
+          </div> */}
           <div className="d-flex mt-20">
             <input id="browser" type="checkbox" />
             <label htmlFor="browser" className="mr-20">
@@ -115,14 +229,21 @@ function Account() {
           <div className="absolute-position-title">SUBSCRIPTION</div>
           <div className="subscription-row">
             <div className="subscription-status">
-              <div className="active" />
-              Active
+              {client && client.data && client.data.isActive ? (
+                <>
+                  <div className="active" />
+                  Active
+                </>
+              ) : (
+                <>
+                  <div className="inactive" />
+                  In Active
+                </>
+              )}
             </div>
 
             <div className="d-flex">
-              <button type="button" className="mr-10">
-                Pause
-              </button>
+              {/* <button type='button' className='mr-10'>Pause</button> */}
               <button type="button">Cancel</button>
             </div>
           </div>
