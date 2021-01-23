@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import SideBar from '../sideBar/SideBar';
 import UpperHeader from '../upperHeader/UpperHeader';
 import './layout.scss';
-import {getAuthTokenLocalStorage} from "../../../helpers/LocalStorageHelper";
+import { getAuthTokenLocalStorage } from '../../../helpers/LocalStorageHelper';
 
 const Layout = props => {
   const { children } = props;

@@ -8,7 +8,7 @@ import logout from '../../../assets/images/logout.svg';
 import notification from '../../../assets/bell.svg';
 import account from '../../../assets/images/account.svg';
 import help from '../../../assets/images/lifesaver.svg';
-import {clearAuthToken} from "../../../helpers/LocalStorageHelper";
+import { clearAuthToken } from '../../../helpers/LocalStorageHelper';
 
 function UpperHeader() {
   const history = useHistory();

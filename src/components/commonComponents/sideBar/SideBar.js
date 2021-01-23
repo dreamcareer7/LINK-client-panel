@@ -33,7 +33,6 @@ function SideBar() {
           <NavLink className="menu-item menu-link" to="/reporting" replace>
             <img alt="reporting" src={reporting} /> <span>Reporting</span>
           </NavLink>
-
         </div>
         <div className="copyright">Copyright 2021. Linkfluencer Pvt. Ltd.</div>
       </div>
