@@ -1,5 +1,6 @@
 export const BASE_URL = 'https://link.dev.gradlesol.com/app/';
-export const LINKEDIN_CLIENT_ID = '77ugsdksaaa1rf';
+// export const BASE_URL = 'https://0f9d1f408f24.ngrok.io/';
+export const LINKEDIN_CLIENT_ID = '776gktki6ukrgj';
 export const API_METHODS = {
   GET: 'GET',
   POST: 'POST',
