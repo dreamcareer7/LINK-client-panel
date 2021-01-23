@@ -24,4 +24,5 @@ export const HISTORY_URL = {
 
 export const CRM_URL = {
   GET_FILTERED_CRM_URL: `${BASE_URL}client-crm/filters`,
+  GET_CRM_GRAPH_URL: `${BASE_URL}client-dashboard/opportunities`,
 };
