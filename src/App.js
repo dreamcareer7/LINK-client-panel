@@ -13,6 +13,7 @@ import AuthRedirect from './components/dashboard/AuthRedirect';
 import OpportunityDetails from './components/dashboard/follow-ups/UpcomingActions/OpportunityDetails/OpportunityDetails';
 import Account from './components/commonComponents/upperHeader/Account/Account';
 import PopUp from './components/commonComponents/PopUp/PopUp';
+import { requestFirebaseNotificationPermission } from './firebaseInit';
 
 const PrivateRoute = ({ component, ...options }) => {
   const isLoggedIn =
@@ -36,6 +37,15 @@ PrivateRoute.defaultProps = {
 };
 
 function App() {
+  requestFirebaseNotificationPermission()
+    .then(firebaseToken => {
+      // eslint-disable-next-line no-console
+      console.log(firebaseToken);
+    })
+    .catch(err => {
+      return err;
+    });
+
   return (
     <div className="App">
       <Notifications />
@@ -44,6 +54,7 @@ function App() {
           <Switch>
             <Route exact path="/signUp" component={SignupWithLinkedIn} />
             <Route exact path="/auth-verify" component={AuthRedirect} />
+            <Route exact path="/popUp" component={PopUp} />
             <PrivateRoute exact path="/" />
             <Layout>
               <PrivateRoute exact path="/home" component={Home} />
@@ -56,7 +67,6 @@ function App() {
                 component={OpportunityDetails}
               />
               <PrivateRoute exact path="/account" component={Account} />
-              <PrivateRoute exact path="/popUp" component={PopUp} />
             </Layout>
           </Switch>
         </Route>

@@ -11,6 +11,7 @@
     "canvasjs-react-charts": "^1.0.5",
     "chart.js": "^2.9.4",
     "chartjs-plugin-datalabels": "^0.7.0",
+    "firebase": "^8.2.4",
     "moment": "^2.29.1",
     "prettier": "^2.2.1",
     "prop-types": "^15.7.2",
