@@ -1,0 +1,70 @@
+@import "src/styles/index";
+
+.total-sales-container {
+  padding: 30px;
+  background-color: $secondary-variant-color;
+  border-radius: 10px;
+}
+
+.activity-breakdown-container {
+  margin-top: 30px;
+}
+
+.activity-breakdown-circles-container {
+  display: inline-flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.outer-circle, .middle-circle, .inner-circle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 15px;
+  background-color: $secondary-variant-color;
+  border-radius: 50%;
+}
+
+.middle-circle {
+  padding: 12px;
+  background-color: #003499;
+}
+
+.inner-circle {
+  font-size: 3vw;
+  font-weight: 700;
+  color: #ffffff;
+  background: $primary-color;
+}
+
+.outer-circle:before, .middle-circle:before, .inner-circle:before {
+  content: "";
+  display: inline-block;
+  padding-top: 100%;
+}
+
+.activity-breakdown-title {
+  position: absolute;
+  bottom: -30px;
+  font-size: 14px;
+  font-weight: 600;
+  color:$primary-color;
+}
+
+.conversions-pipeline-container {
+  display: inline-flex;
+  gap: 20px;
+  width: 100%;
+  margin-top: 60px;
+}
+
+.conversions-pipeline-container > div {
+  flex: 1;
+  padding: 25px;
+  background-color: $secondary-variant-color;
+  border-radius: 10px;
+}

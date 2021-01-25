@@ -9,16 +9,23 @@
 }
 
 .filter-container {
-  display: flex;
+  display: grid;
   justify-content: space-between;
+  grid-template-columns: calc(25% - 64px) calc(35% - 64px) calc(20% - 64px) calc(20% - 64px) 175px;
+  gap: 20px;
 }
 
-.filter-action-block:not(:first-child) {
-  margin-left: 30px;
+.filter-date-range {
+  display: inline-flex;
+  gap: 10px;
 }
 
-.filter-from-date {
-  margin: 5px 0 0 10px
+.filter-buttons-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  height: 100%;
+  width: 100%;
 }
 
 .applied-filter-container {

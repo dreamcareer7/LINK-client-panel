@@ -46,6 +46,27 @@ input[type="checkbox"]:focus + label::before {
 }
 /* HTML Checkbox modification ends here */
 
+.input-range__slider {
+  background: $primary-color!important;
+  border: 1px solid $primary-color!important;
+}
+
+.input-range__label--value {
+  bottom: -1.7rem!important;
+  top: unset!important;
+}
+
+.input-range__slider {
+  height: 10px;
+  width: 10px;
+  margin-left: -5px;
+  margin-top: -7px;
+}
+
+.input-range__track--active {
+  background-color: #eeeeee;
+}
+
 @media (max-width: 1500px) {
   /* date picker changes start here */
   .react-datepicker__triangle {left: 100px!important;}
