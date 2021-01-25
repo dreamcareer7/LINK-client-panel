@@ -1,5 +1,6 @@
 import React from 'react';
 import linkFluencer from '../../../assets/images/linkfluencer.png';
+import signInLinkedIn from '../../../assets/images/Sign-in-Large---Default.png';
 
 import './login.scss';
 import { BASE_URL, LINKEDIN_CLIENT_ID } from '../../../constants/UrlConstant';
@@ -14,7 +15,7 @@ function SignupWithLinkedIn() {
       <img alt="linkfluencer" src={linkFluencer} className="logo" />
 
       <button type="button" className="sign-up-button" onClick={onClickSignUp}>
-        SIGN UP WITH LINKEDIN
+        <img src={signInLinkedIn}/>
       </button>
       <a href="forgot" className="forgot-password">
         Forgot Password?
