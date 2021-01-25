@@ -30,7 +30,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
   const [stageValue, setStageValue] = useState(stage);
   const [potentialValue, setPotentialValue] = useState(likelyHood);
   const [locationVal, setLocationVal] = useState(location);
-  const [dealSizeVal, setDealSizeVal] = useState(dealSize);
+  const [dealSizeVal, setDealSizeVal] = useState(dealSize || '-');
   const onSaveOpportunityData = () => {
     const data = {
       firstName,
@@ -79,21 +79,21 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             <div className="content-title ellipsis">PHONE</div>
             <input
               type="text"
-              className="common-input common-input-white placeholder-color ellipsis"
+              className="common-input common-input-white  ellipsis"
               value={phoneVal}
               onChange={e => setPhoneVal(e.target.value)}
             />
             <div className="content-title ellipsis">EMAIL</div>
             <input
               type="text"
-              className="common-input common-input-white placeholder-color ellipsis"
+              className="common-input common-input-white  ellipsis"
               value={mail}
               onChange={e => setMail(e.target.value)}
             />
             <div className="content-title ellipsis">LOCATION</div>
             <input
               type="text"
-              className="common-input common-input-white placeholder-color ellipsis"
+              className="common-input common-input-white  ellipsis"
               value={locationVal}
               onChange={e => setLocationVal(e.target.value)}
             />
@@ -120,7 +120,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             <div className="common-subtitle">DEAL SIZE</div>
             <input
               className="common-input common-input-white mt-5"
-              placeholder={dealSizeVal}
+              value={dealSizeVal }
               onChange={e => {
                 setDealSizeVal(e.target.value);
               }}
@@ -140,10 +140,11 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
           </div>
           <div>
             <div className="common-subtitle">FOLLOW UP DATE</div>
-            <DatePicker
+              <DatePicker
               className="mt-5"
               placeholderText="From"
-              value={moment(followUpDate).format('MM/DD/YYYY')}
+              value={followUpDate ? moment(followUpDate).format('MM/DD/YYYY') : followUpDate}
+              dateFormat = 'MM/DD/YYYY'
               onChange={date => setFollowUpDate(date)}
             />
           </div>
@@ -166,7 +167,7 @@ OpportunityData.propTypes = {
     lastName: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     profilePicUrl: PropTypes.string.isRequired,
-    stage: PropTypes.string.isRequired,
+    stage: PropTypes.string,
     title: PropTypes.string.isRequired,
     companyName: PropTypes.string,
     dealSize: PropTypes.string.isRequired,
