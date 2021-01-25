@@ -46,9 +46,9 @@ export const getClientInfo = () => {
   };
 };
 
-export const updateClientInfo = () => {
+export const updateClientInfo = (data) => {
   return dispatch => {
-    AccountService.updateClient()
+    AccountService.updateClient(data)
       .then(response => {
         if (response.data.status === 'SUCCESS') {
           dispatch({

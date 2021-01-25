@@ -24,7 +24,6 @@ function Account() {
   });
   const dispatch = useDispatch();
   const { company, client, industries } = useSelector(state => state.AccountReducer);
-  console.log(company, industries, client);
 
   const onHandleSubmit = () => {
     const formData = {
@@ -37,8 +36,6 @@ function Account() {
       companySize: form.company_size,
       companyLocation: form.location,
     };
-    console.log('work', formData);
-
     dispatch(updateClientInfo(formData));
   };
 
@@ -57,7 +54,6 @@ function Account() {
         company_size: client.data.companySize && client.data.companySize,
         industry: client.data.industry && client.data.industry,
       });
-      console.log(form.industry);
     }
   }, [
     client && client.data && client.data.firstName,
@@ -93,7 +89,7 @@ function Account() {
               <span className="field-title">Name</span>
               <input
                 className="common-input"
-                value={form.name}
+                value={form.name || ''}
                 onChange={onHandleChange}
                 name="name"
                 placeholder="Michelle Obama"
@@ -103,7 +99,7 @@ function Account() {
               <span className="field-title">Email</span>
               <input
                 onChange={onHandleChange}
-                value={form.email}
+                value={form.email || ''}
                 className="common-input"
                 name="email"
                 placeholder="michelle@abcmedia.com"
@@ -113,7 +109,7 @@ function Account() {
               <span className="field-title">Phone</span>
               <input
                 onChange={onHandleChange}
-                value={form.phone}
+                value={form.phone || ''}
                 className="common-input"
                 name="phone"
                 placeholder="(+61)545-789-963"
@@ -125,7 +121,7 @@ function Account() {
               <span className="field-title">Title</span>
               <input
                 onChange={onHandleChange}
-                value={form.title}
+                value={form.title || ''}
                 className="common-input"
                 name="title"
                 placeholder="ABC News"
@@ -135,7 +131,7 @@ function Account() {
               <span className="field-title">Location</span>
               <input
                 onChange={onHandleChange}
-                value={form.location}
+                value={form.location || ''}
                 name="location"
                 className="common-input"
                 placeholder="Melbourne"
@@ -149,7 +145,7 @@ function Account() {
               <input
                 className="common-input"
                 onChange={onHandleChange}
-                value={form.company}
+                value={form.company || ''}
                 name="company"
                 placeholder="ABC News"
               />
