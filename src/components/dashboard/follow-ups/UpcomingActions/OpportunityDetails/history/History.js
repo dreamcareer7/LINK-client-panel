@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import './History.scss';
 /* import PropTypes from 'prop-types'; */
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -24,6 +25,10 @@ function History() {
   };
 
   const allConversation = useSelector(state => state.opportunityHistory);
+  console.log('allConversation=>', allConversation);
+  if (allConversation.isLoading) {
+    return <div className="loader ajax-global-spin" />;
+  }
 
   return (
     <div className="opportunity-right common-block blue">
@@ -31,8 +36,8 @@ function History() {
 
       <div className="common-block--detail-container chat-history" onScroll={handleScroll}>
         <div className="common-subtitle">HISTORY</div>
-        {allConversation &&
-          allConversation.map(convo => (
+        {allConversation && allConversation.data ? (
+          allConversation.data.map(convo => (
             <div className="chat-container" key={Math.random()}>
               {convo.id === '2' ? (
                 <div className="left-conversation">
@@ -56,7 +61,10 @@ function History() {
                 </div>
               )}
             </div>
-          ))}
+          ))
+        ) : (
+          <div>No conversation</div>
+        )}
       </div>
     </div>
   );

@@ -32,6 +32,7 @@ function OpportunityDetails() {
 
   const onSyncClick = () => {
     dispatch(syncWithLinkedIn(id));
+    // dispatch(fetchConversation(id, ''));
   };
   const deleteSyncClick = () => {
     deleteOpportunity(id, history.goBack);
