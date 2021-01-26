@@ -1,4 +1,6 @@
 import REPORT_REDUX_CONSTANT from '../../constants/reportReduxConstants/ReportReduxConstant';
+import { getLabelFromValues } from '../../../helpers/chartHelper';
+import { potentialMapperObject } from '../../../helpers/Mappers';
 
 const initialActivityBreakdownGraphData = {
   labels: [],
@@ -25,12 +27,12 @@ export const pipelineValuesGraphData = (state = initialActivityBreakdownGraphDat
     case REPORT_REDUX_CONSTANT.GET_PIPELINE_VALUES_GRAPH_DATA:
       return {
         ...state,
-        labels: action.data.map(e => e.label),
-        values: action.data.map(e => e.value),
+        labels: action.data.map(e => getLabelFromValues(e._id, potentialMapperObject)),
+        values: action.data.map(e => e.totalDealValue),
         datasets: [
           {
-            data: action.data.map(e => e.value),
-            backgroundColor: '#4282FE',
+            data: action.data.map(e => e.totalDealValue),
+            backgroundColor: ['#39C3BB', '#FCAB50', '#FF696A'],
           },
         ],
       };
