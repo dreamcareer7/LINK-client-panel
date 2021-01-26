@@ -12,7 +12,7 @@ const initialActivityBreakdownGraphData = {
 
 export const activityBreakdownGraphData = (state = initialActivityBreakdownGraphData, action) => {
   switch (action.type) {
-    case REPORT_REDUX_CONSTANT.GET_ACTIVITY_BREAKDOWN:
+    case REPORT_REDUX_CONSTANT.GET_ACTIVITY_BREAKDOWN_GRAPH_DATA:
       return {
         ...state,
         labels: action.data.map(e => e.label),
@@ -32,7 +32,7 @@ export const activityBreakdownGraphData = (state = initialActivityBreakdownGraph
 
 export const pipelineValuesGraphData = (state = initialActivityBreakdownGraphData, action) => {
   switch (action.type) {
-    case REPORT_REDUX_CONSTANT.GET_PIPELINE_VALUES:
+    case REPORT_REDUX_CONSTANT.GET_PIPELINE_VALUES_GRAPH_DATA:
       return {
         ...state,
         labels: action.data.map(e => e.label),
