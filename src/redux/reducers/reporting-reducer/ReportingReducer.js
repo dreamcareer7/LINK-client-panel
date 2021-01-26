@@ -10,7 +10,6 @@ const initialActivityBreakdownGraphData = {
   ],
 };
 
-// eslint-disable-next-line import/prefer-default-export
 export const activityBreakdownGraphData = (state = initialActivityBreakdownGraphData, action) => {
   switch (action.type) {
     case REPORT_REDUX_CONSTANT.GET_ACTIVITY_BREAKDOWN:
