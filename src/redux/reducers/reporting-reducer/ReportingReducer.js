@@ -42,3 +42,31 @@ export const pipelineValuesGraphData = (state = initialPipelineValuesGraphData, 
       return state;
   }
 };
+
+const initialConversationGraphData = {
+  labels: ['AR', 'A to C', 'C to M', 'M to S'],
+  datasets: [
+    {
+      data: [0, 0, 0, 0],
+      backgroundColor: '#4282FE',
+      datalabels: { display: false },
+    },
+  ],
+};
+
+export const conversationGraphData = (state = initialConversationGraphData, action) => {
+  switch (action.type) {
+    case REPORT_REDUX_CONSTANT.GET_CONVERSATION_GRAPH_DATA:
+      return {
+        ...state,
+        datasets: [
+          {
+            data: [action.data.ar, action.data.aToC, action.data.cToM, action.data.MTos],
+          },
+        ],
+      };
+
+    default:
+      return state;
+  }
+};
