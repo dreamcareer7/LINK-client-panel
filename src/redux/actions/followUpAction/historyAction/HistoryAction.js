@@ -4,9 +4,9 @@ import HISTORY_REDUX_CONSTANT from '../../../constants/historyReduxConstant/Hist
 import HistoryService from '../../../../services/follow-up-service/historyService/HistoryService';
 
 // eslint-disable-next-line import/prefer-default-export
-export const fetchConversation = id => {
+export const fetchConversation = (id,data)=> {
   return dispatch => {
-    HistoryService.fetchConversation(id)
+    HistoryService.fetchConversation(id,data)
       .then(response => {
         if (response.data.status === 'SUCCESS') {
           dispatch({

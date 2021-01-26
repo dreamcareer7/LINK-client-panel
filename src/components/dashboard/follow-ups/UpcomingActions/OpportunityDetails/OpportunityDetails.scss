@@ -99,6 +99,9 @@
   color: $placeholder-color;
 }
 
+.right-date-time{
+  color: $background-primary-color;
+}
 .note-action {
   display: flex;
   align-items: center;
@@ -164,6 +167,7 @@
   color: $placeholder-color;
   background-color: #ffffff;
   border-radius: 5px;
+  flex: 1;
 }
 
 .user-bubble {
