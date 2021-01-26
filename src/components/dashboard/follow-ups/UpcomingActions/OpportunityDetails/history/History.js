@@ -3,7 +3,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
-import { fetchConversation } from '../../../../../../redux/actions/followUpAction/historyAction/HistoryAction';
+import {
+  clearConversation,
+  fetchConversation,
+} from '../../../../../../redux/actions/followUpAction/historyAction/HistoryAction';
 
 function History() {
   const dispatch = useDispatch();
@@ -11,6 +14,9 @@ function History() {
 
   useEffect(() => {
     dispatch(fetchConversation(id, ''));
+    return () => {
+      dispatch(clearConversation());
+    };
   }, []);
 
   const handleScroll = e => {
