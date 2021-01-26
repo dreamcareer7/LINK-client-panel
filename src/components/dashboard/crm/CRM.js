@@ -279,7 +279,7 @@ function Crm() {
           <InputRange
             minValue={0}
             maxValue={10}
-            onChange={() => setRangeState({ min: 1, max: 10 })}
+            onChange={value => setRangeState(value)}
             value={rangeState}
           />
         </div>
