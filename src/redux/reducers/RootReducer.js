@@ -7,6 +7,7 @@ import { dashboardReducer } from './dashboard-reducer/DashboardReducer';
 import { AccountReducer } from './account-reducer/AccountReducer';
 import {
   activityBreakdownGraphData,
+  conversationGraphData,
   pipelineValuesGraphData,
 } from './reporting-reducer/ReportingReducer';
 
@@ -21,5 +22,6 @@ const rootReducer = combineReducers({
   AccountReducer,
   activityBreakdownGraphData,
   pipelineValuesGraphData,
+  conversationGraphData,
 });
 export default rootReducer;
