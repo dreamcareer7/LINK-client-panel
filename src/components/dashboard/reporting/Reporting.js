@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 import './Reporting.scss';
 import { Bar, Doughnut, Line } from 'react-chartjs-2';
 import { useDispatch, useSelector } from 'react-redux';
-import { getActivityBreakdownGraphData } from '../../../redux/actions/ReportingActions/CRMAction';
+import {
+  getActivityBreakdownGraphData,
+  getPipelineValuesGraphData,
+} from '../../../redux/actions/ReportingActions/ReportingAction';
 
 function Reporting() {
-  const activityBreakdownGraph = useSelector(
-    ({ activityBreakdownGraphData }) => activityBreakdownGraphData
-  );
-
   const totalSalesOptions = {
     backgroundColor: '#f9f9f9',
     legend: {
@@ -168,19 +167,14 @@ function Reporting() {
       elements: { point: { radius: '10' } },
     },
   };
-  const pipelineData = {
-    labels: ['Very Likely Deals', 'Likely Deals', 'Not Likely Deals'],
-    fillText: '$7,00,000',
-    datasets: [
-      {
-        data: [43, 36, 21],
-        backgroundColor: ['#39C3BB', '#FCAB50', '#FF696A'],
-        datalabels: { display: false },
-      },
-    ],
-  };
 
   const dispatch = useDispatch();
+
+  const activityBreakdownGraph = useSelector(
+    ({ activityBreakdownGraphData }) => activityBreakdownGraphData
+  );
+  const pipelineValuesGraph = useSelector(({ pipelineValuesGraphData }) => pipelineValuesGraphData);
+
   const [startDate] = useState(new Date('2021-01-20T07:03:46.724').toISOString());
   const [endDate] = useState(new Date('2021-01-31T07:03:46.724Z').toISOString());
 
@@ -191,6 +185,7 @@ function Reporting() {
     };
 
     dispatch(getActivityBreakdownGraphData(data));
+    dispatch(getPipelineValuesGraphData(data));
   }, []);
 
   return (
@@ -221,7 +216,7 @@ function Reporting() {
         </div>
         <div className="pipeline-container">
           <div className="common-title">PIPELINE VALUE</div>
-          <Doughnut data={pipelineData} options={pipelineOptions} />
+          <Doughnut data={pipelineValuesGraph} options={pipelineOptions} />
         </div>
       </div>
     </>
