@@ -4,6 +4,7 @@ import { Bar, Doughnut, Line } from 'react-chartjs-2';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getActivityBreakdownGraphData,
+  getConversationGraphData,
   getPipelineValuesGraphData,
 } from '../../../redux/actions/ReportingActions/ReportingAction';
 
@@ -130,16 +131,7 @@ function Reporting() {
       ],
     },
   };
-  const conversionsData = {
-    labels: ['AR', 'A to C', 'C to M', 'M to S'],
-    datasets: [
-      {
-        data: [0, 37, 55, 43],
-        backgroundColor: '#4282FE',
-        datalabels: { display: false },
-      },
-    ],
-  };
+
   const pipelineOptions = {
     value: ['$10000', '$20000', '$52000'],
     labels: {
@@ -174,6 +166,7 @@ function Reporting() {
     ({ activityBreakdownGraphData }) => activityBreakdownGraphData
   );
   const pipelineValuesGraph = useSelector(({ pipelineValuesGraphData }) => pipelineValuesGraphData);
+  const conversionsData = useSelector(({ conversationGraphData }) => conversationGraphData);
 
   const [startDate] = useState(new Date('2021-01-20T07:03:46.724').toISOString());
   const [endDate] = useState(new Date('2021-01-31T07:03:46.724Z').toISOString());
@@ -186,6 +179,7 @@ function Reporting() {
 
     dispatch(getActivityBreakdownGraphData(data));
     dispatch(getPipelineValuesGraphData(data));
+    dispatch(getConversationGraphData(data));
   }, []);
 
   return (
