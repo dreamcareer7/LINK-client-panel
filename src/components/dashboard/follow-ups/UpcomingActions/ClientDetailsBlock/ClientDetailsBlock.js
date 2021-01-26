@@ -7,6 +7,12 @@ import { stageMapperObject } from '../../../../../helpers/Mappers';
 
 /* import user from '../../../../../assets/images/dummy-user.jpg'; */
 
+const likelyHoodClassMapper = [
+  { label: 'green', value: 'VERY_LIKELY' },
+  { label: 'yellow', value: 'LIKELY' },
+  { label: 'red', value: 'NOT_LIKELY' },
+];
+
 function ClientDetailsBlock({ opportunity }) {
   const {
     profilePicUrl,
@@ -18,9 +24,17 @@ function ClientDetailsBlock({ opportunity }) {
     stage,
     title,
     phone,
+    likelyHood,
   } = opportunity;
+  console.log('likelyHoods=>', likelyHood);
+
   return (
-    <div className="common-block upcoming-action-block-size cursor-pointer blue">
+    <div
+      className={`common-block upcoming-action-block-size cursor-pointer ${getLabelFromValues(
+        likelyHood,
+        likelyHoodClassMapper
+      )} ${!likelyHood && 'blue'}`}
+    >
       <div className="status-color" />
       <div className="common-block--detail-container">
         <div className="DP-name-container">
@@ -66,6 +80,7 @@ ClientDetailsBlock.propTypes = {
     title: PropTypes.string,
     followUp: PropTypes.string,
     phone: PropTypes.string,
+    likelyHood: PropTypes.string,
   }).isRequired,
 };
 

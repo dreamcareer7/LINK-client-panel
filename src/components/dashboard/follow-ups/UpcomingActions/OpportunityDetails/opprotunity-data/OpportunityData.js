@@ -131,7 +131,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             />
           </div>
           <div>
-            <div className="common-subtitle">POTENTIAL</div>
+            <div className="common-subtitle">LIKELYHOODS</div>
             <select
               className="common-select common-select-white mt-5"
               value={potentialValue}
