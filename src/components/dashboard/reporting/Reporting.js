@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Reporting.scss';
-import { Line, Bar, Doughnut } from 'react-chartjs-2';
+import { Bar, Doughnut, Line } from 'react-chartjs-2';
+import { useDispatch, useSelector } from 'react-redux';
+import { getActivityBreakdownGraphData } from '../../../redux/actions/ReportingActions/CRMAction';
 
 function Reporting() {
+  const activityBreakdownGraph = useSelector(
+    ({ activityBreakdownGraphData }) => activityBreakdownGraphData
+  );
+
   const totalSalesOptions = {
     backgroundColor: '#f9f9f9',
     legend: {
@@ -174,53 +180,40 @@ function Reporting() {
     ],
   };
 
+  const dispatch = useDispatch();
+  const [startDate] = useState(new Date('2021-01-20T07:03:46.724').toISOString());
+  const [endDate] = useState(new Date('2021-01-31T07:03:46.724Z').toISOString());
+
+  useEffect(() => {
+    const data = {
+      startDate,
+      endDate,
+    };
+
+    dispatch(getActivityBreakdownGraphData(data));
+  }, []);
+
   return (
     <>
       <div className="total-sales-container">
         <div className="common-title mb-10">TOTAL SALES GENERATED</div>
         <Line height={80} options={totalSalesOptions} data={totalSalesData} />
       </div>
-      <div className="activity-breakdown-container">
-        <div className="common-title">ACTIVITY BREAKDOWN</div>
-        <div className="activity-breakdown-circles-container">
-          <div className="outer-circle">
-            <div className="middle-circle">
-              <div className="inner-circle">600</div>
-            </div>
-            <div className="activity-breakdown-title">INVITED</div>
-          </div>
-          <div className="outer-circle">
-            <div className="middle-circle">
-              <div className="inner-circle">240</div>
-            </div>
-            <div className="activity-breakdown-title">ACCEPTED</div>
-          </div>
-          <div className="outer-circle">
-            <div className="middle-circle">
-              <div className="inner-circle">36</div>
-            </div>
-            <div className="activity-breakdown-title">CONVERSATIONS</div>
-          </div>
-          <div className="outer-circle">
-            <div className="middle-circle">
-              <div className="inner-circle">18</div>
-            </div>
-            <div className="activity-breakdown-title">MEETINGS</div>
-          </div>
-          <div className="outer-circle">
-            <div className="middle-circle">
-              <div className="inner-circle">06</div>
-            </div>
-            <div className="activity-breakdown-title">DEALS CLOSED</div>
-          </div>
-          <div className="outer-circle">
-            <div className="middle-circle">
-              <div className="inner-circle">08</div>
-            </div>
-            <div className="activity-breakdown-title">DEALS LOST</div>
+      {activityBreakdownGraph && (
+        <div className="activity-breakdown-container">
+          <div className="common-title">ACTIVITY BREAKDOWN</div>
+          <div className="activity-breakdown-circles-container">
+            {activityBreakdownGraph.map(activity => (
+              <div className="outer-circle">
+                <div className="middle-circle">
+                  <div className="inner-circle">{activity.total}</div>
+                </div>
+                <div className="activity-breakdown-title">{activity._id}</div>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+      )}
       <div className="conversions-pipeline-container">
         <div className="conversions-container">
           <div className="common-title mb-5">CONVERSIONS</div>
