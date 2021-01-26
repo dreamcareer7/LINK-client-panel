@@ -34,7 +34,7 @@ export const REPORTING_URL = {
   GET_ACTIVITY_BREAKDOWN_URL: `${BASE_URL}client-reporting/activity-breakdown`,
   GET_PIPELINE_URL: `${BASE_URL}client-reporting/pipeline-value`,
   GET_CONVERSATION_URL: `${BASE_URL}client-reporting/conversions`,
-  GET_TOTAL_SALES_URL: `${BASE_URL}client-reporting/total-sale`,
+  GET_TOTAL_SALES_URL: `${BASE_URL}client-reporting/total-sales`,
 };
 
 export const DASHBOARD_URL = {
