@@ -3,8 +3,8 @@ import './OpportunityDetails.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import {
-  clearOpportunity,
-  getOpportunity,
+  clearOpportunity, deleteOpportunity,
+  getOpportunity, syncWithLinkedIn,
 } from '../../../../../redux/actions/followUpAction/FollowUpAction';
 import OpportunityData from './opprotunity-data/OpportunityData';
 import History from './history/History';
@@ -29,7 +29,12 @@ function OpportunityDetails() {
   };
 
   const onSyncClick = () =>{
-    console.log("sync with linked in click");
+    console.log("sync with linked in click",id);
+    dispatch(syncWithLinkedIn(id));
+  }
+  const deleteSyncClick = () => {
+    deleteOpportunity(id,history.goBack);
+
   }
 
   return (
@@ -43,7 +48,7 @@ function OpportunityDetails() {
           <button type="submit" className="button success-button" onClick={onSyncClick}>
             SYNC
           </button>
-          <button type="button" className="button danger-button">
+          <button type="button" className="button danger-button" onClick={deleteSyncClick}>
             DELETE OPPORTUNITY
           </button>
         </div>
