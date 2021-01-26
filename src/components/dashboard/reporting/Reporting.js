@@ -49,10 +49,27 @@ function Reporting() {
     },
   };
 
+  const tooltips = [
+    'This is the percentage of people who have accepted your connection invite, you should be aiming for a 35 - 45% acceptance rate.',
+    'The number of conversations opened up based on the total invitations accepted, the goal is to achieve a 15 - 20% conversion.',
+    'This is the number of conversations that have turned into meetings. The goal is to get this to a 25 - 35% conversion rate.',
+    'The number of meetings that have turned into a sale. This depends on your sales process but 10 - 30% is considered a good rate.',
+  ];
+
   const conversionsOptions = {
     backgroundColor: '#f9f9f9',
     legend: {
       display: false,
+    },
+    tooltips: {
+      callbacks: {
+        title(tooltipItem) {
+          return tooltips[tooltipItem[0].index];
+        },
+        label() {
+          return null;
+        },
+      },
     },
     elements: { point: { radius: 0 } },
     scales: {
