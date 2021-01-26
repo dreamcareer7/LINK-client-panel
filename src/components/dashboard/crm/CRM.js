@@ -110,7 +110,7 @@ function Crm() {
         handleStageChange(index);
       }
     },
-    [crmsChartState],
+    [crmsChartState]
   );
 
   const options = {
@@ -242,75 +242,79 @@ function Crm() {
 
   return (
     <>
-      <div className='common-subtitle'>SALES OPPORTUNITIES</div>
-      <div className='graph-container'>
+      <div className="common-subtitle">SALES OPPORTUNITIES</div>
+      <div className="graph-container">
         <Bar options={options} data={crmsChartState} height={80} />
       </div>
-      <div className='filter-container'>
+      <div className="filter-container">
         <div>
-          <div className='common-subtitle'>LOCATION</div>
+          <div className="common-subtitle">LOCATION</div>
           <input
-            placeholder='Location'
-            className='common-input mt-5'
-            name='location'
+            placeholder="Location"
+            className="common-input mt-5"
+            name="location"
             value={location}
             onChange={handleFilterChange}
           />
         </div>
         <div className="mr-10">
-          <div className='common-subtitle'>DATE RANGE</div>
-          <div className='d-flex'>
+          <div className="common-subtitle">DATE RANGE</div>
+          <div className="d-flex">
             <DatePicker
-              placeholderText='From'
-              className='common-input mt-5'
+              placeholderText="From"
+              className="common-input mt-5"
               value={moment(startDate).format('YYYY-MM-DD')}
               onChange={handleStartDateChange}
             />
             <DatePicker
-              placeholderText='To'
-              className='common-input mt-5 ml-10'
+              placeholderText="To"
+              className="common-input mt-5 ml-10"
               value={moment(endDate).format('YYYY-MM-DD')}
               onChange={handleEndDateChange}
             />
           </div>
         </div>
         <div>
-          <div className='common-subtitle'>DEAL VALUE</div>
-          <InputRange minValue={0} maxValue={10} onChange={() => setRangeState({ min: 1, max: 10 })}
-                      value={rangeState} />
+          <div className="common-subtitle">DEAL VALUE</div>
+          <InputRange
+            minValue={0}
+            maxValue={10}
+            onChange={() => setRangeState({ min: 1, max: 10 })}
+            value={rangeState}
+          />
         </div>
         <div className="ml-10">
-          <div className='common-subtitle'>LIKELY HOOD</div>
+          <div className="common-subtitle">LIKELY HOOD</div>
           <select
-            className='common-select mt-5'
+            className="common-select mt-5"
             value={likelyHoods}
             onChange={handleFilterChange}
-            name='likelyHoods'
+            name="likelyHoods"
           >
-            <option value=''>Select</option>
+            <option value="">Select</option>
             {likelyHoodDropdownData.map(e => (
               <option value={e.value}>{e.label}</option>
             ))}
           </select>
         </div>
-        <div className='filter-buttons-container'>
+        <div className="filter-buttons-container">
           <button
-            type='submit'
-            className='button success-button slim-button mr-10'
+            type="submit"
+            className="button success-button slim-button mr-10"
             onClick={handleFilterApplyClick}
           >
             APPLY
           </button>
           <button
-            type='button'
-            className='button primary-button slim-button'
+            type="button"
+            className="button primary-button slim-button"
             onClick={handleResetClick}
           >
             RESET
           </button>
         </div>
       </div>
-      <div className='applied-filter-container'>
+      <div className="applied-filter-container">
         {docs && (
           <div>
             Showing {(docs.page - 1) * (docs.limit + 1)}-
@@ -318,14 +322,14 @@ function Crm() {
           </div>
         )}
         {stageIndex &&
-        crmsChartState.labels &&
-        stageIndex > -1 &&
-        stageIndex < crmsChartState.labels.length && (
-          <div>
-            <span>Opportunity Stage: </span>
-            {crmsChartState.labels[stageIndex]}
-          </div>
-        )}
+          crmsChartState.labels &&
+          stageIndex > -1 &&
+          stageIndex < crmsChartState.labels.length && (
+            <div>
+              <span>Opportunity Stage: </span>
+              {crmsChartState.labels[stageIndex]}
+            </div>
+          )}
         {location && location.trim().length > 0 && (
           <div>
             <span>Location: </span>
@@ -342,7 +346,7 @@ function Crm() {
 
       {crmsArray && crmsArray.length > 0 ? (
         <>
-          <div className='customer-list-heading'>
+          <div className="customer-list-heading">
             <div>NAME</div>
             <div>DATE ADDED</div>
             <div>FOLLOW-UP DATE</div>
@@ -363,8 +367,8 @@ function Crm() {
             } = singleCrm;
 
             return (
-              <div className='customer-list-rows'>
-                <div className='customer-name'>
+              <div className="customer-list-rows">
+                <div className="customer-name">
                   <img src={profilePicUrl || user} />
                   {`${firstName} ${lastName}`}
                 </div>
@@ -373,14 +377,14 @@ function Crm() {
                 <div>{userLocation}</div>
                 <div>High Likely</div>
                 <div>{dealSize}</div>
-                <div className='table-action-field'>
+                <div className="table-action-field">
                   <img
                     src={edit}
-                    className='mr-10'
-                    title='Edit'
+                    className="mr-10"
+                    title="Edit"
                     onClick={() => handleEditCRMUser(_id)}
                   />
-                  <img src={bin} title='Delete' onClick={() => handleDeleteCRMUser(_id)} />
+                  <img src={bin} title="Delete" onClick={() => handleDeleteCRMUser(_id)} />
                 </div>
               </div>
             );
@@ -391,13 +395,13 @@ function Crm() {
             totalItemsCount={docs.total || 1}
             pageRangeDisplayed={3}
             onChange={handlePageChange}
-            itemClass='page-item'
-            linkClass='page-link'
+            itemClass="page-item"
+            linkClass="page-link"
           />
         </>
       ) : (
         <>
-          <div className='row-container'>
+          <div className="row-container">
             <div style={{ textAlign: 'center', marginTop: '5vh' }}>No Data Found!</div>
           </div>
         </>
