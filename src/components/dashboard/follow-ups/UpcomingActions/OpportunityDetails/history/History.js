@@ -13,8 +13,8 @@ function History() {
     dispatch(fetchConversation(id, ''));
   }, []);
 
-  const handleScroll = () => {
-    console.log('handle scroll');
+  const handleScroll = e => {
+    console.log('handle scroll', e);
   };
 
   const allConversation = useSelector(state => state.opportunityHistory);
@@ -24,11 +24,11 @@ function History() {
     <div className="opportunity-right common-block blue">
       <div className="status-color" />
 
-      <div className="common-block--detail-container chat-history">
+      <div className="common-block--detail-container chat-history" onScroll={handleScroll}>
         <div className="common-subtitle">HISTORY</div>
         {allConversation &&
           allConversation.map(convo => (
-            <div className="chat-container" key={Math.random()} onScroll={handleScroll}>
+            <div className="chat-container" key={Math.random()}>
               {convo.id === '2' ? (
                 <div className="left-conversation">
                   <img className="chat-dp" src={convo.profilePicUrl} />

@@ -1,5 +1,6 @@
 import CRM_REDUX_CONSTANT from '../../constants/crmReduxConstants/CRMReduxConstant';
 import { getLabelFromValues } from '../../../helpers/chartHelper';
+import { stageMapperObject } from '../../../helpers/Mappers';
 
 export const crms = (state = null, action) => {
   switch (action.type) {
@@ -29,22 +30,12 @@ const initiralGraphData = {
   ],
 };
 
-const mapperObject = [
-  { label: 'In Conversation', value: 'IN_CONVERSION' },
-  { label: 'Initial Contact', value: 'INITIAL_CONTACT' },
-  { label: 'Lost', value: 'LOST' },
-  { label: 'Follow-Up', value: 'FOLLOW_UP' },
-  { label: 'Closed', value: 'CLOSED' },
-  { label: 'Meeting Booked', value: 'MEETING_BOOKED' },
-  { label: 'Potential Deals', value: 'POTENTIAL_DEAL' },
-];
-
 export const crmsGraphData = (state = initiralGraphData, action) => {
   switch (action.type) {
     case CRM_REDUX_CONSTANT.GET_CRMS_GRAPH_DATA:
       return {
         ...state,
-        labels: action.data.map(e => getLabelFromValues(e._id, mapperObject)),
+        labels: action.data.map(e => getLabelFromValues(e._id, stageMapperObject)),
         values: action.data.map(e => e._id),
         datasets: [
           {
