@@ -14,6 +14,10 @@ const ReportingService = {
     ApiService.getData(
       `${REPORTING_URL.GET_CONVERSATION_URL}?startDate=${startDate}&endDate=${endDate}`
     ),
+  getTotalSales: ({ startDate, endDate }) =>
+    ApiService.getData(
+      `${REPORTING_URL.GET_TOTAL_SALES_URL}?startDate=${startDate}&endDate=${endDate}`
+    ),
 };
 
 export default ReportingService;
