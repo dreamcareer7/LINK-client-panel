@@ -324,6 +324,7 @@ input::placeholder {
 /* common block starts here */
 .common-block {
   border-radius: 7px;
+  min-height: 350px;
 
   &.red {
     background: linear-gradient(180deg, $danger-color 50%, $secondary-variant-color 50%);
