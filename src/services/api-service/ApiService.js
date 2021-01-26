@@ -4,7 +4,7 @@ import { getAuthTokenLocalStorage } from '../../helpers/LocalStorageHelper';
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
-  timeout: 3000,
+  timeout: 10000,
   params: {}, // do not remove this, its added to add params later in the config
 });
 
