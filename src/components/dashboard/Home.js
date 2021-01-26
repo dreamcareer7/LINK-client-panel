@@ -69,12 +69,11 @@ const Home = () => {
       </div>
       <div className="col-md-12 m-top">
         <div className="text-center">
-          {clientQuote && clientQuote.data && clientQuote.data.quote > 0 && (
+          {clientQuote && clientQuote.data && clientQuote.data.length !== 0 &&
             <>
               <h5 className="quote-text">{`"${clientQuote && clientQuote.data && clientQuote.data.quote}"`}</h5>
               <h6 className="text-transform">{`${clientQuote && clientQuote.data && clientQuote.data.quoteBy}`}</h6>
-            </>
-          )}
+            </>}
         </div>
       </div>
     </div>
