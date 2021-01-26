@@ -10,20 +10,10 @@ const initialActivityBreakdownGraphData = {
   ],
 };
 
-export const activityBreakdownGraphData = (state = initialActivityBreakdownGraphData, action) => {
+export const activityBreakdownGraphData = (state = [], action) => {
   switch (action.type) {
     case REPORT_REDUX_CONSTANT.GET_ACTIVITY_BREAKDOWN_GRAPH_DATA:
-      return {
-        ...state,
-        labels: action.data.map(e => e.label),
-        values: action.data.map(e => e.value),
-        datasets: [
-          {
-            data: action.data.map(e => e.value),
-            backgroundColor: '#4282FE',
-          },
-        ],
-      };
+      return action.data;
 
     default:
       return state;
