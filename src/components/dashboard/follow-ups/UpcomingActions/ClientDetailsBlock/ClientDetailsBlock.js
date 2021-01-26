@@ -18,7 +18,7 @@ function ClientDetailsBlock({ opportunity }) {
     phone,
   } = opportunity;
   return (
-    <div className="common-block cursor-pointer blue">
+    <div className="common-block upcoming-action-block-size cursor-pointer blue">
       <div className="status-color" />
       <div className="common-block--detail-container">
         <div className="DP-name-container">
