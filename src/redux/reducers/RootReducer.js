@@ -5,6 +5,7 @@ import { opportunityHistory } from './follow-up-reducer/historyReducer/HistoryRe
 import { crms, crmsGraphData } from './crm-reducer/CRMReducer';
 import { dashboardReducer } from './dashboard-reducer/DashboardReducer';
 import { AccountReducer } from './account-reducer/AccountReducer';
+import { activityBreakdownGraphData } from './reporting-reducer/ReportingReducer';
 
 const rootReducer = combineReducers({
   followUps,
@@ -15,5 +16,6 @@ const rootReducer = combineReducers({
   crmsGraphData,
   dashboardReducer,
   AccountReducer,
+  activityBreakdownGraphData,
 });
 export default rootReducer;
