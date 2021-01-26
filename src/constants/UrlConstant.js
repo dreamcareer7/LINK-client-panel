@@ -33,6 +33,7 @@ export const CRM_URL = {
 export const REPORTING_URL = {
   GET_ACTIVITY_BREAKDOWN_URL: `${BASE_URL}client-reporting/activity-breakdown`,
   GET_PIPELINE_URL: `${BASE_URL}client-reporting/pipeline-value`,
+  GET_CONVERSATION_URL: `${BASE_URL}client-reporting/conversions`,
 };
 
 export const DASHBOARD_URL = {
