@@ -268,6 +268,10 @@ function Crm() {
     dispatchFilter({
       type: CRM_FILTER_REDUCER_ACTIONS.RESET_STATE,
     });
+    setRangeState({
+      min: dealSizes?.minDealValue || 0,
+      max: dealSizes?.maxDealValue || 1000,
+    });
     dispatch(getFilteredCRMSAction(page, data));
   };
 
