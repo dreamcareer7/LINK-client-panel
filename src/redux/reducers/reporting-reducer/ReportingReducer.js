@@ -70,3 +70,34 @@ export const conversationGraphData = (state = initialConversationGraphData, acti
       return state;
   }
 };
+
+const initialTotalSalesGraphData = {
+  labels: [],
+  datasets: [
+    {
+      data: [],
+      backgroundColor: '#4282FE',
+      datalabels: { display: false },
+    },
+  ],
+};
+
+export const totalSalesGraphData = (state = initialTotalSalesGraphData, action) => {
+  switch (action.type) {
+    case REPORT_REDUX_CONSTANT.GET_TOTAL_SALES_GRAPH_DATA:
+      return {
+        ...state,
+        // TODO fix the id
+        labels: action.data.map(e => JSON.stringify(e._id)),
+        values: action.data.map(e => e.totalDealValue),
+        datasets: [
+          {
+            data: action.data.map(e => e.totalDealValue),
+          },
+        ],
+      };
+
+    default:
+      return state;
+  }
+};

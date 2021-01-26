@@ -6,6 +6,7 @@ import {
   getActivityBreakdownGraphData,
   getConversationGraphData,
   getPipelineValuesGraphData,
+  getTotalSalesGraphData,
 } from '../../../redux/actions/ReportingActions/ReportingAction';
 
 function Reporting() {
@@ -47,52 +48,7 @@ function Reporting() {
       ],
     },
   };
-  const totalSalesData = {
-    labels: [
-      'Sep 20',
-      'Oct 20',
-      'Nov 20',
-      'Dec 20',
-      'Jan 21',
-      'Feb 21',
-      'Feb 21',
-      'Mar 21',
-      'Apr 21',
-      'May 21',
-      'Jun 21',
-      'Jul 21',
-      'Aug 21',
-      'Sep 21',
-      'Oct 21',
-      'Nov 21',
-      'Dec 21',
-    ],
-    datasets: [
-      {
-        data: [
-          0,
-          4000,
-          16000,
-          24000,
-          38000,
-          67000,
-          101000,
-          117000,
-          124000,
-          127000,
-          156000,
-          174000,
-          205000,
-          214000,
-          228000,
-          234000,
-          246000,
-        ],
-        backgroundColor: '#4282FE',
-        datalabels: { display: false },
-      },
-    ],
-  };
+
   const conversionsOptions = {
     backgroundColor: '#f9f9f9',
     legend: {
@@ -167,6 +123,7 @@ function Reporting() {
   );
   const pipelineValuesGraph = useSelector(({ pipelineValuesGraphData }) => pipelineValuesGraphData);
   const conversionsData = useSelector(({ conversationGraphData }) => conversationGraphData);
+  const totalSalesData = useSelector(({ totalSalesGraphData }) => totalSalesGraphData);
 
   const [startDate] = useState(new Date('2021-01-20T07:03:46.724').toISOString());
   const [endDate] = useState(new Date('2021-01-31T07:03:46.724Z').toISOString());
@@ -180,6 +137,7 @@ function Reporting() {
     dispatch(getActivityBreakdownGraphData(data));
     dispatch(getPipelineValuesGraphData(data));
     dispatch(getConversationGraphData(data));
+    dispatch(getTotalSalesGraphData(data));
   }, []);
 
   return (
