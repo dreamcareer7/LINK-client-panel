@@ -186,8 +186,13 @@ function Crm() {
   };
 
   useEffect(() => {
+    const data = {
+      startDate: startDate || undefined,
+      endDate: endDate || undefined,
+    };
+
     dispatch(getCRMGraphData());
-    dispatch(getFilteredCRMSAction(page));
+    dispatch(getFilteredCRMSAction(page, data));
   }, []);
 
   useEffect(() => {
@@ -255,10 +260,15 @@ function Crm() {
   };
 
   const handleResetClick = () => {
+    const data = {
+      startDate: startDate || undefined,
+      endDate: endDate || undefined,
+    };
+
     dispatchFilter({
       type: CRM_FILTER_REDUCER_ACTIONS.RESET_STATE,
     });
-    dispatch(getFilteredCRMSAction(page));
+    dispatch(getFilteredCRMSAction(page, data));
   };
 
   const handleEditCRMUser = id => {
