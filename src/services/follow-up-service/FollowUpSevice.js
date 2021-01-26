@@ -8,6 +8,7 @@ const FollowUpService = {
   updateOpportunity: (id, data) =>
     ApiService.putData(FOLLOW_UP_URL.UPDATE_OPPORTUNITY_URL + id, data),
   deleteOpportunity: id => ApiService.deleteData(FOLLOW_UP_URL.DELETE_OPPORTUNITY_URL + id),
-  syncWithLinkedIn:id => ApiService.postData(FOLLOW_UP_URL.SYNC_OPPORTUNITY_WITH_LINKEDIN_URL + id)
+  syncWithLinkedIn: id =>
+    ApiService.postData(FOLLOW_UP_URL.SYNC_OPPORTUNITY_WITH_LINKEDIN_URL + id),
 };
 export default FollowUpService;

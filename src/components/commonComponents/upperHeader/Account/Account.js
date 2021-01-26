@@ -152,14 +152,28 @@ function Account() {
             </div>
             <div>
               <span className="field-title">Company Size</span>
-              <select className="common-input" value={form.company_size} onChange={onHandleChange} name="company_size">
-                {company && company.data && company.data.map(value => <option key={value}>{value}</option>)}
+              <select
+                className="common-input"
+                value={form.company_size}
+                onChange={onHandleChange}
+                name="company_size"
+              >
+                {company &&
+                  company.data &&
+                  company.data.map(value => <option key={value}>{value}</option>)}
               </select>
             </div>
             <div>
               <span className="field-title">Industry</span>
-              <select className="common-input" value={form.industry} onChange={onHandleChange} name="industry">
-                {industries && industries.data && industries.data.map(value => <option key={value}>{value}</option>)}
+              <select
+                className="common-input"
+                value={form.industry}
+                onChange={onHandleChange}
+                name="industry"
+              >
+                {industries &&
+                  industries.data &&
+                  industries.data.map(value => <option key={value}>{value}</option>)}
               </select>
             </div>
           </div>

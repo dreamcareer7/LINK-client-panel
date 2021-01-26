@@ -3,8 +3,10 @@ import './OpportunityDetails.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import {
-  clearOpportunity, deleteOpportunity,
-  getOpportunity, syncWithLinkedIn,
+  clearOpportunity,
+  deleteOpportunity,
+  getOpportunity,
+  syncWithLinkedIn,
 } from '../../../../../redux/actions/followUpAction/FollowUpAction';
 import OpportunityData from './opprotunity-data/OpportunityData';
 import History from './history/History';
@@ -28,14 +30,13 @@ function OpportunityDetails() {
     window.location = `${opportunity.linkedInUrl}`;
   };
 
-  const onSyncClick = () =>{
-    console.log("sync with linked in click",id);
+  const onSyncClick = () => {
+    console.log('sync with linked in click', id);
     dispatch(syncWithLinkedIn(id));
-  }
+  };
   const deleteSyncClick = () => {
-    deleteOpportunity(id,history.goBack);
-
-  }
+    deleteOpportunity(id, history.goBack);
+  };
 
   return (
     <>

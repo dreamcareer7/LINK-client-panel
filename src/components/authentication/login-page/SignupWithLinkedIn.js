@@ -15,7 +15,7 @@ function SignupWithLinkedIn() {
       <img alt="linkfluencer" src={linkFluencer} className="logo" />
 
       <button type="button" className="sign-up-button" onClick={onClickSignUp}>
-        <img src={signInLinkedIn}/>
+        <img src={signInLinkedIn} />
       </button>
       <a href="forgot" className="forgot-password">
         Forgot Password?

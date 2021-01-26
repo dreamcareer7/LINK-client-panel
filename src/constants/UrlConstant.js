@@ -12,7 +12,7 @@ export const FOLLOW_UP_URL = {
   GET_INDIVIDUAL_OPPORTUNITY_URL: `${BASE_URL}opportunity/get-opportunity/`,
   UPDATE_OPPORTUNITY_URL: `${BASE_URL}opportunity/update-opportunity/`,
   DELETE_OPPORTUNITY_URL: `${BASE_URL}opportunity/delete-opportunity/`,
-  SYNC_OPPORTUNITY_WITH_LINKEDIN_URL:`${BASE_URL}opportunity/sync-with-linkedIn/`
+  SYNC_OPPORTUNITY_WITH_LINKEDIN_URL: `${BASE_URL}opportunity/sync-with-linkedIn/`,
 };
 export const NOTES_URL = {
   GET_NOTES_URL: `${BASE_URL}opportunity-note/get-opportunity-note/`,

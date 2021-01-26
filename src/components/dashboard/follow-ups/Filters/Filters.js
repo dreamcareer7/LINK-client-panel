@@ -3,11 +3,11 @@ import './Filters.scss';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useDispatch, useSelector } from 'react-redux';
-import moment from "moment";
+import moment from 'moment';
 import FollowUpCheckBox from './FollowUpCheckBox';
 import PotentialCheckBox from './PotentialCheckBox';
 import { getUpcomingActions } from '../../../../redux/actions/followUpAction/FollowUpAction';
-import {errorNotification} from "../../../../constants/Toast";
+import { errorNotification } from '../../../../constants/Toast';
 
 const stageInitialState = {
   INITIAL_CONTACT: {
@@ -77,27 +77,26 @@ function Filters() {
   const [potentialCheckBox, setPotentialCheckBox] = useReducer(reducer, potentialInitialState);
 
   const applyFilters = () => {
-    if(moment(startDate).isAfter(endDate)){
+    if (moment(startDate).isAfter(endDate)) {
       errorNotification('Please enter from date before to date');
-    }
-    else if(moment(endDate).isBefore(startDate)){
+    } else if (moment(endDate).isBefore(startDate)) {
       errorNotification('Please enter to date after from date');
-    }
-    else{
-    const data = {
-      stages: Object.entries(stageCheckBox)
-        .filter(e => e[1].value)
-        .map(e => e[0]),
-      likelyHoods: Object.entries(potentialCheckBox)
-        .filter(e => e[1].value)
-        .map(e => e[0]),
-      startDeal: 13,
-      endDeal: 1000,
-      startDate: startDate ? startDate.toISOString() : undefined,
-      endDate: endDate ? endDate.toISOString() : undefined,
-    };
+    } else {
+      const data = {
+        stages: Object.entries(stageCheckBox)
+          .filter(e => e[1].value)
+          .map(e => e[0]),
+        likelyHoods: Object.entries(potentialCheckBox)
+          .filter(e => e[1].value)
+          .map(e => e[0]),
+        startDeal: 13,
+        endDeal: 1000,
+        startDate: startDate ? startDate.toISOString() : undefined,
+        endDate: endDate ? endDate.toISOString() : undefined,
+      };
 
-    dispatch(getUpcomingActions(followupData.docs.page, data));}
+      dispatch(getUpcomingActions(followupData.docs.page, data));
+    }
   };
   const resetFilters = () => {
     setStartDate(null);

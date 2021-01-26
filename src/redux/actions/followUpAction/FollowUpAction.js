@@ -56,23 +56,23 @@ export const syncWithLinkedIn = id => {
   return dispatch => {
     dispatch(clearOpportunity);
     FollowUpService.syncWithLinkedIn(id)
-        .then(response => {
-          if (response.data.status === 'SUCCESS') {
-            dispatch({
-              type: FOLLOW_UP_REDUX_CONSTANT.GET_OPPORTUNITY_DETAIL,
-              data: response.data.data,
-            });
-            successNotification('Data synced with linked in')
-          }
-        })
-        .catch(e => {
-          console.log(e);
-          if (e.response.data.status === undefined) {
-            errorNotification('It seems like server is down, Please try after sometime.');
-          } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
-            errorNotification('Internal server error');
-          }
-        });
+      .then(response => {
+        if (response.data.status === 'SUCCESS') {
+          dispatch({
+            type: FOLLOW_UP_REDUX_CONSTANT.GET_OPPORTUNITY_DETAIL,
+            data: response.data.data,
+          });
+          successNotification('Data synced with linked in');
+        }
+      })
+      .catch(e => {
+        console.log(e);
+        if (e.response.data.status === undefined) {
+          errorNotification('It seems like server is down, Please try after sometime.');
+        } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
+          errorNotification('Internal server error');
+        }
+      });
   };
 };
 
@@ -100,20 +100,20 @@ export const updateOpportunity = (id, data) => {
 };
 
 export const deleteOpportunity = (id, cb) => {
-    FollowUpService.deleteOpportunity(id)
-        .then(response => {
-          if (response.data.status === 'SUCCESS') {
-            if(cb && typeof cb === 'function') {
-              cb();
-            }
-            successNotification('Opportunity deleted successfully');
-          }
-        })
-        .catch(e => {
-          if (e.response.data.status === undefined) {
-            errorNotification('It seems like server is down, Please try after sometime.');
-          } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
-            errorNotification('Internal server error');
-          }
-        });
+  FollowUpService.deleteOpportunity(id)
+    .then(response => {
+      if (response.data.status === 'SUCCESS') {
+        if (cb && typeof cb === 'function') {
+          cb();
+        }
+        successNotification('Opportunity deleted successfully');
+      }
+    })
+    .catch(e => {
+      if (e.response.data.status === undefined) {
+        errorNotification('It seems like server is down, Please try after sometime.');
+      } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
+        errorNotification('Internal server error');
+      }
+    });
 };

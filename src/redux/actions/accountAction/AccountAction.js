@@ -46,7 +46,7 @@ export const getClientInfo = () => {
   };
 };
 
-export const updateClientInfo = (data) => {
+export const updateClientInfo = data => {
   return dispatch => {
     AccountService.updateClient(data)
       .then(response => {

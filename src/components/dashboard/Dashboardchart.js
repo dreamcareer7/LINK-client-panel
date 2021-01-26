@@ -10,7 +10,15 @@ const DashboardChart = props => {
     datasets: [
       {
         label: 'Rainfall',
-        backgroundColor: ['#f79400', '#43c643', '#950094', '#0096c0', '#d64374', '#3264c8', '#d53711'],
+        backgroundColor: [
+          '#f79400',
+          '#43c643',
+          '#950094',
+          '#0096c0',
+          '#d64374',
+          '#3264c8',
+          '#d53711',
+        ],
         data: chartData && chartData.map(e => e.total),
       },
     ],

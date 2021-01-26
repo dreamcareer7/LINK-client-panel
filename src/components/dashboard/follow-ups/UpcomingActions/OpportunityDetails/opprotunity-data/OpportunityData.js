@@ -32,10 +32,9 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
   const [locationVal, setLocationVal] = useState(location);
   const [dealSizeVal, setDealSizeVal] = useState(dealSize || '-');
   const onSaveOpportunityData = () => {
-    if(dealSizeVal === '-'){
+    if (dealSizeVal === '-') {
       setDealSizeVal('');
-    }
-    else {
+    } else {
       const data = {
         firstName,
         lastName,
@@ -125,7 +124,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             <div className="common-subtitle">DEAL SIZE</div>
             <input
               className="common-input common-input-white mt-5"
-              value={dealSizeVal }
+              value={dealSizeVal}
               onChange={e => {
                 setDealSizeVal(e.target.value);
               }}
@@ -145,11 +144,11 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
           </div>
           <div>
             <div className="common-subtitle">FOLLOW UP DATE</div>
-              <DatePicker
+            <DatePicker
               className="mt-5"
               placeholderText="From"
               value={followUpDate ? moment(followUpDate).format('MM/DD/YYYY') : followUpDate}
-              dateFormat = 'MM/DD/YYYY'
+              dateFormat="MM/DD/YYYY"
               onChange={date => setFollowUpDate(date)}
             />
           </div>
