@@ -32,20 +32,25 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
   const [locationVal, setLocationVal] = useState(location);
   const [dealSizeVal, setDealSizeVal] = useState(dealSize || '-');
   const onSaveOpportunityData = () => {
-    const data = {
-      firstName,
-      lastName,
-      title,
-      companyName,
-      stage: stageValue,
-      phone: phoneVal,
-      email: mail,
-      dealSize: dealSizeVal,
-      likelyHood: potentialValue,
-      location: locationVal,
-      followUp: followUpDate,
-    };
-    dispatch(updateOpportunity(_id, data));
+    if(dealSizeVal === '-'){
+      setDealSizeVal('');
+    }
+    else {
+      const data = {
+        firstName,
+        lastName,
+        title,
+        companyName,
+        stage: stageValue,
+        phone: phoneVal,
+        email: mail,
+        dealSize: dealSizeVal,
+        likelyHood: potentialValue,
+        location: locationVal,
+        followUp: followUpDate,
+      };
+      dispatch(updateOpportunity(_id, data));
+    }
   };
   return (
     <div className="common-block blue">
@@ -79,7 +84,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             <div className="content-title ellipsis">PHONE</div>
             <input
               type="text"
-              className="common-input common-input-white  ellipsis"
+              className="common-input common-input-white ellipsis"
               value={phoneVal}
               onChange={e => setPhoneVal(e.target.value)}
             />

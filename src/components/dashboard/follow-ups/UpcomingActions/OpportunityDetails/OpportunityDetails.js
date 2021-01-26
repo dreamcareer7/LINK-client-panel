@@ -28,6 +28,10 @@ function OpportunityDetails() {
     window.location = `${opportunity.linkedInUrl}`;
   };
 
+  const onSyncClick = () =>{
+    console.log("sync with linked in click");
+  }
+
   return (
     <>
       <div className="opportunity-header">
@@ -36,7 +40,7 @@ function OpportunityDetails() {
           <span> / OPPORTUNITY DETAILS</span>
         </div>
         <div className="buttons-row">
-          <button type="submit" className="button success-button">
+          <button type="submit" className="button success-button" onClick={onSyncClick}>
             SYNC
           </button>
           <button type="button" className="button danger-button">
