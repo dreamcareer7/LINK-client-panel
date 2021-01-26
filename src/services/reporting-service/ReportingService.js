@@ -7,7 +7,7 @@ const ReportingService = {
       `${REPORTING_URL.GET_ACTIVITY_BREAKDOWN_URL}?startDate=${startDate}&endDate=${endDate}`
     ),
   getPipeline: ({ startDate, endDate }) =>
-    ApiService.putData(
+    ApiService.getData(
       `${REPORTING_URL.GET_PIPELINE_URL}?startDate=${startDate}&endDate=${endDate}`
     ),
 };
