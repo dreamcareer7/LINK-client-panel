@@ -10,6 +10,10 @@ const ReportingService = {
     ApiService.getData(
       `${REPORTING_URL.GET_PIPELINE_URL}?startDate=${startDate}&endDate=${endDate}`
     ),
+  getConversation: ({ startDate, endDate }) =>
+    ApiService.getData(
+      `${REPORTING_URL.GET_CONVERSATION_URL}?startDate=${startDate}&endDate=${endDate}`
+    ),
 };
 
 export default ReportingService;
