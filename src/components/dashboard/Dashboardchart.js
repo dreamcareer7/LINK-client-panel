@@ -4,7 +4,6 @@ import { Pie } from 'react-chartjs-2';
 
 const DashboardChart = props => {
   const { title, chartData } = props;
-  console.log(chartData);
   const state = {
     labels: chartData && chartData.map(e => e._id),
     datasets: [

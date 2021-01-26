@@ -31,7 +31,6 @@ function OpportunityDetails() {
   };
 
   const onSyncClick = () => {
-    console.log('sync with linked in click', id);
     dispatch(syncWithLinkedIn(id));
   };
   const deleteSyncClick = () => {

@@ -24,7 +24,6 @@ function History() {
   };
 
   const allConversation = useSelector(state => state.opportunityHistory);
-  console.log('allConversation =>', allConversation);
 
   return (
     <div className="opportunity-right common-block blue">

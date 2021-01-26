@@ -26,7 +26,6 @@ function ClientDetailsBlock({ opportunity }) {
     phone,
     likelyHood,
   } = opportunity;
-  console.log('likelyHoods=>', likelyHood);
 
   return (
     <div

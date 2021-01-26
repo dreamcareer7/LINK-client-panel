@@ -67,7 +67,6 @@ function Account() {
   ]);
 
   const onHandleChange = e => {
-    console.log(e.target.value);
     setFormValue({
       ...form,
       [e.target.name]: e.target.value,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './upperHeader.scss';
 import search from '../../../assets/images/search.png';
@@ -9,9 +9,37 @@ import notification from '../../../assets/bell.svg';
 import account from '../../../assets/images/account.svg';
 import help from '../../../assets/images/lifesaver.svg';
 import { clearAuthToken } from '../../../helpers/LocalStorageHelper';
+import FollowUpService from '../../../services/follow-up-service/FollowUpSevice';
 
 function UpperHeader() {
   const history = useHistory();
+
+  const [searchText, setSearchText] = useState('');
+  const [filtered, setFiltered] = useState([]);
+
+  const onClickSearchedVal = val => {
+    history.push(`/followUps/opportunityDetails/${val}`);
+    setFiltered([]);
+    setSearchText('');
+  };
+
+  const onSearch = e => {
+    const text = e.target.value;
+    setSearchText(text);
+    if (text && text.trim().length > 0) {
+      const data = {
+        name: text,
+      };
+      FollowUpService.searchSubscriber(data).then(r => {
+        const searchResult = r.data.data;
+        setFiltered(searchResult);
+      });
+      /* setFiltered(array.filter(f => f.match(e.target.value))); */
+    } else {
+      setFiltered([]);
+    }
+  };
+
   const onLogOut = () => {
     clearAuthToken();
     history.push('/signUp');
@@ -25,9 +53,18 @@ function UpperHeader() {
   return (
     <div className="upper-header-block">
       <div className="upper-header--rounded-block search-block">
-        <input placeholder="Search Opportunity" />
+        <input placeholder="Search Subscriber" value={searchText} onChange={onSearch} />
         <button type="button">
-          <img src={search} />{' '}
+          <div className="down-arrow">
+            <img src={search} />{' '}
+            <div className="search-area">
+              {filtered.map(e => (
+                <div className="open-search-area" onClick={() => onClickSearchedVal(e._id)}>
+                  {e.firstName} {e.lastName}
+                </div>
+              ))}
+            </div>
+          </div>
         </button>
       </div>
       <div title="Notifications" className="notification-container" onClick="">
