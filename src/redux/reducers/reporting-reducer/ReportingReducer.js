@@ -61,7 +61,7 @@ export const conversationGraphData = (state = initialConversationGraphData, acti
         ...state,
         datasets: [
           {
-            data: [action.data.ar, action.data.aToC, action.data.cToM, action.data.MTos],
+            data: [action.data.ar, action.data.aToC, action.data.cToM, action.data.MToS],
           },
         ],
       };
