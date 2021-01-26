@@ -43,3 +43,24 @@ export const getPipelineValuesGraphData = ({ startDate, endDate }) => {
       });
   };
 };
+
+export const getConversationGraphData = ({ startDate, endDate }) => {
+  return dispatch => {
+    ReportingService.getConversation({ startDate, endDate })
+      .then(response => {
+        if (response.data.status === 'SUCCESS') {
+          dispatch({
+            type: REPORT_REDUX_CONSTANT.GET_CONVERSATION_GRAPH_DATA,
+            data: response.data.data,
+          });
+        }
+      })
+      .catch(e => {
+        if (e.response.data.status === undefined) {
+          errorNotification('It seems like server is down, Please try after sometime.');
+        } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
+          errorNotification('Internal server error');
+        }
+      });
+  };
+};
