@@ -9,6 +9,7 @@ import {
   activityBreakdownGraphData,
   conversationGraphData,
   pipelineValuesGraphData,
+  totalSalesGraphData,
 } from './reporting-reducer/ReportingReducer';
 
 const rootReducer = combineReducers({
@@ -23,5 +24,6 @@ const rootReducer = combineReducers({
   activityBreakdownGraphData,
   pipelineValuesGraphData,
   conversationGraphData,
+  totalSalesGraphData,
 });
 export default rootReducer;
