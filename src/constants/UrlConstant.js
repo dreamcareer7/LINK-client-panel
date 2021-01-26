@@ -29,6 +29,12 @@ export const CRM_URL = {
   GET_FILTERED_CRM_URL: `${BASE_URL}client-crm/filters`,
   GET_CRM_GRAPH_URL: `${BASE_URL}client-dashboard/opportunities`,
 };
+
+export const REPORTING_URL = {
+  GET_ACTIVITY_BREAKDOWN_URL: `${BASE_URL}client-reporting/pipeline-value`,
+  GET_PIPELINE_URL: `${BASE_URL}client-reporting/pipeline-value`,
+};
+
 export const DASHBOARD_URL = {
   OPPORTUNITY_URL: `${BASE_URL}client-dashboard/opportunities`,
   PIPELINE_VALUE: `${BASE_URL}client-dashboard/pipeline-value`,
