@@ -30,3 +30,23 @@ export const activityBreakdownGraphData = (state = initialActivityBreakdownGraph
       return state;
   }
 };
+
+export const pipelineValuesGraphData = (state = initialActivityBreakdownGraphData, action) => {
+  switch (action.type) {
+    case REPORT_REDUX_CONSTANT.GET_PIPELINE_VALUES:
+      return {
+        ...state,
+        labels: action.data.map(e => e.label),
+        values: action.data.map(e => e.value),
+        datasets: [
+          {
+            data: action.data.map(e => e.value),
+            backgroundColor: '#4282FE',
+          },
+        ],
+      };
+
+    default:
+      return state;
+  }
+};
