@@ -64,18 +64,29 @@ const likelyHoodDropdownData = [
 ];
 
 function Crm() {
-  const [rangeState, setRangeState] = useState({ min: 2, max: 5 });
   const dispatch = useDispatch();
-
-  const [page, setPage] = useState(1);
   const history = useHistory();
-  const [filter, dispatchFilter] = useReducer(filterReducer, initialFilterState);
+
   const crmsData = useSelector(({ crms }) => crms);
   const crmsChartState = useSelector(({ crmsGraphData }) => crmsGraphData);
+  const [page, setPage] = useState(1);
+  const [filter, dispatchFilter] = useReducer(filterReducer, initialFilterState);
 
   const docs = useMemo(() => (crmsData && crmsData.docs ? crmsData.docs : null), [crmsData]);
+
+  const dealSizes = useMemo(
+    () => (crmsData && crmsData.dealSize && crmsData.dealSize[0] ? crmsData.dealSize[0] : null),
+    [crmsData]
+  );
+
   const crmsArray = useMemo(() => (docs && docs.docs ? docs.docs : []), [docs]);
   const activePage = useMemo(() => (docs && docs.page ? docs.page : 1), [docs]);
+
+  const [rangeState, setRangeState] = useState({
+    min: dealSizes?.minDealValue || 0,
+    max: dealSizes?.maxDealValue || 1000,
+  });
+
   const {
     stage,
     stageIndex,
@@ -179,6 +190,10 @@ function Crm() {
     dispatch(getFilteredCRMSAction(page));
   }, []);
 
+  useEffect(() => {
+    setRangeState({ min: dealSizes?.minDealValue || 0, max: dealSizes?.maxDealValue || 10 });
+  }, [dealSizes?.minDealValue, dealSizes?.maxDealValue]);
+
   const handleFilterChange = event => {
     dispatchFilter({
       type: CRM_FILTER_REDUCER_ACTIONS.UPDATE_DATA,
@@ -200,6 +215,20 @@ function Crm() {
       type: CRM_FILTER_REDUCER_ACTIONS.UPDATE_DATA,
       name: 'endDate',
       value: date,
+    });
+  };
+
+  const handleRangePickerChange = value => {
+    setRangeState(value);
+    dispatchFilter({
+      type: CRM_FILTER_REDUCER_ACTIONS.UPDATE_DATA,
+      name: 'startDeal',
+      value: value?.min || null,
+    });
+    dispatchFilter({
+      type: CRM_FILTER_REDUCER_ACTIONS.UPDATE_DATA,
+      name: 'endDeal',
+      value: value?.max || null,
     });
   };
 
@@ -274,15 +303,18 @@ function Crm() {
             />
           </div>
         </div>
-        <div>
-          <div className="common-subtitle">DEAL VALUE</div>
-          <InputRange
-            minValue={0}
-            maxValue={10}
-            onChange={value => setRangeState(value)}
-            value={rangeState}
-          />
-        </div>
+        {dealSizes && dealSizes.minDealValue && dealSizes.maxDealValue && (
+          <div>
+            <div className="common-subtitle">DEAL VALUE</div>
+            <InputRange
+              minValue={dealSizes.minDealValue || 0}
+              maxValue={dealSizes.maxDealValue || 10}
+              formatLabel={a => `$${a}`}
+              onChange={handleRangePickerChange}
+              value={rangeState}
+            />
+          </div>
+        )}
         <div className="ml-10">
           <div className="common-subtitle">LIKELY HOOD</div>
           <select
