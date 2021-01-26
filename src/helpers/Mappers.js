@@ -8,3 +8,9 @@ export const stageMapperObject = [
   { label: 'Meeting Booked', value: 'MEETING_BOOKED' },
   { label: 'Potential Deals', value: 'POTENTIAL_DEAL' },
 ];
+
+export const potentialMapperObject = [
+  { label: 'Very Likely', value: 'VERY_LIKELY' },
+  { label: 'Likely', value: 'LIKELY' },
+  { label: 'Not Likely', value: 'NOT_LIKELY' },
+];
