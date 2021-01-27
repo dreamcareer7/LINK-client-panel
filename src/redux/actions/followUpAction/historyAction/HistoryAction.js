@@ -11,12 +11,18 @@ export const fetchConversation = (id, data) => {
     });
     HistoryService.fetchConversation(id, data)
       .then(response => {
-        console.log('response=>', response);
         if (response.data.status === 'SUCCESS') {
-          dispatch({
-            type: HISTORY_REDUX_CONSTANT.FETCH_OPPORTUNITY_CONVERSATION,
-            data: response.data.data,
-          });
+          if (data) {
+            dispatch({
+              type: HISTORY_REDUX_CONSTANT.APPEND_OPPORTUNITY_CONVERSATION,
+              data: response.data.data,
+            });
+          } else {
+            dispatch({
+              type: HISTORY_REDUX_CONSTANT.FETCH_OPPORTUNITY_CONVERSATION,
+              data: response.data.data,
+            });
+          }
         }
       })
       .catch(e => {
