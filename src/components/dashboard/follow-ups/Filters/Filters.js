@@ -205,10 +205,9 @@ function Filters() {
           <FollowUpCheckBox key={Math.random()} onChange={onChangeCheckbox} data={data} />
         ))}
 
-        <div className="common-title mt-5 mb-5">Deal Size</div>
+        <div className="common-title mt-3 mb-2">Deal Size</div>
 
         <div className="mb-5">
-          <div className="common-subtitle">DEAL VALUE</div>
           {dealSizes && (
             <InputRange
               minValue={dealSizes.minDealValue || 0}
