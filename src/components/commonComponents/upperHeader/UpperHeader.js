@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './upperHeader.scss';
 import search from '../../../assets/images/search.png';
@@ -17,6 +17,8 @@ import { getClientInfo, logoutUser } from '../../../redux/actions/accountAction/
 function UpperHeader() {
   const history = useHistory();
   const dispatch = useDispatch();
+  const match = useRouteMatch('/reporting');
+  console.log('match', match);
   useEffect(() => {
     dispatch(getClientInfo());
   }, []);
@@ -64,15 +66,17 @@ function UpperHeader() {
   const selectDateRange = () => {};
   return (
     <div className="upper-header-block">
-      <div className="upper-header--rounded-block search-block">
-        <input placeholder="Select Report Date" />
-        <button type="button" style={{ backgroundColor: '#ffffff' }}>
-          <div className="down-arrow">
-            <img src={datePicker} onClick={selectDateRange} className="date-range-img" />{' '}
-            <div className="search-area" />
-          </div>
-        </button>
-      </div>
+      {match && match.isExact && (
+        <div className="upper-header--rounded-block search-block">
+          <input placeholder="Select Report Date" />
+          <button type="button" style={{ backgroundColor: '#ffffff' }}>
+            <div className="down-arrow">
+              <img src={datePicker} onClick={selectDateRange} className="date-range-img" />{' '}
+              <div className="search-area" />
+            </div>
+          </button>
+        </div>
+      )}
 
       <div className="upper-header--rounded-block search-block">
         <input placeholder="Search Subscriber" value={searchText} onChange={onSearch} />
