@@ -1,9 +1,10 @@
-import React, { useCallback, useReducer, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
 import './Filters.scss';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
+import InputRange from 'react-input-range';
 import FollowUpCheckBox from './FollowUpCheckBox';
 import PotentialCheckBox from './PotentialCheckBox';
 import { getUpcomingActions } from '../../../../redux/actions/followUpAction/FollowUpAction';
@@ -53,6 +54,16 @@ const potentialInitialState = {
     value: false,
   },
 };
+const initialDeal = {
+  startDeal: {
+    name: 'startDeal',
+    value: 0,
+  },
+  endDeal: {
+    name: 'endDeal',
+    value: 1000,
+  },
+};
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -75,6 +86,39 @@ function Filters() {
 
   const [stageCheckBox, setStageCheckBox] = useReducer(reducer, stageInitialState);
   const [potentialCheckBox, setPotentialCheckBox] = useReducer(reducer, potentialInitialState);
+  const [deal, setDeal] = useReducer(reducer, initialDeal);
+
+  const dealSizes = useMemo(
+    () =>
+      followupData && followupData.dealSize && followupData.dealSize[0]
+        ? followupData.dealSize[0]
+        : null,
+    [followupData]
+  );
+  console.log('dealSize=>', followupData);
+
+  const [rangeState, setRangeState] = useState({
+    min: dealSizes?.minDealValue || 0,
+    max: dealSizes?.maxDealValue || 1000,
+  });
+
+  useEffect(() => {
+    setRangeState({ min: dealSizes?.minDealValue || 0, max: dealSizes?.maxDealValue || 10 });
+  }, [dealSizes?.minDealValue, dealSizes?.maxDealValue]);
+
+  const handleRangePickerChange = value => {
+    setRangeState(value);
+    setDeal({
+      type: 'UPDATE_CHECKBOX',
+      name: 'startDeal',
+      value: value?.min || null,
+    });
+    setDeal({
+      type: 'UPDATE_CHECKBOX',
+      name: 'endDeal',
+      value: value?.max || null,
+    });
+  };
 
   const applyFilters = () => {
     if (moment(startDate).isAfter(endDate)) {
@@ -89,8 +133,8 @@ function Filters() {
         likelyHoods: Object.entries(potentialCheckBox)
           .filter(e => e[1].value)
           .map(e => e[0]),
-        startDeal: 13,
-        endDeal: 1000,
+        startDeal: deal.startDeal.value,
+        endDeal: deal.endDeal.value,
         startDate: startDate ? startDate.toISOString() : undefined,
         endDate: endDate ? endDate.toISOString() : undefined,
       };
@@ -144,19 +188,27 @@ function Filters() {
           onChange={date => setEndDate(date)}
         />
 
-        <div className="common-title mt-20 mb-5">Stage</div>
+        <div className="common-title mt-2 mb-2">Stage</div>
         {Object.entries(stageCheckBox).map(data => (
           <FollowUpCheckBox key={Math.random()} onChange={onChangeCheckbox} data={data} />
         ))}
 
-        <div className="common-title mt-20 mb-5">Deal Size</div>
-        <select className="common-select white-input w-100">
-          <option value="$501-$1000">$501-$1000</option>
-          <option value="$501-$1000">$501-$1000</option>
-          <option value="$501-$1000">$501-$1000</option>
-        </select>
+        <div className="common-title mt-5 mb-5">Deal Size</div>
 
-        <div className="common-title mt-20 mb-5">Potential</div>
+        <div className="mb-5">
+          <div className="common-subtitle">DEAL VALUE</div>
+          {dealSizes && (
+            <InputRange
+              minValue={dealSizes.minDealValue || 0}
+              maxValue={dealSizes.maxDealValue || 1000}
+              formatLabel={a => `$${a}`}
+              onChange={handleRangePickerChange}
+              value={rangeState}
+            />
+          )}
+        </div>
+
+        <div className="common-title mt-2 mb-2">Potential</div>
         {Object.entries(potentialCheckBox).map(data => (
           <PotentialCheckBox key={Math.random()} onChange={onChangePotential} data={data} />
         ))}
