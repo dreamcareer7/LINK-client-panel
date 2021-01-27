@@ -22,7 +22,6 @@ function UpperHeader() {
 
   const accountInfo = useSelector(state => state.AccountReducer);
   const userPic = accountInfo.client.data.profilePicUrl;
-  console.log('upperheader accountInfo=>', accountInfo);
 
   const [searchText, setSearchText] = useState('');
   const [filtered, setFiltered] = useState([]);

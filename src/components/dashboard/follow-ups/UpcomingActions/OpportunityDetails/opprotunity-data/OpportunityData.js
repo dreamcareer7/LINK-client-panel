@@ -34,6 +34,10 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
   const onSaveOpportunityData = () => {
     if (dealSizeVal === '-') {
       setDealSizeVal('');
+    } else if (potentialValue === 'SELECT') {
+      setPotentialValue('');
+    } else if (stageValue === 'SELECT') {
+      setStageValue('');
     } else {
       const data = {
         firstName,
@@ -111,6 +115,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
               value={stageValue}
               onChange={e => setStageValue(e.target.value)}
             >
+              <option value="SELECT">Select</option>
               <option value="INITIAL_CONTACT">Initial Contact</option>
               <option value="IN_CONVERSION"> In Conversation</option>
               <option value="MEETING_BOOKED">Meeting Booked</option>
@@ -137,6 +142,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
               value={potentialValue}
               onChange={e => setPotentialValue(e.target.value)}
             >
+              <option value="SELECT">Select</option>
               <option value="VERY_LIKELY">Very Likely Deals</option>
               <option value="LIKELY">Likely Deals</option>
               <option value="NOT_LIKELY">Not Likely Deals</option>
@@ -154,7 +160,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
           </div>
         </div>
         <button
-          type="submit"
+          type="button"
           className="button success-button mt-20"
           onClick={onSaveOpportunityData}
         >

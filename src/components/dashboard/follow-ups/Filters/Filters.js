@@ -64,7 +64,14 @@ const initialDeal = {
     value: 1000,
   },
 };
-
+const initialFilterState = {
+  stages: [],
+  likelyHoods: [],
+  startDeal: null,
+  endDeal: null,
+  startDate: moment().subtract(30, 'days').toDate(),
+  endDate: moment().toDate(),
+};
 const reducer = (state, action) => {
   switch (action.type) {
     case 'UPDATE_CHECKBOX':
@@ -72,6 +79,8 @@ const reducer = (state, action) => {
       const temp = { ...state };
       temp[`${action.name}`].value = action.value;
       return temp;
+    case 'RESET_FILTER':
+      return initialFilterState;
     default:
       return state;
   }
@@ -95,7 +104,6 @@ function Filters() {
         : null,
     [followupData]
   );
-  console.log('dealSize=>', followupData);
 
   const [rangeState, setRangeState] = useState({
     min: dealSizes?.minDealValue || 0,
@@ -145,6 +153,10 @@ function Filters() {
   const resetFilters = () => {
     setStartDate(null);
     setEndDate(null);
+    setRangeState({
+      min: dealSizes?.minDealValue || 0,
+      max: dealSizes?.maxDealValue || 0,
+    });
     const data = {
       stages: [],
       likelyHoods: [],
