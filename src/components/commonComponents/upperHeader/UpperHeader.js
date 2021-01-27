@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import './upperHeader.scss';
 import search from '../../../assets/images/search.png';
 import user from '../../../assets/images/dummy-user.jpg';
@@ -10,9 +11,18 @@ import account from '../../../assets/images/account.svg';
 import help from '../../../assets/images/lifesaver.svg';
 import { clearAuthToken } from '../../../helpers/LocalStorageHelper';
 import FollowUpService from '../../../services/follow-up-service/FollowUpSevice';
+import { getClientInfo } from '../../../redux/actions/accountAction/AccountAction';
 
 function UpperHeader() {
   const history = useHistory();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getClientInfo());
+  }, []);
+
+  const accountInfo = useSelector(state => state.AccountReducer);
+
+  console.log('upperheader accountInfo=>', accountInfo);
 
   const [searchText, setSearchText] = useState('');
   const [filtered, setFiltered] = useState([]);
@@ -42,7 +52,6 @@ function UpperHeader() {
 
   const onLogOut = () => {
     clearAuthToken();
-    localStorage.removeItem('userName');
     history.push('/signUp');
   };
   const onAccountClick = () => {
