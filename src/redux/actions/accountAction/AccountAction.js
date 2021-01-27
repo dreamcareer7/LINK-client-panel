@@ -34,7 +34,6 @@ export const getClientInfo = () => {
             type: ACCOUNT_REDUX_CONSTANT.GET_CLIENT_INFO,
             data: response.data.data,
           });
-          localStorage.setItem('userName', response.data.data.firstName);
         }
       })
       .catch(e => {

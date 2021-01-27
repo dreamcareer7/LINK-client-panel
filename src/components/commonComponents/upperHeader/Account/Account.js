@@ -5,7 +5,6 @@ import DatePicker from 'react-datepicker';
 import eye from '../../../../assets/images/visibility.svg';
 import download from '../../../../assets/images/down-arrow.svg';
 import {
-  getClientInfo,
   getCompanySize,
   getIndutries,
   updateClientInfo,
@@ -40,7 +39,6 @@ function Account() {
   };
 
   useEffect(() => {
-    dispatch(getClientInfo());
     dispatch(getCompanySize());
     dispatch(getIndutries());
     if (client && client.data && client.data) {

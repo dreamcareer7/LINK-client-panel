@@ -83,7 +83,7 @@ function UpperHeader() {
       <div className="logout-area">
         <div className="upper-header--rounded-block">
           <img className="user-dp" src={userPic && userPic ? userPic : user} />
-          <label>{localStorage.getItem('userName')}</label>
+          <label>{accountInfo.client.data.firstName}</label>
           <div className="down-arrow">
             <img src={downArrow} />
             <div className="user-dropdown">
