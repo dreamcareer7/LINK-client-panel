@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './upperHeader.scss';
 import search from '../../../assets/images/search.png';
 import user from '../../../assets/images/dummy-user.jpg';
+import datePicker from '../../../assets/images/datepicker.svg';
 import downArrow from '../../../assets/images/arrow_down.png';
 import logout from '../../../assets/images/logout.svg';
 import notification from '../../../assets/bell.svg';
@@ -11,7 +12,7 @@ import account from '../../../assets/images/account.svg';
 import help from '../../../assets/images/lifesaver.svg';
 import { clearAuthToken } from '../../../helpers/LocalStorageHelper';
 import FollowUpService from '../../../services/follow-up-service/FollowUpSevice';
-import {getClientInfo, logoutUser} from '../../../redux/actions/accountAction/AccountAction';
+import { getClientInfo, logoutUser } from '../../../redux/actions/accountAction/AccountAction';
 
 function UpperHeader() {
   const history = useHistory();
@@ -51,7 +52,7 @@ function UpperHeader() {
 
   const onLogOut = () => {
     clearAuthToken();
-    dispatch(logoutUser(localStorage.getItem("fcmToken")))
+    dispatch(logoutUser(localStorage.getItem('fcmToken')));
     history.push('/signUp');
   };
   const onAccountClick = () => {
@@ -60,8 +61,19 @@ function UpperHeader() {
   const onHelpClick = () => {
     history.replace('/popUp');
   };
+  const selectDateRange = () => {};
   return (
     <div className="upper-header-block">
+      <div className="upper-header--rounded-block search-block">
+        <input placeholder="Select Report Date" />
+        <button type="button" style={{ backgroundColor: '#ffffff' }}>
+          <div className="down-arrow">
+            <img src={datePicker} onClick={selectDateRange} className="date-range-img" />{' '}
+            <div className="search-area" />
+          </div>
+        </button>
+      </div>
+
       <div className="upper-header--rounded-block search-block">
         <input placeholder="Search Subscriber" value={searchText} onChange={onSearch} />
         <button type="button">
