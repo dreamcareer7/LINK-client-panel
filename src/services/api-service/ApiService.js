@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
-import { getAuthTokenLocalStorage } from '../../helpers/LocalStorageHelper';
+import { clearAuthToken, getAuthTokenLocalStorage } from '../../helpers/LocalStorageHelper';
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -20,6 +20,11 @@ instance.interceptors.request.use(
   },
   error => {
     // Do something with request error
+    if (error.response.status === 401) {
+      clearAuthToken();
+      window.location.href = '/signUp';
+      return false;
+    }
     return Promise.reject(error);
   }
 );

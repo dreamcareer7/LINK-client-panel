@@ -40,7 +40,6 @@ function History() {
       if (prevChatLength.current === 0) {
         setTimeout(() => {
           const scrollHeights = chatContainer.current.scrollHeight;
-          console.log('in useEffect', scrollHeights);
           const height = chatContainer.current.clientHeight;
           const maxScrollTop = scrollHeights - height;
           chatContainer.current.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
