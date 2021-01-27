@@ -21,7 +21,7 @@ function UpperHeader() {
   }, []);
 
   const accountInfo = useSelector(state => state.AccountReducer);
-
+  const userPic = accountInfo.client.data.profilePicUrl;
   console.log('upperheader accountInfo=>', accountInfo);
 
   const [searchText, setSearchText] = useState('');
@@ -82,7 +82,7 @@ function UpperHeader() {
       </div>
       <div className="logout-area">
         <div className="upper-header--rounded-block">
-          <img className="user-dp" src={user} />
+          <img className="user-dp" src={userPic && userPic ? userPic : user} />
           <label>{localStorage.getItem('userName')}</label>
           <div className="down-arrow">
             <img src={downArrow} />
