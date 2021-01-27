@@ -37,7 +37,7 @@ function UpcomingActions() {
   return (
     <div>
       <div className="heading">Upcoming Actions</div>
-      <div style={{ minHeight: '80vh' }}>
+      <div className="client-detail-page">
         <div className="client-detail-blocks-container">
           {upComingActions ? (
             upComingActions.map(opportunity => (
