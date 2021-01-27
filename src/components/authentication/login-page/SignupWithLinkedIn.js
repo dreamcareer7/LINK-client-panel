@@ -1,7 +1,6 @@
 import React from 'react';
 import linkFluencer from '../../../assets/images/linkfluencer.png';
 import signInLinkedIn from '../../../assets/images/Sign-in-Large---Default.png';
-
 import './login.scss';
 import { BASE_URL, LINKEDIN_CLIENT_ID } from '../../../constants/UrlConstant';
 

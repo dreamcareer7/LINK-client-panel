@@ -42,6 +42,7 @@ function UpperHeader() {
 
   const onLogOut = () => {
     clearAuthToken();
+    localStorage.removeItem('userName');
     history.push('/signUp');
   };
   const onAccountClick = () => {
@@ -73,7 +74,7 @@ function UpperHeader() {
       <div className="logout-area">
         <div className="upper-header--rounded-block">
           <img className="user-dp" src={user} />
-          <label>Michelle Obama</label>
+          <label>{localStorage.getItem('userName')}</label>
           <div className="down-arrow">
             <img src={downArrow} />
             <div className="user-dropdown">

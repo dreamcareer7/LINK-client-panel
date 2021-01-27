@@ -13,6 +13,7 @@ import Report from '../../assets/reporting.svg';
 import CRM from '../../assets/crm.svg';
 import FollowUps from '../../assets/calendar.svg';
 import DoughnutChart from './PipelineChart';
+import { getClientInfo } from '../../redux/actions/accountAction/AccountAction';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const Home = () => {
     dispatch(fetchOpportunity());
     dispatch(fetchPipeLine());
     dispatch(fetchClientQuote());
+    dispatch(getClientInfo());
   }, []);
 
   return (
