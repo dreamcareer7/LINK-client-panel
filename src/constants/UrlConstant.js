@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://link.dev.gradlesol.com/app/';
+export const BASE_URL = 'https://c3e7e8824538.ngrok.io/';
 // export const BASE_URL = 'https://0f9d1f408f24.ngrok.io/';
 export const LINKEDIN_CLIENT_ID = '776gktki6ukrgj';
 export const API_METHODS = {
@@ -48,4 +48,6 @@ export const ACCOUNTS_URL = {
   UPDATE_CLIENT: `${BASE_URL}client-auth/update`,
   GET_COMPANY_SIZE: `${BASE_URL}organization/client-companysize`,
   GET_INDUSTRY: `${BASE_URL}organization/client-industries`,
+  CREATE_FCM_TOKEN: `${BASE_URL}client-auth/add-fcm-token`,
+  LOGOUT_USER: `${BASE_URL}client-auth/logout`,
 };

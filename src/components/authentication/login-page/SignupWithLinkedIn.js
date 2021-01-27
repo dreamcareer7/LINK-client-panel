@@ -16,9 +16,6 @@ function SignupWithLinkedIn() {
       <button type="button" className="sign-up-button" onClick={onClickSignUp}>
         <img src={signInLinkedIn} />
       </button>
-      <a href="forgot" className="forgot-password">
-        Forgot Password?
-      </a>
     </div>
   );
 }

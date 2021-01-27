@@ -11,7 +11,7 @@ import account from '../../../assets/images/account.svg';
 import help from '../../../assets/images/lifesaver.svg';
 import { clearAuthToken } from '../../../helpers/LocalStorageHelper';
 import FollowUpService from '../../../services/follow-up-service/FollowUpSevice';
-import { getClientInfo } from '../../../redux/actions/accountAction/AccountAction';
+import {getClientInfo, logoutUser} from '../../../redux/actions/accountAction/AccountAction';
 
 function UpperHeader() {
   const history = useHistory();
@@ -52,6 +52,7 @@ function UpperHeader() {
 
   const onLogOut = () => {
     clearAuthToken();
+    dispatch(logoutUser(localStorage.getItem("fcmToken")))
     history.push('/signUp');
   };
   const onAccountClick = () => {

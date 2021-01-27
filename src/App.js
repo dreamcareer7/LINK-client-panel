@@ -1,4 +1,5 @@
 import React from 'react';
+import {useDispatch} from "react-redux";
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import PropTypes from 'prop-types';
@@ -14,6 +15,7 @@ import OpportunityDetails from './components/dashboard/follow-ups/UpcomingAction
 import Account from './components/commonComponents/upperHeader/Account/Account';
 import PopUp from './components/commonComponents/PopUp/PopUp';
 import { requestFirebaseNotificationPermission } from './firebaseInit';
+import {addFCMToken} from "./redux/actions/accountAction/AccountAction";
 
 const PrivateRoute = ({ component, ...options }) => {
   const isLoggedIn =
@@ -37,10 +39,14 @@ PrivateRoute.defaultProps = {
 };
 
 function App() {
+  const dispatch = useDispatch();
+
   requestFirebaseNotificationPermission()
     .then(firebaseToken => {
       // eslint-disable-next-line no-console
       console.log(firebaseToken);
+      localStorage.setItem("fcmToken", firebaseToken.toString());
+      dispatch(addFCMToken(firebaseToken));
     })
     .catch(err => {
       return err;
