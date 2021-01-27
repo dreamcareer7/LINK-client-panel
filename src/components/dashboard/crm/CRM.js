@@ -367,8 +367,9 @@ function Crm() {
             {docs.total < docs.limit ? docs.total : docs.page * docs.limit} of {docs.total} results
           </div>
         )}
-        {stageIndex &&
-          crmsChartState.labels &&
+        {crmsChartState.labels &&
+          stageIndex !== undefined &&
+          stageIndex !== null &&
           stageIndex > -1 &&
           stageIndex < crmsChartState.labels.length && (
             <div>

@@ -26,7 +26,6 @@ export const fetchConversation = (id, data) => {
         }
       })
       .catch(e => {
-        console.log('e', e);
         if (e.response.data.status === undefined) {
           dispatch({
             type: HISTORY_REDUX_CONSTANT.ERROR_OPPORTUNITY_CONVERSATION,
