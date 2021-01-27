@@ -11,6 +11,7 @@ import {
 import OpportunityData from './opprotunity-data/OpportunityData';
 import History from './history/History';
 import Notes from './notes/Notes';
+import { fetchConversation } from '../../../../../redux/actions/followUpAction/historyAction/HistoryAction';
 
 function OpportunityDetails() {
   const history = useHistory();
@@ -32,7 +33,7 @@ function OpportunityDetails() {
 
   const onSyncClick = () => {
     dispatch(syncWithLinkedIn(id));
-    // dispatch(fetchConversation(id, ''));
+    dispatch(fetchConversation(id, ''));
   };
   const deleteSyncClick = () => {
     deleteOpportunity(id, history.goBack);
