@@ -37,16 +37,18 @@ function UpcomingActions() {
   return (
     <div>
       <div className="heading">Upcoming Actions</div>
-      <div className="client-detail-blocks-container">
-        {upComingActions ? (
-          upComingActions.map(opportunity => (
-            <div onClick={() => onOpportunityClick(opportunity._id)}>
-              <ClientDetailsBlock key={opportunity._id} opportunity={opportunity} />
-            </div>
-          ))
-        ) : (
-          <div>There is no data available</div>
-        )}
+      <div style={{ minHeight: '80vh' }}>
+        <div className="client-detail-blocks-container">
+          {upComingActions ? (
+            upComingActions.map(opportunity => (
+              <div onClick={() => onOpportunityClick(opportunity._id)}>
+                <ClientDetailsBlock key={opportunity._id} opportunity={opportunity} />
+              </div>
+            ))
+          ) : (
+            <div>There is no data available</div>
+          )}
+        </div>
       </div>
       {upComingActions.length ? (
         <Pagination
