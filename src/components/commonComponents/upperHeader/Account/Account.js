@@ -261,7 +261,7 @@ function Account() {
       <div className="account-right">
         <div className="dashed-container">
           <div className="absolute-position-title">TRANSACTION HISTORY</div>
-          <div className="common-subtitle mb-5">Date Range</div>
+          <div className="common-subtitle mar-bott-5">Date Range</div>
           <div className="date-range-button-container">
             <div className="d-flex">
               <div className="date-picker">
