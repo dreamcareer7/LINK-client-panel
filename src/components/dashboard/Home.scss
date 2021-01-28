@@ -22,12 +22,14 @@
 .text-transform {
   text-transform: uppercase;
   color: #1d1d51;
+  font-family: 'Roboto' !important;
 }
 .m-top {
   margin-top: 40px !important;
 }
 .quote-text {
-  color: #b8b8b8;
+  color: $secondary-font-color;
+  font-family: 'Roboto Slab' !important;
 }
 
 .justify {

@@ -62,6 +62,7 @@ function Reporting() {
       display: false,
     },
     tooltips: {
+      wrap: true,
       callbacks: {
         title(tooltipItem) {
           return tooltips[tooltipItem[0].index];

@@ -288,7 +288,7 @@ function Crm() {
 
   return (
     <>
-      <div className="common-subtitle">SALES OPPORTUNITIES</div>
+      <div className="common-title">SALES OPPORTUNITIES</div>
       <div className="graph-container">
         <Bar options={options} data={crmsChartState} height={80} />
       </div>
@@ -418,24 +418,26 @@ function Crm() {
             } = singleCrm;
 
             return (
-              <div className="customer-list-rows">
-                <div className="customer-name">
-                  <img src={profilePicUrl || user} />
-                  {`${firstName} ${lastName}`}
-                </div>
-                <div>{moment(createdAt).format('DD-MM-YYYY')}</div>
-                <div>{moment(createdAt).format('DD-MM-YYYY')}</div>
-                <div>{userLocation}</div>
-                <div>{getLabelFromValues(likelyHood, potentialMapperObject)}</div>
-                <div>{dealSize}</div>
-                <div className="table-action-field">
-                  <img
-                    src={edit}
-                    className="mr-10"
-                    title="Edit"
-                    onClick={() => handleEditCRMUser(_id)}
-                  />
-                  <img src={bin} title="Delete" onClick={() => handleDeleteCRMUser(_id)} />
+              <div style={{ minHeight: 150 }}>
+                <div className="customer-list-rows">
+                  <div className="customer-name">
+                    <img src={profilePicUrl || user} />
+                    {`${firstName} ${lastName}`}
+                  </div>
+                  <div>{moment(createdAt).format('DD-MM-YYYY')}</div>
+                  <div>{moment(createdAt).format('DD-MM-YYYY')}</div>
+                  <div>{userLocation}</div>
+                  <div>{getLabelFromValues(likelyHood, potentialMapperObject)}</div>
+                  <div>{dealSize}</div>
+                  <div className="table-action-field">
+                    <img
+                      src={edit}
+                      className="mr-10"
+                      title="Edit"
+                      onClick={() => handleEditCRMUser(_id)}
+                    />
+                    <img src={bin} title="Delete" onClick={() => handleDeleteCRMUser(_id)} />
+                  </div>
                 </div>
               </div>
             );
