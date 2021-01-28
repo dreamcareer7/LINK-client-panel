@@ -17,6 +17,8 @@ import {
   getFilteredCRMSAction,
 } from '../../../redux/actions/crmActions/CRMAction';
 import { deleteOpportunity } from '../../../redux/actions/followUpAction/FollowUpAction';
+import { getLabelFromValues } from '../../../helpers/chartHelper';
+import { potentialMapperObject } from '../../../helpers/Mappers';
 
 const initialFilterState = {
   stage: null,
@@ -412,6 +414,7 @@ function Crm() {
               location: userLocation,
               dealSize,
               createdAt,
+              likelyHood,
             } = singleCrm;
 
             return (
@@ -423,7 +426,7 @@ function Crm() {
                 <div>{moment(createdAt).format('DD-MM-YYYY')}</div>
                 <div>{moment(createdAt).format('DD-MM-YYYY')}</div>
                 <div>{userLocation}</div>
-                <div>High Likely</div>
+                <div>{getLabelFromValues(likelyHood, potentialMapperObject)}</div>
                 <div>{dealSize}</div>
                 <div className="table-action-field">
                   <img
