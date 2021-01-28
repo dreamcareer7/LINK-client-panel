@@ -18,7 +18,6 @@ function UpperHeader() {
   const history = useHistory();
   const dispatch = useDispatch();
   const match = useRouteMatch('/reporting');
-  console.log('match', match);
   useEffect(() => {
     dispatch(getClientInfo());
   }, []);
