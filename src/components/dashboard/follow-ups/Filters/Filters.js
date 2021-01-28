@@ -64,23 +64,21 @@ const initialDeal = {
     value: 1000,
   },
 };
-const initialFilterState = {
-  stages: [],
-  likelyHoods: [],
-  startDeal: null,
-  endDeal: null,
-  startDate: moment().subtract(30, 'days').toDate(),
-  endDate: moment().toDate(),
-};
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'UPDATE_CHECKBOX':
-      // eslint-disable-next-line no-case-declarations
-      const temp = { ...state };
-      temp[`${action.name}`].value = action.value;
-      return temp;
-    case 'RESET_FILTER':
-      return initialFilterState;
+      return {
+        ...state,
+        [`${action.name}`]: {
+          ...state[`${action.name}`],
+          value: action.value,
+        },
+      };
+    case 'RESET_STAGE_FILTER':
+      return stageInitialState;
+    case 'RESET_POTENTIAL_FILTER':
+      return potentialInitialState;
     default:
       return state;
   }
@@ -153,6 +151,8 @@ function Filters() {
   const resetFilters = () => {
     setStartDate(null);
     setEndDate(null);
+    setStageCheckBox({ type: 'RESET_STAGE_FILTER' });
+    setPotentialCheckBox({ type: 'RESET_POTENTIAL_FILTER' });
     setRangeState({
       min: dealSizes?.minDealValue || 0,
       max: dealSizes?.maxDealValue || 0,
@@ -163,6 +163,7 @@ function Filters() {
     };
     dispatch(getUpcomingActions(1, data));
   };
+
   const onChangeCheckbox = useCallback(e => {
     setStageCheckBox({
       type: 'UPDATE_CHECKBOX',
