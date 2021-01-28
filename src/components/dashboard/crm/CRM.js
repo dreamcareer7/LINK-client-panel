@@ -19,6 +19,7 @@ import {
 import { deleteOpportunity } from '../../../redux/actions/followUpAction/FollowUpAction';
 import { getLabelFromValues } from '../../../helpers/chartHelper';
 import { potentialMapperObject } from '../../../helpers/Mappers';
+import { errorNotification } from '../../../constants/Toast';
 
 const initialFilterState = {
   stage: null,
@@ -27,8 +28,8 @@ const initialFilterState = {
   startDeal: null,
   endDeal: null,
   location: null,
-  startDate: moment().subtract(30, 'days').toDate(),
-  endDate: moment().toDate(),
+  startDate: null,
+  endDate: null,
 };
 
 const CRM_FILTER_REDUCER_ACTIONS = {
@@ -73,6 +74,8 @@ function Crm() {
   const crmsChartState = useSelector(({ crmsGraphData }) => crmsGraphData);
   const [page, setPage] = useState(1);
   const [filter, dispatchFilter] = useReducer(filterReducer, initialFilterState);
+  /* const [fromDate, setFromDate] = useState(null);
+  const [toDate, setToDate] = useState(null); */
 
   const docs = useMemo(() => (crmsData && crmsData.docs ? crmsData.docs : null), [crmsData]);
 
@@ -101,16 +104,22 @@ function Crm() {
   } = filter;
 
   const reloadCRMData = pageNum => {
-    const data = {
-      stage: stage || undefined,
-      likelyHoods: likelyHoods && likelyHoods.length ? [likelyHoods] : undefined,
-      startDeal: startDeal || undefined,
-      endDeal: endDeal || undefined,
-      location: location && location.trim().length > 0 ? location : undefined,
-      startDate: startDate || undefined,
-      endDate: endDate || undefined,
-    };
-    dispatch(getFilteredCRMSAction(pageNum, data));
+    if (moment(startDate).isAfter(endDate)) {
+      errorNotification('Please enter from date before to date');
+    } else if (moment(endDate).isBefore(startDate)) {
+      errorNotification('Please enter to date after from date');
+    } else {
+      const data = {
+        stage: stage || undefined,
+        likelyHoods: likelyHoods && likelyHoods.length ? [likelyHoods] : undefined,
+        startDeal: startDeal || undefined,
+        endDeal: endDeal || undefined,
+        location: location && location.trim().length > 0 ? location : undefined,
+        startDate: startDate || undefined,
+        endDate: endDate || undefined,
+      };
+      dispatch(getFilteredCRMSAction(pageNum, data));
+    }
   };
   const handleStageChange = index => {
     const value = crmsChartState.values[index];
@@ -268,7 +277,6 @@ function Crm() {
   };
 
   const handleResetClick = () => {
-    console.log('handleResetClick');
     const data = {
       startDate: startDate || undefined,
       endDate: endDate || undefined,
@@ -315,13 +323,13 @@ function Crm() {
             <DatePicker
               placeholderText="From"
               className="common-input mt-5"
-              value={moment(startDate).format('YYYY-MM-DD')}
+              selected={startDate}
               onChange={handleStartDateChange}
             />
             <DatePicker
               placeholderText="To"
               className="common-input mt-5 ml-10"
-              value={moment(endDate).format('YYYY-MM-DD')}
+              selected={endDate}
               onChange={handleEndDateChange}
             />
           </div>
@@ -424,14 +432,14 @@ function Crm() {
             } = singleCrm;
 
             return (
-              <div style={{ minHeight: 150 }}>
+              <div>
                 <div className="customer-list-rows">
                   <div className="customer-name">
                     <img src={profilePicUrl || user} />
                     {`${firstName} ${lastName}`}
                   </div>
-                  <div>{moment(createdAt).format('DD-MM-YYYY')}</div>
-                  <div>{moment(createdAt).format('DD-MM-YYYY')}</div>
+                  <div>{moment(createdAt).format('DD/MM/YYYY')}</div>
+                  <div>{moment(createdAt).format('DD/MM/YYYY')}</div>
                   <div>{userLocation}</div>
                   <div>{getLabelFromValues(likelyHood, potentialMapperObject)}</div>
                   <div>{dealSize}</div>
