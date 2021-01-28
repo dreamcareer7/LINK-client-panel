@@ -10,4 +10,19 @@
 .client-detail-page{
    min-height: 80vh;
 }
+.pagination > a
+{
+  color: $primary-font-color !Important;
+  background-color: #ebebeb !Important;
+  border: solid 1px #ebebeb !Important;
+}
+.pagination > .active > a
+{
+  color: #ebebeb !Important;
+  background-color: $primary-font-color !Important;
+  border: solid 1px $primary-font-color !Important;
+}
+.page-link {
+  color: $primary-font-color !Important;
+}
 
