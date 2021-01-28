@@ -20,11 +20,6 @@ instance.interceptors.request.use(
   },
   error => {
     // Do something with request error
-    if (error.response.status === 401) {
-      clearAuthToken();
-      window.location.href = '/signUp';
-      return false;
-    }
     return Promise.reject(error);
   }
 );
@@ -34,6 +29,12 @@ instance.interceptors.response.use(
     return response;
   },
   error => {
+    if (error.response.status === 401) {
+      console.log('redirect to sign up');
+      clearAuthToken();
+      window.location.href = '/signUp';
+      return false;
+    }
     return Promise.reject(error);
   }
 );
