@@ -6,13 +6,14 @@ import { potentialMapperObject } from '../../helpers/Mappers';
 
 const DoughnutChart = props => {
   const { chartData } = props;
+  const filteredData = chartData.filter(e => e.total !== 0);
   const state = {
-    labels: chartData && chartData.map(e => getLabelFromValues(e._id, potentialMapperObject)),
+    labels: filteredData && filteredData.map(e => getLabelFromValues(e._id, potentialMapperObject)),
     datasets: [
       {
-        label: chartData && chartData.map(e => e._id),
+        label: filteredData && filteredData.map(e => e._id),
         backgroundColor: ['#fcab50', '#ff696a', '#39c3bb'],
-        data: chartData && chartData.map(e => e.total),
+        data: filteredData && filteredData.map(e => e.total),
       },
     ],
   };
@@ -25,7 +26,7 @@ const DoughnutChart = props => {
             labels: {
               render: 'value',
               fontStyle: 'bold',
-              fontColor: '#000',
+              fontColor: '#fff',
               fontFamily: '"Lucida Console", Monaco, monospace',
             },
           },
