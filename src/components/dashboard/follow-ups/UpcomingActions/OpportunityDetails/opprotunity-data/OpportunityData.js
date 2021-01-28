@@ -30,7 +30,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
   const [stageValue, setStageValue] = useState(stage);
   const [potentialValue, setPotentialValue] = useState(likelyHood);
   const [locationVal, setLocationVal] = useState(location);
-  const [dealSizeVal, setDealSizeVal] = useState(dealSize || '-');
+  const [dealSizeVal, setDealSizeVal] = useState(dealSize);
   const onSaveOpportunityData = () => {
     if (dealSizeVal === '-') {
       setDealSizeVal('');
@@ -129,7 +129,8 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             <div className="common-subtitle">DEAL SIZE</div>
             <input
               className="common-input common-input-white mt-5"
-              value={dealSizeVal}
+              placeholder="-"
+              value={dealSizeVal && dealSizeVal}
               onChange={e => {
                 setDealSizeVal(e.target.value);
               }}
