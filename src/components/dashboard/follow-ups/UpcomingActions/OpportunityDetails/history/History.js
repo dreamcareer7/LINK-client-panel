@@ -72,7 +72,7 @@ function History() {
                   <div className="chat-bubble">
                     {convo.message ? convo.message : 'This message is deleted'}
                     <span className="chat-time-stamp">
-                      {moment(convo.createdAt).format('DD/MM/YYYY | hh:mm A')}
+                      {moment(convo.createdAt).format('DD-MM-YYYY | hh:mm A')}
                     </span>
                   </div>
                 </div>
@@ -81,7 +81,7 @@ function History() {
                   <div className="chat-bubble user-bubble">
                     {convo.message ? convo.message : 'This message is deleted'}
                     <span className="chat-time-stamp right-date-time">
-                      {moment(convo.createdAt).format('DD/MM/YYYY | hh:mm A')}
+                      {moment(convo.createdAt).format('DD-MM-YYYY | hh:mm A')}
                     </span>
                   </div>
                   <img className="chat-dp" src={convo.profilePicUrl} />

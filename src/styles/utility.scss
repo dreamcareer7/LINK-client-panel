@@ -53,6 +53,9 @@ input {
   outline: none;
   cursor: pointer;
 }
+.button:focus{
+  outline: none;
+}
 
 .slim-button {
   min-width: fit-content;
