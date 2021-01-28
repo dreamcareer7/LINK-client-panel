@@ -20,7 +20,7 @@ const DashboardChart = props => {
           '#3264c8',
           '#d53711',
         ],
-        data: chartData && chartData.map(e => e.total),
+        data: chartData && chartData.map(e => (e.total !== 0 ? e.total : '')),
       },
     ],
   };
