@@ -26,13 +26,15 @@ const initialPipelineValuesGraphData = {
 export const pipelineValuesGraphData = (state = initialPipelineValuesGraphData, action) => {
   switch (action.type) {
     case REPORT_REDUX_CONSTANT.GET_PIPELINE_VALUES_GRAPH_DATA:
+      // eslint-disable-next-line no-case-declarations
+      const filteredData = action.data.filter(e => e.totalDealValue !== 0);
       return {
         ...state,
-        labels: action.data.map(e => getLabelFromValues(e._id, potentialMapperObject)),
-        values: action.data.map(e => e.totalDealValue),
+        labels: filteredData.map(e => getLabelFromValues(e._id, potentialMapperObject)),
+        values: filteredData.map(e => e.totalDealValue),
         datasets: [
           {
-            data: action.data.map(e => e.totalDealValue),
+            data: filteredData.map(e => e.totalDealValue),
             backgroundColor: ['#39C3BB', '#FCAB50', '#FF696A'],
           },
         ],
