@@ -100,6 +100,18 @@ function Crm() {
     endDate,
   } = filter;
 
+  const reloadCRMData = pageNum => {
+    const data = {
+      stage: stage || undefined,
+      likelyHoods: likelyHoods && likelyHoods.length ? [likelyHoods] : undefined,
+      startDeal: startDeal || undefined,
+      endDeal: endDeal || undefined,
+      location: location && location.trim().length > 0 ? location : undefined,
+      startDate: startDate || undefined,
+      endDate: endDate || undefined,
+    };
+    dispatch(getFilteredCRMSAction(pageNum, data));
+  };
   const handleStageChange = index => {
     const value = crmsChartState.values[index];
 
@@ -113,6 +125,13 @@ function Crm() {
       name: 'stage',
       value,
     });
+
+    const data = {
+      stage: value,
+      startDate: startDate || undefined,
+      endDate: endDate || undefined,
+    };
+    dispatch(getFilteredCRMSAction(page, data));
   };
 
   const chartClickCallback = useCallback(
@@ -237,19 +256,6 @@ function Crm() {
       name: 'endDeal',
       value: value?.max || null,
     });
-  };
-
-  const reloadCRMData = pageNum => {
-    const data = {
-      stage: stage || undefined,
-      likelyHoods: likelyHoods && likelyHoods.length ? [likelyHoods] : undefined,
-      startDeal: startDeal || undefined,
-      endDeal: endDeal || undefined,
-      location: location && location.trim().length > 0 ? location : undefined,
-      startDate: startDate || undefined,
-      endDate: endDate || undefined,
-    };
-    dispatch(getFilteredCRMSAction(pageNum, data));
   };
 
   const handlePageChange = pageNum => {
