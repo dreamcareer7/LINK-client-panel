@@ -54,7 +54,7 @@ function UpperHeader() {
 
   const onLogOut = () => {
     clearAuthToken();
-    dispatch(logoutUser(localStorage.getItem('fcmToken')));
+    logoutUser(localStorage.getItem('fcmToken'));
     history.push('/signUp');
   };
   const onAccountClick = () => {
