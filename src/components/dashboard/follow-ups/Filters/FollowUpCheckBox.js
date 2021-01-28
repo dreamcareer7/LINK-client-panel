@@ -11,7 +11,7 @@ const FollowUpCheckBox = ({ onChange, data }) => {
         checked={data[1].value}
         onChange={onChange}
       />
-      <label htmlFor={data[0]} className="checkbox mb-10">
+      <label htmlFor={data[0]} className="checkbox mb-10" style={{ cursor: 'pointer' }}>
         {data[1].name}
       </label>
     </div>
