@@ -34,7 +34,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "update": "rm -rf build && rm -rf node-modules && npm i && npm run build"
   },
   "eslintConfig": {
     "extends": [
