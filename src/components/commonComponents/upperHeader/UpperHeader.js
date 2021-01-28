@@ -7,7 +7,7 @@ import user from '../../../assets/images/dummy-user.jpg';
 import datePicker from '../../../assets/images/datepicker.svg';
 import downArrow from '../../../assets/images/arrow_down.png';
 import logout from '../../../assets/images/logout.svg';
-import notification from '../../../assets/bell.svg';
+import notification from '../../../assets/images/notification.svg';
 import account from '../../../assets/images/account.svg';
 import help from '../../../assets/images/lifesaver.svg';
 import { clearAuthToken } from '../../../helpers/LocalStorageHelper';
@@ -27,6 +27,7 @@ function UpperHeader() {
 
   const [searchText, setSearchText] = useState('');
   const [filtered, setFiltered] = useState([]);
+  const [dateRangePicker, setDateRangePicker] = useState(false);
 
   const onClickSearchedVal = val => {
     history.push(`/followUps/opportunityDetails/${val}`);
@@ -62,7 +63,9 @@ function UpperHeader() {
   const onHelpClick = () => {
     history.replace('/popUp');
   };
-  const selectDateRange = () => {};
+  const selectDateRange = () => {
+    setDateRangePicker(true);
+  };
   return (
     <div className="upper-header-block">
       {match && match.isExact && (
@@ -74,6 +77,7 @@ function UpperHeader() {
               <div className="search-area" />
             </div>
           </button>
+          {dateRangePicker && <div />}
         </div>
       )}
 
