@@ -5,7 +5,7 @@ import { getLabelFromValues } from '../../helpers/chartHelper';
 import { potentialMapperObject } from '../../helpers/Mappers';
 
 const DoughnutChart = props => {
-  const { titles, chartData } = props;
+  const { chartData } = props;
   const state = {
     labels: chartData && chartData.map(e => getLabelFromValues(e._id, potentialMapperObject)),
     datasets: [
@@ -24,14 +24,12 @@ const DoughnutChart = props => {
           plugins: {
             labels: {
               render: 'value',
+              fontSize: 50,
+              lineHeight: 2.5,
+              fontStyle: 'bold',
+              fontColor: '#000',
+              fontFamily: '"Lucida Console", Monaco, monospace',
             },
-          },
-          title: {
-            display: true,
-            text: titles,
-            fontSize: 20,
-            fontColor: '#090944',
-            alignContent: 'left',
           },
           legend: {
             display: true,
@@ -44,7 +42,6 @@ const DoughnutChart = props => {
 };
 
 DoughnutChart.propTypes = {
-  titles: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   chartData: PropTypes.object.isRequired,
 };

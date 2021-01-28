@@ -5,7 +5,7 @@ import { getLabelFromValues } from '../../helpers/chartHelper';
 import { stageMapperObject } from '../../helpers/Mappers';
 
 const DashboardChart = props => {
-  const { title, chartData } = props;
+  const { chartData } = props;
   const state = {
     labels: chartData && chartData.map(e => getLabelFromValues(e._id, stageMapperObject)),
     datasets: [
@@ -30,16 +30,10 @@ const DashboardChart = props => {
       <Pie
         data={state}
         options={{
-          title: {
-            display: true,
-            text: title,
-            fontSize: 20,
-            fontColor: '#090944',
-            position: 'top',
-          },
           legend: {
             display: true,
             position: 'left',
+            align: 'start',
           },
         }}
       />
@@ -48,7 +42,6 @@ const DashboardChart = props => {
 };
 
 DashboardChart.propTypes = {
-  title: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   chartData: PropTypes.object.isRequired,
 };

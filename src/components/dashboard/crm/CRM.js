@@ -42,7 +42,7 @@ function filterReducer(state, action) {
         [`${action.name}`]: action.value,
       };
     case CRM_FILTER_REDUCER_ACTIONS.RESET_STATE:
-      return initialFilterState;
+      return { ...initialFilterState };
     default:
       return state;
   }
@@ -260,18 +260,19 @@ function Crm() {
   };
 
   const handleResetClick = () => {
+    console.log('handleResetClick');
     const data = {
       startDate: startDate || undefined,
       endDate: endDate || undefined,
     };
-
-    dispatchFilter({
-      type: CRM_FILTER_REDUCER_ACTIONS.RESET_STATE,
-    });
     setRangeState({
       min: dealSizes?.minDealValue || 0,
       max: dealSizes?.maxDealValue || 1000,
     });
+    dispatchFilter({
+      type: CRM_FILTER_REDUCER_ACTIONS.RESET_STATE,
+    });
+
     dispatch(getFilteredCRMSAction(page, data));
   };
 

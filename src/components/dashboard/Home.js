@@ -69,18 +69,14 @@ const Home = () => {
       <div className="row">
         <div className="col-md-6">
           <div className="graph-container">
-            <DashboardChart
-              chartData={opportunity && opportunity.data && opportunity.data}
-              title="OPPORTUNITIES"
-            />
+            <div className="common-title">OPPORTUNITIES</div>
+            <DashboardChart chartData={opportunity && opportunity.data && opportunity.data} />
           </div>
         </div>
         <div className="col-md-6">
           <div className="graph-container">
-            <DoughnutChart
-              titles="PIPELINE VALUE"
-              chartData={pipeline && pipeline.data && pipeline.data}
-            />
+            <div className="common-title">PIPELINE VALUE</div>
+            <DoughnutChart chartData={pipeline && pipeline.data && pipeline.data} />
           </div>
         </div>
       </div>
