@@ -24,7 +24,6 @@ const DoughnutChart = props => {
           plugins: {
             labels: {
               render: 'value',
-              lineHeight: 2.5,
               fontStyle: 'bold',
               fontColor: '#000',
               fontFamily: '"Lucida Console", Monaco, monospace',
@@ -33,6 +32,7 @@ const DoughnutChart = props => {
           legend: {
             display: true,
             position: 'left',
+            align: 'start',
             fontStyle: 'bold',
             labels: {
               fontSize: 17,
