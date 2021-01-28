@@ -13,7 +13,7 @@
 .activity-breakdown-circles-container {
   display: inline-flex;
   justify-content: space-between;
-  gap: 50px;
+  gap: 30px;
   width: 75vw;
   height: 90%;
   margin: 1vw 5vw;
@@ -24,15 +24,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1;
+
   padding: 15px;
   background-color: #ebebeb;
   border-radius: 50%;
 }
 
+.outer-circle {
+  height: 150px;
+  width: 150px;
+}
+
 .middle-circle {
   padding: 12px;
   background-color: #003499;
+  height: 120px;
+  width: 120px;
 }
 
 .inner-circle {
@@ -40,13 +47,15 @@
   font-weight: 700;
   color: #ffffff;
   background: $primary-color;
+  height: 100px;
+  width: 100px;
 }
-
-.outer-circle:before, .middle-circle:before, .inner-circle:before {
-  content: "";
-  display: inline-block;
-  padding-top: 100%;
-}
+//
+//.outer-circle:before, .middle-circle:before, .inner-circle:before {
+//  content: "";
+//  display: inline-block;
+//  padding-top: 100%;
+//}
 
 .activity-breakdown-title {
   position: absolute;

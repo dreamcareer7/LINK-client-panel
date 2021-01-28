@@ -111,7 +111,7 @@ function Reporting() {
       render: 'value',
       fontSize: 14,
       fontStyle: 'bold',
-      fontColor: '#000',
+      fontColor: '#fff',
       fontFamily: '"Lucida Console", Monaco, monospace',
     },
     cutoutPercentage: 65,
@@ -124,6 +124,8 @@ function Reporting() {
         pointStyle: 'point',
         boxWidth: 30,
         boxHeight: 2,
+        fontSize: 15,
+        padding: 12,
         box: {
           height: 2,
         },
