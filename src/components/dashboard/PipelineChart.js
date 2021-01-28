@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Doughnut } from 'react-chartjs-2';
+import { getLabelFromValues } from '../../helpers/chartHelper';
+import { potentialMapperObject } from '../../helpers/Mappers';
 
 const DoughnutChart = props => {
   const { titles, chartData } = props;
   const state = {
-    labels: chartData && chartData.map(e => e._id),
+    labels: chartData && chartData.map(e => getLabelFromValues(e._id, potentialMapperObject)),
     datasets: [
       {
         label: chartData && chartData.map(e => e._id),
@@ -28,7 +30,8 @@ const DoughnutChart = props => {
             display: true,
             text: titles,
             fontSize: 20,
-            fontColor: 'black',
+            fontColor: '#090944',
+            alignContent: 'left',
           },
           legend: {
             display: true,
