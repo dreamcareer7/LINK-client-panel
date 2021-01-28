@@ -40,10 +40,16 @@ function Reporting() {
             zeroLineWidth: 1.5,
           },
           ticks: {
+            min: 0,
+            max: 250000,
             fontSize: 14,
             fontStyle: 700,
             fontColor: '#212152',
-            callback: value => `$ ${value}`,
+            callback: value =>
+              value.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD',
+              }),
           },
         },
       ],
