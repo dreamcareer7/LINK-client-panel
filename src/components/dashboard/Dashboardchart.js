@@ -34,6 +34,10 @@ const DashboardChart = props => {
             display: true,
             position: 'left',
             align: 'start',
+            labels: {
+              fontSize: 17,
+              padding: 15,
+            },
           },
         }}
       />
