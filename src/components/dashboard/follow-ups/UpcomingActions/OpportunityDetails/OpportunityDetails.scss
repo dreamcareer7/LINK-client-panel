@@ -85,9 +85,10 @@
   width: calc(100% - 40px);
   padding: 5px 15px 25px 5px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   outline: none;
   border: none;
+  resize: none;
 }
 
 .note-time-stamp, .chat-time-stamp {

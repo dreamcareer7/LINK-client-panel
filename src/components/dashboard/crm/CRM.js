@@ -420,8 +420,8 @@ function Crm() {
                   <img src={profilePicUrl || user} />
                   {`${firstName} ${lastName}`}
                 </div>
-                <div>{moment(createdAt).format('DD/MM/YYYY')}</div>
-                <div>{moment(createdAt).format('DD/MM/YYYY')}</div>
+                <div>{moment(createdAt).format('DD-MM-YYYY')}</div>
+                <div>{moment(createdAt).format('DD-MM-YYYY')}</div>
                 <div>{userLocation}</div>
                 <div>High Likely</div>
                 <div>{dealSize}</div>
