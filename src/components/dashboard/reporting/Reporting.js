@@ -43,6 +43,7 @@ function Reporting() {
             fontSize: 14,
             fontStyle: 700,
             fontColor: '#212152',
+            callback: value => `$ ${value}`,
           },
         },
       ],
@@ -86,6 +87,8 @@ function Reporting() {
             fontSize: 14,
             fontStyle: 700,
             fontColor: '#212152',
+            suggestedMin: 50,
+            suggestedMax: 100,
           },
         },
       ],
@@ -100,6 +103,8 @@ function Reporting() {
             fontSize: 14,
             fontStyle: 700,
             fontColor: '#212152',
+            suggestedMin: 50,
+            suggestedMax: 100,
           },
         },
       ],
@@ -168,7 +173,7 @@ function Reporting() {
       </div>
       {activityBreakdownGraph && (
         <div className="activity-breakdown-container">
-          <div className="common-title">ACTIVITY BREAKDOWN</div>
+          <div className="common-title activity-label">ACTIVITY BREAKDOWN</div>
           <div className="activity-breakdown-circles-container">
             {activityBreakdownGraph.map(activity => (
               <div className="outer-circle">
