@@ -40,7 +40,9 @@ function ClientDetailsBlock({ opportunity }) {
           <img className="user-dp" src={profilePicUrl} />
           <div>
             <div>
-              <div className="common-subtitle client-name ellipsis">{firstName + lastName}</div>
+              <div className="common-subtitle client-name ellipsis">
+                {firstName} {lastName}
+              </div>
               <div className="common-content client-designation placeholder-color">
                 {title}
                 {`${title && companyName ? ', ' : ''}`}
