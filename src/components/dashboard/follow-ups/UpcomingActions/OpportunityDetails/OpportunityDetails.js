@@ -47,10 +47,10 @@ function OpportunityDetails() {
           <span> / OPPORTUNITY DETAILS</span>
         </div>
         <div className="buttons-row">
-          <button type="submit" className="button success-button" onClick={onSyncClick}>
+          <button type="submit" className="button success-button btn-size" onClick={onSyncClick}>
             SYNC
           </button>
-          <button type="button" className="button danger-button" onClick={deleteSyncClick}>
+          <button type="button" className="button danger-button btn-size" onClick={deleteSyncClick}>
             DELETE OPPORTUNITY
           </button>
         </div>
