@@ -35,8 +35,8 @@ const DoughnutChart = props => {
             align: 'start',
             fontStyle: 'bold',
             labels: {
-              fontSize: 17,
-              padding: 15,
+              fontSize: 15,
+              padding: 12,
             },
           },
         }}
