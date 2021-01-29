@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './upperHeader.scss';
@@ -13,6 +13,7 @@ import help from '../../../assets/images/lifesaver.svg';
 import { clearAuthToken } from '../../../helpers/LocalStorageHelper';
 import FollowUpService from '../../../services/follow-up-service/FollowUpSevice';
 import { getClientInfo, logoutUser } from '../../../redux/actions/accountAction/AccountAction';
+import { useOnClickOutside } from '../../../helpers/UseClickOutsideHook';
 
 function UpperHeader() {
   const history = useHistory();
@@ -28,6 +29,7 @@ function UpperHeader() {
   const [searchText, setSearchText] = useState('');
   const [filtered, setFiltered] = useState([]);
   const [dateRangePicker, setDateRangePicker] = useState(false);
+  const ref = useRef();
   const [dropDown, setDropDown] = useState(false);
 
   const onClickSearchedVal = val => {
@@ -55,6 +57,7 @@ function UpperHeader() {
   const onDropDownClick = () => {
     setDropDown(!dropDown);
   };
+  useOnClickOutside(ref, () => setDropDown(false));
 
   const onLogOut = () => {
     clearAuthToken();
@@ -110,7 +113,7 @@ function UpperHeader() {
           <div className="down-arrow">
             <img src={downArrow} onClick={onDropDownClick} />
             {dropDown && (
-              <div className="user-dropdown">
+              <div className="user-dropdown" ref={ref}>
                 <div className="dropdown-option" onClick={onAccountClick}>
                   <img src={account} />
                   <span>Account</span>
