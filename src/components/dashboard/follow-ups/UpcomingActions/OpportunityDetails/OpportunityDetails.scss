@@ -135,10 +135,10 @@
 }
 
 .chat-dp {
-  height: 35px;
-  width: 35px;
-  min-width: 35px;
-  min-height: 35px;
+  height: 40px;
+  width: 40px;
+  min-width: 40px;
+  min-height: 40px;
   object-fit: cover;
   object-position: center;
   border-radius: 50%;
@@ -168,7 +168,7 @@
   font-weight: 500;
   color: $placeholder-color;
   background-color: #ffffff;
-  border-radius: 5px;
+  border-radius: 8px;
   flex: 1;
 }
 
