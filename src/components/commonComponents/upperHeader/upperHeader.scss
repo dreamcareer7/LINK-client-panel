@@ -71,7 +71,7 @@
   cursor: pointer;
 
   img {
-    height: 30px;
+    height: 40px;
   }
 }
 
@@ -100,12 +100,13 @@
 .logout-area{
   position: relative;
   display: inline-block;
+  cursor: pointer;
 }
-.logout-area:hover .user-dropdown{
+/* .logout-area:hover .user-dropdown{
   display: block;
-}
+} */
 .user-dropdown {
-  display: none;
+  display: block;
   position: absolute;
   top: 30px;
   right: -23px;
@@ -117,8 +118,11 @@
   z-index: 1;
 }
 
-.down-arrow:hover .user-dropdown {
+/* .down-arrow:hover .user-dropdown {
   display: block;
+} */
+.label-area{
+  cursor: pointer;
 }
 
 .dropdown-option {

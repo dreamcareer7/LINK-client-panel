@@ -28,6 +28,7 @@ function UpperHeader() {
   const [searchText, setSearchText] = useState('');
   const [filtered, setFiltered] = useState([]);
   const [dateRangePicker, setDateRangePicker] = useState(false);
+  const [dropDown, setDropDown] = useState(false);
 
   const onClickSearchedVal = val => {
     history.push(`/followUps/opportunityDetails/${val}`);
@@ -50,6 +51,9 @@ function UpperHeader() {
     } else {
       setFiltered([]);
     }
+  };
+  const onDropDownClick = () => {
+    setDropDown(!dropDown);
   };
 
   const onLogOut = () => {
@@ -99,26 +103,28 @@ function UpperHeader() {
       <div title="Notifications" className="notification-container" onClick="">
         <img src={notification} />
       </div>
-      <div className="logout-area">
+      <div className="logout-area" onClick={onDropDownClick}>
         <div className="upper-header--rounded-block">
           <img className="user-dp" src={userPic && userPic ? userPic : user} />
-          <label>{accountInfo.client.data.firstName}</label>
+          <label className="label-area">{accountInfo.client.data.firstName}</label>
           <div className="down-arrow">
-            <img src={downArrow} />
-            <div className="user-dropdown">
-              <div className="dropdown-option" onClick={onAccountClick}>
-                <img src={account} />
-                <span>Account</span>
+            <img src={downArrow} onClick={onDropDownClick} />
+            {dropDown && (
+              <div className="user-dropdown">
+                <div className="dropdown-option" onClick={onAccountClick}>
+                  <img src={account} />
+                  <span>Account</span>
+                </div>
+                <div className="dropdown-option" onClick={onHelpClick}>
+                  <img src={help} />
+                  <span>Help & Support</span>
+                </div>
+                <div className="dropdown-option" onClick={onLogOut}>
+                  <img src={logout} />
+                  <span>Logout</span>
+                </div>
               </div>
-              <div className="dropdown-option" onClick={onHelpClick}>
-                <img src={help} />
-                <span>Help & Support</span>
-              </div>
-              <div className="dropdown-option" onClick={onLogOut}>
-                <img src={logout} />
-                <span>Logout</span>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
