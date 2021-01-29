@@ -24,10 +24,10 @@ import { errorNotification } from '../../../constants/Toast';
 const initialFilterState = {
   stage: null,
   stageIndex: null,
-  likelyHoods: null,
+  likelyHoods: 'select',
   startDeal: null,
   endDeal: null,
-  location: null,
+  location: '',
   startDate: null,
   endDate: null,
 };
@@ -74,8 +74,7 @@ function Crm() {
   const crmsChartState = useSelector(({ crmsGraphData }) => crmsGraphData);
   const [page, setPage] = useState(1);
   const [filter, dispatchFilter] = useReducer(filterReducer, initialFilterState);
-  /* const [fromDate, setFromDate] = useState(null);
-  const [toDate, setToDate] = useState(null); */
+  const [dataAdd, setDataAdd] = useState(false);
 
   const docs = useMemo(() => (crmsData && crmsData.docs ? crmsData.docs : null), [crmsData]);
 
@@ -273,6 +272,7 @@ function Crm() {
   };
 
   const handleFilterApplyClick = () => {
+    setDataAdd(true);
     reloadCRMData(page);
   };
 
@@ -299,7 +299,6 @@ function Crm() {
   const handleDeleteCRMUser = id => {
     deleteOpportunity(id, () => reloadCRMData(page));
   };
-
   return (
     <>
       <div className="common-title">SALES OPPORTUNITIES</div>
@@ -394,16 +393,18 @@ function Crm() {
               {crmsChartState.labels[stageIndex]}
             </div>
           )}
-        {location && location.trim().length > 0 && (
+        {dataAdd && location && location.trim().length > 0 && (
           <div>
             <span>Location: </span>
             {location}
           </div>
         )}
-        {likelyHoods && likelyHoods.trim().length > 0 && (
+        {dataAdd && likelyHoods && likelyHoods !== 'select' && likelyHoods.trim().length > 0 && (
           <div>
             <span>Likely Hood: </span>
-            {likelyHoodDropdownData.filter(e => e.value === likelyHoods).map(e => e.label)}
+            {likelyHoodDropdownData
+              .filter(e => e.value === likelyHoods && e.value !== 'select')
+              .map(e => e.label)}
           </div>
         )}
       </div>
