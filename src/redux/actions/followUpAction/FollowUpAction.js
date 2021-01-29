@@ -2,7 +2,6 @@ import FollowUpService from '../../../services/follow-up-service/FollowUpSevice'
 import { errorNotification, successNotification } from '../../../constants/Toast';
 import FOLLOW_UP_REDUX_CONSTANT from '../../constants/FollowUpReduxConstant';
 
-// eslint-disable-next-line import/prefer-default-export
 export const getUpcomingActions = (page, data) => {
   return dispatch => {
     FollowUpService.getUpcomingActions(page, 9, data)
