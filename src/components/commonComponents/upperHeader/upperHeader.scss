@@ -81,7 +81,12 @@
   object-fit: cover;
   border-radius: 50%;
 }
-
+.date-picker-btn{
+  background-color:white !important;
+}
+.date-picker-btn:focus{
+  outline: none;
+}
 .down-arrow {
   position: relative;
   display: inline-block;
@@ -168,5 +173,16 @@
   overflow: hidden;
   z-index: 1;
 }
+.date-range-picker-layout-outer{
+  z-index: 1;
+  position: relative;
+  margin: -25vh;
 
-
+}
+.date-range-picker-layout-inner{
+  z-index: 9999;
+  position: absolute;
+  background: white;
+  left: -150%;
+  margin-top: 50px;
+}

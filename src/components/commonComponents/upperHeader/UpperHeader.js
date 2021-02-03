@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
+import DateRangePicker from 'react-daterange-picker';
+import 'react-daterange-picker/dist/css/react-calendar.css';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './upperHeader.scss';
+import moment from 'moment';
 import search from '../../../assets/images/search.png';
 import user from '../../../assets/images/dummy-user.jpg';
 import datePicker from '../../../assets/images/datepicker.svg';
@@ -31,6 +34,14 @@ function UpperHeader() {
   const [dateRangePicker, setDateRangePicker] = useState(false);
   const ref = useRef();
   const [dropDown, setDropDown] = useState(false);
+  const [dateRangeVal, setDateRangeVal] = useState(
+    moment.range(moment().clone().subtract(5, 'days'), moment().clone())
+  );
+
+  const onSelectDateRange = e => {
+    setDateRangeVal(dateRangeVal);
+    console.log(e.start._d + e.end._d);
+  };
 
   const onClickSearchedVal = val => {
     history.push(`/followUps/opportunityDetails/${val}`);
@@ -71,20 +82,31 @@ function UpperHeader() {
     history.replace('/popUp');
   };
   const selectDateRange = () => {
-    setDateRangePicker(true);
+    setDateRangePicker(!dateRangePicker);
   };
   return (
     <div className="upper-header-block">
       {match && match.isExact && (
-        <div className="upper-header--rounded-block search-block">
-          <input placeholder="Select Report Date" />
-          <button type="button" style={{ backgroundColor: '#ffffff' }}>
+        <div className="upper-header--rounded-block search-block mr-20">
+          <input
+            placeholder="Select Report Date"
+            value={`${dateRangeVal.start.format('DD-MM-YYYY')} ${dateRangeVal.end.format(
+              'DD-MM-YYYY'
+            )} `}
+          />
+          <button type="button" className="date-picker-btn">
             <div className="down-arrow">
               <img src={datePicker} onClick={selectDateRange} className="date-range-img" />{' '}
               <div className="search-area" />
             </div>
           </button>
-          {dateRangePicker && <div />}
+          {dateRangePicker && (
+            <div className="date-range-picker-layout-outer">
+              <div className="date-range-picker-layout-inner">
+                <DateRangePicker value={dateRangeVal} onSelect={onSelectDateRange} />
+              </div>
+            </div>
+          )}
         </div>
       )}
 

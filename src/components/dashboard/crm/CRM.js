@@ -380,7 +380,8 @@ function Crm() {
         {docs && (
           <div>
             Showing {(docs.page - 1) * (docs.limit + 1)}-
-            {docs.total < docs.limit ? docs.total : docs.page * docs.limit} of {docs.total} results
+            {docs.total < docs.page * docs.limit ? docs.total : docs.page * docs.limit} of{' '}
+            {docs.total} results
           </div>
         )}
         {crmsChartState.labels &&
