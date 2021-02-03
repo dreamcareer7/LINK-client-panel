@@ -13,13 +13,25 @@ import Report from '../../assets/reporting.svg';
 import CRM from '../../assets/crm.svg';
 import FollowUps from '../../assets/calendar.svg';
 import DoughnutChart from './PipelineChart';
-import { getClientInfo } from '../../redux/actions/accountAction/AccountAction';
+import { addFCMToken, getClientInfo } from '../../redux/actions/accountAction/AccountAction';
+import { requestFirebaseNotificationPermission } from '../../firebaseInit';
 
 const Home = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { clientQuote, pipeline, opportunity } = useSelector(state => state.dashboardReducer);
   useEffect(() => {
+    requestFirebaseNotificationPermission()
+      .then(firebaseToken => {
+        // eslint-disable-next-line no-console
+        console.log(firebaseToken);
+        localStorage.setItem('fcmToken', firebaseToken.toString());
+        dispatch(addFCMToken(firebaseToken));
+      })
+      .catch(err => {
+        return err;
+      });
+
     dispatch(fetchOpportunity());
     dispatch(fetchPipeLine());
     dispatch(fetchClientQuote());
