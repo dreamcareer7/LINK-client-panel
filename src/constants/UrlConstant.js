@@ -53,4 +53,5 @@ export const ACCOUNTS_URL = {
   GET_INDUSTRY: `${BASE_URL}organization/client-industries`,
   CREATE_FCM_TOKEN: `${BASE_URL}client-auth/add-fcm-token`,
   LOGOUT_USER: `${BASE_URL}client-auth/logout`,
+  DOWNLOAD_INVOICE: `${BASE_URL}client-auth/invoices-download`,
 };

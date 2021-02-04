@@ -8,5 +8,6 @@ const AccountService = {
   getCompany: () => ApiService.getData(ACCOUNTS_URL.GET_COMPANY_SIZE),
   creatFCMToken: data => ApiService.putData(ACCOUNTS_URL.CREATE_FCM_TOKEN, data),
   logoutUser: data => ApiService.postData(ACCOUNTS_URL.LOGOUT_USER, data),
+  downloadInvoice: () => ApiService.getData(ACCOUNTS_URL.DOWNLOAD_INVOICE),
 };
 export default AccountService;

@@ -9,8 +9,12 @@ import {
   getIndutries,
   updateClientInfo,
 } from '../../../../redux/actions/accountAction/AccountAction';
+import AccountService from '../../../../services/account-services/AccountServices';
+import { downloadInvoiceHistory } from '../../../../helpers/downloadInvoiceHistory';
 
 function Account() {
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const [form, setFormValue] = useState({
     name: '',
     email: '',
@@ -69,6 +73,14 @@ function Account() {
       ...form,
       [e.target.name]: e.target.value,
     });
+  };
+  const onDownloadFullHistory = () => {
+    AccountService.downloadInvoice()
+      .then(r => {
+        const invoiceData = r.data;
+        downloadInvoiceHistory(invoiceData, 'invoice.csv');
+      })
+      .catch(e => console.log(e));
   };
 
   return (
@@ -263,13 +275,23 @@ function Account() {
           <div className="date-range-button-container">
             <div className="d-flex">
               <div className="date-picker">
-                <DatePicker placeholderText="From" className="common-input" />
+                <DatePicker
+                  placeholderText="From"
+                  className="common-input"
+                  selected={startDate}
+                  onChange={date => setStartDate(date)}
+                />
               </div>
               <div className="date-picker">
-                <DatePicker placeholderText="To" className="common-input" />
+                <DatePicker
+                  placeholderText="To"
+                  className="common-input"
+                  selected={endDate}
+                  onChange={date => setEndDate(date)}
+                />
               </div>
             </div>
-            <button type="button" className="button primary-button">
+            <button type="button" className="button primary-button" onClick={onDownloadFullHistory}>
               DOWNLOAD FULL HISTORY
             </button>
           </div>
