@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Account.scss';
 import DatePicker from 'react-datepicker';
-import eye from '../../../../assets/images/visibility.svg';
-import download from '../../../../assets/images/down-arrow.svg';
+
 import {
   getCompanySize,
   getIndutries,
+  getInvoices,
   updateClientInfo,
 } from '../../../../redux/actions/accountAction/AccountAction';
 import AccountService from '../../../../services/account-services/AccountServices';
 import { downloadInvoiceHistory } from '../../../../helpers/downloadInvoiceHistory';
+import InvoicesList from './InvoicesList';
 
 function Account() {
   const [startDate, setStartDate] = useState(null);
@@ -26,8 +27,14 @@ function Account() {
     industry: '',
   });
   const dispatch = useDispatch();
-  const { company, client, industries } = useSelector(state => state.AccountReducer);
-
+  const { company, client, industries, invoices } = useSelector(state => state.AccountReducer);
+  console.log('invoices=>', invoices);
+  useEffect(() => {
+    const data = {
+      page: 1,
+    };
+    dispatch(getInvoices(data));
+  }, []);
   const onHandleSubmit = () => {
     const formData = {
       firstName: form.name,
@@ -302,16 +309,11 @@ function Account() {
             <div>Receipt No.</div>
             <div className="actions" />
           </div>
-          <div className="transaction-history-table-row table-row">
-            <div>01/01/2021</div>
-            <div>$100</div>
-            <div>Monthly</div>
-            <div>9876543210</div>
-            <div className="actions">
-              <img src={eye} />
-              <img src={download} />
-            </div>
-          </div>
+
+          {invoices &&
+            invoices.data &&
+            invoices.data.docs &&
+            invoices.data.docs.map(invoice => <InvoicesList invoice={invoice} />)}
         </div>
       </div>
     </div>

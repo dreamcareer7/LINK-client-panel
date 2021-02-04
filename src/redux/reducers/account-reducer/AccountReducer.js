@@ -10,6 +10,9 @@ const initialValue = {
   client: {
     data: [],
   },
+  invoices: {
+    data: [],
+  },
 };
 // eslint-disable-next-line import/prefer-default-export
 export const AccountReducer = (state = initialValue, action) => {
@@ -28,6 +31,14 @@ export const AccountReducer = (state = initialValue, action) => {
         ...state,
         company: {
           ...state.company,
+          data: action.data,
+        },
+      };
+    case ACCOUNT_REDUX_CONSTANT.GET_INVOICES:
+      return {
+        ...state,
+        invoices: {
+          ...state.invoices,
           data: action.data,
         },
       };

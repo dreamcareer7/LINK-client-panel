@@ -89,6 +89,27 @@ export const getCompanySize = () => {
   };
 };
 
+export const getInvoices = data => {
+  return dispatch => {
+    AccountService.getInvoices(data)
+      .then(response => {
+        if (response.data.status === 'SUCCESS') {
+          dispatch({
+            type: ACCOUNT_REDUX_CONSTANT.GET_INVOICES,
+            data: response.data.data,
+          });
+        }
+      })
+      .catch(e => {
+        console.log(e);
+        if (e.response.data.status === undefined) {
+          errorNotification('It seems like server is down, Please try after sometime.');
+        } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
+          errorNotification('Internal server error');
+        }
+      });
+  };
+};
 export const addFCMToken = token => {
   AccountService.creatFCMToken({ fcmToken: token })
     .then(response => {
