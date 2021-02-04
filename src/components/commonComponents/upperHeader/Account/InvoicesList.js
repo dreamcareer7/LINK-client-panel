@@ -7,7 +7,6 @@ import download from '../../../../assets/images/down-arrow.svg';
 import { errorNotification } from '../../../../constants/Toast';
 
 function InvoicesList({ invoice }) {
-  console.log('invoice ---- =>', invoice);
   const { createdAt, totalAmount, receiptNumber, paymentId, downloadUrl, hostUrl } = invoice;
 
   const downloadInvoice = () => {

@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Account.scss';
 import DatePicker from 'react-datepicker';
-
+import Pagination from 'react-js-pagination';
 import {
   getCompanySize,
   getIndutries,
   getInvoices,
   updateClientInfo,
 } from '../../../../redux/actions/accountAction/AccountAction';
+
 import AccountService from '../../../../services/account-services/AccountServices';
 import { downloadInvoiceHistory } from '../../../../helpers/downloadInvoiceHistory';
 import InvoicesList from './InvoicesList';
@@ -16,6 +17,7 @@ import InvoicesList from './InvoicesList';
 function Account() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const [pagenum, setPageNum] = useState(1);
   const [form, setFormValue] = useState({
     name: '',
     email: '',
@@ -28,13 +30,17 @@ function Account() {
   });
   const dispatch = useDispatch();
   const { company, client, industries, invoices } = useSelector(state => state.AccountReducer);
-  console.log('invoices=>', invoices);
+  console.log('pagenum=>', pagenum);
   useEffect(() => {
     const data = {
       page: 1,
     };
     dispatch(getInvoices(data));
   }, []);
+
+  const docs = useMemo(() => (invoices && invoices.data ? invoices.data : null), [invoices]);
+  const invoiceData = useMemo(() => (docs && docs.docs ? docs.docs : []), [docs]);
+  const activePage = useMemo(() => (docs && docs.page ? docs.page : 1), [docs]);
   const onHandleSubmit = () => {
     const formData = {
       firstName: form.name,
@@ -84,12 +90,18 @@ function Account() {
   const onDownloadFullHistory = () => {
     AccountService.downloadInvoice()
       .then(r => {
-        const invoiceData = r.data;
-        downloadInvoiceHistory(invoiceData, 'invoice.csv');
+        const invoice = r.data;
+        downloadInvoiceHistory(invoice, 'invoice.csv');
       })
       .catch(e => console.log(e));
   };
-
+  const handlePageChange = page => {
+    setPageNum(page);
+    const data = {
+      page,
+    };
+    dispatch(getInvoices(data));
+  };
   return (
     <div className="account-container">
       <div className="account-left">
@@ -310,10 +322,18 @@ function Account() {
             <div className="actions" />
           </div>
 
-          {invoices &&
-            invoices.data &&
-            invoices.data.docs &&
-            invoices.data.docs.map(invoice => <InvoicesList invoice={invoice} />)}
+          {invoiceData && invoiceData.map(invoice => <InvoicesList invoice={invoice} />)}
+          {invoices && invoices.data && invoices.data.docs && invoices.data.docs.length > 5 && (
+            <Pagination
+              activePage={activePage}
+              itemsCountPerPage={10}
+              totalItemsCount={invoices.total || 1}
+              pageRangeDisplayed={3}
+              onChange={handlePageChange}
+              itemClass="page-item"
+              linkClass="page-link"
+            />
+          )}
         </div>
       </div>
     </div>
