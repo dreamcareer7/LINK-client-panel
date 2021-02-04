@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './Account.scss';
 import DatePicker from 'react-datepicker';
 import Pagination from 'react-js-pagination';
+import moment from 'moment';
 import {
   getCompanySize,
   getIndutries,
@@ -13,6 +14,7 @@ import {
 import AccountService from '../../../../services/account-services/AccountServices';
 import { downloadInvoiceHistory } from '../../../../helpers/downloadInvoiceHistory';
 import InvoicesList from './InvoicesList';
+import { errorNotification } from '../../../../constants/Toast';
 
 function Account() {
   const [startDate, setStartDate] = useState(null);
@@ -53,6 +55,49 @@ function Account() {
       companyLocation: form.location,
     };
     dispatch(updateClientInfo(formData));
+  };
+  const onEndDateChange = e => {
+    setEndDate(e);
+    const date = moment(e);
+    const today = new Date();
+    if (date) {
+      if (startDate) {
+        if (date.isBefore(moment(startDate))) {
+          errorNotification('You can not set end date before start date');
+        } else {
+          const data = {
+            page: pagenum,
+            startDate: moment(startDate).toISOString(),
+            endDate: today.toISOString(),
+          };
+          dispatch(getInvoices(data));
+        }
+      } else {
+        const data = {
+          page: pagenum,
+          startDate: date.subtract(30, 'days').toISOString(),
+          endDate: date.toISOString(),
+        };
+        dispatch(getInvoices(data));
+      }
+    }
+  };
+  const onStartDateChange = date => {
+    setStartDate(date);
+    if (date) {
+      if (endDate && moment(endDate).isBefore(date)) {
+        errorNotification('You can not set end date before start date');
+      } else {
+        const today = new Date();
+
+        const data = {
+          page: pagenum,
+          startDate: moment(date).toISOString(),
+          endDate: today.toISOString(),
+        };
+        dispatch(getInvoices(data));
+      }
+    }
   };
 
   useEffect(() => {
@@ -102,6 +147,8 @@ function Account() {
     };
     dispatch(getInvoices(data));
   };
+
+  console.log(moment().format('YYYY-MM-DD'));
   return (
     <div className="account-container">
       <div className="account-left">
@@ -298,15 +345,19 @@ function Account() {
                   placeholderText="From"
                   className="common-input"
                   selected={startDate}
-                  onChange={date => setStartDate(date)}
+                  maxDate={moment().toDate()}
+                  onChange={onStartDateChange}
                 />
               </div>
+
               <div className="date-picker">
                 <DatePicker
                   placeholderText="To"
                   className="common-input"
                   selected={endDate}
-                  onChange={date => setEndDate(date)}
+                  minDate={startDate}
+                  maxDate={moment().toDate()}
+                  onChange={onEndDateChange}
                 />
               </div>
             </div>
@@ -322,7 +373,10 @@ function Account() {
             <div className="actions" />
           </div>
 
-          {invoiceData && invoiceData.map(invoice => <InvoicesList invoice={invoice} />)}
+          {invoiceData &&
+            invoiceData.map((invoice, index) => (
+              <InvoicesList key={index.toString()} invoice={invoice} />
+            ))}
           {invoices && invoices.data && invoices.data.docs && invoices.data.docs.length > 5 && (
             <Pagination
               activePage={activePage}
