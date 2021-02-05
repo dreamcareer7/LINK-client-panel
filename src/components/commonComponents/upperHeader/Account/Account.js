@@ -34,11 +34,11 @@ function Account() {
   const { company, client, industries, invoices } = useSelector(state => state.AccountReducer);
   console.log('pagenum=>', pagenum);
   console.log('client=>', client.data.stripeCustomerId);
+
   useEffect(() => {
     const data = {
       page: 1,
     };
-    window.recer();
     dispatch(getInvoices(data));
   }, []);
 

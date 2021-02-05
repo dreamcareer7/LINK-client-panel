@@ -43,7 +43,8 @@ function UpperHeader() {
   const [dateRangeVal, setDateRangeVal] = useState(
     moment.range(moment().clone().subtract(5, 'days'), moment().clone())
   );
-
+  const notificationData = useSelector(state => state.fcmReducer);
+  console.log('notificationData=>', notificationData);
   const onSelectDateRange = e => {
     setDateRangeVal(e);
     console.log(e.start.toISOString());
@@ -143,6 +144,7 @@ function UpperHeader() {
       </div>
       <div title="Notifications" className="notification-container" onClick="">
         <img src={notification} />
+        {notificationData && <div className="notify-dot" />}
       </div>
       <div className="logout-area" onClick={onDropDownClick}>
         <div className="upper-header--rounded-block">

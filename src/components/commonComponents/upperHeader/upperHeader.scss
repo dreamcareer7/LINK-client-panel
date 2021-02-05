@@ -14,7 +14,7 @@
   align-items: center;
   height: 100%;
   width: 20%;
-  min-width: 180px;
+  min-width: 218px; //180
   max-width: 200px;
   padding: 3px;
   font-size: 12px;
@@ -69,9 +69,20 @@
   border-radius: 50%;
   background-color: #ffffff;
   cursor: pointer;
+  position: relative;
 
   img {
     height: 35px;
+  }
+  .notify-dot{
+    width: 10px;
+    height: 10px;
+    background-color: #19A8FF;
+    border-radius: 10px;
+    z-index: 1;
+    position: absolute;
+    right: 12px;
+    top: 10px;
   }
 }
 

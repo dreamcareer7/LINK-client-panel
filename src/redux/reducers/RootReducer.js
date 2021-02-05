@@ -11,6 +11,7 @@ import {
   pipelineValuesGraphData,
   totalSalesGraphData,
 } from './reporting-reducer/ReportingReducer';
+import { fcmReducer } from './fcm-reducer/FcmReducer';
 
 const rootReducer = combineReducers({
   followUps,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   crmsGraphData,
   dashboardReducer,
   AccountReducer,
+  fcmReducer,
   activityBreakdownGraphData,
   pipelineValuesGraphData,
   conversationGraphData,

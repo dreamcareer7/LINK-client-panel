@@ -1,0 +1,4 @@
+const FCM_REDUX_CONSTANT = {
+  FCM_DATA: 'FCM_DATA',
+};
+export default FCM_REDUX_CONSTANT;

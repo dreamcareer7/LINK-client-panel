@@ -12,13 +12,13 @@ const config = {
 };
 
 firebase.initializeApp(config);
-const messaging = firebase.messaging();
+export const firebaseMessagingInstance = firebase.messaging();
 
 export const requestFirebaseNotificationPermission = () =>
   new Promise((resolve, reject) => {
-    messaging
+    firebaseMessagingInstance
       .requestPermission()
-      .then(() => messaging.getToken())
+      .then(() => firebaseMessagingInstance.getToken())
       .then(firebaseToken => {
         resolve(firebaseToken);
       })
@@ -29,7 +29,7 @@ export const requestFirebaseNotificationPermission = () =>
 
 export const onMessageListener = () =>
   new Promise(resolve => {
-    messaging.onMessage(payload => {
+    firebaseMessagingInstance.onMessage(payload => {
       resolve(payload);
     });
   });

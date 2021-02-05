@@ -15,6 +15,7 @@ import FollowUps from '../../assets/calendar.svg';
 import DoughnutChart from './PipelineChart';
 import { addFCMToken, getClientInfo } from '../../redux/actions/accountAction/AccountAction';
 import { requestFirebaseNotificationPermission } from '../../firebaseInit';
+import { addFCMListner } from '../../redux/actions/fcmAction/FcmAction';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const Home = () => {
         console.log(firebaseToken);
         localStorage.setItem('fcmToken', firebaseToken.toString());
         dispatch(addFCMToken(firebaseToken));
+        dispatch(addFCMListner());
       })
       .catch(err => {
         return err;

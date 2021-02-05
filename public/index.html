@@ -50,11 +50,11 @@
      <!-- <script src="https://baremetrics-dunning.baremetrics.com/js/application.js" async ></script>
       <script src="https://baremetrics-barecancel.baremetrics.com/js/application.js" async ></script>-->
     <script>
-      function recer()
+      !function ()
       {if(window.barecancel&&window.barecancel.created)window.console&&console.error&&console.error("Barecancel snippet included twice.");else{window.barecancel={created:!0};var a=document.createElement("script");a.src="https://baremetrics-barecancel.baremetrics.com/js/application.js",a.async=!0;var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b),
               window.barecancel.params = {
                 access_token_id: "f3f1ef18-d0de-46c2-9038-31eb84adc7a4", // Your Cancellation API public key
-                customer_oid: "", // The provider id of this customer. For example, the Stripe Customer ID
+                customer_oid: "jsfdjj", // The provider id of this customer. For example, the Stripe Customer ID
                 callback_send: function(data) {
                   // Once the cancellation is recorded in Baremetrics, you should actually cancel the customer.
                   // This should use the same logic you used before adding Cancellation Insights. For example:
@@ -66,7 +66,7 @@
                   console.error(error)
                 }
               }
-      }}
+      }}();
     </script>
   </body>
 </html>
