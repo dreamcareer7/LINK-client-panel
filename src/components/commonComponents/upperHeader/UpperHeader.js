@@ -17,6 +17,12 @@ import { clearAuthToken } from '../../../helpers/LocalStorageHelper';
 import FollowUpService from '../../../services/follow-up-service/FollowUpSevice';
 import { getClientInfo, logoutUser } from '../../../redux/actions/accountAction/AccountAction';
 import { useOnClickOutside } from '../../../helpers/UseClickOutsideHook';
+import {
+  getActivityBreakdownGraphData,
+  getConversationGraphData,
+  getPipelineValuesGraphData,
+  getTotalSalesGraphData,
+} from '../../../redux/actions/ReportingActions/ReportingAction';
 
 function UpperHeader() {
   const history = useHistory();
@@ -39,8 +45,17 @@ function UpperHeader() {
   );
 
   const onSelectDateRange = e => {
-    setDateRangeVal(dateRangeVal);
-    console.log(e.start._d + e.end._d);
+    setDateRangeVal(e);
+    console.log(e.start.toISOString());
+    const data = {
+      startDate: e.start.toISOString(),
+      endDate: e.end.toISOString(),
+    };
+
+    dispatch(getActivityBreakdownGraphData(data));
+    dispatch(getPipelineValuesGraphData(data));
+    dispatch(getConversationGraphData(data));
+    dispatch(getTotalSalesGraphData(data));
   };
 
   const onClickSearchedVal = val => {
@@ -69,6 +84,7 @@ function UpperHeader() {
     setDropDown(!dropDown);
   };
   useOnClickOutside(ref, () => setDropDown(false));
+  useOnClickOutside(ref, () => setDateRangePicker(false));
 
   const onLogOut = () => {
     clearAuthToken();
@@ -101,7 +117,7 @@ function UpperHeader() {
             </div>
           </button>
           {dateRangePicker && (
-            <div className="date-range-picker-layout-outer">
+            <div className="date-range-picker-layout-outer" ref={ref}>
               <div className="date-range-picker-layout-inner">
                 <DateRangePicker value={dateRangeVal} onSelect={onSelectDateRange} />
               </div>
