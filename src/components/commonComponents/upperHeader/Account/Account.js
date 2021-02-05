@@ -33,10 +33,12 @@ function Account() {
   const dispatch = useDispatch();
   const { company, client, industries, invoices } = useSelector(state => state.AccountReducer);
   console.log('pagenum=>', pagenum);
+  console.log('client=>', client.data.stripeCustomerId);
   useEffect(() => {
     const data = {
       page: 1,
     };
+    window.recer();
     dispatch(getInvoices(data));
   }, []);
 
@@ -147,6 +149,25 @@ function Account() {
     };
     dispatch(getInvoices(data));
   };
+
+  /* const onCancelScriptRun = () => {
+    try {
+      window.barecancel.params = {
+        access_token_id: 'f3f1ef18-d0de-46c2-9038-31eb84adc7a4', // Your Cancellation API public key
+        customer_oid: client.data.stripeCustomerId, // The provider id of this customer. For example, the Stripe Customer ID
+        callback_send(data) {
+          console.log(165);
+          console.log(data);
+        },
+        callback_error(error) {
+          console.error(error);
+        },
+      };
+      dispatch(getClientInfo());
+    } catch (e) {
+      console.log(e);
+    }
+  }; */
 
   console.log(moment().format('YYYY-MM-DD'));
   return (
@@ -329,7 +350,10 @@ function Account() {
 
             <div className="d-flex">
               {/* <button type='button' className='mr-10'>Pause</button> */}
-              <button type="button">Cancel</button>
+
+              <button type="button" id="barecancel-trigger">
+                Cancel
+              </button>
             </div>
           </div>
         </div>

@@ -176,13 +176,13 @@
 .date-range-picker-layout-outer{
   z-index: 1;
   position: relative;
-  margin: -25vh;
+  margin: -20vh;
 
 }
 .date-range-picker-layout-inner{
-  z-index: 9999;
+  z-index: 999;
   position: absolute;
   background: white;
-  left: -150%;
+  left: -120%;
   margin-top: 50px;
 }

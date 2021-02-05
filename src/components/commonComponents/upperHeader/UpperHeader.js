@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import DateRangePicker from 'react-daterange-picker';
+import 'react-daterange-picker/dist/css/react-calendar.css';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './upperHeader.scss';
