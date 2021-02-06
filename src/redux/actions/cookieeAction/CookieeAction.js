@@ -7,7 +7,6 @@ export const checkingCookiee = () => {
   return dispatch => {
     CookieeServices.checkingCookiee()
       .then(response => {
-        console.log('cookiee response->', response);
         if (response.data.status === 'SUCCESS') {
           dispatch({
             type: COOKIEE_REDUX_CONSTANT.GET_COOKIEE,

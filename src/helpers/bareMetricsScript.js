@@ -21,7 +21,9 @@ function runCode(param, cb) {
         // The provider id of this customer. For example, the Stripe Customer ID
         callback_send(data) {
           console.log(data);
-          cb();
+          if (cb) {
+            cb();
+          }
           // Once the cancellation is recorded in Baremetrics, you should actually cancel the customer.
           // This should use the same logic you used before adding Cancellation Insights. For example:
           // axios.delete(`/api/users/example_customer_123`)

@@ -36,6 +36,8 @@ const Home = () => {
     dispatch(fetchClientQuote());
     dispatch(getClientInfo());
   }, []);
+  const clientError = useSelector(state => state.clientErrorReducer);
+  console.log('clienterror=>', clientError);
 
   return (
     <div>
