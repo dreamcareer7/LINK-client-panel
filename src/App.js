@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import PropTypes from 'prop-types';
 import Notifications from 'react-notify-toast';
+import { useDispatch } from 'react-redux';
 import Layout from './components/commonComponents/layout/Layout';
 import Home from './components/dashboard/Home';
 import SignupWithLinkedIn from './components/authentication/login-page/SignupWithLinkedIn';
@@ -13,10 +14,20 @@ import AuthRedirect from './components/dashboard/AuthRedirect';
 import OpportunityDetails from './components/dashboard/follow-ups/UpcomingActions/OpportunityDetails/OpportunityDetails';
 import Account from './components/commonComponents/upperHeader/Account/Account';
 import PopUp from './components/commonComponents/PopUp/PopUp';
+import { addFCMListner } from './redux/actions/fcmAction/FcmAction';
+import { checkingCookiee } from './redux/actions/cookieeAction/CookieeAction';
 
 const PrivateRoute = ({ component, ...options }) => {
+  const dispatch = useDispatch();
+
   const isLoggedIn =
     localStorage.getItem('userToken') !== null && localStorage.getItem('userToken').length !== 0;
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(addFCMListner());
+      dispatch(checkingCookiee());
+    }
+  }, []);
   const finalComponent = isLoggedIn ? component : SignupWithLinkedIn;
   if (options.path === '/' && isLoggedIn) {
     return (

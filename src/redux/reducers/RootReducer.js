@@ -12,6 +12,7 @@ import {
   totalSalesGraphData,
 } from './reporting-reducer/ReportingReducer';
 import { fcmReducer } from './fcm-reducer/FcmReducer';
+import { cookieeReducer } from './cookiee-reducer/CookieeReducer';
 
 const rootReducer = combineReducers({
   followUps,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   dashboardReducer,
   AccountReducer,
   fcmReducer,
+  cookieeReducer,
   activityBreakdownGraphData,
   pipelineValuesGraphData,
   conversationGraphData,
