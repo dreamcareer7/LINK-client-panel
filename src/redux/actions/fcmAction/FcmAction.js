@@ -8,7 +8,7 @@ export const addFCMListner = () => {
     firebaseMessagingInstance.onMessage(payload => {
       console.log('payload->', payload);
       dispatch({
-        type: FCM_REDUX_CONSTANT.FCM_DATA,
+        type: FCM_REDUX_CONSTANT.ADD_NEW_NOTIFICATION,
         data: payload,
       });
     });

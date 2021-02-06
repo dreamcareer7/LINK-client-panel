@@ -96,7 +96,7 @@ function UpperHeader() {
         if (res.data.status === 'SUCCESS') {
           successNotification('Notification read');
           dispatch({
-            type: FCM_REDUX_CONSTANT.FCM_DATA,
+            type: FCM_REDUX_CONSTANT.CLEAR_ALL_NOTIFICATION,
             data: null,
           });
           history.push('/followUps');
@@ -162,7 +162,7 @@ function UpperHeader() {
       </div>
       <div title="Notifications" className="notification-container" onClick={onClickNotification}>
         <img src={notification} />
-        {notificationData && <div className="notify-dot" />}
+        {notificationData.length > 0 && <div className="notify-dot" />}
       </div>
       <div className="logout-area" onClick={onDropDownClick}>
         <div className="upper-header--rounded-block">
