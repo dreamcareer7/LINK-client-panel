@@ -2,6 +2,7 @@ import { errorNotification } from '../../../../constants/Toast';
 import HISTORY_REDUX_CONSTANT from '../../../constants/historyReduxConstant/HistoryReduxConstant';
 // eslint-disable-next-line import/no-named-as-default
 import HistoryService from '../../../../services/follow-up-service/historyService/HistoryService';
+import POPUP_REDUX_CONSTANT from '../../../constants/popUpConstant/PopUpConstant';
 
 // eslint-disable-next-line import/prefer-default-export
 export const fetchConversation = (id, data) => {
@@ -27,7 +28,13 @@ export const fetchConversation = (id, data) => {
         }
       })
       .catch(e => {
-        if (e.response.data.status === undefined) {
+        if (e.response.data.status === 'READ_ERROR_MESSAGE') {
+          console.log(e.response.data.message);
+          dispatch({
+            type: POPUP_REDUX_CONSTANT.POP_UP_MESSAGE,
+            data: e.response.data.message,
+          });
+        } else if (e.response.data.status === undefined) {
           dispatch({
             type: HISTORY_REDUX_CONSTANT.ERROR_OPPORTUNITY_CONVERSATION,
           });

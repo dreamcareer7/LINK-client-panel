@@ -36,6 +36,9 @@ instance.interceptors.response.use(
       window.location.href = '/signUp';
       return false;
     }
+    /* else if(){
+      store.dispatch({setcurt, da til});
+    } */
     return Promise.reject(error);
   }
 );

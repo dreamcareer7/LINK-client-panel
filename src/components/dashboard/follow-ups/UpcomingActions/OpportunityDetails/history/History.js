@@ -49,9 +49,9 @@ function History() {
     }
   }, [allConversation.data]);
 
-  if (allConversation.isLoading) {
+  /* if (allConversation.isLoading) {
     return <div className="loader ajax-global-spin" />;
-  }
+  } */
 
   return (
     <div className="opportunity-right common-block blue">

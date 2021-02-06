@@ -40,6 +40,7 @@ function App() {
   return (
     <div className="App">
       <Notifications />
+      <PopUp />
       <Router>
         <Route>
           <Switch>

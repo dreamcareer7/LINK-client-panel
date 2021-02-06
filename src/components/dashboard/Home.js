@@ -15,6 +15,7 @@ import FollowUps from '../../assets/calendar.svg';
 import DoughnutChart from './PipelineChart';
 import { addFCMToken, getClientInfo } from '../../redux/actions/accountAction/AccountAction';
 import { requestFirebaseNotificationPermission } from '../../firebaseInit';
+import PopUp from '../commonComponents/PopUp/PopUp';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const Home = () => {
       .catch(err => {
         return err;
       });
+    // get error notification
     dispatch(fetchOpportunity());
     dispatch(fetchPipeLine());
     dispatch(fetchClientQuote());
@@ -38,7 +40,11 @@ const Home = () => {
   }, []);
   const clientError = useSelector(state => state.clientErrorReducer);
   console.log('clienterror=>', clientError);
+  /*  const currentError = useSelector(state => state.currentErr);
 
+const errorr = clientError.find(e => e.tile = currentError.tit)
+
+  errorr sjowpophsoot */
   return (
     <div>
       <div className="graph-container">
