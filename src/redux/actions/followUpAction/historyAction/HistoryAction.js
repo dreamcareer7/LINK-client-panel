@@ -18,6 +18,7 @@ export const fetchConversation = (id, data) => {
               data: response.data.data,
             });
           } else {
+            console.log('fetch opp conversation->', response.data);
             dispatch({
               type: HISTORY_REDUX_CONSTANT.FETCH_OPPORTUNITY_CONVERSATION,
               data: response.data.data,

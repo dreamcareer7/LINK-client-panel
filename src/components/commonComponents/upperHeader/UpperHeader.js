@@ -23,6 +23,8 @@ import {
   getPipelineValuesGraphData,
   getTotalSalesGraphData,
 } from '../../../redux/actions/ReportingActions/ReportingAction';
+import { successNotification } from '../../../constants/Toast';
+import FCM_REDUX_CONSTANT from '../../../redux/constants/fcmConstant/FcmConstant';
 
 function UpperHeader() {
   const history = useHistory();
@@ -87,6 +89,22 @@ function UpperHeader() {
   useOnClickOutside(ref, () => setDropDown(false));
   useOnClickOutside(ref, () => setDateRangePicker(false));
 
+  const onClickNotification = () => {
+    FollowUpService.clearNotification()
+      .then(res => {
+        console.log(res);
+        if (res.data.status === 'SUCCESS') {
+          successNotification('Notification read');
+          dispatch({
+            type: FCM_REDUX_CONSTANT.FCM_DATA,
+            data: null,
+          });
+          history.push('/followUps');
+        }
+      })
+      .catch(e => console.log(e));
+  };
+
   const onLogOut = () => {
     clearAuthToken();
     logoutUser(localStorage.getItem('fcmToken'));
@@ -142,7 +160,7 @@ function UpperHeader() {
           </div>
         </button>
       </div>
-      <div title="Notifications" className="notification-container" onClick="">
+      <div title="Notifications" className="notification-container" onClick={onClickNotification}>
         <img src={notification} />
         {notificationData && <div className="notify-dot" />}
       </div>

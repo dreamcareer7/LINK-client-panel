@@ -17,6 +17,7 @@ export const FOLLOW_UP_URL = {
   DELETE_OPPORTUNITY_URL: `${BASE_URL}opportunity/delete-opportunity/`,
   SYNC_OPPORTUNITY_WITH_LINKEDIN_URL: `${BASE_URL}opportunity/sync-with-linkedIn/`,
   SEARCH_SUBSCRIBERS: `${BASE_URL}opportunity/search-opportunity`,
+  CLEAR_NOTIFICATION: `${BASE_URL}client-dashboard/clear-notifications`,
 };
 export const NOTES_URL = {
   GET_NOTES_URL: `${BASE_URL}opportunity-note/get-opportunity-note/`,

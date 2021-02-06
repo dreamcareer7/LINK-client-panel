@@ -16,6 +16,7 @@ import Account from './components/commonComponents/upperHeader/Account/Account';
 import PopUp from './components/commonComponents/PopUp/PopUp';
 import { addFCMListner } from './redux/actions/fcmAction/FcmAction';
 import { checkingCookiee } from './redux/actions/cookieeAction/CookieeAction';
+import { getClientError } from './redux/actions/clientErrorAction/ClientErrorAction';
 
 const PrivateRoute = ({ component, ...options }) => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const PrivateRoute = ({ component, ...options }) => {
     if (isLoggedIn) {
       dispatch(addFCMListner());
       dispatch(checkingCookiee());
+      dispatch(getClientError());
     }
   }, []);
   const finalComponent = isLoggedIn ? component : SignupWithLinkedIn;
