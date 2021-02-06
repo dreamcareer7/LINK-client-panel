@@ -60,3 +60,6 @@ export const ACCOUNTS_URL = {
 export const COOKIEE_URL = {
   CHECK_COOKIEE_URL: `${BASE_URL}client-auth/checking-for-cookie`,
 };
+export const ERROR_URL = {
+  CLIENT_ERROR_URL: `${BASE_URL}client-error-message/get-messages`,
+};
