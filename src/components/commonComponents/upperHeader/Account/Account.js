@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker';
 import Pagination from 'react-js-pagination';
 import moment from 'moment';
 import {
+  getClientInfo,
   getCompanySize,
   getIndutries,
   getInvoices,
@@ -15,6 +16,7 @@ import AccountService from '../../../../services/account-services/AccountService
 import { downloadInvoiceHistory } from '../../../../helpers/downloadInvoiceHistory';
 import InvoicesList from './InvoicesList';
 import { errorNotification } from '../../../../constants/Toast';
+import runCode from '../../../../helpers/bareMetricsScript';
 
 function Account() {
   const [startDate, setStartDate] = useState(null);
@@ -351,7 +353,13 @@ function Account() {
             <div className="d-flex">
               {/* <button type='button' className='mr-10'>Pause</button> */}
 
-              <button type="button" id="barecancel-trigger">
+              <button
+                type="button"
+                id="barecancel-trigger"
+                onClick={() =>
+                  runCode(client.data.stripeCustomerId, () => dispatch(getClientInfo()))
+                }
+              >
                 Cancel
               </button>
             </div>

@@ -29,7 +29,8 @@ instance.interceptors.response.use(
     return response;
   },
   error => {
-    if (error.response.status === 401) {
+    console.log(error);
+    if (error && error.response && error.response.status === 401) {
       console.log('redirect to sign up');
       clearAuthToken();
       window.location.href = '/signUp';
