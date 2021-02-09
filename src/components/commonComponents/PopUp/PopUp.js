@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, {useMemo} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './PopUp.scss';
 import bell from '../../../assets/images/whoops-bell.svg';
@@ -10,8 +10,8 @@ const errorTitles = ['cookie_expired', 'extension_not_installed'];
 function PopUp() {
   const data = useSelector(state => state.popUpReducer);
   const errorData = useSelector(state => state.clientErrorReducer);
-  const findError = useMemo(() => errorData.find(e => e.title === data), [errorData]);
-  console.log(findError);
+  const findError = useMemo(() => errorData.find(e => e.title === data), [errorData, data]);
+
   const dispatch = useDispatch();
   const openUrl = () => {
     dispatch(popUpData(null));

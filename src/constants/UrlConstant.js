@@ -2,7 +2,7 @@ export const BASE_URL = 'https://link.dev.gradlesol.com/app/'; // <-- Kevit Dev
 // export const BASE_URL = 'https://link.dev.humanpixel.com.au/app/'; // <-- HP Dev
 // export const BASE_URL = 'https://link.test.humanpixel.com.au/app/'; // <-- HP Staging
 // export const BASE_URL = 'https://jayla.linkfluencer.com/app/'; // <-- Production
-// export const BASE_URL = 'https://ef4c345152c1.ngrok.io/';
+// export const BASE_URL = 'https://97a229f815ab.ngrok.io/';
 export const LINKEDIN_CLIENT_ID = '776gktki6ukrgj';
 export const API_METHODS = {
   GET: 'GET',
