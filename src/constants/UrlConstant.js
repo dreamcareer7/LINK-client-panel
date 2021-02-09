@@ -56,6 +56,7 @@ export const ACCOUNTS_URL = {
   LOGOUT_USER: `${BASE_URL}client-auth/logout`,
   DOWNLOAD_INVOICE: `${BASE_URL}client-auth/invoices-download`,
   GET_INVOICES_URL: `${BASE_URL}client-auth/invoices`,
+  CLIENT_AUTH_NOTIFICATION_URL: `${BASE_URL}client-auth/notification-type`,
 };
 
 export const COOKIEE_URL = {

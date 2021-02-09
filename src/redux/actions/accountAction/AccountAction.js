@@ -45,6 +45,27 @@ export const getClientInfo = () => {
       });
   };
 };
+// update notification email or browser
+export const updateNotification = data => {
+  return dispatch => {
+    AccountService.updateNotification(data)
+      .then(response => {
+        if (response.data.status === 'SUCCESS') {
+          dispatch({
+            type: ACCOUNT_REDUX_CONSTANT.UPDATE_CLIENT_INFO,
+            data: response.data.data,
+          });
+        }
+      })
+      .catch(e => {
+        if (e.response.data.status === undefined) {
+          errorNotification('It seems like server is down, Please try after sometime.');
+        } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
+          errorNotification('Internal server error');
+        }
+      });
+  };
+};
 
 export const updateClientInfo = data => {
   return dispatch => {

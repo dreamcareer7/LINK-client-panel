@@ -10,6 +10,7 @@ import {
   getIndutries,
   getInvoices,
   updateClientInfo,
+  updateNotification,
 } from '../../../../redux/actions/accountAction/AccountAction';
 
 import AccountService from '../../../../services/account-services/AccountServices';
@@ -150,6 +151,45 @@ function Account() {
       page,
     };
     dispatch(getInvoices(data));
+  };
+  const onUpdateCheckbox = () => {
+    const browser = document.getElementById('browser');
+    const email = document.getElementById('email');
+    if (browser.checked && !email.checked) {
+      const browserChecked = true;
+      const data = {
+        notificationType: {
+          browser: browserChecked,
+          email: false,
+        },
+      };
+      dispatch(updateNotification(data));
+    } else if (email.checked && !browser.checked) {
+      const emailChecked = true;
+      const data = {
+        notificationType: {
+          browser: false,
+          email: emailChecked,
+        },
+      };
+      dispatch(updateNotification(data));
+    } else if (browser.checked && email.checked) {
+      const data = {
+        notificationType: {
+          browser: true,
+          email: true,
+        },
+      };
+      dispatch(updateNotification(data));
+    } else {
+      const data = {
+        notificationType: {
+          browser: false,
+          email: false,
+        },
+      };
+      dispatch(updateNotification(data));
+    }
   };
 
   /* const onCancelScriptRun = () => {
@@ -329,7 +369,7 @@ function Account() {
               Email
             </label>
           </div>
-          <button type="submit" className="button success-button mt-20">
+          <button type="submit" className="button success-button mt-20" onClick={onUpdateCheckbox}>
             UPDATE
           </button>
         </div>
