@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
+import './notes.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import edit from '../../../../../../assets/images/edit.svg';
@@ -62,7 +63,7 @@ function Notes() {
         <div className="common-subtitle">NOTES</div>
         {notes && notes.length ? (
           notes.map(noteData => (
-            <div key={noteData._id} className="note-block mt-10">
+            <div key={noteData._id} className="note-block">
               <span className="note">{noteData.text}</span>
               <div className="note-action">
                 <img
@@ -84,7 +85,7 @@ function Notes() {
             </div>
           ))
         ) : (
-          <div>Notes not available</div>
+          <div className="notes-not-available">Notes not available</div>
         )}
       </div>
 

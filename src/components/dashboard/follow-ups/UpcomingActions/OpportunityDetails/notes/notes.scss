@@ -1,0 +1,11 @@
+.note-list{
+  display: flex;
+  flex-direction: column;
+  flex:1;
+}
+.notes-not-available{
+  display: flex;
+  flex: 2;
+  align-items: center;
+  justify-content: center;
+}
