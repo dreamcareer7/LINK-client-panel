@@ -15,7 +15,6 @@ import FollowUps from '../../assets/calendar.svg';
 import DoughnutChart from './PipelineChart';
 import { addFCMToken, getClientInfo } from '../../redux/actions/accountAction/AccountAction';
 import { requestFirebaseNotificationPermission } from '../../firebaseInit';
-import PopUp from '../commonComponents/PopUp/PopUp';
 
 const Home = () => {
   const dispatch = useDispatch();

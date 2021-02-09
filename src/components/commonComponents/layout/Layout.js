@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
+import is from 'is_js';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import SideBar from '../sideBar/SideBar';
 import UpperHeader from '../upperHeader/UpperHeader';
 import './layout.scss';
 import { getAuthTokenLocalStorage } from '../../../helpers/LocalStorageHelper';
-
 import { addFCMListner } from '../../../redux/actions/fcmAction/FcmAction';
 import { checkingCookiee } from '../../../redux/actions/cookieeAction/CookieeAction';
 import { getClientError } from '../../../redux/actions/clientErrorAction/ClientErrorAction';
+import PopUp from '../PopUp/PopUp';
 
 const Layout = props => {
   const { children } = props;
@@ -24,6 +25,7 @@ const Layout = props => {
   if (!isLoggedIn) {
     return children;
   }
+  if (is.firefox()) return <PopUp />;
   return (
     <div>
       <div className="dashboard">

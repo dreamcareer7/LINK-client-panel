@@ -46,7 +46,7 @@ function App() {
           <Switch>
             <Route exact path="/signUp" component={SignupWithLinkedIn} />
             <Route exact path="/auth-verify" component={AuthRedirect} />
-            <Route exact path="/popUp" component={PopUp} />
+            {/* <Route exact path="/popUp" component={PopUp} /> */}
             <PrivateRoute exact path="/" />
             <Layout>
               <PrivateRoute exact path="/home" component={Home} />
