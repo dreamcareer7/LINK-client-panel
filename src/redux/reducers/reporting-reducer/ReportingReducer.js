@@ -91,10 +91,10 @@ export const totalSalesGraphData = (state = initialTotalSalesGraphData, action) 
         ...state,
         // TODO fix the id
         labels: action.data.map(e => e._id),
-        values: action.data.map(e => e.totalDealValue),
+        values: action.data.map(e => e.totalDealSize),
         datasets: [
           {
-            data: action.data.map(e => e.totalDealValue),
+            data: action.data.map(e => e.totalDealSize),
           },
         ],
       };
