@@ -58,7 +58,7 @@ const Home = () => {
             type="button"
             onClick={() => history.push('/followUps')}
           >
-            <img src={FollowUps} height="16" />
+            <img src={FollowUps} height="20" />
             <span className="p-left">Follow Ups</span>
           </button>
           <button
@@ -66,7 +66,7 @@ const Home = () => {
             type="button"
             onClick={() => history.push('/crm')}
           >
-            <img src={CRM} className="ml-3" height="18" />
+            <img src={CRM} className="ml-3" height="24" />
             <span className="p-left">CRM</span>
           </button>
           <button
@@ -74,7 +74,7 @@ const Home = () => {
             type="button"
             onClick={() => history.push('/reporting')}
           >
-            <img src={Report} height="16" />
+            <img src={Report} height="20" />
             <span className="p-left">Reporting</span>
           </button>
         </div>
