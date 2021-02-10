@@ -1,5 +1,13 @@
 @import "src/styles/index";
 
+.opportunity-detail-block {
+  input, select {
+    font-size: 14px;
+    font-weight: 500;
+    color: $placeholder-color;
+  }
+}
+
 .opportunity-header {
   display: flex;
   justify-content: space-between;
@@ -23,6 +31,8 @@
     justify-content: center;
     height: 24px;
     width: 24px;
+    min-width: 24px;
+    min-height: 24px;
     margin-right: 10px;
     font-size: 20px;
     font-weight: 600;
@@ -85,7 +95,7 @@
   width: calc(100% - 40px);
   padding: 5px 15px 25px 5px;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500;
   outline: none;
   border: none;
   resize: none;
@@ -100,9 +110,10 @@
   color: $placeholder-color;
 }
 
-.right-date-time{
-  color: $background-primary-color;
+.chat-time-stamp, .right-date-time{
+  color: #9595B3;
 }
+
 .note-action {
   display: flex;
   align-items: center;
@@ -122,16 +133,26 @@
   height:42vh;
 }
 
+.history-container {
+  height: 350px;
+}
+
 .chat-history {
-  padding: 20px 10px 50px 15px;
-  height: 100%;
+  padding: 20px 10px 20px 15px !important;
+
+  .common-subtitle {
+    margin-bottom: 5px;
+  }
+}
+
+.whole-chat-container {
+  height: calc(100% - 24px);
   overflow-y: auto;
 }
 
 .chat-container {
   margin-top: 10px;
   padding-right: 5px;
-  overflow-y: auto;
 }
 
 .chat-dp {
@@ -164,7 +185,7 @@
 .chat-bubble {
   position: relative;
   padding: 10px 30px 25px 10px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   color: $placeholder-color;
   background-color: #ffffff;
@@ -173,6 +194,7 @@
 }
 
 .user-bubble {
+  font-weight: 400;
   color: #ffffff;
   background-color: $primary-color;
 }

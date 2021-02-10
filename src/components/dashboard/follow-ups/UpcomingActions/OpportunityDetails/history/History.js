@@ -54,7 +54,7 @@ function History() {
   } */
 
   return (
-    <div className="opportunity-right common-block blue">
+    <div className="opportunity-right history-container common-block blue">
       <div className="status-color" />
 
       <div
@@ -63,35 +63,37 @@ function History() {
         onScroll={handleScroll}
       >
         <div className="common-subtitle">HISTORY</div>
+        <div className="whole-chat-container">
         {allConversation && allConversation.data ? (
           allConversation.data.map(convo => (
-            <div className="chat-container" key={Math.random()}>
-              {convo.id === '2' ? (
-                <div className="left-conversation">
-                  <img className="chat-dp" src={convo.profilePicUrl} />
-                  <div className="chat-bubble">
-                    {convo.message ? convo.message : 'This message is deleted'}
-                    <span className="chat-time-stamp">
+              <div className="chat-container" key={Math.random()}>
+                {convo.id === '2' ? (
+                  <div className="left-conversation">
+                    <img className="chat-dp" src={convo.profilePicUrl} />
+                    <div className="chat-bubble">
+                      {convo.message ? convo.message : 'This message is deleted'}
+                      <span className="chat-time-stamp">
                       {moment(convo.createdAt).format('DD-MM-YYYY | hh:mm A')}
                     </span>
+                    </div>
                   </div>
-                </div>
-              ) : (
-                <div className="right-conversation">
-                  <div className="chat-bubble user-bubble">
-                    {convo.message ? convo.message : 'This message is deleted'}
-                    <span className="chat-time-stamp right-date-time">
+                ) : (
+                  <div className="right-conversation">
+                    <div className="chat-bubble user-bubble">
+                      {convo.message ? convo.message : 'This message is deleted'}
+                      <span className="chat-time-stamp right-date-time">
                       {moment(convo.createdAt).format('DD-MM-YYYY | hh:mm A')}
                     </span>
+                    </div>
+                    <img className="chat-dp" src={convo.profilePicUrl} />
                   </div>
-                  <img className="chat-dp" src={convo.profilePicUrl} />
-                </div>
-              )}
+                )}
             </div>
           ))
         ) : (
           <div>No conversation</div>
         )}
+        </div>
       </div>
     </div>
   );

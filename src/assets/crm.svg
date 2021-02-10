@@ -1,39 +1,8 @@
-<?xml version="1.0"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="512" height="512" x="0" y="0" viewBox="0 0 308.99 308.99" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g>
-<g xmlns="http://www.w3.org/2000/svg">
-	<g>
-		<path d="M301.135,82.438L159.869,19.441c-3.42-1.537-7.329-1.537-10.767,0L7.843,82.438c-4.611,2.053-7.656,6.572-7.827,11.623    c-0.165,5.041,2.534,9.751,6.993,12.123l141.257,75.333c1.948,1.045,4.083,1.556,6.224,1.556c2.152,0,4.284-0.511,6.235-1.556    l141.264-75.333c4.455-2.372,7.157-7.082,6.995-12.123C308.791,89.01,305.753,84.491,301.135,82.438z" fill="#ffffff" data-original="#000000" style="" class=""/>
-		<path d="M289.527,138.805l-135.045,72.04l-135.023-72.04c-6.464-3.449-14.468-1.002-17.894,5.45    c-3.45,6.449-1.003,14.451,5.443,17.891L148.265,237.5c1.948,1.038,4.083,1.555,6.224,1.555c2.152,0,4.284-0.51,6.235-1.555    l141.264-75.354c6.431-3.44,8.875-11.442,5.445-17.891C303.981,137.802,295.971,135.355,289.527,138.805z" fill="#ffffff" data-original="#000000" style="" class=""/>
-	</g>
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-</g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Group_11381" data-name="Group 11381" transform="translate(-7238 16750)">
+    <g id="layers-24px" transform="translate(7238 -16750)">
+      <path id="Path_34232" data-name="Path 34232" d="M0,0H24V24H0Z" fill="none"/>
+      <path id="Path_34233" data-name="Path 34233" d="M12.6,18.06a1.006,1.006,0,0,1-1.23,0L5.22,13.28A.994.994,0,1,0,4,14.85l6.76,5.26a2.011,2.011,0,0,0,2.46,0l6.76-5.26a1,1,0,0,0,0-1.57l-.01-.01a.991.991,0,0,0-1.22,0L12.6,18.06Zm.63-3.02,6.76-5.26a1.007,1.007,0,0,0,0-1.58L13.23,2.94a2.011,2.011,0,0,0-2.46,0L4.01,8.21a1.007,1.007,0,0,0,0,1.58l6.76,5.26a2,2,0,0,0,2.46-.01Z" fill="#fff"/>
+    </g>
+  </g>
+</svg>

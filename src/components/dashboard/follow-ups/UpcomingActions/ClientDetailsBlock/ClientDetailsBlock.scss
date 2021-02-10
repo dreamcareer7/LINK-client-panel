@@ -6,6 +6,10 @@
   column-gap: 10px;
 }
 
+.client-name {
+  text-transform: uppercase;
+}
+
 .client-other-details {
   display: grid;
   grid-template-columns: 120px calc(100% - 130px);

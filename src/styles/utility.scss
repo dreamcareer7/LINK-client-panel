@@ -24,12 +24,6 @@
 }
 /* scrollbar ends here */
 
-input {
-  font-size: 14px;
-  font-weight: 500;
-  color: #464646;
-}
-
 .buttons-row {
   display: flex;
   justify-content: left;
@@ -41,6 +35,9 @@ input {
 }
 
 .button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-width: 140px;
   width: fit-content;
   padding: 10px 30px;
@@ -118,9 +115,9 @@ input {
   min-width: 150px;
   height: 30px;
   padding: 0 5px;
-  font-size: 12px;
-  font-weight: 600;
-  color: $secondary-font-color;
+  font-size: 14px;
+  font-weight: 500;
+  color: $placeholder-color;
   background-color: $secondary-variant-color;
   border-radius: 5px;
   border: none;
@@ -139,7 +136,6 @@ input {
   padding: 5px 10px;
   font-size: 14px;
   font-weight: 500;
-  color: $secondary-font-color;
   background-color: $secondary-variant-color;
   border-radius: 5px;
   border: none;
@@ -147,8 +143,11 @@ input {
   resize: none;
 }
 
-.common-input::placeholder {
-  font-size: 14px!important;
+.common-text-background {
+  color: $secondary-font-color;
+}
+
+input {
   color: $placeholder-color;
 }
 
@@ -213,7 +212,7 @@ input {
 
 input::placeholder {
   font-size: 12px !important;
-  font-weight: 500 !important;
+  font-weight: 400 !important;
 }
 
 .placeholder-color {
@@ -254,6 +253,10 @@ input::placeholder {
   font-size: 14px !important;
 }
 
+.f-16 {
+  font-size: 16px!important;
+}
+
 .info-text-color {
   color: $info-color!important;
 }
@@ -280,6 +283,10 @@ input::placeholder {
 
 .w-100 {
   width: 100% !important;
+}
+
+.w-90 {
+  width: 90% !important;
 }
 
 .ml-5 {
@@ -347,11 +354,11 @@ input::placeholder {
 }
 
 .status-color {
-  height: 7px;
+  height: 8px;
 }
 
 .common-block--detail-container {
-  height: calc(100% - 7px);
+  height: calc(100% - 8px);
   padding: 25px 25px 40px 25px;
   background-color: $secondary-variant-color;
   border-radius: 7px;

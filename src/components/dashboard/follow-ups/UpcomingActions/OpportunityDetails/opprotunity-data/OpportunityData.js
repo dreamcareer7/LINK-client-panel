@@ -56,7 +56,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
     }
   };
   return (
-    <div className="common-block blue">
+    <div className="common-block opportunity-detail-block blue">
       <div className="status-color" />
       <div className="common-block--detail-container">
         <div className="opportunity-detail">
@@ -94,7 +94,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             <div className="content-title ellipsis">EMAIL</div>
             <input
               type="text"
-              className="common-input common-input-white  ellipsis"
+              className="common-input common-input-white ellipsis"
               value={mail}
               onChange={e => setMail(e.target.value)}
             />

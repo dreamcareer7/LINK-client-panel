@@ -208,7 +208,7 @@ function Filters() {
 
         <div className="common-title mt-3 mb-2">Deal Size</div>
 
-        <div className="mb-5">
+        <div className="filter-deal-range-container">
           {dealSizes && (
             <InputRange
               minValue={dealSizes.minDealValue || 0}

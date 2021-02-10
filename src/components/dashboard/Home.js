@@ -58,7 +58,7 @@ const Home = () => {
             type="button"
             onClick={() => history.push('/followUps')}
           >
-            <img src={FollowUps} height="15" />
+            <img src={FollowUps} height="16" />
             <span className="p-left">Follow Ups</span>
           </button>
           <button
@@ -66,7 +66,7 @@ const Home = () => {
             type="button"
             onClick={() => history.push('/crm')}
           >
-            <img src={CRM} className="ml-3" height="15" />
+            <img src={CRM} className="ml-3" height="18" />
             <span className="p-left">CRM</span>
           </button>
           <button
@@ -74,7 +74,7 @@ const Home = () => {
             type="button"
             onClick={() => history.push('/reporting')}
           >
-            <img src={Report} height="15" />
+            <img src={Report} height="16" />
             <span className="p-left">Reporting</span>
           </button>
         </div>
@@ -94,16 +94,16 @@ const Home = () => {
         </div>
       </div>
       <div className="col-md-12 m-top">
-        <div className="text-center">
+        <div className="d-flex justify-content-center">
           {clientQuote && clientQuote.data && clientQuote.data.length !== 0 && (
-            <>
+            <div className="quote">
               <h5 className="quote-text">{`"${
                 clientQuote && clientQuote.data && clientQuote.data.quote
               }"`}</h5>
-              <h6 className="text-transform">{`${
+              <h6 className="text-transform text-center f-16">{`${
                 clientQuote && clientQuote.data && clientQuote.data.quoteBy
               }`}</h6>
-            </>
+            </div>
           )}
         </div>
       </div>
