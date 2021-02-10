@@ -180,16 +180,19 @@ function Reporting() {
       {activityBreakdownGraph && (
         <div className="activity-breakdown-container">
           <div className="common-title activity-label">ACTIVITY BREAKDOWN</div>
-          <div className="activity-breakdown-circles-container">
-            {activityBreakdownGraph.map(activity => (
-              <div className="outer-circle">
-                <div className="middle-circle">
-                  <div className="inner-circle">{activity.total}</div>
+          <div className='d-flex justify-content-center w-100'>
+            <div className="activity-breakdown-circles-container">
+              {activityBreakdownGraph.map(activity => (
+                <div className="outer-circle">
+                  <div className="middle-circle">
+                    <div className="inner-circle">{activity.total}</div>
+                  </div>
+                  <div className="activity-breakdown-title">{activity._id}</div>
                 </div>
-                <div className="activity-breakdown-title">{activity._id}</div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
+
         </div>
       )}
       <div className="conversions-pipeline-container">

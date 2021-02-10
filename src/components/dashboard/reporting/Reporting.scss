@@ -11,12 +11,11 @@
 }
 
 .activity-breakdown-circles-container {
-  display: inline-flex;
+  display: flex;
   justify-content: space-between;
   gap: 30px;
-  width: 75vw;
-  height: 90%;
-  margin: 1vw 5vw;
+  margin-top: 10px;
+  padding: 10px 40px;
 }
 .activity-label{
   padding-left: 32px;
@@ -27,31 +26,36 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   padding: 15px;
   background-color: #ebebeb;
   border-radius: 50%;
 }
 
 .outer-circle {
-  height: 150px;
-  width: 150px;
+  max-width: 150px;
+  max-height: 150px;
+  height: 10vw;
+  width: 10vw;
 }
 
 .middle-circle {
   padding: 12px;
   background-color: #003499;
-  height: 120px;
-  width: 120px;
+  height: calc(10vw - 30px);
+  width: calc(10vw - 30px);
+  max-height: 120px;
+  max-width: 120px;
 }
 
 .inner-circle {
+  height: calc(10vw - 60px);
+  width: calc(10vw - 60px);
+  max-height: 100px;
+  max-width: 100px;
   font-size: 3vw;
   font-weight: 700;
   color: #ffffff;
   background: $primary-color;
-  height: 100px;
-  width: 100px;
 }
 //
 //.outer-circle:before, .middle-circle:before, .inner-circle:before {
