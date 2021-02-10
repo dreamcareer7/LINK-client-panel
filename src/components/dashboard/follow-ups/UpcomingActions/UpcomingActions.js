@@ -54,7 +54,7 @@ function UpcomingActions() {
         <Pagination
           activePage={activePage}
           itemsCountPerPage={10}
-          totalItemsCount={allUpcomingActions.total || 1}
+          totalItemsCount={docs.total || 1}
           pageRangeDisplayed={3}
           onChange={handlePageChange}
           itemClass="page-item"
