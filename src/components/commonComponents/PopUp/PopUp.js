@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './PopUp.scss';
 import bell from '../../../assets/images/whoops-bell.svg';

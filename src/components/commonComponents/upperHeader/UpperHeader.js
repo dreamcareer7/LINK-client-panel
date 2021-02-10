@@ -146,7 +146,7 @@ function UpperHeader() {
       )}
 
       <div className="upper-header--rounded-block search-block">
-        <input placeholder="Search Subscriber" value={searchText} onChange={onSearch} />
+        <input placeholder="Search Opportunity" value={searchText} onChange={onSearch} />
         <button type="button">
           <div className="down-arrow">
             <img src={search} />{' '}

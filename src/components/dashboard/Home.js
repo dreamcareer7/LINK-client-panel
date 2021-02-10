@@ -39,11 +39,6 @@ const Home = () => {
   }, []);
   const clientError = useSelector(state => state.clientErrorReducer);
   console.log('clienterror=>', clientError);
-  /*  const currentError = useSelector(state => state.currentErr);
-
-const errorr = clientError.find(e => e.tile = currentError.tit)
-
-  errorr sjowpophsoot */
   return (
     <div>
       <div className="graph-container">
