@@ -28,7 +28,7 @@ function OpportunityDetails() {
     };
   }, [id]);
   const goToLinkedInProfile = () => {
-    window.location = `${opportunity.linkedInUrl}`;
+    window.open(`${opportunity.linkedInUrl}`, '_blank');
   };
 
   const onSyncClick = () => {
