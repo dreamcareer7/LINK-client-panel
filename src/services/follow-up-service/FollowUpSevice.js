@@ -12,5 +12,6 @@ const FollowUpService = {
     ApiService.postData(FOLLOW_UP_URL.SYNC_OPPORTUNITY_WITH_LINKEDIN_URL + id),
   searchSubscriber: name => ApiService.putData(FOLLOW_UP_URL.SEARCH_SUBSCRIBERS, name),
   clearNotification: () => ApiService.putData(FOLLOW_UP_URL.CLEAR_NOTIFICATION),
+  getNotification: () => ApiService.getData(FOLLOW_UP_URL.GET_NOTIFICATION),
 };
 export default FollowUpService;

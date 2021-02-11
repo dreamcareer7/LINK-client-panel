@@ -23,7 +23,6 @@ import {
   getPipelineValuesGraphData,
   getTotalSalesGraphData,
 } from '../../../redux/actions/ReportingActions/ReportingAction';
-import { successNotification } from '../../../constants/Toast';
 import FCM_REDUX_CONSTANT from '../../../redux/constants/fcmConstant/FcmConstant';
 
 function UpperHeader() {
@@ -42,14 +41,14 @@ function UpperHeader() {
   const [dateRangePicker, setDateRangePicker] = useState(false);
   const ref = useRef();
   const [dropDown, setDropDown] = useState(false);
+  const [showDot, setShowDot] = useState(true);
   const [dateRangeVal, setDateRangeVal] = useState(
     moment.range(moment().clone().subtract(5, 'days'), moment().clone())
   );
   const notificationData = useSelector(state => state.fcmReducer);
-  console.log('notificationData=>', notificationData);
+
   const onSelectDateRange = e => {
     setDateRangeVal(e);
-    console.log(e.start.toISOString());
     const data = {
       startDate: e.start.toISOString(),
       endDate: e.end.toISOString(),
@@ -89,12 +88,21 @@ function UpperHeader() {
   useOnClickOutside(ref, () => setDropDown(false));
   useOnClickOutside(ref, () => setDateRangePicker(false));
 
+  useEffect(() => {
+    FollowUpService.getNotification()
+      .then(res => {
+        if (res.data.status === 'SUCCESS') {
+          const show = res.data.data;
+          setShowDot(show.showDot);
+        }
+      })
+      .catch(e => console.log(e));
+  }, []);
+
   const onClickNotification = () => {
     FollowUpService.clearNotification()
       .then(res => {
-        console.log(res);
         if (res.data.status === 'SUCCESS') {
-          successNotification('Notification read');
           dispatch({
             type: FCM_REDUX_CONSTANT.CLEAR_ALL_NOTIFICATION,
             data: null,
@@ -162,7 +170,7 @@ function UpperHeader() {
       </div>
       <div title="Notifications" className="notification-container" onClick={onClickNotification}>
         <img src={notification} />
-        {notificationData.length > 0 && <div className="notify-dot" />}
+        {notificationData.length > 0 && showDot && <div className="notify-dot" />}
       </div>
       <div className="logout-area" onClick={onDropDownClick}>
         <div className="upper-header--rounded-block">
