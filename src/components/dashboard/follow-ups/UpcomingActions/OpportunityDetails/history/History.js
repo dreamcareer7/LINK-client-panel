@@ -57,15 +57,11 @@ function History() {
     <div className="opportunity-right history-container common-block blue">
       <div className="status-color" />
 
-      <div
-        className="common-block--detail-container chat-history"
-        ref={chatContainer}
-        onScroll={handleScroll}
-      >
+      <div className="common-block--detail-container chat-history">
         <div className="common-subtitle">HISTORY</div>
-        <div className="whole-chat-container">
-        {allConversation && allConversation.data ? (
-          allConversation.data.map(convo => (
+        <div className="whole-chat-container" ref={chatContainer} onScroll={handleScroll}>
+          {allConversation && allConversation.data ? (
+            allConversation.data.map(convo => (
               <div className="chat-container" key={Math.random()}>
                 {convo.id === '2' ? (
                   <div className="left-conversation">
@@ -73,8 +69,8 @@ function History() {
                     <div className="chat-bubble">
                       {convo.message ? convo.message : 'This message is deleted'}
                       <span className="chat-time-stamp">
-                      {moment(convo.createdAt).format('DD-MM-YYYY | hh:mm A')}
-                    </span>
+                        {moment(convo.createdAt).format('DD-MM-YYYY | hh:mm A')}
+                      </span>
                     </div>
                   </div>
                 ) : (
@@ -82,17 +78,17 @@ function History() {
                     <div className="chat-bubble user-bubble">
                       {convo.message ? convo.message : 'This message is deleted'}
                       <span className="chat-time-stamp right-date-time">
-                      {moment(convo.createdAt).format('DD-MM-YYYY | hh:mm A')}
-                    </span>
+                        {moment(convo.createdAt).format('DD-MM-YYYY | hh:mm A')}
+                      </span>
                     </div>
                     <img className="chat-dp" src={convo.profilePicUrl} />
                   </div>
                 )}
-            </div>
-          ))
-        ) : (
-          <div>No conversation</div>
-        )}
+              </div>
+            ))
+          ) : (
+            <div>No conversation</div>
+          )}
         </div>
       </div>
     </div>
