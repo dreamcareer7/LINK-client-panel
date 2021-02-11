@@ -41,7 +41,6 @@ function UpperHeader() {
   const [dateRangePicker, setDateRangePicker] = useState(false);
   const ref = useRef();
   const [dropDown, setDropDown] = useState(false);
-  const [showDot, setShowDot] = useState(true);
   const [dateRangeVal, setDateRangeVal] = useState(
     moment.range(moment().clone().subtract(5, 'days'), moment().clone())
   );
@@ -93,12 +92,22 @@ function UpperHeader() {
       .then(res => {
         if (res.data.status === 'SUCCESS') {
           const show = res.data.data;
-          setShowDot(show.showDot);
+          if (show.showDot) {
+            dispatch({
+              type: FCM_REDUX_CONSTANT.ADD_NEW_NOTIFICATION,
+              data: {},
+            });
+          }
         }
       })
       .catch(e => console.log(e));
   }, []);
-
+  useEffect(() => {
+    const unlisten = history.listen(() => {
+      setDateRangeVal(moment.range(moment().clone().subtract(5, 'days'), moment().clone()));
+    });
+    return unlisten;
+  }, []);
   const onClickNotification = () => {
     FollowUpService.clearNotification()
       .then(res => {
@@ -170,7 +179,7 @@ function UpperHeader() {
       </div>
       <div title="Notifications" className="notification-container" onClick={onClickNotification}>
         <img src={notification} />
-        {notificationData.length > 0 && showDot && <div className="notify-dot" />}
+        {notificationData.length > 0 && <div className="notify-dot" />}
       </div>
       <div className="logout-area" onClick={onDropDownClick}>
         <div className="upper-header--rounded-block">
