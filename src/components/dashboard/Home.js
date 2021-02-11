@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useEffect } from 'react';
+import { Chart } from 'react-chartjs-2';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {
@@ -15,6 +16,8 @@ import FollowUps from '../../assets/calendar.svg';
 import DoughnutChart from './PipelineChart';
 import { addFCMToken, getClientInfo } from '../../redux/actions/accountAction/AccountAction';
 import { requestFirebaseNotificationPermission } from '../../firebaseInit';
+
+Chart.defaults.global.defaultFontColor = 'white';
 
 const Home = () => {
   const dispatch = useDispatch();
