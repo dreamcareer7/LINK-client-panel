@@ -152,7 +152,6 @@ function Reporting() {
           ctx.fontColor = '#212152';
           ctx.font = Chart.helpers.fontString(
             Chart.defaults.global.defaultFontSize,
-            Chart.defaults.global.defaultFontStyle('red'),
             Chart.defaults.global.defaultFontFamily
           );
           ctx.textAlign = 'center';
@@ -240,9 +239,7 @@ function Reporting() {
           <Doughnut
             ref={pipelineRef}
             data={
-              pipelineValuesGraph &&
-              pipelineValuesGraph.data &&
-              pipelineValuesGraph.data.length === 0
+              pipelineValuesGraph && pipelineValuesGraph.data
                 ? 'No Data Available'
                 : pipelineValuesGraph
             }
