@@ -13,7 +13,7 @@ const DoughnutChart = props => {
       {
         label: chartData && chartData.map(e => e._id),
         backgroundColor: ['#fcab50', '#ff696a', '#39c3bb'],
-        data: chartData && chartData.map(e => e.total && e.total),
+        data: chartData && chartData.map(e => (e.total ? e.total : '')),
       },
     ],
   };

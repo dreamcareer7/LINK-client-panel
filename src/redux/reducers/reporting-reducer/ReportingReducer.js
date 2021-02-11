@@ -35,7 +35,7 @@ export const pipelineValuesGraphData = (state = initialPipelineValuesGraphData, 
         values: filteredData.map(e => e.totalDealValue),
         datasets: [
           {
-            data: filteredData.map(e => e.totalDealValue),
+            data: filteredData.map(e => (e.totalDealValue ? e.totalDealValue : '')),
             backgroundColor: ['#39C3BB', '#FCAB50', '#FF696A'],
           },
         ],
@@ -92,10 +92,10 @@ export const totalSalesGraphData = (state = initialTotalSalesGraphData, action) 
         ...state,
         // TODO fix the id
         labels: action.data.map(e => e._id),
-        values: action.data.map(e => e.totalDealSize),
+        values: action.data.map(e => (e.totalDealSize !== 0 ? e.totalDealSize : '')),
         datasets: [
           {
-            data: action.data.map(e => e.totalDealSize),
+            data: action.data.map(e => (e.totalDealSize !== 0 ? e.totalDealSize : '')),
           },
         ],
       };
