@@ -23,6 +23,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { clientQuote, pipeline, opportunity } = useSelector(state => state.dashboardReducer);
+  console.log('pipeline', pipeline);
   useEffect(() => {
     requestFirebaseNotificationPermission()
       .then(firebaseToken => {

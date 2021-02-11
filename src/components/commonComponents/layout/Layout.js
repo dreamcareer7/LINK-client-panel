@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import is from 'is_js';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import SideBar from '../sideBar/SideBar';
 import UpperHeader from '../upperHeader/UpperHeader';
@@ -22,10 +22,13 @@ const Layout = props => {
       dispatch(getClientError());
     }
   }, []);
+  const checkCookiee = useSelector(state => state.popUpReducer);
   if (!isLoggedIn) {
     return children;
   }
-  if (is.firefox()) return <PopUp />;
+  if (checkCookiee) return <PopUp popupData={checkCookiee} />;
+  if (is.not.chrome()) return <PopUp popupData="browser_not_supported" />;
+  if (is.mobile()) return <PopUp popupData="device_not_desktop" />;
   return (
     <div>
       <div className="dashboard">

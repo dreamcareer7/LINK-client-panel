@@ -7,8 +7,12 @@ import { popUpData } from '../../../redux/actions/popUpAction/PopUpAction';
 
 const errorTitles = ['cookie_expired', 'extension_not_installed'];
 
-function PopUp() {
-  const data = useSelector(state => state.popUpReducer);
+// eslint-disable-next-line react/prop-types
+function PopUp({ popupData }) {
+  console.log('popup');
+  // const data = useSelector(state => state.popUpReducer);
+  const data = popupData;
+  console.log('data coming from popup props', data);
   const errorData = useSelector(state => state.clientErrorReducer);
   const findError = useMemo(() => errorData.find(e => e.title === data), [errorData, data]);
 

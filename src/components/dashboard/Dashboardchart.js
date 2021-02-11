@@ -37,6 +37,8 @@ const DashboardChart = props => {
             labels: {
               fontSize: 15,
               padding: 12,
+              fontWeight: 700,
+              fontColor: '#464646',
             },
           },
         }}
