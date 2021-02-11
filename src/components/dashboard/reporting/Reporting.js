@@ -175,12 +175,20 @@ function Reporting() {
     <>
       <div className="total-sales-container">
         <div className="common-title mb-10">TOTAL SALES GENERATED</div>
-        <Line height={80} options={totalSalesOptions} data={totalSalesData} />
+        <Line
+          height={80}
+          options={totalSalesOptions}
+          data={
+            totalSalesData !== null && totalSalesData.data.length === 0
+              ? 'No Data Available'
+              : totalSalesData
+          }
+        />
       </div>
       {activityBreakdownGraph && (
         <div className="activity-breakdown-container">
           <div className="common-title activity-label">ACTIVITY BREAKDOWN</div>
-          <div className='d-flex justify-content-center w-100'>
+          <div className="d-flex justify-content-center w-100">
             <div className="activity-breakdown-circles-container">
               {activityBreakdownGraph.map(activity => (
                 <div className="outer-circle">
@@ -192,17 +200,30 @@ function Reporting() {
               ))}
             </div>
           </div>
-
         </div>
       )}
       <div className="conversions-pipeline-container">
         <div className="conversions-container">
           <div className="common-title mb-5">CONVERSIONS</div>
-          <Bar options={conversionsOptions} data={conversionsData} />
+          <Bar
+            options={conversionsOptions}
+            data={
+              conversionsData !== null && conversionsData.data.length === 0
+                ? 'No Data Available'
+                : conversionsData
+            }
+          />
         </div>
         <div className="pipeline-container">
           <div className="common-title">PIPELINE VALUE</div>
-          <Doughnut data={pipelineValuesGraph} options={pipelineOptions} />
+          <Doughnut
+            data={
+              pipelineValuesGraph !== null && pipelineValuesGraph.data.length === 0
+                ? 'No Data Available'
+                : pipelineValuesGraph
+            }
+            options={pipelineOptions}
+          />
         </div>
       </div>
     </>
