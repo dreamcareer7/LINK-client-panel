@@ -38,6 +38,7 @@ const DoughnutChart = props => {
             labels: {
               fontSize: 15,
               padding: 12,
+              fontColor: '#464646',
             },
           },
         }}

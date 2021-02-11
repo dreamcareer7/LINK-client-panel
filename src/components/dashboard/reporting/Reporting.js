@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './Reporting.scss';
-import { Bar, Doughnut, Line } from 'react-chartjs-2';
+import { Bar, Chart, Doughnut, Line } from 'react-chartjs-2';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getActivityBreakdownGraphData,
@@ -8,6 +8,8 @@ import {
   getPipelineValuesGraphData,
   getTotalSalesGraphData,
 } from '../../../redux/actions/ReportingActions/ReportingAction';
+
+Chart.defaults.global.defaultFontColor = 'white';
 
 function Reporting() {
   const totalSalesOptions = {
@@ -116,7 +118,7 @@ function Reporting() {
       ],
     },
   };
-
+  const pipelineRef = useRef();
   const pipelineOptions = {
     value: ['$10000', '$20000', '$52000'],
     labels: {
@@ -143,11 +145,31 @@ function Reporting() {
         },
         fontColor: '#464646',
       },
+      animation: {
+        onComplete: () => {
+          const { chartInstance } = pipelineRef.current;
+          const { ctx } = chartInstance;
+          ctx.fontColor = '#212152';
+          ctx.font = Chart.helpers.fontString(
+            Chart.defaults.global.defaultFontSize,
+            Chart.defaults.global.defaultFontStyle('red'),
+            Chart.defaults.global.defaultFontFamily
+          );
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'bottom';
+          ctx.fontColor = '#212152';
+        },
+      },
       elements: { point: { radius: '10' } },
     },
   };
 
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //
+  //
+  // }, [pipelineRef.current]);
 
   const activityBreakdownGraph = useSelector(
     ({ activityBreakdownGraphData }) => activityBreakdownGraphData
@@ -216,6 +238,7 @@ function Reporting() {
         <div className="pipeline-container">
           <div className="common-title">PIPELINE VALUE</div>
           <Doughnut
+            ref={pipelineRef}
             data={
               pipelineValuesGraph &&
               pipelineValuesGraph.data &&
