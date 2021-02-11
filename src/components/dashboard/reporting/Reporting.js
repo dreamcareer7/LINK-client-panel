@@ -170,7 +170,6 @@ function Reporting() {
     dispatch(getConversationGraphData(data));
     dispatch(getTotalSalesGraphData(data));
   }, []);
-
   return (
     <>
       <div className="total-sales-container">

@@ -27,7 +27,7 @@ export const pipelineValuesGraphData = (state = initialPipelineValuesGraphData, 
   switch (action.type) {
     case REPORT_REDUX_CONSTANT.GET_PIPELINE_VALUES_GRAPH_DATA:
       // eslint-disable-next-line no-case-declarations
-      const filteredData = action.data.filter(e => e.totalDealValue !== 0);
+      const filteredData = action.data.filter(e => e.totalDealValue && e.totalDealValue !== 0);
       return {
         ...state,
         labels: filteredData.map(e => getLabelFromValues(e._id, potentialMapperObject)),
