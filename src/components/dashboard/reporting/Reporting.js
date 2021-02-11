@@ -179,7 +179,7 @@ function Reporting() {
           height={80}
           options={totalSalesOptions}
           data={
-            totalSalesData !== null && totalSalesData.data.length === 0
+            totalSalesData && totalSalesData.data && totalSalesData.data.length === 0
               ? 'No Data Available'
               : totalSalesData
           }
@@ -208,7 +208,7 @@ function Reporting() {
           <Bar
             options={conversionsOptions}
             data={
-              conversionsData !== null && conversionsData.data.length === 0
+              conversionsData && conversionsData.data && conversionsData.data.length === 0
                 ? 'No Data Available'
                 : conversionsData
             }
@@ -218,7 +218,9 @@ function Reporting() {
           <div className="common-title">PIPELINE VALUE</div>
           <Doughnut
             data={
-              pipelineValuesGraph !== null && pipelineValuesGraph.data.length === 0
+              pipelineValuesGraph &&
+              pipelineValuesGraph.data &&
+              pipelineValuesGraph.data.length === 0
                 ? 'No Data Available'
                 : pipelineValuesGraph
             }
