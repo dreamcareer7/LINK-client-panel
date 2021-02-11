@@ -64,27 +64,26 @@ function Account() {
   const onEndDateChange = e => {
     setEndDate(e);
     const date = moment(e);
-    const today = new Date();
-    if (date) {
-      if (startDate) {
-        if (date.isBefore(moment(startDate))) {
-          errorNotification('You can not set end date before start date');
-        } else {
-          const data = {
-            page: pagenum,
-            startDate: moment(startDate).toISOString(),
-            endDate: today.toISOString(),
-          };
-          dispatch(getInvoices(data));
-        }
+    // const today = new Date();
+
+    if (date && startDate) {
+      if (date.isBefore(moment(startDate))) {
+        errorNotification('You can not set end date before start date');
       } else {
         const data = {
           page: pagenum,
-          startDate: date.subtract(30, 'days').toISOString(),
+          startDate: moment(startDate).toISOString(),
           endDate: date.toISOString(),
         };
         dispatch(getInvoices(data));
       }
+    } else {
+      const data = {
+        page: pagenum,
+        startDate: moment().subtract(30, 'days').toISOString(),
+        endDate: date.toISOString(),
+      };
+      dispatch(getInvoices(data));
     }
   };
   const onStartDateChange = date => {
