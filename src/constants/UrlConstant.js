@@ -58,6 +58,7 @@ export const ACCOUNTS_URL = {
   DOWNLOAD_INVOICE: `${BASE_URL}client-auth/invoices-download`,
   GET_INVOICES_URL: `${BASE_URL}client-auth/invoices`,
   CLIENT_AUTH_NOTIFICATION_URL: `${BASE_URL}client-auth/notification-type`,
+  CANCEL_SUBSCRIPTION: `${BASE_URL}client-auth/cancel-subscription`,
 };
 
 export const COOKIEE_URL = {

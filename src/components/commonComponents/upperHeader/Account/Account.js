@@ -210,6 +210,10 @@ function Account() {
       console.log(e);
     }
   }; */
+  const callBack = () => {
+    dispatch(getClientInfo());
+    AccountService.cancelSubscription().then(null).catch(null);
+  };
 
   console.log(moment().format('YYYY-MM-DD'));
   return (
@@ -396,9 +400,7 @@ function Account() {
               <button
                 type="button"
                 id="barecancel-trigger"
-                onClick={() =>
-                  runCode(client.data.stripeCustomerId, () => dispatch(getClientInfo()))
-                }
+                onClick={() => runCode(client.data.stripeCustomerId, callBack)}
               >
                 Cancel
               </button>

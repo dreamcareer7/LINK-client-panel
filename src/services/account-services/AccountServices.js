@@ -16,5 +16,6 @@ const AccountService = {
       }${endDate ? `&endDate=${endDate}` : ''}`
     ),
   updateNotification: data => ApiService.putData(ACCOUNTS_URL.CLIENT_AUTH_NOTIFICATION_URL, data),
+  cancelSubscription: () => ApiService.putData(ACCOUNTS_URL.CANCEL_SUBSCRIPTION),
 };
 export default AccountService;
