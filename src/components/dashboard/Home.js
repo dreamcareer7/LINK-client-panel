@@ -85,13 +85,13 @@ const Home = () => {
       <div className="row">
         <div className="col-md-6">
           <div className="graph-container">
-            <div className="common-title">OPPORTUNITIES</div>
+            <div className="common-title chart-title">OPPORTUNITIES</div>
             <DashboardChart chartData={opportunity && opportunity.data && opportunity.data} />
           </div>
         </div>
         <div className="col-md-6">
           <div className="graph-container">
-            <div className="common-title">PIPELINE VALUE</div>
+            <div className="common-title chart-title">PIPELINE VALUE</div>
             <DoughnutChart chartData={pipeline && pipeline.data && pipeline.data} />
           </div>
         </div>
