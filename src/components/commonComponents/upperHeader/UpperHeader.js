@@ -131,7 +131,7 @@ function UpperHeader() {
     history.replace('/account');
   };
   const onHelpClick = () => {
-    history.replace('/popUp');
+    window.open('https://support.linkfluencer.com/hc/en-us', '_blank');
   };
   const selectDateRange = () => {
     setDateRangePicker(!dateRangePicker);
