@@ -34,11 +34,11 @@ const Layout = props => {
   if (!isLoggedIn) {
     return children;
   }
-  if (checkCookiee) return <PopUp popupData={checkCookiee} onClosePopup={onClosePopup} />;
-  if (is.not.chrome()) return <PopUp popupData="browser_not_supported" />;
-  if (is.mobile()) return <PopUp popupData="device_not_desktop" />;
   return (
-    <div>
+    <>
+      {checkCookiee && <PopUp popupData={checkCookiee} onClosePopup={onClosePopup} />}
+      {is.not.chrome() && <PopUp popupData="browser_not_supported" />}
+      {is.mobile() && <PopUp popupData="device_not_desktop" />}
       <div className="dashboard">
         <div className="dashboard--left-part">
           <SideBar />
@@ -50,7 +50,7 @@ const Layout = props => {
           <div className="common-area">{children}</div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 Layout.propTypes = {

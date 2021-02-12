@@ -1,15 +1,15 @@
 @import "src/styles/index";
 
 .pop-up-main-container {
-  display: block;
+  display: flex;
   position: fixed;
   left: 0;
   top: 0;
-  display: flex;
+  background-color: rgba(0,0,0,0.2);
   z-index: 9999;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(2px);
 }
 
 .pop-up-container {
