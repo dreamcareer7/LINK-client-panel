@@ -1,330 +1,309 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, {useEffect, useMemo, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import './Account.scss';
 import DatePicker from 'react-datepicker';
 import Pagination from 'react-js-pagination';
 import moment from 'moment';
 import {
-  getClientInfo,
-  getCompanySize,
-  getIndutries,
-  getInvoices,
-  updateClientInfo,
-  updateNotification,
+    getClientInfo,
+    getCompanySize,
+    getIndutries,
+    getInvoices,
+    updateClientInfo,
+    updateNotification,
 } from '../../../../redux/actions/accountAction/AccountAction';
 
 import AccountService from '../../../../services/account-services/AccountServices';
-import { downloadInvoiceHistory } from '../../../../helpers/downloadInvoiceHistory';
+import {downloadInvoiceHistory} from '../../../../helpers/downloadInvoiceHistory';
 import InvoicesList from './InvoicesList';
-import { errorNotification } from '../../../../constants/Toast';
+import {errorNotification} from '../../../../constants/Toast';
 import runCode from '../../../../helpers/bareMetricsScript';
 
 function Account() {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [pagenum, setPageNum] = useState(1);
-  const [form, setFormValue] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    title: '',
-    location: '',
-    company: '',
-    company_size: '',
-    industry: '',
-  });
-  const dispatch = useDispatch();
-  const { company, client, industries, invoices } = useSelector(state => state.AccountReducer);
-  console.log('pagenum=>', pagenum);
-  console.log('client=>', client);
-
-  useEffect(() => {
-    const data = {
-      page: 1,
-    };
-    dispatch(getInvoices(data));
-  }, []);
-
-  const docs = useMemo(() => (invoices && invoices.data ? invoices.data : null), [invoices]);
-  const invoiceData = useMemo(() => (docs && docs.docs ? docs.docs : []), [docs]);
-  const activePage = useMemo(() => (docs && docs.page ? docs.page : 1), [docs]);
-  const onHandleSubmit = () => {
-    const formData = {
-      firstName: form.name,
-      email: form.email,
-      phone: form.phone,
-      title: form.title,
-      industry: form.industry,
-      companyName: form.company,
-      companySize: form.company_size,
-      companyLocation: form.location,
-    };
-    dispatch(updateClientInfo(formData));
-  };
-  const onEndDateChange = e => {
-    setEndDate(e);
-    const date = moment(e);
-    // const today = new Date();
-
-    if (date && startDate) {
-      if (date.isBefore(moment(startDate))) {
-        errorNotification('You can not set end date before start date');
-      } else {
-        const data = {
-          page: pagenum,
-          startDate: moment(startDate).format('YYYY-MM-DD'),
-          endDate: date.format('YYYY-MM-DD'),
-        };
-        dispatch(getInvoices(data));
-      }
-    } else {
-      const data = {
-        page: pagenum,
-        startDate: moment(date).subtract(30, 'days').format('YYYY-MM-DD'),
-        endDate: date.format('YYYY-MM-DD'),
-      };
-      dispatch(getInvoices(data));
-    }
-  };
-  const onStartDateChange = date => {
-    setStartDate(date);
-    if (date) {
-      if (endDate && moment(endDate).isBefore(date)) {
-        errorNotification('You can not set end date before start date');
-      } else {
-        const today = new Date();
-
-        const data = {
-          page: pagenum,
-          startDate: moment(date).format('YYYY-MM-DD'),
-          endDate: moment(today).format('YYYY-MM-DD'),
-        };
-        dispatch(getInvoices(data));
-      }
-    }
-  };
-
-  useEffect(() => {
-    dispatch(getCompanySize());
-    dispatch(getIndutries());
-    if (client && client.data && client.data) {
-      setFormValue({
-        name: client.data.firstName && client.data.firstName,
-        email: client.data.email && client.data.email,
-        phone: client.data.phone && client.data.phone,
-        title: client.data.title && client.data.title,
-        location: client.data.companyLocation && client.data.companyLocation,
-        company: client.data.companyName && client.data.companyName,
-        company_size: client.data.companySize && client.data.companySize,
-        industry: client.data.industry && client.data.industry,
-        notificationType: client.data.notificationType && client.data.notificationType,
-      });
-    }
-  }, [
-    client && client.data && client.data.firstName,
-    client && client.data && client.data.email,
-    client && client.data && client.data.phone,
-    client && client.data && client.data.title,
-    client && client.data && client.data.companyName,
-    client && client.data && client.data.companyLocation,
-    client && client.data && client.data.companySize,
-    client && client.data && client.data.industry,
-    client && client.data && client.data.notificationType,
-  ]);
-
-  const onHandleChange = e => {
-    setFormValue({
-      ...form,
-      [e.target.name]: e.target.value,
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+    const [pagenum, setPageNum] = useState(1);
+    const [form, setFormValue] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        title: '',
+        location: '',
+        company: '',
+        company_size: '',
+        industry: '',
     });
-  };
-  const onDownloadFullHistory = () => {
-    AccountService.downloadInvoice()
-      .then(r => {
-        const invoice = r.data;
-        downloadInvoiceHistory(invoice, 'invoice.csv');
-      })
-      .catch(e => console.log(e));
-  };
-  const handlePageChange = page => {
-    setPageNum(page);
-    const data = {
-      page,
+    const dispatch = useDispatch();
+    const {company, client, industries, invoices} = useSelector(state => state.AccountReducer);
+    console.log('pagenum=>', pagenum);
+    console.log('client=>', client);
+
+    useEffect(() => {
+        const data = {
+            page: 1,
+        };
+        dispatch(getInvoices(data));
+    }, []);
+
+    const docs = useMemo(() => (invoices && invoices.data ? invoices.data : null), [invoices]);
+    const invoiceData = useMemo(() => (docs && docs.docs ? docs.docs : []), [docs]);
+    const activePage = useMemo(() => (docs && docs.page ? docs.page : 1), [docs]);
+
+    const [browserCheckBox, setBrowserCheckBox] = React.useState(false);
+    const [emailCheckBox, setEmailCheckBox] = React.useState(false);
+
+    const onHandleSubmit = () => {
+        const formData = {
+            firstName: form.name,
+            email: form.email,
+            phone: form.phone,
+            title: form.title,
+            industry: form.industry,
+            companyName: form.company,
+            companySize: form.company_size,
+            companyLocation: form.location,
+        };
+        dispatch(updateClientInfo(formData));
     };
-    dispatch(getInvoices(data));
-  };
-  const onUpdateCheckbox = () => {
-    const browser = document.getElementById('browser');
-    const email = document.getElementById('email');
-    if (browser.checked && !email.checked) {
-      const browserChecked = true;
-      const data = {
-        notificationType: {
-          browser: browserChecked,
-          email: false,
-        },
-      };
-      dispatch(updateNotification(data));
-    } else if (email.checked && !browser.checked) {
-      const emailChecked = true;
-      const data = {
-        notificationType: {
-          browser: false,
-          email: emailChecked,
-        },
-      };
-      dispatch(updateNotification(data));
-    } else if (browser.checked && email.checked) {
-      const data = {
-        notificationType: {
-          browser: true,
-          email: true,
-        },
-      };
-      dispatch(updateNotification(data));
-    } else {
-      const data = {
-        notificationType: {
-          browser: false,
-          email: false,
-        },
-      };
-      dispatch(updateNotification(data));
-    }
-  };
+    const onEndDateChange = e => {
+        setEndDate(e);
+        const date = moment(e);
+        // const today = new Date();
 
-  /* const onCancelScriptRun = () => {
-    try {
-      window.barecancel.params = {
-        access_token_id: 'f3f1ef18-d0de-46c2-9038-31eb84adc7a4', // Your Cancellation API public key
-        customer_oid: client.data.stripeCustomerId, // The provider id of this customer. For example, the Stripe Customer ID
-        callback_send(data) {
-          console.log(165);
-          console.log(data);
-        },
-        callback_error(error) {
-          console.error(error);
-        },
-      };
-      dispatch(getClientInfo());
-    } catch (e) {
-      console.log(e);
-    }
-  }; */
-  const callBack = () => {
-    dispatch(getClientInfo());
-    AccountService.cancelSubscription().then(null).catch(null);
-  };
+        if (date && startDate) {
+            if (date.isBefore(moment(startDate))) {
+                errorNotification('You can not set end date before start date');
+            } else {
+                const data = {
+                    page: pagenum,
+                    startDate: moment(startDate).format('YYYY-MM-DD'),
+                    endDate: date.format('YYYY-MM-DD'),
+                };
+                dispatch(getInvoices(data));
+            }
+        } else {
+            const data = {
+                page: pagenum,
+                startDate: moment(date).subtract(30, 'days').format('YYYY-MM-DD'),
+                endDate: date.format('YYYY-MM-DD'),
+            };
+            dispatch(getInvoices(data));
+        }
+    };
+    const onStartDateChange = date => {
+        setStartDate(date);
+        if (date) {
+            if (endDate && moment(endDate).isBefore(date)) {
+                errorNotification('You can not set end date before start date');
+            } else {
+                const today = new Date();
 
-  console.log(moment().format('YYYY-MM-DD'));
-  return (
-    <div className="account-container">
-      <div className="account-left">
-        <div className="dashed-container">
-          <div className="absolute-position-title">USER DETAILS</div>
-          {/* <div className='success-message'>
+                const data = {
+                    page: pagenum,
+                    startDate: moment(date).format('YYYY-MM-DD'),
+                    endDate: moment(today).format('YYYY-MM-DD'),
+                };
+                dispatch(getInvoices(data));
+            }
+        }
+    };
+
+    useEffect(() => {
+        dispatch(getCompanySize());
+        dispatch(getIndutries());
+        if (client && client.data && client.data) {
+            setFormValue({
+                name: client.data.firstName && client.data.firstName,
+                email: client.data.email && client.data.email,
+                phone: client.data.phone && client.data.phone,
+                title: client.data.title && client.data.title,
+                location: client.data.companyLocation && client.data.companyLocation,
+                company: client.data.companyName && client.data.companyName,
+                company_size: client.data.companySize && client.data.companySize,
+                industry: client.data.industry && client.data.industry,
+                notificationType: client.data.notificationType && client.data.notificationType,
+            });
+
+            setEmailCheckBox(client && client.data.notificationType && client.data.notificationType.email)
+            setBrowserCheckBox(client && client.data.notificationType && client.data.notificationType.browser)
+        }
+    }, [
+        client && client.data && client.data.firstName,
+        client && client.data && client.data.email,
+        client && client.data && client.data.phone,
+        client && client.data && client.data.title,
+        client && client.data && client.data.companyName,
+        client && client.data && client.data.companyLocation,
+        client && client.data && client.data.companySize,
+        client && client.data && client.data.industry,
+        client && client.data && client.data.notificationType,
+    ]);
+
+    const onHandleChange = e => {
+        setFormValue({
+            ...form,
+            [e.target.name]: e.target.value,
+        });
+    };
+    const onDownloadFullHistory = () => {
+        AccountService.downloadInvoice()
+            .then(r => {
+                const invoice = r.data;
+                downloadInvoiceHistory(invoice, 'invoice.csv');
+            })
+            .catch(e => console.log(e));
+    };
+    const handlePageChange = page => {
+        setPageNum(page);
+        const data = {
+            page,
+        };
+        dispatch(getInvoices(data));
+    };
+    const onUpdateCheckbox = () => {
+        dispatch(updateNotification({
+            notificationType: {
+                browser: browserCheckBox,
+                email: emailCheckBox,
+            }
+        }));
+    };
+
+    console.log("*******************");
+    console.log(emailCheckBox);
+    console.log(browserCheckBox);
+    /* const onCancelScriptRun = () => {
+      try {
+        window.barecancel.params = {
+          access_token_id: 'f3f1ef18-d0de-46c2-9038-31eb84adc7a4', // Your Cancellation API public key
+          customer_oid: client.data.stripeCustomerId, // The provider id of this customer. For example, the Stripe Customer ID
+          callback_send(data) {
+            console.log(165);
+            console.log(data);
+          },
+          callback_error(error) {
+            console.error(error);
+          },
+        };
+        dispatch(getClientInfo());
+      } catch (e) {
+        console.log(e);
+      }
+    }; */
+    const callBack = () => {
+        dispatch(getClientInfo());
+        AccountService.cancelSubscription().then(null).catch(null);
+    };
+
+    console.log(moment().format('YYYY-MM-DD'));
+    return (
+        <div className="account-container">
+            <div className="account-left">
+                <div className="dashed-container">
+                    <div className="absolute-position-title">USER DETAILS</div>
+                    {/* <div className='success-message'>
             <span>!</span>
             <span>Account uploaded Successfully.</span>
           </div> */}
 
-          <div className="dashed-flex">
-            <div>
-              <span className="field-title">Name</span>
-              <input
-                className="common-input"
-                value={form.name || ''}
-                onChange={onHandleChange}
-                name="name"
-                placeholder="Michelle Obama"
-              />
-            </div>
-            <div>
-              <span className="field-title">Email</span>
-              <input
-                onChange={onHandleChange}
-                value={form.email || ''}
-                className="common-input"
-                name="email"
-                placeholder="michelle@abcmedia.com"
-              />
-            </div>
-            <div>
-              <span className="field-title">Phone</span>
-              <input
-                onChange={onHandleChange}
-                value={form.phone || ''}
-                className="common-input"
-                name="phone"
-                placeholder="(+61)545-789-963"
-              />
-            </div>
-          </div>
-          <div className="dashed-flex">
-            <div>
-              <span className="field-title">Title</span>
-              <input
-                onChange={onHandleChange}
-                value={form.title || ''}
-                className="common-input"
-                name="title"
-                placeholder="ABC News"
-              />
-            </div>
-            <div>
-              <span className="field-title">Location</span>
-              <input
-                onChange={onHandleChange}
-                value={form.location || ''}
-                name="location"
-                className="common-input"
-                placeholder="Melbourne"
-              />
-            </div>
-            <div />
-          </div>
-          <div className="dashed-flex">
-            <div>
-              <span className="field-title">Company</span>
-              <input
-                className="common-input"
-                onChange={onHandleChange}
-                value={form.company || ''}
-                name="company"
-                placeholder="ABC News"
-              />
-            </div>
-            <div>
-              <span className="field-title">Company Size</span>
-              <select
-                className="common-input"
-                value={form.company_size}
-                onChange={onHandleChange}
-                name="company_size"
-              >
-                {company &&
-                  company.data &&
-                  company.data.map(value => <option key={value}>{value}</option>)}
-              </select>
-            </div>
-            <div>
-              <span className="field-title">Industry</span>
-              <select
-                className="common-input"
-                value={form.industry}
-                onChange={onHandleChange}
-                name="industry"
-              >
-                {industries &&
-                  industries.data &&
-                  industries.data.map(value => <option key={value}>{value}</option>)}
-              </select>
-            </div>
-          </div>
-          <button type="button" onClick={onHandleSubmit} className="button success-button mt-20">
-            UPDATE
-          </button>
-        </div>
-        {/* <div className='dashed-container'>
+                    <div className="dashed-flex">
+                        <div>
+                            <span className="field-title">Name</span>
+                            <input
+                                className="common-input"
+                                value={form.name || ''}
+                                onChange={onHandleChange}
+                                name="name"
+                                placeholder="Michelle Obama"
+                            />
+                        </div>
+                        <div>
+                            <span className="field-title">Email</span>
+                            <input
+                                onChange={onHandleChange}
+                                value={form.email || ''}
+                                className="common-input"
+                                name="email"
+                                placeholder="michelle@abcmedia.com"
+                            />
+                        </div>
+                        <div>
+                            <span className="field-title">Phone</span>
+                            <input
+                                onChange={onHandleChange}
+                                value={form.phone || ''}
+                                className="common-input"
+                                name="phone"
+                                placeholder="(+61)545-789-963"
+                            />
+                        </div>
+                    </div>
+                    <div className="dashed-flex">
+                        <div>
+                            <span className="field-title">Title</span>
+                            <input
+                                onChange={onHandleChange}
+                                value={form.title || ''}
+                                className="common-input"
+                                name="title"
+                                placeholder="ABC News"
+                            />
+                        </div>
+                        <div>
+                            <span className="field-title">Location</span>
+                            <input
+                                onChange={onHandleChange}
+                                value={form.location || ''}
+                                name="location"
+                                className="common-input"
+                                placeholder="Melbourne"
+                            />
+                        </div>
+                        <div/>
+                    </div>
+                    <div className="dashed-flex">
+                        <div>
+                            <span className="field-title">Company</span>
+                            <input
+                                className="common-input"
+                                onChange={onHandleChange}
+                                value={form.company || ''}
+                                name="company"
+                                placeholder="ABC News"
+                            />
+                        </div>
+                        <div>
+                            <span className="field-title">Company Size</span>
+                            <select
+                                className="common-input"
+                                value={form.company_size}
+                                onChange={onHandleChange}
+                                name="company_size"
+                            >
+                                {company &&
+                                company.data &&
+                                company.data.map(value => <option key={value}>{value}</option>)}
+                            </select>
+                        </div>
+                        <div>
+                            <span className="field-title">Industry</span>
+                            <select
+                                className="common-input"
+                                value={form.industry}
+                                onChange={onHandleChange}
+                                name="industry"
+                            >
+                                {industries &&
+                                industries.data &&
+                                industries.data.map(value => <option key={value}>{value}</option>)}
+                            </select>
+                        </div>
+                    </div>
+                    <button type="button" onClick={onHandleSubmit} className="button success-button mt-20">
+                        UPDATE
+                    </button>
+                </div>
+                {/* <div className='dashed-container'>
           <div className='absolute-position-title'>CHANGED PASSWORD</div>
           <div className='success-message'>
             <span>!</span>
@@ -350,9 +329,9 @@ function Account() {
           </button>
         </div> */}
 
-        <div className="dashed-container notifications-container">
-          <div className="absolute-position-title">NOTIFICATIONS</div>
-          {/* <div className='notification--radio-button-row'>
+                <div className="dashed-container notifications-container">
+                    <div className="absolute-position-title">NOTIFICATIONS</div>
+                    {/* <div className='notification--radio-button-row'>
             <input type='radio' className='mr-10' />
             <span>Daily</span>
             <input type="radio" className="mr-10" />
@@ -364,121 +343,119 @@ function Account() {
             <input type="radio" className="mr-10" />
             <span>Custom</span>
           </div> */}
-          <div className="d-flex mt-20">
-            <input
-              id="browser"
-              type="checkbox"
-              value={
-                client.data && client.data.notificationType && client.data.notificationType.browser
-              }
-            />
-            <label htmlFor="browser" className="mr-20">
-              Browser
-            </label>
-            <input
-              id="email"
-              type="checkbox"
-              value={
-                client.data && client.data.notificationType && client.data.notificationType.email
-              }
-            />
-            <label htmlFor="email" className="mr-20">
-              Email
-            </label>
-          </div>
-          <button type="submit" className="button success-button mt-20" onClick={onUpdateCheckbox}>
-            UPDATE
-          </button>
-        </div>
-        <div className="dashed-container">
-          <div className="absolute-position-title">SUBSCRIPTION</div>
-          <div className="subscription-row">
-            <div className="subscription-status">
-              {client && client.data && client.data.isActive ? (
-                <>
-                  <div className="active" />
-                  Active
-                </>
-              ) : (
-                <>
-                  <div className="inactive" />
-                  In Active
-                </>
-              )}
+                    <div className="d-flex mt-20">
+                        <input
+                            id="browser"
+                            type="checkbox"
+                            checked={browserCheckBox}
+                            onChange={(e) => setBrowserCheckBox(e.target.checked)}
+                        />
+                        <label htmlFor="browser" className="mr-20">
+                            Browser
+                        </label>
+                        <input
+                            id="email"
+                            type="checkbox"
+                            checked={emailCheckBox}
+                            onChange={(e) => setEmailCheckBox(e.target.checked)}
+                        />
+                        <label htmlFor="email" className="mr-20">
+                            Email
+                        </label>
+                    </div>
+                    <button type="submit" className="button success-button mt-20" onClick={onUpdateCheckbox}>
+                        UPDATE
+                    </button>
+                </div>
+                <div className="dashed-container">
+                    <div className="absolute-position-title">SUBSCRIPTION</div>
+                    <div className="subscription-row">
+                        <div className="subscription-status">
+                            {client && client.data && client.data.isActive ? (
+                                <>
+                                    <div className="active"/>
+                                    Active
+                                </>
+                            ) : (
+                                <>
+                                    <div className="inactive"/>
+                                    In Active
+                                </>
+                            )}
+                        </div>
+
+                        <div className="d-flex">
+                            {/* <button type='button' className='mr-10'>Pause</button> */}
+
+                            <button
+                                type="button"
+                                id="barecancel-trigger"
+                                onClick={() => runCode(client.data.stripeCustomerId, callBack)}
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div className="account-right">
+                <div className="dashed-container">
+                    <div className="absolute-position-title">TRANSACTION HISTORY</div>
+                    <div className="common-subtitle mar-bott-5">Date Range</div>
+                    <div className="date-range-button-container">
+                        <div className="d-flex">
+                            <div className="date-picker">
+                                <DatePicker
+                                    placeholderText="From"
+                                    className="common-input"
+                                    selected={startDate}
+                                    maxDate={moment().toDate()}
+                                    onChange={onStartDateChange}
+                                />
+                            </div>
 
-            <div className="d-flex">
-              {/* <button type='button' className='mr-10'>Pause</button> */}
+                            <div className="date-picker">
+                                <DatePicker
+                                    placeholderText="To"
+                                    className="common-input"
+                                    selected={endDate}
+                                    minDate={startDate}
+                                    maxDate={moment().toDate()}
+                                    onChange={onEndDateChange}
+                                />
+                            </div>
+                        </div>
+                        <button type="button" className="button primary-button" onClick={onDownloadFullHistory}>
+                            DOWNLOAD FULL HISTORY
+                        </button>
+                    </div>
+                    <div className="transaction-history-table-row mt-20">
+                        <div>Date</div>
+                        <div>Amount</div>
+                        <div>Subscription Type</div>
+                        <div>Receipt No.</div>
+                        <div className="actions"/>
+                    </div>
 
-              <button
-                type="button"
-                id="barecancel-trigger"
-                onClick={() => runCode(client.data.stripeCustomerId, callBack)}
-              >
-                Cancel
-              </button>
+                    {invoiceData &&
+                    invoiceData.map((invoice, index) => (
+                        <InvoicesList key={index.toString()} invoice={invoice}/>
+                    ))}
+                    {invoices && invoices.data && invoices.data.docs && invoices.data.docs.length > 5 && (
+                        <Pagination
+                            activePage={activePage}
+                            itemsCountPerPage={10}
+                            totalItemsCount={invoices.total || 1}
+                            pageRangeDisplayed={3}
+                            onChange={handlePageChange}
+                            itemClass="page-item"
+                            linkClass="page-link"
+                        />
+                    )}
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div className="account-right">
-        <div className="dashed-container">
-          <div className="absolute-position-title">TRANSACTION HISTORY</div>
-          <div className="common-subtitle mar-bott-5">Date Range</div>
-          <div className="date-range-button-container">
-            <div className="d-flex">
-              <div className="date-picker">
-                <DatePicker
-                  placeholderText="From"
-                  className="common-input"
-                  selected={startDate}
-                  maxDate={moment().toDate()}
-                  onChange={onStartDateChange}
-                />
-              </div>
-
-              <div className="date-picker">
-                <DatePicker
-                  placeholderText="To"
-                  className="common-input"
-                  selected={endDate}
-                  minDate={startDate}
-                  maxDate={moment().toDate()}
-                  onChange={onEndDateChange}
-                />
-              </div>
-            </div>
-            <button type="button" className="button primary-button" onClick={onDownloadFullHistory}>
-              DOWNLOAD FULL HISTORY
-            </button>
-          </div>
-          <div className="transaction-history-table-row mt-20">
-            <div>Date</div>
-            <div>Amount</div>
-            <div>Subscription Type</div>
-            <div>Receipt No.</div>
-            <div className="actions" />
-          </div>
-
-          {invoiceData &&
-            invoiceData.map((invoice, index) => (
-              <InvoicesList key={index.toString()} invoice={invoice} />
-            ))}
-          {invoices && invoices.data && invoices.data.docs && invoices.data.docs.length > 5 && (
-            <Pagination
-              activePage={activePage}
-              itemsCountPerPage={10}
-              totalItemsCount={invoices.total || 1}
-              pageRangeDisplayed={3}
-              onChange={handlePageChange}
-              itemClass="page-item"
-              linkClass="page-link"
-            />
-          )}
-        </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default Account;
