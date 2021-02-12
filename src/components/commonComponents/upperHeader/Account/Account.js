@@ -72,16 +72,16 @@ function Account() {
       } else {
         const data = {
           page: pagenum,
-          startDate: moment(startDate).toISOString(),
-          endDate: date.toISOString(),
+          startDate: moment(startDate).format('YYYY-MM-DD'),
+          endDate: date.format('YYYY-MM-DD'),
         };
         dispatch(getInvoices(data));
       }
     } else {
       const data = {
         page: pagenum,
-        startDate: moment().subtract(30, 'days').toISOString(),
-        endDate: date.toISOString(),
+        startDate: moment(date).subtract(30, 'days').format('YYYY-MM-DD'),
+        endDate: date.format('YYYY-MM-DD'),
       };
       dispatch(getInvoices(data));
     }
@@ -96,8 +96,8 @@ function Account() {
 
         const data = {
           page: pagenum,
-          startDate: moment(date).toISOString(),
-          endDate: today.toISOString(),
+          startDate: moment(date).format('YYYY-MM-DD'),
+          endDate: moment(today).format('YYYY-MM-DD'),
         };
         dispatch(getInvoices(data));
       }
