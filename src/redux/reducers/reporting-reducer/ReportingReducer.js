@@ -14,7 +14,6 @@ export const activityBreakdownGraphData = (state = [], action) => {
 
 const initialPipelineValuesGraphData = {
   labels: [],
-  fillText: '$7,00,000',
   datasets: [
     {
       data: [],
@@ -28,7 +27,6 @@ export const pipelineValuesGraphData = (state = initialPipelineValuesGraphData, 
     case REPORT_REDUX_CONSTANT.GET_PIPELINE_VALUES_GRAPH_DATA:
       // eslint-disable-next-line no-case-declarations
       const filteredData = action.data;
-      console.log('filteredData->', filteredData);
       return {
         ...state,
         labels: filteredData.map(e => getLabelFromValues(e._id, chartPotentialMapperObject)),
