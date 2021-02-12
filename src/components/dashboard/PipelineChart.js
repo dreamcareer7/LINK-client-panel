@@ -116,7 +116,7 @@ const DoughnutChart = props => {
           },
           elements: {
             center: {
-              text: '$70,000',
+              text: '$700,000',
               color: '#07084B', // Default is #000000
               fontStyle: 'roboto', // Default is Arial
               sidePadding: 20, // Default is 20 (as a percentage)
