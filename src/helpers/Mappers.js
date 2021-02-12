@@ -14,3 +14,9 @@ export const potentialMapperObject = [
   { label: 'Likely', value: 'LIKELY' },
   { label: 'Not Likely', value: 'NOT_LIKELY' },
 ];
+
+export const chartPotentialMapperObject = [
+  { label: 'Very Likely Deals', value: 'VERY_LIKELY' },
+  { label: 'Likely Deals', value: 'LIKELY' },
+  { label: 'Not Likely Deals', value: 'NOT_LIKELY' },
+];

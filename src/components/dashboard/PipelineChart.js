@@ -2,18 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Doughnut } from 'react-chartjs-2';
 import { getLabelFromValues } from '../../helpers/chartHelper';
-import { potentialMapperObject } from '../../helpers/Mappers';
+import { chartPotentialMapperObject } from '../../helpers/Mappers';
 
 const DoughnutChart = props => {
   const { chartData } = props;
   // const filteredData = chartData.filter(e => e.total);
   const state = {
-    labels: chartData && chartData.map(e => getLabelFromValues(e._id, potentialMapperObject)),
+    labels: chartData && chartData.map(e => getLabelFromValues(e._id, chartPotentialMapperObject)),
     datasets: [
       {
         label: chartData && chartData.map(e => e._id),
         backgroundColor: ['#fcab50', '#ff696a', '#39c3bb'],
-        data: chartData && chartData.map(e => (e.totalDealValue ? `+${e.totalDealValue}` : '')),
+        data: chartData && chartData.map(e => (e.totalDealValue ? `${e.totalDealValue}` : '')),
       },
     ],
   };

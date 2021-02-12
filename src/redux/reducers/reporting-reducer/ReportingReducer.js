@@ -1,6 +1,6 @@
 import REPORT_REDUX_CONSTANT from '../../constants/reportReduxConstants/ReportReduxConstant';
 import { getLabelFromValues } from '../../../helpers/chartHelper';
-import { potentialMapperObject } from '../../../helpers/Mappers';
+import { chartPotentialMapperObject } from '../../../helpers/Mappers';
 
 export const activityBreakdownGraphData = (state = [], action) => {
   switch (action.type) {
@@ -31,7 +31,7 @@ export const pipelineValuesGraphData = (state = initialPipelineValuesGraphData, 
       console.log('filteredData->', filteredData);
       return {
         ...state,
-        labels: filteredData.map(e => getLabelFromValues(e._id, potentialMapperObject)),
+        labels: filteredData.map(e => getLabelFromValues(e._id, chartPotentialMapperObject)),
         values: filteredData.map(e => e.totalDealValue),
         datasets: [
           {
