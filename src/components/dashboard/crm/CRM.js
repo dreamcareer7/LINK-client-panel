@@ -110,7 +110,8 @@ function Crm() {
     } else {
       const data = {
         stage: stage || undefined,
-        likelyHoods: likelyHoods && likelyHoods.length ? [likelyHoods] : undefined,
+        likelyHoods:
+          likelyHoods && likelyHoods.length && likelyHoods !== 'select' ? [likelyHoods] : undefined,
         startDeal: startDeal || undefined,
         endDeal: endDeal || undefined,
         location: location && location.trim().length > 0 ? location : undefined,
