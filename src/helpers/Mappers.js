@@ -20,3 +20,10 @@ export const chartPotentialMapperObject = [
   { label: 'Likely Deals', value: 'LIKELY' },
   { label: 'Not Likely Deals', value: 'NOT_LIKELY' },
 ];
+
+export const subTypeObject = [
+  { label: 'Free Trial', value: 'FREE_TRIAL' },
+  { label: 'Monthly', value: 'MONTHLY' },
+  { label: 'Yearly', value: 'YEARLY' },
+  { label: 'Cancelled', value: 'CANCELLED' },
+];

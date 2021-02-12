@@ -5,6 +5,8 @@ import moment from 'moment';
 import eye from '../../../../assets/images/visibility.svg';
 import download from '../../../../assets/images/down-arrow.svg';
 import { errorNotification } from '../../../../constants/Toast';
+import { getLabelFromValues } from '../../../../helpers/chartHelper';
+import { subTypeObject } from '../../../../helpers/Mappers';
 
 function InvoicesList({ invoice }) {
   const { createdAt, totalAmount, receiptNumber, paymentId, downloadUrl, hostUrl } = invoice;
@@ -27,7 +29,7 @@ function InvoicesList({ invoice }) {
     <div className="transaction-history-table-row table-row">
       <div>{moment(createdAt).format('DD/MM/YYYY')}</div>
       <div>{`$${totalAmount}`}</div>
-      <div>{paymentId.planType}</div>
+      <div>{getLabelFromValues(paymentId.planType, subTypeObject)}</div>
       <div>{receiptNumber}</div>
       <div className="actions">
         <img src={eye} onClick={watchInvoice} />

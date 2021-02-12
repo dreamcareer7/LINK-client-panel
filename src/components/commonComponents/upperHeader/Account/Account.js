@@ -36,7 +36,7 @@ function Account() {
   const dispatch = useDispatch();
   const { company, client, industries, invoices } = useSelector(state => state.AccountReducer);
   console.log('pagenum=>', pagenum);
-  console.log('client=>', client.data.stripeCustomerId);
+  console.log('client=>', client);
 
   useEffect(() => {
     const data = {
@@ -117,6 +117,7 @@ function Account() {
         company: client.data.companyName && client.data.companyName,
         company_size: client.data.companySize && client.data.companySize,
         industry: client.data.industry && client.data.industry,
+        notificationType: client.data.notificationType && client.data.notificationType,
       });
     }
   }, [
@@ -128,6 +129,7 @@ function Account() {
     client && client.data && client.data.companyLocation,
     client && client.data && client.data.companySize,
     client && client.data && client.data.industry,
+    client && client.data && client.data.notificationType,
   ]);
 
   const onHandleChange = e => {
@@ -363,11 +365,23 @@ function Account() {
             <span>Custom</span>
           </div> */}
           <div className="d-flex mt-20">
-            <input id="browser" type="checkbox" />
+            <input
+              id="browser"
+              type="checkbox"
+              value={
+                client.data && client.data.notificationType && client.data.notificationType.browser
+              }
+            />
             <label htmlFor="browser" className="mr-20">
               Browser
             </label>
-            <input id="email" type="checkbox" />
+            <input
+              id="email"
+              type="checkbox"
+              value={
+                client.data && client.data.notificationType && client.data.notificationType.email
+              }
+            />
             <label htmlFor="email" className="mr-20">
               Email
             </label>
