@@ -4,19 +4,21 @@ import './PopUp.scss';
 import bell from '../../../assets/images/whoops-bell.svg';
 import { BASE_URL, LINKEDIN_CLIENT_ID } from '../../../constants/UrlConstant';
 import { popUpData } from '../../../redux/actions/popUpAction/PopUpAction';
+import { useOnClickOutside } from '../../../helpers/UseClickOutsideHook';
 
 const errorTitles = ['cookie_expired', 'extension_not_installed'];
 
 // eslint-disable-next-line react/prop-types
-function PopUp({ popupData }) {
-  console.log('popup');
-  // const data = useSelector(state => state.popUpReducer);
+const PopUp = ({ popupData, onClosePopup = () => {} }) => {
+  const dispatch = useDispatch();
+  const popupRef = React.useRef();
+
   const data = popupData;
-  console.log('data coming from popup props', data);
   const errorData = useSelector(state => state.clientErrorReducer);
   const findError = useMemo(() => errorData.find(e => e.title === data), [errorData, data]);
 
-  const dispatch = useDispatch();
+  useOnClickOutside(popupRef, onClosePopup);
+
   const openUrl = () => {
     dispatch(popUpData(null));
     if (findError.title === 'cookie_expired') {
@@ -31,12 +33,14 @@ function PopUp({ popupData }) {
       );
     }
   };
+
   if (!data) {
     return null;
   }
+
   return (
     <div className="pop-up-main-container">
-      <div id="pop-up" className="pop-up-container">
+      <div id="pop-up" ref={popupRef} className="pop-up-container">
         <div className="whoops-title">
           <img src={bell} />
           <span>WHOOPS!</span>
@@ -50,6 +54,6 @@ function PopUp({ popupData }) {
       </div>
     </div>
   );
-}
+};
 
 export default PopUp;

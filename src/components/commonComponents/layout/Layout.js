@@ -10,11 +10,19 @@ import { addFCMListner } from '../../../redux/actions/fcmAction/FcmAction';
 import { checkingCookiee } from '../../../redux/actions/cookieeAction/CookieeAction';
 import { getClientError } from '../../../redux/actions/clientErrorAction/ClientErrorAction';
 import PopUp from '../PopUp/PopUp';
+import POPUP_REDUX_CONSTANT from '../../../redux/constants/popUpConstant/PopUpConstant';
 
 const Layout = props => {
   const { children } = props;
-  const isLoggedIn = getAuthTokenLocalStorage();
   const dispatch = useDispatch();
+  const isLoggedIn = getAuthTokenLocalStorage();
+
+  const onClosePopup = () => {
+    dispatch({
+      type: POPUP_REDUX_CONSTANT.POP_UP_MESSAGE,
+      data: null,
+    });
+  };
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(addFCMListner());
@@ -26,7 +34,7 @@ const Layout = props => {
   if (!isLoggedIn) {
     return children;
   }
-  if (checkCookiee) return <PopUp popupData={checkCookiee} />;
+  if (checkCookiee) return <PopUp popupData={checkCookiee} onClosePopup={onClosePopup} />;
   if (is.not.chrome()) return <PopUp popupData="browser_not_supported" />;
   if (is.mobile()) return <PopUp popupData="device_not_desktop" />;
   return (
