@@ -10,6 +10,7 @@ import {
 } from '../../../redux/actions/ReportingActions/ReportingAction';
 
 Chart.defaults.global.defaultFontColor = 'white';
+Chart.defaults.global.defaultFontSize = 14;
 
 function Reporting() {
   const totalSalesOptions = {

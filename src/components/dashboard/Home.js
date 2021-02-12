@@ -18,6 +18,7 @@ import { addFCMToken, getClientInfo } from '../../redux/actions/accountAction/Ac
 import { requestFirebaseNotificationPermission } from '../../firebaseInit';
 
 Chart.defaults.global.defaultFontColor = 'white';
+Chart.defaults.global.defaultFontSize = 16;
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,6 @@ const Home = () => {
     requestFirebaseNotificationPermission()
       .then(firebaseToken => {
         // eslint-disable-next-line no-console
-        console.log(firebaseToken);
         localStorage.setItem('fcmToken', firebaseToken.toString());
         dispatch(addFCMToken(firebaseToken));
       })
