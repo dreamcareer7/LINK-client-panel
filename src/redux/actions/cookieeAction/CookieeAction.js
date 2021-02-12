@@ -1,6 +1,7 @@
 import { errorNotification } from '../../../constants/Toast';
 import COOKIEE_REDUX_CONSTANT from '../../constants/cookiee/CokkieeConstant';
 import CookieeServices from '../../../services/cookiee-service/CookieeServices';
+import POPUP_REDUX_CONSTANT from '../../constants/popUpConstant/PopUpConstant';
 
 // eslint-disable-next-line import/prefer-default-export
 export const checkingCookiee = () => {
@@ -15,13 +16,19 @@ export const checkingCookiee = () => {
         }
       })
       .catch(e => {
-        console.log(e);
-        if (e.response.data.status === 'ERROR') {
-          console.log('cookiee error', e.response.data.message);
-        } else if (e.response.data.status === undefined) {
+        if (e.response.data.status === undefined) {
           errorNotification('It seems like server is down, Please try after sometime.');
-        } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
+        }
+        if (e.response.data.status === 'ERROR') {
           errorNotification('Internal server error');
+        }
+        if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
+          errorNotification('Internal server error');
+        } else if (e.response.data.status === 'READ_ERROR_MESSAGE') {
+          dispatch({
+            type: POPUP_REDUX_CONSTANT.POP_UP_MESSAGE,
+            data: e.response.data.message,
+          });
         }
       });
   };
