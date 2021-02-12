@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './upperHeader.scss';
 import moment from 'moment';
 import search from '../../../assets/images/search.png';
-import user from '../../../assets/images/dummy-user.jpg';
+import loggeduser from '../../../assets/images/loggeduser.jpg';
 import datePicker from '../../../assets/images/datepicker.svg';
 import downArrow from '../../../assets/images/arrow_down.png';
 import logout from '../../../assets/images/logout.svg';
@@ -183,7 +183,7 @@ function UpperHeader() {
       </div>
       <div className="logout-area" onClick={onDropDownClick}>
         <div className="upper-header--rounded-block">
-          <img className="user-dp" src={userPic && userPic ? userPic : user} />
+          <img className="user-dp" src={userPic && userPic ? userPic : loggeduser} />
           <label className="label-area">{accountInfo.client.data.firstName}</label>
           <div className="down-arrow">
             <img src={downArrow} onClick={onDropDownClick} />

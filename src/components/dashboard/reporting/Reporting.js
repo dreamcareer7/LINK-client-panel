@@ -123,7 +123,7 @@ function Reporting() {
   const pipelineOptions = {
     value: ['$10000', '$20000', '$52000'],
     labels: {
-      render: '$value',
+      render: 'value',
       fontSize: 14,
       fontStyle: 'bold',
       fontColor: '#fff',
