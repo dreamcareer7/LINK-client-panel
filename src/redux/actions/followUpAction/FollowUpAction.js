@@ -1,6 +1,7 @@
 import FollowUpService from '../../../services/follow-up-service/FollowUpSevice';
 import { errorNotification, successNotification } from '../../../constants/Toast';
 import FOLLOW_UP_REDUX_CONSTANT from '../../constants/FollowUpReduxConstant';
+import POPUP_REDUX_CONSTANT from '../../constants/popUpConstant/PopUpConstant';
 
 export const getUpcomingActions = (page, data) => {
   return dispatch => {
@@ -65,8 +66,13 @@ export const syncWithLinkedIn = id => {
         }
       })
       .catch(e => {
-        console.log(e);
-        if (e.response.data.status === undefined) {
+        if (e.response.data.status === 'READ_ERROR_MESSAGE') {
+          console.log(e.response.data.message);
+          dispatch({
+            type: POPUP_REDUX_CONSTANT.POP_UP_MESSAGE,
+            data: e.response.data.message,
+          });
+        } else if (e.response.data.status === undefined) {
           errorNotification('It seems like server is down, Please try after sometime.');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
           errorNotification('Internal server error');
