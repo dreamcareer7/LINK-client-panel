@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import moment from 'moment';
 import './Reporting.scss';
 import { Bar, Chart, Doughnut, Line } from 'react-chartjs-2';
 import { useDispatch, useSelector } from 'react-redux';
@@ -203,16 +204,6 @@ function Reporting() {
   };
   const pipelineRef = useRef();
   const pipelineOptions = {
-    elements: {
-      center: {
-        text: '$700,000',
-        color: '#07084B', // Default is #000000
-        fontStyle: 'roboto', // Default is Arial
-        sidePadding: 20, // Default is 20 (as a percentage)
-        minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
-        lineHeight: 20, // Default is 25 (in px), used for when text wraps
-      },
-    },
     value: ['$10000', '$20000', '$52000'],
     labels: {
       render: 'value',
@@ -255,8 +246,8 @@ function Reporting() {
   const conversionsData = useSelector(({ conversationGraphData }) => conversationGraphData);
   const totalSalesData = useSelector(({ totalSalesGraphData }) => totalSalesGraphData);
 
-  const [startDate] = useState(new Date('2021-01-20T07:03:46.724').toISOString());
-  const [endDate] = useState(new Date('2021-01-31T07:03:46.724Z').toISOString());
+  const [startDate] = useState(moment().subtract(5, 'days').format('YYYY-MM-DD'));
+  const [endDate] = useState(moment().format('YYYY-MM-DD'));
 
   useEffect(() => {
     const data = {
