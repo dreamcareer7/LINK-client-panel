@@ -153,7 +153,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             <div className="common-subtitle">FOLLOW UP DATE</div>
             <DatePicker
               className="mt-5"
-              placeholderText="From"
+              placeholderText="Follow up date"
               value={followUpDate ? moment(followUpDate).format('MM/DD/YYYY') : followUpDate}
               dateFormat="MM/DD/YYYY"
               onChange={date => setFollowUpDate(date)}
