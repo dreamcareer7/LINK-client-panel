@@ -49,8 +49,8 @@ function UpperHeader() {
   const onSelectDateRange = e => {
     setDateRangeVal(e);
     const data = {
-      startDate: e.start.toISOString(),
-      endDate: e.end.toISOString(),
+      startDate: moment(e.start).format('YYYY-MM-DD'),
+      endDate: moment(e.end).format('YYYY-MM-DD'),
     };
 
     dispatch(getActivityBreakdownGraphData(data));
