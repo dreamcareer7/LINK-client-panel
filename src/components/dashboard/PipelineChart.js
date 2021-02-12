@@ -101,6 +101,8 @@ const DoughnutChart = props => {
       },
     ],
   };
+
+  console.log(state);
   return (
     <div>
       <Doughnut
@@ -112,16 +114,6 @@ const DoughnutChart = props => {
               fontStyle: 'bold',
               fontColor: '#fff',
               fontFamily: '"Lucida Console", Monaco, monospace',
-            },
-          },
-          elements: {
-            center: {
-              text: '$700,000',
-              color: '#07084B', // Default is #000000
-              fontStyle: 'roboto', // Default is Arial
-              sidePadding: 20, // Default is 20 (as a percentage)
-              minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
-              lineHeight: 20, // Default is 25 (in px), used for when text wraps
             },
           },
           legend: {
