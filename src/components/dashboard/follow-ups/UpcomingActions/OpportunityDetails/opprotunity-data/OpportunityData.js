@@ -65,7 +65,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             <div>
               <div>
                 <div className="common-subtitle client-name ellipsis">
-                  {firstName}{" "}{lastName}
+                  {firstName} {lastName}
                 </div>
                 <div className="common-content client-designation placeholder-color">
                   {title}
@@ -136,7 +136,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             />
           </div>
           <div>
-            <div className="common-subtitle">LIKELYHOODS</div>
+            <div className="common-subtitle">LIKELIHOODS</div>
             <select
               className="common-select common-select-white mt-5"
               value={potentialValue}

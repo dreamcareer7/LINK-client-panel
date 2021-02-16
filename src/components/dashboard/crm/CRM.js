@@ -347,7 +347,7 @@ function Crm() {
           </div>
         )}
         <div className="ml-10">
-          <div className="common-subtitle">LIKELY HOOD</div>
+          <div className="common-subtitle">LIKELIHOOD</div>
           <select
             className="common-select mt-5"
             value={likelyHoods}
