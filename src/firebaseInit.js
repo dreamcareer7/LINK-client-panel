@@ -9,7 +9,16 @@ const config = {
   messagingSenderId: '479390988709',
   appId: '1:479390988709:web:6e4ef40dba9176bf63504c',
   measurementId: 'G-VG42VFY5GG',
-};
+}; // <-- Dev
+// const config = {
+//     apiKey: "AIzaSyAnLbY-rRXvpnYuK0Ehk0BcCfeNwVZgOjw",
+//     authDomain: "jayla-firebase.firebaseapp.com",
+//     projectId: "jayla-firebase",
+//     storageBucket: "jayla-firebase.appspot.com",
+//     messagingSenderId: "395971076915",
+//     appId: "1:395971076915:web:e63cbe28f34703dbbe5446",
+//     measurementId: "G-NXY98HGT9V"
+// }; // <-- Production + Client Staging
 
 firebase.initializeApp(config);
 export const firebaseMessagingInstance = firebase.messaging();
