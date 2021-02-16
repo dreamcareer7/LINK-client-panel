@@ -119,7 +119,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
               <option value="IN_CONVERSION"> In Conversation</option>
               <option value="MEETING_BOOKED">Meeting Booked</option>
               <option value="FOLLOW_UP">Follow Up</option>
-              <option value="POTENTIAL_DEAL">Potential Deal</option>
+              <option value="POTENTIAL">Potential Deal</option>
               <option value="CLOSED">Closed</option>
               <option value="LOST">Lost</option>
             </select>

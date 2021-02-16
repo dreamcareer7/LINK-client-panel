@@ -3,7 +3,7 @@ import './ClientDetailsBlock.scss';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { getLabelFromValues } from '../../../../../helpers/chartHelper';
-import { stageMapperObject } from '../../../../../helpers/Mappers';
+import { stageMapperObjectForOne } from '../../../../../helpers/Mappers';
 
 /* import user from '../../../../../assets/images/dummy-user.jpg'; */
 
@@ -58,7 +58,7 @@ function ClientDetailsBlock({ opportunity }) {
           <div className="common-content placeholder-color ellipsis">{email}</div>
           <div className="content-title ellipsis">STAGE</div>
           <div className="common-content placeholder-color ellipsis">
-            {getLabelFromValues(stage, stageMapperObject)}
+            {getLabelFromValues(stage, stageMapperObjectForOne)}
           </div>
           <div className="content-title">FOLLOW-UP DATE</div>
           <div className="common-content placeholder-color ellipsis">

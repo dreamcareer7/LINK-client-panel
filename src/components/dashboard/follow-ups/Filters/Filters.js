@@ -27,7 +27,7 @@ const stageInitialState = {
     name: 'Follow Up',
     value: false,
   },
-  POTENTIAL_DEAL: {
+  POTENTIAL: {
     name: 'Potential Deal',
     value: false,
   },
