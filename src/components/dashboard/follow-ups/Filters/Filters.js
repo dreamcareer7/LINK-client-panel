@@ -220,7 +220,7 @@ function Filters() {
           )}
         </div>
 
-        <div className="common-title mt-4 mb-4">Potential</div>
+        <div className="common-title mt-4 mb-4">LIKELIHOODS</div>
         {Object.entries(potentialCheckBox).map(data => (
           <PotentialCheckBox key={Math.random()} onChange={onChangePotential} data={data} />
         ))}
