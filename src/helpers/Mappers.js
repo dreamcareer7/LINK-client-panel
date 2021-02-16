@@ -6,7 +6,7 @@ export const stageMapperObject = [
   { label: 'Follow-Up', value: 'FOLLOW_UP' },
   { label: 'Closed', value: 'CLOSED' },
   { label: 'Meeting Booked', value: 'MEETING_BOOKED' },
-  { label: 'Potential Deals', value: 'POTENTIAL_DEAL' },
+  { label: 'Potential Deals', value: 'POTENTIAL' },
 ];
 
 export const potentialMapperObject = [
