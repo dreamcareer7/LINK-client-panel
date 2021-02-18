@@ -403,7 +403,7 @@ function Crm() {
         )}
         {dataAdd && likelyHoods && likelyHoods !== 'select' && likelyHoods.trim().length > 0 && (
           <div>
-            <span>Likely Hood: </span>
+            <span>Likelihood: </span>
             {likelyHoodDropdownData
               .filter(e => e.value === likelyHoods && e.value !== 'select')
               .map(e => e.label)}
