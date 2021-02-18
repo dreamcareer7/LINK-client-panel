@@ -151,7 +151,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
           <div>
             <div className="common-subtitle">FOLLOW UP DATE</div>
             {stageValue === 'LOST' ? (
-              <DatePicker disableCalendar />
+              <DatePicker className="mt-5 cursor-not-allowed" disableCalendar readOnly placeholderText="Cannot set follow up date for lost stage" />
             ) : (
               <DatePicker
                 className="mt-5"

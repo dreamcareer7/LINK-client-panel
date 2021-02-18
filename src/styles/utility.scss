@@ -233,6 +233,10 @@ input::placeholder {
   cursor: pointer !important;
 }
 
+.cursor-not-allowed {
+  cursor: not-allowed!important;
+}
+
 .ellipsis {
   white-space: nowrap;
   text-overflow: ellipsis;
