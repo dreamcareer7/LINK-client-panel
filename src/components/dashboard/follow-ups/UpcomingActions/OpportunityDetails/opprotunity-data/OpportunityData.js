@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { updateOpportunity } from '../../../../../../redux/actions/followUpAction/FollowUpAction';
+import { errorNotification } from '../../../../../../constants/Toast';
 
 function OpportunityData({ opportunityData, goToLinkedIn }) {
   const {
@@ -38,6 +39,9 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
       setPotentialValue('');
     } else if (stageValue === 'SELECT') {
       setStageValue('');
+      // eslint-disable-next-line no-restricted-globals
+    } else if (isNaN(dealSizeVal) === true) {
+      errorNotification('Deal size should be number');
     } else {
       const data = {
         firstName,
@@ -133,6 +137,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
               onChange={e => {
                 setDealSizeVal(e.target.value);
               }}
+              maxLength={9}
             />
           </div>
           <div>
