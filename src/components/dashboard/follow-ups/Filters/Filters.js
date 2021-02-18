@@ -201,7 +201,7 @@ function Filters() {
           onChange={date => setEndDate(date)}
         />
 
-        <div className="common-title mt-4 mb-4">Stage</div>
+        <div className="common-title mt-4 mb-10">Stage</div>
         {Object.entries(stageCheckBox).map(data => (
           <FollowUpCheckBox key={Math.random()} onChange={onChangeCheckbox} data={data} />
         ))}
@@ -220,7 +220,7 @@ function Filters() {
           )}
         </div>
 
-        <div className="common-title mt-4 mb-4">LIKELIHOODS</div>
+        <div className="common-title mt-4 mb-10">LIKELIHOODS</div>
         {Object.entries(potentialCheckBox).map(data => (
           <PotentialCheckBox key={Math.random()} onChange={onChangePotential} data={data} />
         ))}
