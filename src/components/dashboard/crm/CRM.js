@@ -226,7 +226,7 @@ function Crm() {
   }, []);
 
   useEffect(() => {
-    setRangeState({ min: dealSizes?.minDealValue || 0, max: dealSizes?.maxDealValue || 10 });
+    setRangeState({ min: dealSizes?.minDealValue || 1, max: dealSizes?.maxDealValue || 999999999 });
   }, [dealSizes?.minDealValue, dealSizes?.maxDealValue]);
 
   const handleFilterChange = event => {
@@ -283,8 +283,8 @@ function Crm() {
       endDate: endDate || undefined,
     };
     setRangeState({
-      min: dealSizes?.minDealValue || 0,
-      max: dealSizes?.maxDealValue || 1000,
+      min: dealSizes?.minDealValue || 1,
+      max: dealSizes?.maxDealValue || 999999999,
     });
     dispatchFilter({
       type: CRM_FILTER_REDUCER_ACTIONS.RESET_STATE,
@@ -338,8 +338,8 @@ function Crm() {
           <div>
             <div className="common-subtitle">DEAL VALUE</div>
             <InputRange
-              minValue={dealSizes.minDealValue || 0}
-              maxValue={dealSizes.maxDealValue || 10}
+              minValue={dealSizes.minDealValue || 1}
+              maxValue={dealSizes.maxDealValue || 999999999}
               formatLabel={a => `$${a}`}
               onChange={handleRangePickerChange}
               value={rangeState}

@@ -104,12 +104,12 @@ function Filters() {
   );
 
   const [rangeState, setRangeState] = useState({
-    min: dealSizes?.minDealValue || 0,
-    max: dealSizes?.maxDealValue || 1000,
+    min: dealSizes?.minDealValue || 1,
+    max: dealSizes?.maxDealValue || 999999999,
   });
 
   useEffect(() => {
-    setRangeState({ min: dealSizes?.minDealValue || 0, max: dealSizes?.maxDealValue || 10 });
+    setRangeState({ min: dealSizes?.minDealValue || 1, max: dealSizes?.maxDealValue || 999999999 });
   }, [dealSizes?.minDealValue, dealSizes?.maxDealValue]);
 
   const handleRangePickerChange = value => {
@@ -154,8 +154,8 @@ function Filters() {
     setStageCheckBox({ type: 'RESET_STAGE_FILTER' });
     setPotentialCheckBox({ type: 'RESET_POTENTIAL_FILTER' });
     setRangeState({
-      min: dealSizes?.minDealValue || 0,
-      max: dealSizes?.maxDealValue || 0,
+      min: dealSizes?.minDealValue || 1,
+      max: dealSizes?.maxDealValue || 999999999,
     });
     const data = {
       stages: [],
@@ -211,8 +211,8 @@ function Filters() {
         <div className="filter-deal-range-container">
           {dealSizes && (
             <InputRange
-              minValue={dealSizes.minDealValue || 0}
-              maxValue={dealSizes.maxDealValue || 1000}
+              minValue={dealSizes.minDealValue || 1}
+              maxValue={dealSizes.maxDealValue || 999999999}
               formatLabel={a => `$${a}`}
               onChange={handleRangePickerChange}
               value={rangeState}
