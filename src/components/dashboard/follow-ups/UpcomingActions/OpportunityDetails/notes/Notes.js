@@ -63,8 +63,8 @@ function Notes() {
         <div className="common-subtitle">NOTES</div>
         {notes && notes.length ? (
           notes.map(noteData => (
-            <div key={noteData._id} className="note-block">
-              <span className="note">{noteData.text}</span>
+            <div key={noteData._id} className="note-block mt-10">
+              <span className="note note-container">{noteData.text}</span>
               <div className="note-action">
                 <img
                   alt="edit"
@@ -92,7 +92,7 @@ function Notes() {
       <div className="add-new-note-container">
         <div className="common-subtitle">{isEditNote ? 'EDIT NOTE' : 'ADD NEW NOTE'}</div>
         <div className="note-block mt-10">
-          <textarea className="note" value={newNote} onChange={onChaneNoteText} />
+          <textarea className="note w-100" value={newNote} onChange={onChaneNoteText} />
         </div>
         <button
           type="button"

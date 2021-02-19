@@ -2,8 +2,8 @@
 
 .opportunity-detail-block {
   input, select {
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 12px;
+    font-weight: 400;
     color: $placeholder-color;
   }
 }
@@ -84,6 +84,7 @@
   position: relative;
   display: flex;
   align-items: flex-start;
+  justify-content: space-between;
   margin-bottom: 20px;
   padding: 7px 10px;
   color: $placeholder-color;
@@ -92,14 +93,21 @@
 }
 
 .note {
-  width: calc(100% - 40px);
+  width: calc(100% - 45px);
   padding: 5px 15px 25px 5px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
+  color: $placeholder-color;
+  word-break: break-all;
   outline: none;
   border: none;
   resize: none;
-  word-break: break-all;
+}
+
+.note-container {
+  max-height: 51px;
+  margin-bottom: 30px;
+  overflow-y: auto;
 }
 
 .note-time-stamp, .chat-time-stamp {
