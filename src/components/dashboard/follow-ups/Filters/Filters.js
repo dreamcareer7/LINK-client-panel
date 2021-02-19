@@ -192,6 +192,8 @@ function Filters() {
           placeholderText="From"
           selected={startDate}
           onChange={date => setStartDate(date)}
+          onFocus={(e) => {e.target.placeholder = ""}}
+          onBlur={(e) => {e.target.placeholder = "From"}}
         />
         <DatePicker
           className="mt-10"
@@ -199,6 +201,8 @@ function Filters() {
           // dateFormat="MM-DD-YYYY"
           selected={endDate}
           onChange={date => setEndDate(date)}
+          onFocus={(e) => {e.target.placeholder = ""}}
+          onBlur={(e) => {e.target.placeholder = "To"}}
         />
 
         <div className="common-title mt-4 mb-10">Stage</div>
