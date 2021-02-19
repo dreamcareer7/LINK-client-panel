@@ -30,6 +30,8 @@
 }
 
 .search-block {
+  position: relative;
+  margin-right: 20px;
 
   input {
     width: calc(100% - 55px);
@@ -39,7 +41,7 @@
     outline: none;
   }
 
-  button {
+  .search-icon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -49,7 +51,6 @@
     outline: none;
     border: none;
     border-radius: 50%;
-    cursor: pointer;
 
     img {
       height: 16px;
@@ -74,7 +75,8 @@
   img {
     height: 28px;
   }
-  .notify-dot{
+
+  .notify-dot {
     width: 10px;
     height: 10px;
     background-color: #19A8FF;
@@ -92,12 +94,15 @@
   object-fit: cover;
   border-radius: 50%;
 }
-.date-picker-btn{
-  background-color:white !important;
+
+.date-picker-btn {
+  background-color: white !important;
 }
-.date-picker-btn:focus{
+
+.date-picker-btn:focus {
   outline: none;
 }
+
 .down-arrow {
   position: relative;
   display: inline-block;
@@ -106,18 +111,19 @@
     width: 16px;
     cursor: pointer;
   }
-  .date-range-img
-  {
-   height: 30px;
-  width: 30px;
+
+  .date-range-img {
+    height: 30px;
+    width: 30px;
   }
 }
 
-.logout-area{
+.logout-area {
   position: relative;
   display: inline-block;
   cursor: pointer;
 }
+
 /* .logout-area:hover .user-dropdown{
   display: block;
 } */
@@ -129,7 +135,7 @@
   min-width: 190px;
   background-color: #ffffff;
   border-radius: 5px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   z-index: 1;
 }
@@ -137,7 +143,7 @@
 /* .down-arrow:hover .user-dropdown {
   display: block;
 } */
-.label-area{
+.label-area {
   cursor: pointer;
 }
 
@@ -163,7 +169,8 @@
 .dropdown-option:hover {
   background-color: $secondary-variant-color;
 }
-.open-search-area{
+
+.open-search-area {
   display: flex;
   align-items: center;
   padding: 10px 16px;
@@ -172,25 +179,28 @@
   color: $primary-font-color;
   cursor: pointer;
 }
-.search-area{
+
+.search-area {
   display: block;
   position: absolute;
-  top: 30px;
-  right: -23px;
+  top: 45px;
+  right: 10px;
   min-width: 190px;
   background-color: #ffffff;
   border-radius: 5px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   z-index: 1;
 }
-.date-range-picker-layout-outer{
+
+.date-range-picker-layout-outer {
   z-index: 1;
   position: relative;
   margin: -20vh;
 
 }
-.date-range-picker-layout-inner{
+
+.date-range-picker-layout-inner {
   z-index: 999;
   position: absolute;
   background: white;

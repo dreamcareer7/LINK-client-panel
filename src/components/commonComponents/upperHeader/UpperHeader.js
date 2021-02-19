@@ -136,6 +136,12 @@ function UpperHeader() {
   const selectDateRange = () => {
     setDateRangePicker(!dateRangePicker);
   };
+  const [searchStart, setSearchStart] = useState(false);
+  const searchBlurEvent = (e) => {
+    setSearchText('');
+    e.target.placeholder = "Search Opportunity";
+    setSearchStart(!e);
+  }
   return (
     <div className="upper-header-block">
       {match && match.isExact && (
@@ -163,19 +169,25 @@ function UpperHeader() {
       )}
 
       <div className="upper-header--rounded-block search-block">
-        <input placeholder="Search Opportunity" value={searchText} onChange={onSearch} />
-        <button type="button">
-          <div className="down-arrow">
-            <img src={search} />{' '}
-            <div className="search-area">
-              {filtered.map(e => (
-                <div className="open-search-area" onClick={() => onClickSearchedVal(e._id)}>
-                  {e.firstName} {e.lastName}
-                </div>
-              ))}
-            </div>
+        <input placeholder="Search Opportunity" value={searchText} onChange={onSearch}
+               onKeyDown={setSearchStart}
+               onFocus={(e) => {
+                 e.target.placeholder = ""
+               }}
+               onBlur={searchBlurEvent}
+        />
+        <div className="search-icon">
+          <img src={search}/>
+          <div className="search-area">
+            {searchStart && filtered.length === 0 &&
+            <div className="open-search-area">No such opportunity found.</div>}
+            {filtered.map(e => (
+                    <div className="open-search-area" onClick={() => onClickSearchedVal(e._id)}>
+                      {e.firstName} {e.lastName}
+                    </div>
+            ))}
           </div>
-        </button>
+        </div>
       </div>
       <div title="Notifications" className="notification-container" onClick={onClickNotification}>
         <img src={notification} />
