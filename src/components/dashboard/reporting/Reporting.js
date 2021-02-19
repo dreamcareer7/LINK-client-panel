@@ -204,6 +204,12 @@ function Reporting() {
   };
   const pipelineRef = useRef();
   const pipelineOptions = {
+    elements: {
+      center: {
+        text: 'Hello there',
+        fontColor: 'red'
+      }
+    },
     value: ['$10000', '$20000', '$52000'],
     labels: {
       render: 'value',
@@ -222,7 +228,7 @@ function Reporting() {
         pointStyle: 'point',
         boxWidth: 30,
         boxHeight: 2,
-        fontSize: 15,
+        fontSize: 14,
         padding: 12,
         box: {
           height: 2,

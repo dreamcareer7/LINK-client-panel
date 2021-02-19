@@ -12,13 +12,14 @@ const DashboardChart = props => {
       {
         label: 'Rainfall',
         backgroundColor: [
+          '#4282FE',
+          '#d53711',
           '#f79400',
           '#43c643',
           '#950094',
-          '#0096c0',
+          '#0097C1',
           '#d64374',
-          '#3264c8',
-          '#d53711',
+
         ],
         data: chartData && chartData.map(e => (e.total !== 0 ? e.total : '')),
       },
@@ -35,9 +36,9 @@ const DashboardChart = props => {
             position: 'left',
             align: 'start',
             labels: {
-              fontSize: 15,
+              fontSize: 14,
               padding: 12,
-              fontWeight: 700,
+              fontWeight: 'bolder',
               fontColor: '#464646',
             },
           },

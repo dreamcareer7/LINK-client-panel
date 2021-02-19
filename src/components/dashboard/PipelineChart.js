@@ -96,18 +96,21 @@ const DoughnutChart = props => {
     datasets: [
       {
         label: chartData && chartData.map(e => e._id),
-        backgroundColor: ['#fcab50', '#ff696a', '#39c3bb'],
-        data: chartData && chartData.map(e => (e.totalDealValue ? e.totalDealValue : '')),
+        backgroundColor: ['#39c3bb', '#fcab50', '#ff696a'],
+        data: chartData && chartData.map(e => (e.total ? e.total : '')),
       },
     ],
   };
-
-  console.log(state);
   return (
     <div>
       <Doughnut
         data={state}
         options={{
+          elements: {
+            center: {
+              text: 'Hello'
+            }
+          },
           plugins: {
             labels: {
               render: 'value',
@@ -132,7 +135,7 @@ const DoughnutChart = props => {
             align: 'start',
             fontStyle: 'bold',
             labels: {
-              fontSize: 15,
+              fontSize: 14,
               padding: 12,
               fontColor: '#464646',
             },
