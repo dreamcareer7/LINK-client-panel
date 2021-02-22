@@ -33,6 +33,7 @@ function ClientDetailsBlock({ opportunity }) {
         likelyHood,
         likelyHoodClassMapper
       )} ${!likelyHood && 'blue'}`}
+      title="Click to view details"
     >
       <div className="status-color" />
       <div className="common-block--detail-container">
