@@ -371,3 +371,10 @@ input::placeholder {
   border-radius: 7px;
 }
 /* common block ends here */
+
+.deal-value-container {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+  font-size: 14px;
+}

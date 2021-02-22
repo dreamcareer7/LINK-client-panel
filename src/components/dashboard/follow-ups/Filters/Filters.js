@@ -192,8 +192,12 @@ function Filters() {
           placeholderText="From"
           selected={startDate}
           onChange={date => setStartDate(date)}
-          onFocus={(e) => {e.target.placeholder = ""}}
-          onBlur={(e) => {e.target.placeholder = "From"}}
+          onFocus={e => {
+            e.target.placeholder = '';
+          }}
+          onBlur={e => {
+            e.target.placeholder = 'From';
+          }}
         />
         <DatePicker
           className="mt-10"
@@ -201,8 +205,12 @@ function Filters() {
           // dateFormat="MM-DD-YYYY"
           selected={endDate}
           onChange={date => setEndDate(date)}
-          onFocus={(e) => {e.target.placeholder = ""}}
-          onBlur={(e) => {e.target.placeholder = "To"}}
+          onFocus={e => {
+            e.target.placeholder = '';
+          }}
+          onBlur={e => {
+            e.target.placeholder = 'To';
+          }}
         />
 
         <div className="common-title mt-4 mb-10">Stage</div>
@@ -210,21 +218,31 @@ function Filters() {
           <FollowUpCheckBox key={Math.random()} onChange={onChangeCheckbox} data={data} />
         ))}
 
-        <div className="common-title mt-3 mb-2">Deal Size</div>
+        <div className="common-title mt-4 mb-2">Deal Size</div>
 
         <div className="filter-deal-range-container">
           {dealSizes && (
-            <InputRange
-              minValue={dealSizes.minDealValue || 1}
-              maxValue={dealSizes.maxDealValue || 999999999}
-              formatLabel={a => `$${a}`}
-              onChange={handleRangePickerChange}
-              value={rangeState}
-            />
+            <>
+              <InputRange
+                minValue={dealSizes.minDealValue || 1}
+                maxValue={dealSizes.maxDealValue || 999999999}
+                formatLabel={a => `$${a}`}
+                onChange={handleRangePickerChange}
+                value={rangeState}
+              />
+              <div className="deal-value-container">
+                <span className="common-subtitle mr-5">Min-value: </span>
+                <span>{rangeState.min}</span>
+              </div>
+              <div className="deal-value-container">
+                <span className="common-subtitle mr-5">Max-value: </span>
+                <span>{rangeState.max}</span>
+              </div>
+            </>
           )}
         </div>
 
-        <div className="common-title mt-4 mb-10">LIKELIHOODS</div>
+        <div className="common-title mt-4 mb-10">Likelihoods</div>
         {Object.entries(potentialCheckBox).map(data => (
           <PotentialCheckBox key={Math.random()} onChange={onChangePotential} data={data} />
         ))}
