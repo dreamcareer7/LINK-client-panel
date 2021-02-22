@@ -40,7 +40,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
     } else if (stageValue === 'SELECT') {
       setStageValue('');
       // eslint-disable-next-line no-restricted-globals
-    } else if (isNaN(dealSizeVal) === true) {
+    } else if (dealSizeVal && isNaN(dealSizeVal) === true) {
       errorNotification('Deal size should be number');
     } else {
       const data = {
@@ -155,14 +155,14 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
           </div>
           <div>
             <div className="common-subtitle">FOLLOW UP DATE</div>
-              <DatePicker
-                className="mt-5"
-                placeholderText="Follow up date"
-                value={followUpDate ? moment(followUpDate).format('MM/DD/YYYY') : followUpDate}
-                dateFormat="MM/DD/YYYY"
-                minDate={new Date()}
-                onChange={date => setFollowUpDate(date)}
-              />
+            <DatePicker
+              className="mt-5"
+              placeholderText="Follow up date"
+              value={followUpDate ? moment(followUpDate).format('MM/DD/YYYY') : followUpDate}
+              dateFormat="MM/DD/YYYY"
+              minDate={new Date()}
+              onChange={date => setFollowUpDate(date)}
+            />
           </div>
         </div>
         <button
