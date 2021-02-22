@@ -378,3 +378,39 @@ input::placeholder {
   margin: 5px 0;
   font-size: 14px;
 }
+
+/* pagination changes */
+.pagination {
+  padding-top: 20px!important;
+  font-weight: 500!important;
+}
+
+.pagination > a, .pagination > .active > a
+{
+  color: $primary-color !Important;
+  background-color: $secondary-color !Important;
+  border: none !Important;
+  border-radius: 50% !important;
+  outline: none!important;
+}
+.page-link {
+  margin: 0 5px!important;
+  color: $primary-font-color !Important;
+  border: none!important;
+  border-radius: 50% !important;
+}
+.page-link:hover {
+  border-radius: 50% !important;
+}
+.page-link:focus {
+  box-shadow: none!important;
+}
+
+.page-item.disabled {
+  cursor: not-allowed!important;
+}
+
+.page-item.disabled .page-link {
+  color: $placeholder-color!important;
+  cursor: not-allowed!important;
+}
