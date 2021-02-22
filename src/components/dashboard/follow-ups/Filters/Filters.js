@@ -230,14 +230,14 @@ function Filters() {
                 onChange={handleRangePickerChange}
                 value={rangeState}
               />
-              <div className="deal-value-container">
+              {/* <div className="deal-value-container">
                 <span className="common-subtitle mr-5">Min-value: </span>
                 <span>{rangeState.min}</span>
               </div>
               <div className="deal-value-container">
                 <span className="common-subtitle mr-5">Max-value: </span>
                 <span>{rangeState.max}</span>
-              </div>
+              </div> */}
             </>
           )}
         </div>
