@@ -137,11 +137,11 @@ function UpperHeader() {
     setDateRangePicker(!dateRangePicker);
   };
   const [searchStart, setSearchStart] = useState(false);
-  const searchBlurEvent = (e) => {
+  const searchBlurEvent = e => {
     setSearchText('');
-    e.target.placeholder = "Search Opportunity";
+    e.target.placeholder = 'Search Opportunity';
     setSearchStart(!e);
-  }
+  };
   return (
     <div className="upper-header-block">
       {match && match.isExact && (
@@ -169,22 +169,26 @@ function UpperHeader() {
       )}
 
       <div className="upper-header--rounded-block search-block">
-        <input placeholder="Search Opportunity" value={searchText} onChange={onSearch}
-               onKeyDown={setSearchStart}
-               onFocus={(e) => {
-                 e.target.placeholder = ""
-               }}
-               onBlur={searchBlurEvent}
+        <input
+          placeholder="Search Opportunity"
+          value={searchText}
+          onChange={onSearch}
+          onKeyDown={setSearchStart}
+          onFocus={e => {
+            e.target.placeholder = '';
+          }}
+          onBlur={searchBlurEvent}
         />
         <div className="search-icon">
-          <img src={search}/>
+          <img src={search} />
           <div className="search-area">
-            {searchStart && filtered.length === 0 &&
-            <div className="open-search-area">No such opportunity found</div>}
+            {searchStart && filtered.length === 0 && (
+              <div className="open-search-area">No such opportunity found</div>
+            )}
             {filtered.map(e => (
-                    <div className="open-search-area" onClick={() => onClickSearchedVal(e._id)}>
-                      {e.firstName} {e.lastName}
-                    </div>
+              <div className="open-search-area" onClick={() => onClickSearchedVal(e._id)}>
+                {e.firstName} {e.lastName}
+              </div>
             ))}
           </div>
         </div>
@@ -193,8 +197,11 @@ function UpperHeader() {
         <img src={notification} />
         {notificationData.length > 0 && <div className="notify-dot" />}
       </div>
-      <div className="logout-area" onClick={onDropDownClick}>
-        <div className="upper-header--rounded-block">
+      <div
+        className={`logout-area ${dropDown && 'user-settings-container'}`}
+        onClick={onDropDownClick}
+      >
+        <div className="upper-header--rounded-block user-settings">
           <img className="user-dp" src={userPic && userPic ? userPic : loggeduser} />
           <label className="label-area">{accountInfo.client.data.firstName}</label>
           <div className="down-arrow">

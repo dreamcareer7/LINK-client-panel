@@ -4,7 +4,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 7px 35px;
+  padding: 7px 35px 0 35px;
   width: 100%;
   background-color: $secondary-variant-color;
 }
@@ -12,10 +12,10 @@
 .upper-header--rounded-block {
   display: flex;
   align-items: center;
-  height: 100%;
+  height: 46px;
   width: 20%;
   min-width: 218px; //180
-  max-width: 200px;
+  margin-bottom: 7px;
   padding: 3px;
   font-size: 12px;
   font-weight: 500;
@@ -31,7 +31,6 @@
 
 .search-block {
   position: relative;
-  margin-right: 20px;
 
   input {
     width: calc(100% - 55px);
@@ -95,6 +94,10 @@
   border-radius: 50%;
 }
 
+.user-settings {
+  margin-bottom: 7px;
+}
+
 .date-picker-btn {
   background-color: white !important;
   border: none;
@@ -125,15 +128,22 @@
   cursor: pointer;
 }
 
+.user-settings-container {
+  margin-bottom: 0;
+  background-color: white;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
 /* .logout-area:hover .user-dropdown{
   display: block;
 } */
 .user-dropdown {
   display: block;
   position: absolute;
-  top: 30px;
-  right: -23px;
-  min-width: 190px;
+  top: 40px;
+  right: -17px;
+  min-width: 218px;
   background-color: #ffffff;
   border-radius: 5px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
