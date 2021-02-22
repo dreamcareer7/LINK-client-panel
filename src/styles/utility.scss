@@ -390,17 +390,17 @@ input::placeholder {
   color: $primary-color !Important;
   background-color: $secondary-color !Important;
   border: none !Important;
-  border-radius: 50% !important;
+  border-radius: 10px !important;
   outline: none!important;
 }
 .page-link {
   margin: 0 5px!important;
   color: $primary-font-color !Important;
   border: none!important;
-  border-radius: 50% !important;
+  border-radius: 10px !important;
 }
 .page-link:hover {
-  border-radius: 50% !important;
+  border-radius: 10px !important;
 }
 .page-link:focus {
   box-shadow: none!important;
