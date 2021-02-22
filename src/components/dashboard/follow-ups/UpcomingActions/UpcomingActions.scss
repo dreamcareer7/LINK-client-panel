@@ -10,19 +10,34 @@
 .client-detail-page{
    min-height: 80vh;
 }
-.pagination > a
-{
-  color: $primary-font-color !Important;
-  background-color: #ebebeb !Important;
-  border: solid 1px #ebebeb !Important;
-}
-.pagination > .active > a
-{
-  color: #ebebeb !Important;
-  background-color: $primary-font-color !Important;
-  border: solid 1px $primary-font-color !Important;
-}
-.page-link {
-  color: $primary-font-color !Important;
+
+.pagination {
+  padding-top: 20px!important;
+  font-weight: 500!important;
 }
 
+.pagination > a, .pagination > .active > a
+{
+  color: $primary-color !Important;
+  background-color: $secondary-color !Important;
+  border: none !Important;
+  border-radius: 50% !important;
+  outline: none!important;
+}
+.page-link {
+  margin: 0 5px!important;
+  color: $primary-font-color !Important;
+  border: none!important;
+  border-radius: 50% !important;
+}
+.page-link:hover {
+  border-radius: 50% !important;
+}
+.page-link:focus {
+  box-shadow: none!important;
+}
+
+.page-item.disabled .page-link {
+  color: $placeholder-color!important;
+  cursor: not-allowed!important;
+}
