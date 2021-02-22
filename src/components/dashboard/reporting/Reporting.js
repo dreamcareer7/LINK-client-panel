@@ -154,6 +154,11 @@ function Reporting() {
     legend: {
       display: false,
     },
+    layout: {
+      padding: {
+        top: 30,
+      },
+    },
     tooltips: {
       wrap: true,
       callbacks: {

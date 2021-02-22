@@ -156,6 +156,11 @@ function Crm() {
 
   const options = {
     backgroundColor: '#f9f9f9',
+    layout: {
+      padding: {
+        top: 30,
+      },
+    },
     legend: {
       display: false,
     },
@@ -304,7 +309,7 @@ function Crm() {
     <>
       <div className="common-title">SALES OPPORTUNITIES</div>
       <div className="graph-container">
-        <Bar options={options} data={crmsChartState} height={80} />
+        <Bar options={options} id="sales-opportunities" data={crmsChartState} height={80} />
       </div>
       <div className="filter-container">
         <div>
