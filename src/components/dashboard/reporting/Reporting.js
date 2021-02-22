@@ -204,12 +204,12 @@ function Reporting() {
   };
   const pipelineRef = useRef();
   const pipelineOptions = {
-    elements: {
+    /* elements: {
       center: {
-        text: 'Hello there',
-        fontColor: 'red'
-      }
-    },
+        text: '$7,00,000',
+        fontColor: 'red',
+      },
+    }, */
     value: ['$10000', '$20000', '$52000'],
     labels: {
       render: 'value',

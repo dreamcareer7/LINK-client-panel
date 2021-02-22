@@ -106,11 +106,11 @@ const DoughnutChart = props => {
       <Doughnut
         data={state}
         options={{
-          elements: {
+          /* elements: {
             center: {
-              text: 'Hello'
-            }
-          },
+              text: '$7,00,000',
+            },
+          }, */
           plugins: {
             labels: {
               render: 'value',

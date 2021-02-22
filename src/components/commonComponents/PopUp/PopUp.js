@@ -37,9 +37,15 @@ const PopUp = ({ popupData, onClosePopup = () => {} }) => {
   if (!data) {
     return null;
   }
-
+  console.log(popupData);
   return (
-    <div className="pop-up-main-container">
+    <div
+      className={`${
+        popupData === 'browser_not_supported' || popupData === 'device_not_desktop'
+          ? 'pop-up-not-chrome-container'
+          : 'pop-up-main-container'
+      }`}
+    >
       <div id="pop-up" ref={popupRef} className="pop-up-container">
         <div className="whoops-title">
           <img src={bell} />

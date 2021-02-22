@@ -11,6 +11,17 @@
   height: 100%;
   backdrop-filter: blur(2px);
 }
+.pop-up-not-chrome-container{
+  display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #ffffff;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(2px);
+}
 
 .pop-up-container {
   display: flex;
