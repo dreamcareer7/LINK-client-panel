@@ -101,7 +101,7 @@ function Reporting() {
     legend: {
       display: false,
     },
-    elements: { point: { radius: 0 } },
+    /* elements: { point: { radius: 0 } }, */
     scales: {
       xAxes: [
         {
@@ -165,7 +165,7 @@ function Reporting() {
         },
       },
     },
-    elements: { point: { radius: 0 } },
+    /* elements: { point: { radius: 0 } }, */
     scales: {
       xAxes: [
         {
@@ -206,7 +206,7 @@ function Reporting() {
   const pipelineOptions = {
     /* elements: {
       center: {
-        text: '$7,00,000',
+        text: '1',
         fontColor: 'red',
       },
     }, */

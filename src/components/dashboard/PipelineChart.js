@@ -108,7 +108,11 @@ const DoughnutChart = props => {
         options={{
           /* elements: {
             center: {
-              text: '$7,00,000',
+              text: `${total} || No Value`,
+              color: '#07084B', // Default is #000000
+              fontStyle: 'roboto', // Default is Arial
+              fontSize: 10, // Default is 20 (in px), set to false and text will not wrap.
+              lineHeight: 1, // Default is 25 (in px), used for when text wraps
             },
           }, */
           plugins: {
@@ -119,16 +123,6 @@ const DoughnutChart = props => {
               fontFamily: '"Lucida Console", Monaco, monospace',
             },
           },
-          /* elements: {
-            center: {
-              text: '$700,000',
-              color: '#07084B', // Default is #000000
-              fontStyle: 'roboto', // Default is Arial
-              sidePadding: 20, // Default is 20 (as a percentage)
-              minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
-              lineHeight: 20, // Default is 25 (in px), used for when text wraps
-            },
-          }, */
           legend: {
             display: true,
             position: 'left',
