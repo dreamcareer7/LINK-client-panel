@@ -30,6 +30,7 @@ const Layout = props => {
       dispatch(getClientError());
     }
   }, []);
+
   const checkCookiee = useSelector(state => state.popUpReducer);
   if (!isLoggedIn) {
     return children;

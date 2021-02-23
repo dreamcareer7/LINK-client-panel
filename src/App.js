@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import is from 'is_js';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import PropTypes from 'prop-types';
 import Notifications from 'react-notify-toast';
+
 import Layout from './components/commonComponents/layout/Layout';
 import Home from './components/dashboard/Home';
 import SignupWithLinkedIn from './components/authentication/login-page/SignupWithLinkedIn';
@@ -12,6 +15,9 @@ import Reporting from './components/dashboard/reporting/Reporting';
 import AuthRedirect from './components/dashboard/AuthRedirect';
 import OpportunityDetails from './components/dashboard/follow-ups/UpcomingActions/OpportunityDetails/OpportunityDetails';
 import Account from './components/commonComponents/upperHeader/Account/Account';
+
+import PopUp from './components/commonComponents/PopUp/PopUp';
+import { getClientError } from './redux/actions/clientErrorAction/ClientErrorAction';
 
 const PrivateRoute = ({ component, ...options }) => {
   const isLoggedIn =
@@ -36,9 +42,14 @@ PrivateRoute.defaultProps = {
 };
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getClientError());
+  }, []);
   return (
     <div className="App">
       <Notifications />
+      {is.not.chrome() && <PopUp popupData="browser_not_supported" />}
       <Router>
         <Route>
           <Switch>

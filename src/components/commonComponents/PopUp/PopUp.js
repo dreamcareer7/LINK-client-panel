@@ -16,7 +16,6 @@ const PopUp = ({ popupData, onClosePopup = () => {} }) => {
   const data = popupData;
   const errorData = useSelector(state => state.clientErrorReducer);
   const findError = useMemo(() => errorData.find(e => e.title === data), [errorData, data]);
-
   useOnClickOutside(popupRef, onClosePopup);
 
   const openUrl = () => {
