@@ -13,7 +13,6 @@ import logout from '../../../assets/images/logout.svg';
 import notification from '../../../assets/images/notification.svg';
 import account from '../../../assets/images/account.svg';
 import help from '../../../assets/images/lifesaver.svg';
-import { clearAuthToken } from '../../../helpers/LocalStorageHelper';
 import FollowUpService from '../../../services/follow-up-service/FollowUpSevice';
 import { getClientInfo, logoutUser } from '../../../redux/actions/accountAction/AccountAction';
 import { useOnClickOutside } from '../../../helpers/UseClickOutsideHook';
@@ -123,7 +122,6 @@ function UpperHeader() {
   };
 
   const onLogOut = () => {
-    clearAuthToken();
     logoutUser(localStorage.getItem('fcmToken'));
     history.push('/signUp');
   };

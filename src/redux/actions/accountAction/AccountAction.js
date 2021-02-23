@@ -2,6 +2,7 @@ import { errorNotification, successNotification } from '../../../constants/Toast
 import ACCOUNT_REDUX_CONSTANT from '../../constants/accountConstant/AccountConstant';
 // eslint-disable-next-line import/no-named-as-default
 import AccountService from '../../../services/account-services/AccountServices';
+import { clearAuthToken } from '../../../helpers/LocalStorageHelper';
 
 // eslint-disable-next-line import/prefer-default-export
 export const getIndutries = () => {
@@ -144,6 +145,7 @@ export const logoutUser = token => {
   AccountService.logoutUser({ fcmToken: token })
     .then(response => {
       console.log(response);
+      clearAuthToken();
     })
     .catch(e => {
       console.log(e);
