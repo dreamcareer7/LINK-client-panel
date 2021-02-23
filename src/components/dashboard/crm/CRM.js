@@ -456,7 +456,7 @@ function Crm() {
                     {`${firstName} ${lastName}`}
                   </div>
                   <div>{moment(createdAt).format('DD/MM/YYYY')}</div>
-                  <div>{moment(followUp).format('DD/MM/YYYY')}</div>
+                  <div>{followUp ? moment(followUp).format('DD/MM/YYYY') : ''}</div>
                   <div>{userLocation}</div>
                   <div>{getLabelFromValues(likelyHood, potentialMapperObject)}</div>
                   <div>{dealSize}</div>
