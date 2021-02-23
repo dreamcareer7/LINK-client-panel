@@ -50,12 +50,12 @@ function App() {
     <div className="App">
       <Notifications />
       {is.not.chrome() && <PopUp popupData="browser_not_supported" />}
+      {is.not.desktop() && <PopUp popupData="device_not_desktop" />}
       <Router>
         <Route>
           <Switch>
             <Route exact path="/signUp" component={SignupWithLinkedIn} />
             <Route exact path="/auth-verify" component={AuthRedirect} />
-            {/* <Route exact path="/popUp" component={PopUp} /> */}
             <PrivateRoute exact path="/" />
             <Layout>
               <PrivateRoute exact path="/home" component={Home} />
