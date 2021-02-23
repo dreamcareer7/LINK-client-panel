@@ -14,7 +14,7 @@ import Report from '../../assets/reporting.svg';
 import CRM from '../../assets/crm.svg';
 import FollowUps from '../../assets/calendar.svg';
 import DoughnutChart from './PipelineChart';
-import { addFCMToken, getClientInfo } from '../../redux/actions/accountAction/AccountAction';
+import { addFCMToken } from '../../redux/actions/accountAction/AccountAction';
 import { requestFirebaseNotificationPermission } from '../../firebaseInit';
 
 Chart.defaults.global.defaultFontColor = 'white';
@@ -38,10 +38,8 @@ const Home = () => {
     dispatch(fetchOpportunity());
     dispatch(fetchPipeLine());
     dispatch(fetchClientQuote());
-    dispatch(getClientInfo());
   }, []);
-  /* const clientError = useSelector(state => state.clientErrorReducer);
-  console.log('clienterror=>', clientError); */
+
   return (
     <div>
       <div className="graph-container">
