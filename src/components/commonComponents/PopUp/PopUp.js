@@ -40,7 +40,9 @@ const PopUp = ({ popupData, onClosePopup = () => {} }) => {
   return (
     <div
       className={`${
-        popupData === 'browser_not_supported' || popupData === 'device_not_desktop'
+        popupData === 'browser_not_supported' ||
+        popupData === 'device_not_desktop' ||
+        popupData === 'device_mobile'
           ? 'pop-up-not-chrome-container'
           : 'pop-up-main-container'
       }`}
