@@ -20,25 +20,33 @@ const config = {
   measurementId: 'G-NXY98HGT9V',
 }; // <-- Production + Client Staging
 
-firebase.initializeApp(config);
-export const firebaseMessagingInstance = firebase.messaging();
 
+export let firebaseMessagingInstance = null
+
+if (firebase.messaging.isSupported()) {
+    firebase.initializeApp(config);
+      firebaseMessagingInstance = firebase.messaging();
+}
+
+else{
+    console.log('firebase not supported')
+}
 export const requestFirebaseNotificationPermission = () =>
-  new Promise((resolve, reject) => {
-    firebaseMessagingInstance
-      .requestPermission()
-      .then(() => firebaseMessagingInstance.getToken())
-      .then(firebaseToken => {
-        resolve(firebaseToken);
-      })
-      .catch(err => {
-        reject(err);
-      });
-  });
+    new Promise((resolve, reject) => {
+        firebaseMessagingInstance
+            .requestPermission()
+            .then(() => firebaseMessagingInstance.getToken())
+            .then(firebaseToken => {
+                resolve(firebaseToken);
+            })
+            .catch(err => {
+                reject(err);
+            });
+    });
 
 export const onMessageListener = () =>
-  new Promise(resolve => {
-    firebaseMessagingInstance.onMessage(payload => {
-      resolve(payload);
+    new Promise(resolve => {
+        firebaseMessagingInstance.onMessage(payload => {
+            resolve(payload);
+        });
     });
-  });
