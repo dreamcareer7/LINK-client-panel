@@ -39,6 +39,8 @@ const Layout = props => {
     <>
       {checkCookiee && <PopUp popupData={checkCookiee} onClosePopup={onClosePopup} />}
       {is.not.chrome() && <PopUp popupData="browser_not_supported" />}
+      {is.not.desktop() && <PopUp popupData="device_not_desktop" />}
+      {is.mobile() && <PopUp popupData="device_mobile" />}
       <div className="dashboard">
         <div className="dashboard--left-part">
           <SideBar />
