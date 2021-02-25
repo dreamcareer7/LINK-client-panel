@@ -375,8 +375,13 @@ input::placeholder {
 .deal-value-container {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   margin: 5px 0;
   font-size: 14px;
+
+  * {
+    white-space: nowrap;
+  }
 }
 
 /* pagination changes */
