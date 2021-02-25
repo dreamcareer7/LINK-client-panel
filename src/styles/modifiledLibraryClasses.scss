@@ -48,9 +48,9 @@ input[type="checkbox"]:focus + label::before {
 }
 /* HTML Checkbox modification ends here */
 
-/* .input-range__label-container {
+.input-range__label-container {
   display: none;
-} */
+}
 
 .input-range__slider {
   background: $primary-color!important;
