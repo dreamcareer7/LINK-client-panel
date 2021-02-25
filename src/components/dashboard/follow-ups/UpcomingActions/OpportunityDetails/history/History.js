@@ -28,8 +28,6 @@ function History() {
     [allConversationData]
   );
 
-  console.log('allConversation=>', allConversation);
-
   const handleScroll = e => {
     const targetVal = e.target;
     if (targetVal.scrollTop < 1) {

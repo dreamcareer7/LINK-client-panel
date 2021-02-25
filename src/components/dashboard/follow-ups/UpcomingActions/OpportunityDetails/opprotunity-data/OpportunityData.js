@@ -33,7 +33,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
   const [locationVal, setLocationVal] = useState(location);
   const [dealSizeVal, setDealSizeVal] = useState(dealSize);
   const allConversationData = useSelector(state => state.opportunityHistory);
-  console.log('allConversationData - >', allConversationData);
+
   const onSaveOpportunityData = () => {
     if (dealSizeVal === '-') {
       setDealSizeVal('');
