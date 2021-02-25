@@ -39,6 +39,9 @@ const Home = () => {
     dispatch(fetchPipeLine());
     dispatch(fetchClientQuote());
   }, []);
+  useEffect(() => {
+    document.title = 'Home';
+  }, []);
 
   return (
     <div>

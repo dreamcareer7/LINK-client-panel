@@ -22,6 +22,10 @@ function OpportunityDetails() {
   const { id } = useParams();
   const opportunity = useSelector(state => state.opportunityDetail);
   useEffect(() => {
+    document.title = 'Reporting';
+  }, []);
+
+  useEffect(() => {
     dispatch(getOpportunity(id));
     return () => {
       dispatch(clearOpportunity);

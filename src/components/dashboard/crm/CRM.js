@@ -221,6 +221,9 @@ function Crm() {
   };
 
   useEffect(() => {
+    document.title = 'CRM';
+  }, []);
+  useEffect(() => {
     const data = {
       startDate: startDate || undefined,
       endDate: endDate || undefined,

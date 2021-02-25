@@ -107,7 +107,9 @@ function Account() {
       }
     }
   };
-
+  useEffect(() => {
+    document.title = 'Account';
+  }, []);
   useEffect(() => {
     dispatch(getCompanySize());
     dispatch(getIndutries());

@@ -261,6 +261,9 @@ function Reporting() {
   const [endDate] = useState(moment().format('YYYY-MM-DD'));
 
   useEffect(() => {
+    document.title = 'Reporting';
+  }, []);
+  useEffect(() => {
     const data = {
       startDate,
       endDate,
