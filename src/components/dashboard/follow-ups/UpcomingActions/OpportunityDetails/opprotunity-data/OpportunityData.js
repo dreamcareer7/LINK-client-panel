@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import '../OpportunityDetails.scss';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateOpportunity } from '../../../../../../redux/actions/followUpAction/FollowUpAction';
 import { errorNotification } from '../../../../../../constants/Toast';
 
@@ -32,6 +32,8 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
   const [potentialValue, setPotentialValue] = useState(likelyHood);
   const [locationVal, setLocationVal] = useState(location);
   const [dealSizeVal, setDealSizeVal] = useState(dealSize);
+  const allConversationData = useSelector(state => state.opportunityHistory);
+  console.log('allConversationData - >', allConversationData);
   const onSaveOpportunityData = () => {
     if (dealSizeVal === '-') {
       setDealSizeVal('');
@@ -115,7 +117,11 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             <div className="common-subtitle">STAGE</div>
             <select
               className="common-select common-select-white mt-5"
-              value={stageValue}
+              value={
+                allConversationData && allConversationData.changeStageToInConversation
+                  ? 'IN_CONVERSION'
+                  : stageValue
+              }
               onChange={e => setStageValue(e.target.value)}
             >
               <option value="SELECT">Select</option>

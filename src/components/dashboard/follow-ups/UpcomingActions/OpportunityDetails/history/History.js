@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import './History.scss';
 /* import PropTypes from 'prop-types'; */
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,8 +22,13 @@ function History() {
     };
   }, []);
 
-  const allConversation = useSelector(state => state.opportunityHistory);
-  console.log('allConversation=>', allConversation.data);
+  const allConversationData = useSelector(state => state.opportunityHistory);
+  const allConversation = useMemo(
+    () => (allConversationData && allConversationData.data ? allConversationData.data : []),
+    [allConversationData]
+  );
+
+  console.log('allConversation=>', allConversation);
 
   const handleScroll = e => {
     const targetVal = e.target;
