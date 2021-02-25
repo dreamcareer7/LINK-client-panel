@@ -351,11 +351,15 @@ function Crm() {
             />
             <div className="deal-value-container">
               <span className="common-subtitle mr-5">Min-value: </span>
-              <span>{rangeState.min}</span>
+              <span>
+                {Number.isInteger(rangeState.min) ? rangeState.min : rangeState.min.toFixed(2)}
+              </span>
             </div>
             <div className="deal-value-container">
               <span className="common-subtitle mr-5">Max-value: </span>
-              <span>{rangeState.max}</span>
+              <span>
+                {Number.isInteger(rangeState.max) ? rangeState.max : rangeState.max.toFixed(2)}
+              </span>
             </div>
           </div>
         )}
