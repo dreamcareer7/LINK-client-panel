@@ -308,6 +308,11 @@ function Crm() {
   const handleDeleteCRMUser = id => {
     deleteOpportunity(id, () => reloadCRMData(page));
   };
+  const numberToUSD = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  });
   return (
     <>
       <div className="common-title">SALES OPPORTUNITIES</div>
@@ -342,30 +347,24 @@ function Crm() {
             />
           </div>
         </div>
-        {dealSizes && dealSizes.minDealValue && dealSizes.maxDealValue && (
-          <div>
-            <div className="common-subtitle">DEAL VALUE</div>
-            <InputRange
-              minValue={dealSizes.minDealValue ? dealSizes.minDealValue : 1}
-              maxValue={dealSizes.maxDealValue ? dealSizes.maxDealValue : 999999999}
-              formatLabel={a => `$${a}`}
-              onChange={handleRangePickerChange}
-              value={rangeState}
-            />
-            <div className="deal-value-container">
-              <span className="common-subtitle mr-5">Min-value: </span>
-              <span>
-                {Number.isInteger(rangeState.min) ? rangeState.min : rangeState.min.toFixed(2)}
-              </span>
-            </div>
-            <div className="deal-value-container">
-              <span className="common-subtitle mr-5">Max-value: </span>
-              <span>
-                {Number.isInteger(rangeState.max) ? rangeState.max : rangeState.max.toFixed(2)}
-              </span>
-            </div>
+        <div>
+          <div className="common-subtitle">DEAL VALUE</div>
+          <InputRange
+            minValue={dealSizes && dealSizes?.minDealValue ? dealSizes.minDealValue : 1}
+            maxValue={dealSizes && dealSizes?.maxDealValue ? dealSizes.maxDealValue : 999999999}
+            formatLabel={a => `$${a}`}
+            onChange={handleRangePickerChange}
+            value={rangeState}
+          />
+          <div className="deal-value-container">
+            <span className="common-subtitle mr-5">Min-value: </span>
+            <span>{numberToUSD.format(rangeState.min)}</span>
           </div>
-        )}
+          <div className="deal-value-container">
+            <span className="common-subtitle mr-5">Max-value: </span>
+            <span>{numberToUSD.format(rangeState.max)}</span>
+          </div>
+        </div>
         <div className="ml-10">
           <div className="common-subtitle">LIKELIHOOD</div>
           <select
@@ -466,7 +465,14 @@ function Crm() {
                   <div>{followUp ? moment(followUp).format('DD/MM/YYYY') : ''}</div>
                   <div>{userLocation}</div>
                   <div>{getLabelFromValues(likelyHood, potentialMapperObject)}</div>
-                  <div>{dealSize}</div>
+                  <div>
+                    {/* eslint-disable-next-line no-nested-ternary */}
+                    {dealSize
+                      ? Number.isInteger(dealSize)
+                        ? dealSize
+                        : dealSize.toFixed(2)
+                      : dealSize}
+                  </div>
                   <div className="table-action-field">
                     <img
                       src={edit}

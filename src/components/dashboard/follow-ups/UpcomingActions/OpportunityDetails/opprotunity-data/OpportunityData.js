@@ -102,6 +102,13 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
               className="common-input common-input-white ellipsis"
               value={mail}
               onChange={e => setMail(e.target.value)}
+              placeholder="john@abcmedia.com.au"
+              onFocus={e => {
+                e.target.placeholder = '';
+              }}
+              onBlur={e => {
+                e.target.placeholder = 'john@abcmedia.com.au';
+              }}
             />
             <div className="content-title ellipsis">LOCATION</div>
             <input
@@ -109,6 +116,13 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
               className="common-input common-input-white  ellipsis"
               value={locationVal}
               onChange={e => setLocationVal(e.target.value)}
+              placeholder="Enter Location"
+              onFocus={e => {
+                e.target.placeholder = '';
+              }}
+              onBlur={e => {
+                e.target.placeholder = 'Enter Location';
+              }}
             />
           </div>
         </div>
@@ -139,9 +153,15 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             <input
               className="common-input common-input-white mt-5"
               placeholder="-"
-              value={dealSizeVal && dealSizeVal}
+              value={dealSizeVal}
               onChange={e => {
                 setDealSizeVal(e.target.value);
+              }}
+              onFocus={e => {
+                e.target.placeholder = '';
+              }}
+              onBlur={e => {
+                e.target.placeholder = '-';
               }}
               maxLength={9}
             />
@@ -182,6 +202,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
     </div>
   );
 }
+
 OpportunityData.propTypes = {
   opportunityData: PropTypes.shape({
     _id: PropTypes.string,

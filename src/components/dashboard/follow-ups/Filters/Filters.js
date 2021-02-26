@@ -181,7 +181,11 @@ function Filters() {
       value: e.target.checked,
     });
   }, []);
-
+  const numberToUSD = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  });
   return (
     <div>
       <div className="heading placeholder-color">Filters</div>
@@ -189,19 +193,19 @@ function Filters() {
         <div className="common-title">Follow-Up Date</div>
         <DatePicker
           className="mt-10"
-          placeholderText="From"
+          placeholderText="dd/MM/yyyy"
           selected={startDate}
           onChange={date => setStartDate(date)}
           onFocus={e => {
             e.target.placeholder = '';
           }}
           onBlur={e => {
-            e.target.placeholder = 'From';
+            e.target.placeholder = 'dd/MM/yyyy';
           }}
         />
         <DatePicker
           className="mt-10"
-          placeholderText="To"
+          placeholderText="dd/MM/yyyy"
           // dateFormat="MM-DD-YYYY"
           selected={endDate}
           onChange={date => setEndDate(date)}
@@ -209,7 +213,7 @@ function Filters() {
             e.target.placeholder = '';
           }}
           onBlur={e => {
-            e.target.placeholder = 'To';
+            e.target.placeholder = 'dd/MM/yyyy';
           }}
         />
 
@@ -221,25 +225,21 @@ function Filters() {
         <div className="common-title mt-4 mb-2">Deal Size</div>
 
         <div className="filter-deal-range-container">
-          {dealSizes && (
-            <>
-              <InputRange
-                minValue={dealSizes.minDealValue ? dealSizes.minDealValue : 1}
-                maxValue={dealSizes.maxDealValue ? dealSizes.minDealValue : 999999999}
-                formatLabel={a => `$${a}`}
-                onChange={handleRangePickerChange}
-                value={rangeState}
-              />
-              <div className="deal-value-container">
-                <span className="common-subtitle mr-5">Min-value: </span>
-                {Number.isInteger(rangeState.min) ? rangeState.min : rangeState.min.toFixed(2)}
-              </div>
-              <div className="deal-value-container">
-                <span className="common-subtitle mr-5">Max-value: </span>
-                {Number.isInteger(rangeState.max) ? rangeState.max : rangeState.max.toFixed(2)}
-              </div>
-            </>
-          )}
+          <InputRange
+            minValue={dealSizes && dealSizes?.minDealValue ? dealSizes.minDealValue : 1}
+            maxValue={dealSizes && dealSizes?.maxDealValue ? dealSizes.maxDealValue : 999999999}
+            formatLabel={a => `$${a}`}
+            onChange={handleRangePickerChange}
+            value={rangeState}
+          />
+          <div className="deal-value-container">
+            <span className="common-subtitle mr-5">Min-value: </span>
+            <span>{numberToUSD.format(rangeState.min)}</span>
+          </div>
+          <div className="deal-value-container">
+            <span className="common-subtitle mr-5">Max-value: </span>
+            <span>{numberToUSD.format(rangeState.max)}</span>
+          </div>
         </div>
 
         <div className="common-title mt-4 mb-10">Likelihoods</div>
