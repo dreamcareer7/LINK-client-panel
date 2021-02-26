@@ -346,8 +346,8 @@ function Crm() {
           <div>
             <div className="common-subtitle">DEAL VALUE</div>
             <InputRange
-              minValue={dealSizes.minDealValue || 1}
-              maxValue={dealSizes.maxDealValue || 999999999}
+              minValue={dealSizes.minDealValue ? dealSizes.minDealValue : 1}
+              maxValue={dealSizes.maxDealValue ? dealSizes.maxDealValue : 999999999}
               formatLabel={a => `$${a}`}
               onChange={handleRangePickerChange}
               value={rangeState}

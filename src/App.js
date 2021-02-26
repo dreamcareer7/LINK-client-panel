@@ -51,6 +51,9 @@ function App() {
       <Notifications />
       {is.not.chrome() && <PopUp popupData="browser_not_supported" />}
       {is.ie() && <PopUp popupData="browser_not_supported" />}
+      {!(/* @cc_on!@ */ (false || !!document.documentMode)) && !!window.StyleMedia && (
+        <PopUp popupData="browser_not_supported" />
+      )}
       {window.navigator.userAgent.indexOf('Edge') > -1 && (
         <PopUp popupData="browser_not_supported" />
       )}
