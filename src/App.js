@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-d
 import './App.css';
 import PropTypes from 'prop-types';
 import Notifications from 'react-notify-toast';
+import UAParser from 'ua-parser-js';
 
 import Layout from './components/commonComponents/layout/Layout';
 import Home from './components/dashboard/Home';
@@ -41,22 +42,19 @@ PrivateRoute.defaultProps = {
   component: null,
 };
 
+const uaParser = new UAParser();
+const browserName = uaParser.getBrowser().name;
+
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getClientError());
   }, []);
+
   return (
     <div className="App">
       <Notifications />
-      {is.not.chrome() && <PopUp popupData="browser_not_supported" />}
-      {is.ie() && <PopUp popupData="browser_not_supported" />}
-      {!(/* @cc_on!@ */ (false || !!document.documentMode)) && !!window.StyleMedia && (
-        <PopUp popupData="browser_not_supported" />
-      )}
-      {window.navigator.userAgent.indexOf('Edge') > -1 && (
-        <PopUp popupData="browser_not_supported" />
-      )}
+      {browserName !== 'Chrome' && <PopUp popupData="browser_not_supported" />}
       {is.not.desktop() && <PopUp popupData="device_not_desktop" />}
       {is.mobile() && <PopUp popupData="device_mobile" />}
       <Router>
