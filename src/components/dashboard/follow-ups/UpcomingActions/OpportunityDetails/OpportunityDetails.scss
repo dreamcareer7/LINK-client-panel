@@ -59,6 +59,7 @@
   display: grid;
   grid-template-columns: 120px calc(100% - 130px);
   grid-template-rows: repeat(3, 1fr);
+  align-items: center;
   gap: 10px;
 }
 
