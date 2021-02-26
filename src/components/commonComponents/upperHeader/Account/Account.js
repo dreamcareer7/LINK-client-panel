@@ -232,7 +232,7 @@ function Account() {
                 value={form.email || ''}
                 className="common-input"
                 name="email"
-                placeholder="michelle@abcmedia.com"
+                placeholder="john@abcmedia.com.au"
               />
             </div>
             <div>
