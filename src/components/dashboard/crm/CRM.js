@@ -306,7 +306,14 @@ function Crm() {
   };
 
   const handleDeleteCRMUser = id => {
-    deleteOpportunity(id, () => reloadCRMData(page));
+    dispatchFilter({
+      type: CRM_FILTER_REDUCER_ACTIONS.RESET_STATE,
+    });
+
+    deleteOpportunity(id, () => {
+      reloadCRMData(page);
+      dispatch(getFilteredCRMSAction(page));
+    });
   };
   const numberToUSD = new Intl.NumberFormat('en-US', {
     style: 'currency',
