@@ -101,7 +101,7 @@ function Crm() {
     startDate,
     endDate,
   } = filter;
-
+  console.log('crmsData', crmsData);
   const reloadCRMData = pageNum => {
     if (moment(startDate).isAfter(endDate)) {
       errorNotification('Please enter from date before to date');
@@ -454,6 +454,7 @@ function Crm() {
               profilePicUrl,
               firstName,
               lastName,
+              stage: stageValue,
               location: userLocation,
               dealSize,
               createdAt,
@@ -469,7 +470,11 @@ function Crm() {
                     {`${firstName} ${lastName}`}
                   </div>
                   <div>{moment(createdAt).format('DD/MM/YYYY')}</div>
-                  <div>{followUp ? moment(followUp).format('DD/MM/YYYY') : ''}</div>
+                  <div>
+                    {followUp && stageValue !== 'LOST' && stageValue !== 'CLOSED'
+                      ? moment(followUp).format('DD/MM/YYYY')
+                      : ''}
+                  </div>
                   <div>{userLocation}</div>
                   <div>{getLabelFromValues(likelyHood, potentialMapperObject)}</div>
                   <div>
