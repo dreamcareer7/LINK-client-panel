@@ -1,13 +1,5 @@
 @import "src/styles/index";
 
-.opportunity-detail-block {
-  input, select {
-    font-size: 12px;
-    font-weight: 400;
-    color: $placeholder-color;
-  }
-}
-
 .opportunity-header {
   display: flex;
   justify-content: space-between;
@@ -86,6 +78,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  height: 88px;
   margin-bottom: 20px;
   padding: 7px 10px;
   color: $placeholder-color;
@@ -98,16 +91,21 @@
   padding: 5px 15px 25px 5px;
   font-size: 14px;
   font-weight: 400;
-  color: $placeholder-color;
+  color: $secondary-font-color;
   word-break: break-all;
   outline: none;
   border: none;
   resize: none;
 }
 
+.add-or-edit-note {
+  height: 75px;
+  padding: 0;
+}
+
 .note-container {
-  max-height: 51px;
-  margin-bottom: 30px;
+  max-height: 50px;
+  margin-bottom: 15px;
   overflow-y: auto;
 }
 

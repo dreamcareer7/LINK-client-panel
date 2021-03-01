@@ -93,7 +93,7 @@ function Notes() {
         <div className="common-subtitle">{isEditNote ? 'EDIT NOTE' : 'ADD NEW NOTE'}</div>
         <div className="note-block mt-10">
           <textarea
-            className="note w-100"
+            className="note add-or-edit-note w-100"
             value={newNote}
             onChange={onChaneNoteText}
             placeholder="Add new note here.."
