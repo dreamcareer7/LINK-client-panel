@@ -62,7 +62,7 @@ export const syncWithLinkedIn = id => {
             type: FOLLOW_UP_REDUX_CONSTANT.GET_OPPORTUNITY_DETAIL,
             data: response.data.data,
           });
-          successNotification('Data synced with linked in');
+          successNotification('Data synced with LinkedIn');
         }
       })
       .catch(e => {
