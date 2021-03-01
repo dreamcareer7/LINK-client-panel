@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './OpportunityDetails.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
@@ -12,6 +12,7 @@ import OpportunityData from './opprotunity-data/OpportunityData';
 import History from './history/History';
 import Notes from './notes/Notes';
 import { fetchConversation } from '../../../../../redux/actions/followUpAction/historyAction/HistoryAction';
+import Modal from '../../../../commonComponents/Modal/Modal';
 
 function OpportunityDetails() {
   const history = useHistory();
@@ -20,6 +21,7 @@ function OpportunityDetails() {
     history.push('/followUps');
   };
   const { id } = useParams();
+  const [isModelOpen, setIsModelOpen] = useState(false);
   const opportunity = useSelector(state => state.opportunityDetail);
   useEffect(() => {
     document.title = 'Opportunity Details';
@@ -40,11 +42,26 @@ function OpportunityDetails() {
     dispatch(fetchConversation(id, ''));
   };
   const deleteSyncClick = () => {
+    setIsModelOpen(true);
+  };
+  const onClosePopup = () => {
+    setIsModelOpen(false);
+  };
+  const onDeleteData = () => {
+    setIsModelOpen(false);
     deleteOpportunity(id, history.goBack);
   };
 
   return (
     <>
+      {isModelOpen && (
+        <Modal
+          description="Are you sure you want to delete contact?"
+          title="Delete Opportunity"
+          deleteData={onDeleteData}
+          onClosePopup={onClosePopup}
+        />
+      )}
       <div className="opportunity-header">
         <div className="breadcrumb common-subtitle">
           <span onClick={onBack}>UPCOMING ACTIONS</span>
