@@ -35,6 +35,15 @@
   }
 }
 
+input:-webkit-autofill {
+  -webkit-box-shadow:0 0 0 50px white inset; /* Change the color to your own background color */
+  -webkit-text-fill-color: $secondary-font-color;
+}
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 50px white inset;
+  -webkit-text-fill-color: $secondary-font-color;
+}
+
 .button {
   display: flex;
   align-items: center;
