@@ -342,12 +342,14 @@ function Crm() {
           <div className="d-flex">
             <DatePicker
               placeholderText="From"
+              dateFormat="dd/MM/yyyy"
               className="common-input mt-5"
               selected={startDate}
               onChange={handleStartDateChange}
             />
             <DatePicker
               placeholderText="To"
+              dateFormat="dd/MM/yyyy"
               className="common-input mt-5 ml-10"
               selected={endDate}
               onChange={handleEndDateChange}
