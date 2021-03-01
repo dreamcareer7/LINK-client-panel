@@ -80,7 +80,7 @@ function Notes() {
                 />
               </div>
               <div className="note-time-stamp">
-                {moment(noteData.creationTime).format('MM-DD-YYYY | hh:mm A')}
+                {moment(noteData.creationTime).format('DD-MM-YYYY | hh:mm A')}
               </div>
             </div>
           ))
