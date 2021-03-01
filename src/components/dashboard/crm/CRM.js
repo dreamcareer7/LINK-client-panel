@@ -20,6 +20,7 @@ import { deleteOpportunity } from '../../../redux/actions/followUpAction/FollowU
 import { getLabelFromValues } from '../../../helpers/chartHelper';
 import { potentialMapperObject } from '../../../helpers/Mappers';
 import { errorNotification } from '../../../constants/Toast';
+import Modal from '../../commonComponents/Modal/Modal';
 
 const initialFilterState = {
   stage: null,
@@ -304,8 +305,24 @@ function Crm() {
   const handleEditCRMUser = id => {
     history.push(`/followUps/opportunityDetails/${id}`);
   };
+  const [id, setId] = useState('');
+  const [isModelOpen, setIsModelOpen] = useState(false);
 
-  const handleDeleteCRMUser = id => {
+  const handleDeleteCRMUser = idParam => {
+    setIsModelOpen(true);
+    setId(idParam);
+  };
+  const numberToUSD = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  });
+
+  const onClosePopup = () => {
+    setIsModelOpen(false);
+  };
+  const onDeleteData = () => {
+    setIsModelOpen(false);
     dispatchFilter({
       type: CRM_FILTER_REDUCER_ACTIONS.RESET_STATE,
     });
@@ -315,13 +332,17 @@ function Crm() {
       dispatch(getFilteredCRMSAction(page));
     });
   };
-  const numberToUSD = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-  });
+
   return (
     <>
+      {isModelOpen && (
+        <Modal
+          description="Are you sure you want to delete contact?"
+          title="Delete Opportunity"
+          deleteData={onDeleteData}
+          onClosePopup={onClosePopup}
+        />
+      )}
       <div className="common-title">SALES OPPORTUNITIES</div>
       <div className="graph-container">
         <Bar options={options} id="sales-opportunities" data={crmsChartState} height={80} />
