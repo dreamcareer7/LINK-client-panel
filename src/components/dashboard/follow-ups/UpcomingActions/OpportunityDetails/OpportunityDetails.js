@@ -22,7 +22,7 @@ function OpportunityDetails() {
   const { id } = useParams();
   const opportunity = useSelector(state => state.opportunityDetail);
   useEffect(() => {
-    document.title = 'Reporting';
+    document.title = 'Opportunity Details';
   }, []);
 
   useEffect(() => {
