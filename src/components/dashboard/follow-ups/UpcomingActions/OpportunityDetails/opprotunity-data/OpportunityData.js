@@ -180,10 +180,10 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             </select>
           </div>
           <div>
-            <div className="common-subtitle">FOLLOW UP DATE</div>
+            <div className="common-subtitle">FOLLOW-UP DATE</div>
             <DatePicker
               className="mt-5"
-              placeholderText="Follow up date"
+              placeholderText="Follow-Up date"
               value={followUpDate ? moment(followUpDate).format('DD/MM/YYYY') : followUpDate}
               dateFormat="dd/MM/yyyy"
               minDate={new Date()}

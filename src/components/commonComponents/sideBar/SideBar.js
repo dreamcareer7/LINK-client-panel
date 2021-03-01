@@ -23,7 +23,7 @@ function SideBar() {
           </NavLink>
 
           <NavLink className="menu-item menu-link" to="/followUps" replace>
-            <img alt="followups" src={calendar} /> <span>Follow ups</span>
+            <img alt="followups" src={calendar} /> <span>Follow-Ups</span>
           </NavLink>
 
           <NavLink className="menu-item menu-link" to="/crm" replace>

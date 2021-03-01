@@ -63,7 +63,7 @@ const Home = () => {
             onClick={() => history.push('/followUps')}
           >
             <img src={FollowUps} height="20" />
-            <span className="p-left">Follow Ups</span>
+            <span className="p-left">Follow-Ups</span>
           </button>
           <button
             className="button primary-button ml-4 btn-width"
