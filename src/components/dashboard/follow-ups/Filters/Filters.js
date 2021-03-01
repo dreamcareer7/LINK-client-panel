@@ -193,7 +193,7 @@ function Filters() {
         <div className="common-title">Follow-Up Date</div>
         <DatePicker
           className="mt-10"
-          placeholderText="dd/mm/yyyy"
+          placeholderText="From"
           dateFormat="dd/MM/yyyy"
           selected={startDate}
           onChange={date => setStartDate(date)}
@@ -201,12 +201,12 @@ function Filters() {
             e.target.placeholder = '';
           }}
           onBlur={e => {
-            e.target.placeholder = 'dd/mm/yyyy';
+            e.target.placeholder = 'From';
           }}
         />
         <DatePicker
           className="mt-10"
-          placeholderText="dd/mm/yyyy"
+          placeholderText="To"
           dateFormat="dd/MM/yyyy"
           selected={endDate}
           onChange={date => setEndDate(date)}
@@ -214,7 +214,7 @@ function Filters() {
             e.target.placeholder = '';
           }}
           onBlur={e => {
-            e.target.placeholder = 'dd/mm/yyyy';
+            e.target.placeholder = 'To';
           }}
         />
 
