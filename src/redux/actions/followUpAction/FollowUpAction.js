@@ -13,7 +13,7 @@ export const getUpcomingActions = (page, data) => {
             data: response.data.data,
           });
           if (response.data.data.docs.docs.length === 0) {
-            errorNotification('It seems data not available for this category');
+            errorNotification('Data not available, please try again');
           }
         }
       })
