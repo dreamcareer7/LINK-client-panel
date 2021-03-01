@@ -117,8 +117,8 @@
   height: 30px;
   padding: 0 5px;
   font-size: 14px;
-  font-weight: 500;
-  color: $placeholder-color;
+  font-weight: 400;
+  color: $secondary-font-color;
   background-color: $secondary-variant-color;
   border-radius: 5px;
   border: none;
@@ -126,9 +126,9 @@
 }
 
 .common-select option {
-  font-size: 14px;
-  font-weight: 600;
-  color: $secondary-font-color;
+  font-size: 14px!important;
+  font-weight: 500!important;
+  color: $secondary-font-color!important;
 }
 
 .common-input, .common-text-background {
@@ -149,7 +149,8 @@
 }
 
 input {
-  color: $placeholder-color;
+  color: $secondary-font-color;
+  font-weight: 400!important;
 }
 
 .common-select-white, .common-input-white {
