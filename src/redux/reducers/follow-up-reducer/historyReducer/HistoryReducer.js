@@ -20,7 +20,7 @@ export const opportunityHistory = (state = initialDataFetch, action) => {
     case HISTORY_REDUX_CONSTANT.APPEND_OPPORTUNITY_CONVERSATION:
       return {
         isLoading: false,
-        data: [...action.data, ...state.data],
+        data: { ...action.data, ...state.data },
       };
     case HISTORY_REDUX_CONSTANT.ERROR_OPPORTUNITY_CONVERSATION:
       return {

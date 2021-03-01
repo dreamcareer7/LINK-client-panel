@@ -16,7 +16,7 @@ export const fetchConversation = (id, data) => {
           if (data) {
             dispatch({
               type: HISTORY_REDUX_CONSTANT.APPEND_OPPORTUNITY_CONVERSATION,
-              data: response.data.data,
+              data: response.data,
             });
           } else {
             dispatch({
@@ -27,6 +27,7 @@ export const fetchConversation = (id, data) => {
         }
       })
       .catch(e => {
+        console.log(e);
         if (e.response.data.status === 'READ_ERROR_MESSAGE') {
           console.log(e.response.data.message);
           dispatch({
