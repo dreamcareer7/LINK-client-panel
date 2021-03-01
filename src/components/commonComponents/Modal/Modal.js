@@ -1,7 +1,6 @@
 import React from 'react';
 import './Modal.scss';
-import {useOnClickOutside} from "../../../helpers/UseClickOutsideHook";
-
+import { useOnClickOutside } from '../../../helpers/UseClickOutsideHook';
 
 // eslint-disable-next-line react/prop-types
 const Modal = ({ title, description, deleteData = () => {}, onClosePopup = () => {} }) => {
