@@ -341,18 +341,30 @@ function Crm() {
           <div className="common-subtitle">DATE RANGE</div>
           <div className="d-flex">
             <DatePicker
-              placeholderText="From"
+              placeholderText="dd/mm/yyyy"
               dateFormat="dd/MM/yyyy"
               className="common-input mt-5"
               selected={startDate}
               onChange={handleStartDateChange}
+              onFocus={e => {
+                e.target.placeholder = '';
+              }}
+              onBlur={e => {
+                e.target.placeholder = 'dd/mm/yyyy';
+              }}
             />
             <DatePicker
-              placeholderText="To"
+              placeholderText="dd/mm/yyyy"
               dateFormat="dd/MM/yyyy"
               className="common-input mt-5 ml-10"
               selected={endDate}
               onChange={handleEndDateChange}
+              onFocus={e => {
+                e.target.placeholder = '';
+              }}
+              onBlur={e => {
+                e.target.placeholder = 'dd/mm/yyyy';
+              }}
             />
           </div>
         </div>
