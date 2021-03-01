@@ -184,8 +184,8 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             <DatePicker
               className="mt-5"
               placeholderText="Follow up date"
-              value={followUpDate ? moment(followUpDate).format('MM/DD/YYYY') : followUpDate}
-              dateFormat="MM/DD/YYYY"
+              value={followUpDate ? moment(followUpDate).format('DD/MM/YYYY') : followUpDate}
+              dateFormat="dd/MM/yyyy"
               minDate={new Date()}
               onChange={date => setFollowUpDate(date)}
             />
