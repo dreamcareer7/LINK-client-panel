@@ -27,7 +27,6 @@ export const fetchConversation = (id, data) => {
         }
       })
       .catch(e => {
-        console.log(e);
         if (e.response.data.status === 'READ_ERROR_MESSAGE') {
           console.log(e.response.data.message);
           dispatch({
