@@ -434,9 +434,10 @@ input::placeholder {
   display: flex;
   align-items: flex-start;
   justify-content: space-around;
+  height: 100%;
   .graph {
     max-width: calc(100% - 140px);
-    padding: 5px;
+    padding-left: 20px;
   }
 }
 
@@ -478,4 +479,13 @@ input::placeholder {
       white-space: nowrap;
     }
   }
+}
+
+.no-data-style {
+  display: flex;
+  height: calc(100% - 50px);
+  width: 100%;
+  flex: 1;
+  align-items: center;
+  justify-content: center
 }

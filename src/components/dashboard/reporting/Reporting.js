@@ -9,8 +9,6 @@ import {
   getPipelineValuesGraphData,
   getTotalSalesGraphData,
 } from '../../../redux/actions/ReportingActions/ReportingAction';
-import { getLabelFromValues } from '../../../helpers/chartHelper';
-import { chartPotentialMapperObject } from '../../../helpers/Mappers';
 
 Chart.defaults.global.defaultFontColor = 'white';
 Chart.defaults.global.defaultFontSize = 14;
@@ -225,6 +223,7 @@ function Reporting() {
         fontColor: 'red',
       },
     }, */
+    aspectRatio: 1,
     value: ['$10000', '$20000', '$52000'],
     labels: {
       render: 'value',
@@ -285,37 +284,56 @@ function Reporting() {
     dispatch(getConversationGraphData(data));
     dispatch(getTotalSalesGraphData(data));
   }, []);
+
   const pipelineLegendFunction = () => {
     const legendHtml = [];
-    const pipelineBackgroundColor = ['#39c3bb', '#fcab50', '#ff696a'];
+    let legendLabel = [];
+    legendLabel = pipelineValuesGraph.labels.map(label => label);
     legendHtml.push('<ul>');
     if (pipelineValuesGraph) {
-      pipelineValuesGraph.data.forEach((record, index) => {
+      pipelineValuesGraph.datasets[0].data.forEach((record, index) => {
         legendHtml.push('<li>');
         legendHtml.push(
-          `<div className="chart-legend" style="background-color: ${pipelineBackgroundColor[index]}">${record.total}</div>`
+          `<div className="chart-legend" style="background-color: ${
+            pipelineValuesGraph.datasets[0].backgroundColor[index]
+          }">${record === '' ? 0 : record}</div>`
         );
         legendHtml.push(
-          `<label className="chart-legend-label-text">${getLabelFromValues(
-            record._id,
-            chartPotentialMapperObject
-          )}</label>`
+          `<label className="chart-legend-label-text">
+            ${legendLabel[index]}
+          </label>`
         );
         legendHtml.push('<li>');
       });
     }
     legendHtml.push('</ul>');
+    console.log(legendHtml.join(''));
     return legendHtml.join('');
   };
 
   useEffect(() => {
-    if (pipelineValuesGraph && pipelineValuesGraph.data && pipelineValuesGraph.data.length > 0) {
+    if (
+      pipelineValuesGraph &&
+      pipelineValuesGraph.datasets[0].data &&
+      pipelineValuesGraph.datasets[0].data.length > 0
+    ) {
       const element = document.getElementById('pipeline-reporting-legends');
       if (element) {
         element.innerHTML = pipelineLegendFunction();
       }
     }
   }, [pipelineValuesGraph]);
+
+  const getPipelineTotalValues = () => {
+    let total = 0;
+    if (pipelineValuesGraph && pipelineValuesGraph.values) {
+      total = pipelineValuesGraph.values.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue;
+      });
+    }
+    return total;
+  };
+
   return (
     <>
       <div className="total-sales-container">
@@ -361,20 +379,22 @@ function Reporting() {
         </div>
         <div className="pipeline-container">
           <div className="common-title">PIPELINE VALUE</div>
-          <div className="graph-legend-container">
-            <div id="pipeline-reporting-legends" />
-            <div className="graph">
-              <Doughnut
-                ref={pipelineRef}
-                data={
-                  pipelineValuesGraph && pipelineValuesGraph.data
-                    ? 'No Data Available'
-                    : pipelineValuesGraph
-                }
-                options={pipelineOptions}
-              />
+          {getPipelineTotalValues() === 0 ? (
+            <div className="no-data-style">No Data Available</div>
+          ) : (
+            <div className="graph-legend-container">
+              <div id="pipeline-reporting-legends" />
+              <div className="graph">
+                <Doughnut
+                  height={null}
+                  width={null}
+                  ref={pipelineRef}
+                  data={pipelineValuesGraph}
+                  options={pipelineOptions}
+                />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </>

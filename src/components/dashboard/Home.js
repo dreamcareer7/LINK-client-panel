@@ -160,23 +160,31 @@ const Home = () => {
         <div className="col-md-6">
           <div className="graph-container">
             <div className="common-title chart-title">OPPORTUNITIES</div>
-            <div className="graph-legend-container">
-              <div id="opportunity-chart-legends" />
-              <div className="graph">
-                <DashboardChart chartData={opportunity && opportunity.data && opportunity.data} />
+            {opportunity && opportunity.data ? (
+              <div className="graph-legend-container">
+                <div id="opportunity-chart-legends" />
+                <div className="graph">
+                  <DashboardChart chartData={opportunity && opportunity.data && opportunity.data} />
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="no-data-style">No Data Available</div>
+            )}
           </div>
         </div>
         <div className="col-md-6">
           <div className="graph-container">
             <div className="common-title chart-title">PIPELINE VALUE</div>
-            <div className="graph-legend-container">
-              <div id="pipeline-chart-legends" />
-              <div className="graph">
-                <DoughnutChart chartData={pipeline && pipeline.data && pipeline.data} />
+            {pipeline && pipeline.data ? (
+              <div className="graph-legend-container">
+                <div id="pipeline-chart-legends" />
+                <div className="graph">
+                  <DoughnutChart chartData={pipeline && pipeline.data && pipeline.data} />
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="no-data-style">No Data Available</div>
+            )}
           </div>
         </div>
       </div>
