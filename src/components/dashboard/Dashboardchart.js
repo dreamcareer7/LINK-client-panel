@@ -32,6 +32,11 @@ const DashboardChart = props => {
         width={null}
         data={state}
         options={{
+          plugins: {
+            datalabels: {
+              display: false,
+            },
+          },
           aspectRatio: 1,
           legend: {
             display: false,
