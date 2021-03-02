@@ -376,7 +376,7 @@ function Crm() {
             />
             <DatePicker
               placeholderText="To"
-              dateFormat="dd/mm/yyyy"
+              dateFormat="dd/MM/yyyy"
               className="common-input mt-5 ml-10"
               selected={endDate}
               onChange={handleEndDateChange}
