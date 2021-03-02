@@ -141,7 +141,15 @@ function Reporting() {
       ],
     },
   };
-
+  /* const [toolTip, setToolTip] = useState(undefined);
+  const showTooltip = tooltip => {
+    if (tooltip.opacity === 0) {
+      setToolTip(undefined);
+    } else {
+      setToolTip(tooltip);
+    }
+  };
+  */
   const tooltips = [
     'This is the percentage of people who have accepted your connection invite, you should be aiming for a 35 - 45% acceptance rate.',
     'The number of conversations opened up based on the total invitations accepted, the goal is to achieve a 15 - 20% conversion.',
@@ -150,7 +158,7 @@ function Reporting() {
   ];
 
   const conversionsOptions = {
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#00A8FF',
     legend: {
       display: false,
     },
