@@ -9,6 +9,8 @@ import {
   getPipelineValuesGraphData,
   getTotalSalesGraphData,
 } from '../../../redux/actions/ReportingActions/ReportingAction';
+import { getLabelFromValues } from '../../../helpers/chartHelper';
+import { chartPotentialMapperObject } from '../../../helpers/Mappers';
 
 Chart.defaults.global.defaultFontColor = 'white';
 Chart.defaults.global.defaultFontSize = 14;
@@ -232,8 +234,9 @@ function Reporting() {
       fontFamily: '"Lucida Console", Monaco, monospace',
     },
     cutoutPercentage: 65,
-    backgroundColor: '#00A8FF',
+    backgroundColor: '#f9f9f9',
     legend: {
+      display: false,
       position: 'left',
       align: 'start',
       pointRadius: '30',
@@ -282,6 +285,38 @@ function Reporting() {
     dispatch(getConversationGraphData(data));
     dispatch(getTotalSalesGraphData(data));
   }, []);
+  const pipelineLegendFunction = () => {
+    const legendHtml = [];
+    const pipelineBackgroundColor = ['#39c3bb', '#fcab50', '#ff696a'];
+    legendHtml.push('<ul>');
+    if (pipelineValuesGraph) {
+      pipelineValuesGraph.data.forEach((record, index) => {
+        legendHtml.push('<li>');
+        legendHtml.push(
+          `<div className="chart-legend" style="background-color: ${pipelineBackgroundColor[index]}">${record.total}</div>`
+        );
+        legendHtml.push(
+          `<label className="chart-legend-label-text">${getLabelFromValues(
+            record._id,
+            chartPotentialMapperObject
+          )}</label>`
+        );
+        legendHtml.push('<li>');
+      });
+    }
+    legendHtml.push('</ul>');
+    return legendHtml.join('');
+  };
+
+  useEffect(() => {
+    if (pipelineValuesGraph && pipelineValuesGraph.data && pipelineValuesGraph.data.length > 0) {
+      const element = document.getElementById('pipeline-reporting-legends');
+      if (element) {
+        element.innerHTML = pipelineLegendFunction();
+        console.log(element.innerHTML);
+      }
+    }
+  }, [pipelineValuesGraph]);
   return (
     <>
       <div className="total-sales-container">
@@ -327,15 +362,20 @@ function Reporting() {
         </div>
         <div className="pipeline-container">
           <div className="common-title">PIPELINE VALUE</div>
-          <Doughnut
-            ref={pipelineRef}
-            data={
-              pipelineValuesGraph && pipelineValuesGraph.data
-                ? 'No Data Available'
-                : pipelineValuesGraph
-            }
-            options={pipelineOptions}
-          />
+          <div className="graph-legend-container">
+            <div id="pipeline-reporting-legends" />
+            <div className="graph">
+              <Doughnut
+                ref={pipelineRef}
+                data={
+                  pipelineValuesGraph && pipelineValuesGraph.data
+                    ? 'No Data Available'
+                    : pipelineValuesGraph
+                }
+                options={pipelineOptions}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </>

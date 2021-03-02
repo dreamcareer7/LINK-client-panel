@@ -104,8 +104,11 @@ const DoughnutChart = props => {
   return (
     <div>
       <Doughnut
+        height={null}
+        width={null}
         data={state}
         options={{
+          aspectRatio: 1,
           /* elements: {
             center: {
               text: `${total} || No Value`,
@@ -124,7 +127,7 @@ const DoughnutChart = props => {
             },
           },
           legend: {
-            display: true,
+            display: false,
             position: 'left',
             align: 'start',
             fontStyle: 'bold',

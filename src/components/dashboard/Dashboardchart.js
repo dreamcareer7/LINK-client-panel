@@ -19,7 +19,6 @@ const DashboardChart = props => {
           '#950094',
           '#0097C1',
           '#d64374',
-
         ],
         data: chartData && chartData.map(e => (e.total !== 0 ? e.total : '')),
       },
@@ -29,10 +28,13 @@ const DashboardChart = props => {
   return (
     <div>
       <Pie
+        height={null}
+        width={null}
         data={state}
         options={{
+          aspectRatio: 1,
           legend: {
-            display: true,
+            display: false,
             position: 'left',
             align: 'start',
             labels: {

@@ -16,6 +16,8 @@ import FollowUps from '../../assets/calendar.svg';
 import DoughnutChart from './PipelineChart';
 import { addFCMToken } from '../../redux/actions/accountAction/AccountAction';
 import { requestFirebaseNotificationPermission } from '../../firebaseInit';
+import { potentialMapperObject, stageMapperObjectForOne } from '../../helpers/Mappers';
+import { getLabelFromValues } from '../../helpers/chartHelper';
 
 Chart.defaults.global.defaultFontColor = 'white';
 Chart.defaults.global.defaultFontSize = 16;
@@ -42,6 +44,79 @@ const Home = () => {
   useEffect(() => {
     document.title = 'Home';
   }, []);
+  const pipelineBackgroundColor = ['#39c3bb', '#fcab50', '#ff696a'];
+  const opportunityBackgroundColor = [
+    '#4282FE',
+    '#d53711',
+    '#f79400',
+    '#43c643',
+    '#950094',
+    '#0097C1',
+    '#d64374',
+  ];
+
+  const opportunityLegendFunction = () => {
+    const legendHtml = [];
+    legendHtml.push('<ul>');
+    if (opportunity) {
+      opportunity.data.forEach((record, index) => {
+        legendHtml.push('<li>');
+        legendHtml.push(
+          `<div className="chart-legend" style="background-color: ${opportunityBackgroundColor[index]}">${record.total}</div>`
+        );
+        legendHtml.push(
+          `<label className="chart-legend-label-text">${getLabelFromValues(
+            record._id,
+            stageMapperObjectForOne
+          )}</label>`
+        );
+        legendHtml.push('<li>');
+      });
+    }
+    legendHtml.push('</ul>');
+    return legendHtml.join('');
+  };
+  const pipelineLegendFunction = () => {
+    const legendHtml = [];
+    legendHtml.push('<ul>');
+    if (pipeline) {
+      pipeline.data.forEach((record, index) => {
+        legendHtml.push('<li>');
+        legendHtml.push(
+          `<div className="chart-legend" style="background-color: ${pipelineBackgroundColor[index]}">${record.total}</div>`
+        );
+        legendHtml.push(
+          `<label className="chart-legend-label-text">${getLabelFromValues(
+            record._id,
+            potentialMapperObject
+          )}</label>`
+        );
+        legendHtml.push('<li>');
+      });
+    }
+    legendHtml.push('</ul>');
+    return legendHtml.join('');
+  };
+
+  useEffect(() => {
+    if (opportunity && opportunity.data && opportunity.data.length > 0) {
+      const element = document.getElementById('opportunity-chart-legends');
+      if (element) {
+        element.innerHTML = opportunityLegendFunction();
+        console.log(element.innerHTML);
+      }
+    }
+  }, [opportunity]);
+
+  useEffect(() => {
+    if (pipeline && pipeline.data && pipeline.data.length > 0) {
+      const element = document.getElementById('pipeline-chart-legends');
+      if (element) {
+        element.innerHTML = pipelineLegendFunction();
+        console.log(element.innerHTML);
+      }
+    }
+  }, [pipeline]);
 
   return (
     <div>
@@ -87,13 +162,23 @@ const Home = () => {
         <div className="col-md-6">
           <div className="graph-container">
             <div className="common-title chart-title">OPPORTUNITIES</div>
-            <DashboardChart chartData={opportunity && opportunity.data && opportunity.data} />
+            <div className="graph-legend-container">
+              <div id="opportunity-chart-legends" />
+              <div className="graph">
+                <DashboardChart chartData={opportunity && opportunity.data && opportunity.data} />
+              </div>
+            </div>
           </div>
         </div>
         <div className="col-md-6">
           <div className="graph-container">
             <div className="common-title chart-title">PIPELINE VALUE</div>
-            <DoughnutChart chartData={pipeline && pipeline.data && pipeline.data} />
+            <div className="graph-legend-container">
+              <div id="pipeline-chart-legends" />
+              <div className="graph">
+                <DoughnutChart chartData={pipeline && pipeline.data && pipeline.data} />
+              </div>
+            </div>
           </div>
         </div>
       </div>
