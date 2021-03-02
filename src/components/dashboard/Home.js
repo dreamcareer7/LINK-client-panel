@@ -103,7 +103,6 @@ const Home = () => {
       const element = document.getElementById('opportunity-chart-legends');
       if (element) {
         element.innerHTML = opportunityLegendFunction();
-        console.log(element.innerHTML);
       }
     }
   }, [opportunity]);
@@ -113,7 +112,6 @@ const Home = () => {
       const element = document.getElementById('pipeline-chart-legends');
       if (element) {
         element.innerHTML = pipelineLegendFunction();
-        console.log(element.innerHTML);
       }
     }
   }, [pipeline]);

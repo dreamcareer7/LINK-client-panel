@@ -313,7 +313,6 @@ function Reporting() {
       const element = document.getElementById('pipeline-reporting-legends');
       if (element) {
         element.innerHTML = pipelineLegendFunction();
-        console.log(element.innerHTML);
       }
     }
   }, [pipelineValuesGraph]);
