@@ -11,7 +11,7 @@ import {
 import OpportunityData from './opprotunity-data/OpportunityData';
 import History from './history/History';
 import Notes from './notes/Notes';
-import { fetchConversation } from '../../../../../redux/actions/followUpAction/historyAction/HistoryAction';
+// import { fetchConversation } from '../../../../../redux/actions/followUpAction/historyAction/HistoryAction';
 import Modal from '../../../../commonComponents/Modal/Modal';
 
 function OpportunityDetails() {
@@ -39,7 +39,7 @@ function OpportunityDetails() {
 
   const onSyncClick = () => {
     dispatch(syncWithLinkedIn(id));
-    dispatch(fetchConversation(id, ''));
+    // dispatch(fetchConversation(id, ''));
   };
   const deleteSyncClick = () => {
     setIsModelOpen(true);
