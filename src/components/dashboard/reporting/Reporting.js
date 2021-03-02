@@ -232,7 +232,7 @@ function Reporting() {
       fontFamily: '"Lucida Console", Monaco, monospace',
     },
     cutoutPercentage: 65,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#00A8FF',
     legend: {
       position: 'left',
       align: 'start',
