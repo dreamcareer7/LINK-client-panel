@@ -29,12 +29,17 @@ export const pipelineValuesGraphData = (state = initialPipelineValuesGraphData, 
       const filteredData = action.data;
       return {
         ...state,
-        labels: filteredData.map(e => getLabelFromValues(e._id, chartPotentialMapperObject)),
-        values: filteredData.map(e => e.totalDealValue),
+        labels: filteredData.data.map(e => getLabelFromValues(e._id, chartPotentialMapperObject)),
+        values: filteredData.data.map(e => e.totalDealValue),
+        totalDealAmount: filteredData.totalDealAmount,
         datasets: [
           {
-            data: filteredData.map(e => (e.totalDealValue ? e.totalDealValue : '')),
+            data: filteredData.data.map(e => (e.totalDealValue ? e.totalDealValue : '')),
             backgroundColor: ['#39C3BB', '#FCAB50', '#FF696A'],
+            dataTotal: filteredData.data.map(e => (e.totalDealValueStr ? e.totalDealValueStr : '')),
+            dataTotalPer: filteredData.data.map(e =>
+              e.totalDealValuePer ? e.totalDealValuePer : ''
+            ),
           },
         ],
       };
@@ -89,11 +94,12 @@ export const totalSalesGraphData = (state = initialTotalSalesGraphData, action) 
       return {
         ...state,
         // TODO fix the id
-        labels: action.data.map(e => e._id),
-        values: action.data.map(e => (e.totalDealSize !== 0 ? e.totalDealSize : '')),
+        labels: action.data.data.map(e => e._id),
+        values: action.data.data.map(e => (e.totalDealSize !== 0 ? e.totalDealSize : '')),
+        maximumGraphValue: action.data.maximumGraphValue !== 0 ? action.data.maximumGraphValue : 0,
         datasets: [
           {
-            data: action.data.map(e => (e.totalDealSize !== 0 ? e.totalDealSize : '')),
+            data: action.data.data.map(e => (e.totalDealSize !== 0 ? e.totalDealSize : '')),
           },
         ],
       };

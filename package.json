@@ -11,7 +11,7 @@
     "bootstrap-daterangepicker": "^3.1.0",
     "canvasjs-react-charts": "^1.0.5",
     "chart.js": "^2.9.4",
-    "chartjs-plugin-datalabels": "^0.7.0",
+    "chartjs-plugin-labels": "^1.1.0",
     "firebase": "^8.2.5",
     "is_js": "^0.9.0",
     "moment": "^2.29.1",

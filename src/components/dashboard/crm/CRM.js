@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
 import './CRM.scss';
 import { Bar } from 'react-chartjs-2';
-import 'chartjs-plugin-datalabels';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';

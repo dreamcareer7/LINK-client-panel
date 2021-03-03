@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Chart, Doughnut } from 'react-chartjs-2';
 import { getLabelFromValues } from '../../helpers/chartHelper';
 import { chartPotentialMapperObject } from '../../helpers/Mappers';
+import 'chartjs-plugin-labels';
 
 Chart.pluginService.register({
   beforeDraw(chart) {
@@ -90,17 +91,26 @@ Chart.pluginService.register({
 
 const DoughnutChart = props => {
   const { chartData } = props;
+  console.log(chartData, '132423543');
   // const filteredData = chartData.filter(e => e.total);
   const state = {
-    labels: chartData && chartData.map(e => getLabelFromValues(e._id, chartPotentialMapperObject)),
+    labels:
+      chartData && chartData.data.map(e => getLabelFromValues(e._id, chartPotentialMapperObject)),
     datasets: [
       {
-        label: chartData && chartData.map(e => e._id),
+        label: chartData && chartData.data.map(e => e._id),
         backgroundColor: ['#39c3bb', '#fcab50', '#ff696a'],
-        data: chartData && chartData.map(e => (e.total ? e.total : '')),
+        data: chartData && chartData.data.map(e => (e.totalDealValue ? e.totalDealValue : '')),
+        totalData:
+          chartData && chartData.data.map(e => (e.totalDealValueStr ? e.totalDealValueStr : '')),
       },
     ],
   };
+  const numberToUSD = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+  });
   return (
     <div>
       <Doughnut
@@ -109,21 +119,24 @@ const DoughnutChart = props => {
         data={state}
         options={{
           aspectRatio: 1,
-          /* elements: {
+          elements: {
             center: {
-              text: `${total} || No Value`,
+              text: chartData.totalDealAmount ? numberToUSD.format(chartData.totalDealAmount) : '',
               color: '#07084B', // Default is #000000
               fontStyle: 'roboto', // Default is Arial
               fontSize: 10, // Default is 20 (in px), set to false and text will not wrap.
               lineHeight: 1, // Default is 25 (in px), used for when text wraps
             },
-          }, */
+          },
           plugins: {
             labels: {
-              render: 'value',
-              fontStyle: 'bold',
-              fontColor: '#fff',
+              render: args => {
+                return args.dataset.totalData[args.index];
+              },
+              fontStyle: 'normal',
+              fontColor: '#ffffff',
               fontFamily: '"Lucida Console", Monaco, monospace',
+              arc: true,
             },
           },
           legend: {

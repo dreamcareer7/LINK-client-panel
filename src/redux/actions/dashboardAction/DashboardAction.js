@@ -32,7 +32,7 @@ export const fetchPipeLine = () => {
         if (response.data.status === 'SUCCESS') {
           dispatch({
             type: DASHBOARD_REDUX_CONSTANT.PIPELINE_REDUX_CONSTANT,
-            data: response.data.data,
+            data: response.data,
           });
         }
       })

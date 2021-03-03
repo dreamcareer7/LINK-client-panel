@@ -26,6 +26,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { clientQuote, pipeline, opportunity } = useSelector(state => state.dashboardReducer);
+  console.log(pipeline, '423432543545');
   useEffect(() => {
     requestFirebaseNotificationPermission()
       .then(firebaseToken => {
@@ -79,11 +80,11 @@ const Home = () => {
   const pipelineLegendFunction = () => {
     const legendHtml = [];
     legendHtml.push('<ul>');
-    if (pipeline) {
-      pipeline.data.forEach((record, index) => {
+    if (pipeline && pipeline.data && pipeline.data.data) {
+      pipeline.data.data.forEach((record, index) => {
         legendHtml.push('<li>');
         legendHtml.push(
-          `<div className="chart-legend" style="background-color: ${pipelineBackgroundColor[index]}">${record.total}</div>`
+          `<div className="chart-legend" style="background-color: ${pipelineBackgroundColor[index]}">${record.totalDealValueStr}</div>`
         );
         legendHtml.push(
           `<label className="chart-legend-label-text">${getLabelFromValues(
@@ -106,16 +107,15 @@ const Home = () => {
       }
     }
   }, [opportunity]);
-
+  console.log(pipeline);
   useEffect(() => {
-    if (pipeline && pipeline.data && pipeline.data.length > 0) {
+    if (pipeline && pipeline.data && pipeline.data.data && pipeline.data.data.length > 0) {
       const element = document.getElementById('pipeline-chart-legends');
       if (element) {
         element.innerHTML = pipelineLegendFunction();
       }
     }
   }, [pipeline]);
-
   return (
     <div>
       <div className="graph-container">
@@ -160,7 +160,7 @@ const Home = () => {
         <div className="col-md-6">
           <div className="graph-container">
             <div className="common-title chart-title">OPPORTUNITIES</div>
-            {opportunity && opportunity.data ? (
+            {opportunity && opportunity.data.length !== 0 ? (
               <div className="graph-legend-container">
                 <div id="opportunity-chart-legends" />
                 <div className="graph">
@@ -168,14 +168,19 @@ const Home = () => {
                 </div>
               </div>
             ) : (
-              <div className="no-data-style">No Data Available</div>
+              <div className="no-data-style">
+                <span>
+                  Looks like you haven&#39;t added any opportunities, head to your LinkedIn account
+                  to get started. Good luck!
+                </span>
+              </div>
             )}
           </div>
         </div>
         <div className="col-md-6">
           <div className="graph-container">
             <div className="common-title chart-title">PIPELINE VALUE</div>
-            {pipeline && pipeline.data ? (
+            {pipeline && pipeline.data.length !== 0 ? (
               <div className="graph-legend-container">
                 <div id="pipeline-chart-legends" />
                 <div className="graph">
@@ -183,7 +188,12 @@ const Home = () => {
                 </div>
               </div>
             ) : (
-              <div className="no-data-style">No Data Available</div>
+              <div className="no-data-style">
+                <span>
+                  Looks like you haven&#39;t added any opportunities, head to your LinkedIn account
+                  to get started. Good luck!
+                </span>
+              </div>
             )}
           </div>
         </div>

@@ -30,7 +30,7 @@ export const getPipelineValuesGraphData = ({ startDate, endDate }) => {
         if (response.data.status === 'SUCCESS') {
           dispatch({
             type: REPORT_REDUX_CONSTANT.GET_PIPELINE_VALUES_GRAPH_DATA,
-            data: response.data.data,
+            data: response.data,
           });
         }
       })
@@ -72,7 +72,7 @@ export const getTotalSalesGraphData = ({ startDate, endDate }) => {
         if (response.data.status === 'SUCCESS') {
           dispatch({
             type: REPORT_REDUX_CONSTANT.GET_TOTAL_SALES_GRAPH_DATA,
-            data: response.data.data,
+            data: response.data,
           });
         }
       })
