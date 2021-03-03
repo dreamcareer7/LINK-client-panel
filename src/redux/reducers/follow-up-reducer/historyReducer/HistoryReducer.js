@@ -2,6 +2,7 @@ import HISTORY_REDUX_CONSTANT from '../../../constants/historyReduxConstant/Hist
 
 const initialDataFetch = {
   isLoading: true,
+  isAllDataLoaded: false,
   data: null,
 };
 // eslint-disable-next-line import/prefer-default-export
@@ -20,7 +21,8 @@ export const opportunityHistory = (state = initialDataFetch, action) => {
     case HISTORY_REDUX_CONSTANT.APPEND_OPPORTUNITY_CONVERSATION:
       return {
         isLoading: false,
-        data: { ...action.data, ...state.data },
+        isAllDataLoaded: action.data.data.length === 0,
+        data: { data: [...action.data.data, ...state.data.data] },
       };
     case HISTORY_REDUX_CONSTANT.ERROR_OPPORTUNITY_CONVERSATION:
       return {
