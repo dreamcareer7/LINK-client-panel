@@ -106,11 +106,11 @@ const DoughnutChart = props => {
       },
     ],
   };
-  const numberToUSD = new Intl.NumberFormat('en-US', {
+  /* const numberToUSD = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 0,
-  });
+  }); */
   return (
     <div>
       <Doughnut
@@ -121,7 +121,8 @@ const DoughnutChart = props => {
           aspectRatio: 1,
           elements: {
             center: {
-              text: chartData.totalDealAmount ? numberToUSD.format(chartData.totalDealAmount) : '',
+              text: '',
+              // text: chartData.totalDealAmount ? numberToUSD.format(chartData.totalDealAmount) : '',
               color: '#07084B', // Default is #000000
               fontStyle: 'roboto', // Default is Arial
               fontSize: 10, // Default is 20 (in px), set to false and text will not wrap.

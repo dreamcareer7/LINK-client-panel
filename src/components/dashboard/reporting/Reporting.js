@@ -301,19 +301,20 @@ function Reporting() {
       ],
     },
   };
-  const numberToUSD = new Intl.NumberFormat('en-US', {
+  /* const numberToUSD = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 0,
-  });
+  }); */
   const pipelineRef = useRef();
 
   const pipelineOptions = {
     elements: {
       center: {
-        text: pipelineValuesGraph.totalDealAmount
-          ? numberToUSD.format(pipelineValuesGraph.totalDealAmount)
-          : '',
+        text: '',
+        // text: pipelineValuesGraph.totalDealAmount
+        //   ? numberToUSD.format(pipelineValuesGraph.totalDealAmount)
+        //   : '',
         color: '#07084B', // Default is #000000
         fontStyle: 'roboto', // Default is Arial
         fontSize: 10, // Default is 20 (in px), set to false and text will not wrap.
@@ -481,7 +482,7 @@ function Reporting() {
         </div>
         <div className="pipeline-container">
           <div className="common-title">PIPELINE VALUE</div>
-          {pipelineValuesGraph.values > 0 ? (
+          {pipelineValuesGraph && pipelineValuesGraph.values && pipelineValuesGraph.values.length === 0 ? (
             <div className="no-data-style">
               <span>
                 Looks like you haven&#39;t added any opportunities, head to your LinkedIn account to

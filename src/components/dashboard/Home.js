@@ -180,7 +180,7 @@ const Home = () => {
         <div className="col-md-6">
           <div className="graph-container">
             <div className="common-title chart-title">PIPELINE VALUE</div>
-            {pipeline && pipeline.data.length !== 0 ? (
+            {pipeline && pipeline.data && pipeline.data.data && pipeline.data.data.length !== 0 ? (
               <div className="graph-legend-container">
                 <div id="pipeline-chart-legends" />
                 <div className="graph">
