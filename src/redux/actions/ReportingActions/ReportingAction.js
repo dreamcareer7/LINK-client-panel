@@ -85,3 +85,12 @@ export const getTotalSalesGraphData = ({ startDate, endDate }) => {
       });
   };
 };
+
+export const resetReportingGraphData = dispatch => {
+  dispatch({
+    type: REPORT_REDUX_CONSTANT.RESET_CONVERSATION_GRAPH_DATA,
+  });
+  dispatch({
+    type: REPORT_REDUX_CONSTANT.RESET_TOTAL_SALES_GRAPH_DATA,
+  });
+};

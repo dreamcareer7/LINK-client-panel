@@ -8,6 +8,7 @@ import {
   getConversationGraphData,
   getPipelineValuesGraphData,
   getTotalSalesGraphData,
+  resetReportingGraphData,
 } from '../../../redux/actions/ReportingActions/ReportingAction';
 import 'chartjs-plugin-labels';
 
@@ -175,7 +176,6 @@ function Reporting() {
     }
 
     const index = tooltipModel && tooltipModel.dataPoints && tooltipModel.dataPoints[0].index;
-    console.log(tooltips[index]);
     tooltipEl.classList.remove('above', 'below', 'no-transform');
     tooltipEl.classList.remove('above', 'below', 'no-transform');
     if (tooltipModel.yAlign) {
@@ -186,7 +186,6 @@ function Reporting() {
 
     if (tooltipModel.body) {
       const titleLines = tooltipModel.title || [];
-      console.log('titleLines', tooltipModel.body);
       let innerHtml = '<thead>';
 
       titleLines.forEach(() => {
@@ -197,51 +196,19 @@ function Reporting() {
       innerHtml += '</tbody>';
       const tableRoot = tooltipEl.querySelector('table');
       tableRoot.innerHTML = innerHtml;
-      console.log('tooltipEl', tooltipEl);
     }
     const position = chart.chartInstance.canvas.getBoundingClientRect();
-    // Display, position, and set styles for font
-    const positionY = chart.chartInstance.canvas.offsetTop;
-    const positionX = chart.chartInstance.canvas.offsetLeft;
+
     tooltipEl.style.opacity = 1;
-    console.log(
-      'position.left',
-      position.left,
-      'position.top',
-      position.top,
-      'positionX',
-      positionX,
-      'positionY',
-      positionY
-    );
-    let top = 0;
-
-    console.log(`tooltip.yAlign: ${tooltipModel.yAlign}`);
-    console.log(`tooltip.y: ${tooltipModel.y}`);
-    console.log(`tooltip.caretHeight: ${tooltipModel.caretHeight}`);
-    console.log(`tooltip.caretPadding: ${tooltipModel.caretPadding}`);
-
-    if (tooltipModel.yAlign) {
-      let ch = 0;
-      if (tooltipModel.caretHeight) {
-        ch = tooltipModel.caretHeight;
-      }
-      if (tooltipModel.yAlign === 'above') {
-        top = tooltipModel.y - ch - tooltipModel.caretPadding;
-      } else {
-        top = tooltipModel.y + ch + tooltipModel.caretPadding;
-      }
-    }
 
     tooltipEl.style.left = `${position.left + tooltipModel.x}px`;
-    tooltipEl.style.top = `${position.top + top / 4}px`;
-    console.log(top, 'top', top / 2, 'top/2');
-    console.log(tooltipModel.caretX, 'tooltipModel.caretX');
+    tooltipEl.style.top = `${position.top + tooltipModel.y / 1.5}px`;
     tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
     tooltipEl.style.fontSize = `${tooltipModel.bodyFontSize}px`;
     tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
     tooltipEl.style.padding = `${tooltipModel.yPadding}px ${tooltipModel.xPadding}px`;
   };
+
   const conversionsOptions = {
     backgroundColor: '#00A8FF',
     legend: {
@@ -262,7 +229,6 @@ function Reporting() {
       mode: 'nearest',
       custom: tooltipModel => onHandleCustomTooltips(tooltipModel),
     },
-    /* elements: { point: { radius: 0 } }, */
     scales: {
       xAxes: [
         {
@@ -326,18 +292,19 @@ function Reporting() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    document.title = 'Reporting';
-  }, []);
-  useEffect(() => {
     const data = {
       startDate,
       endDate,
     };
+    document.title = 'Reporting';
 
     dispatch(getActivityBreakdownGraphData(data));
     dispatch(getPipelineValuesGraphData(data));
     dispatch(getConversationGraphData(data));
     dispatch(getTotalSalesGraphData(data));
+    return () => {
+      dispatch(resetReportingGraphData);
+    };
   }, []);
 
   const pipelineLegendFunction = () => {
@@ -345,7 +312,6 @@ function Reporting() {
     let legendLabel = [];
     legendLabel = pipelineValuesGraph.labels.map(label => label);
     legendHtml.push('<ul>');
-    console.log(pipelineValuesGraph);
     if (pipelineValuesGraph && pipelineValuesGraph.datasets[0].dataTotalPer) {
       pipelineValuesGraph.datasets[0].dataTotalPer.forEach((record, index) => {
         legendHtml.push('<li>');
@@ -379,7 +345,6 @@ function Reporting() {
     }
   }, [pipelineValuesGraph]);
 
-  console.log(totalSalesData, 'data');
   return (
     <>
       <div className="total-sales-container">

@@ -71,7 +71,8 @@ export const conversationGraphData = (state = initialConversationGraphData, acti
           },
         ],
       };
-
+    case REPORT_REDUX_CONSTANT.RESET_CONVERSATION_GRAPH_DATA:
+      return initialConversationGraphData;
     default:
       return state;
   }
@@ -103,7 +104,8 @@ export const totalSalesGraphData = (state = initialTotalSalesGraphData, action) 
           },
         ],
       };
-
+    case REPORT_REDUX_CONSTANT.RESET_TOTAL_SALES_GRAPH_DATA:
+      return initialTotalSalesGraphData;
     default:
       return state;
   }
