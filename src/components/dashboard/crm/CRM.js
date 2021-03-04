@@ -20,6 +20,7 @@ import { getLabelFromValues } from '../../../helpers/chartHelper';
 import { potentialMapperObject } from '../../../helpers/Mappers';
 import { errorNotification } from '../../../constants/Toast';
 import Modal from '../../commonComponents/Modal/Modal';
+import 'chartjs-plugin-labels';
 
 const initialFilterState = {
   stage: null,
@@ -154,8 +155,7 @@ function Crm() {
     [crmsChartState]
   );
 
-  const options = {
-    backgroundColor: '#f9f9f9',
+  const crmOptions = {
     layout: {
       padding: {
         top: 30,
@@ -202,19 +202,12 @@ function Crm() {
       ],
     },
     plugins: {
-      datalabels: {
-        display: true,
-        anchor: 'end',
-        align: 'end',
-        color: '#7f7f7f',
-        labels: {
-          title: {
-            font: {
-              size: 16,
-              weight: 'bold',
-            },
-          },
-        },
+      labels: {
+        render: 'value',
+        fontSize: '16',
+        fontColor: '#7f7f7f',
+        fontStyle: 'bold',
+        position: 'outside',
       },
     },
     onClick: chartClickCallback,
@@ -344,7 +337,7 @@ function Crm() {
       )}
       <div className="common-title">SALES OPPORTUNITIES</div>
       <div className="graph-container">
-        <Bar options={options} id="sales-opportunities" data={crmsChartState} height={80} />
+        <Bar options={crmOptions} id="sales-opportunities" data={crmsChartState} height={80} />
       </div>
       <div className="filter-container">
         <div>

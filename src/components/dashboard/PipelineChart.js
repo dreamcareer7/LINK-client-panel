@@ -91,8 +91,7 @@ Chart.pluginService.register({
 
 const DoughnutChart = props => {
   const { chartData } = props;
-  console.log(chartData, '132423543');
-  // const filteredData = chartData.filter(e => e.total);
+
   const state = {
     labels:
       chartData && chartData.data.map(e => getLabelFromValues(e._id, chartPotentialMapperObject)),
@@ -106,11 +105,7 @@ const DoughnutChart = props => {
       },
     ],
   };
-  /* const numberToUSD = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 0,
-  }); */
+
   return (
     <div>
       <Doughnut
@@ -119,16 +114,6 @@ const DoughnutChart = props => {
         data={state}
         options={{
           aspectRatio: 1,
-          elements: {
-            center: {
-              text: '',
-              // text: chartData.totalDealAmount ? numberToUSD.format(chartData.totalDealAmount) : '',
-              color: '#07084B', // Default is #000000
-              fontStyle: 'roboto', // Default is Arial
-              fontSize: 10, // Default is 20 (in px), set to false and text will not wrap.
-              lineHeight: 1, // Default is 25 (in px), used for when text wraps
-            },
-          },
           plugins: {
             labels: {
               render: args => {
@@ -142,14 +127,6 @@ const DoughnutChart = props => {
           },
           legend: {
             display: false,
-            position: 'left',
-            align: 'start',
-            fontStyle: 'bold',
-            labels: {
-              fontSize: 14,
-              padding: 12,
-              fontColor: '#464646',
-            },
           },
         }}
       />

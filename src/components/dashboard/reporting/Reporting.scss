@@ -85,3 +85,49 @@
   background-color: $secondary-variant-color;
   border-radius: 10px;
 }
+
+.chartjs-render-monitor {
+  position: relative!important;
+}
+
+#chartjs-tooltip {
+  position: absolute;
+  width: 300px;
+ // top: 80%;
+  background: rgba(0,0,0,.7);
+  border-radius: 10px;
+  color: #ebebeb;
+}
+
+#chartjs-tooltip:after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  z-index: 1;
+  border-style: solid;
+  border-color: rgba(0,0,0,.7) transparent;
+  border-width: 10px 10px 0;
+  bottom: -10px;
+  left: 50%;
+  margin-left: -10px;
+}
+
+#chartjs-tooltip {
+  opacity: 1;
+  position: absolute;
+  background: rgba(0, 0, 0, .7);
+  color: white;
+  border-radius: 3px;
+  -webkit-transition: all .1s ease;
+  transition: all .1s ease;
+  pointer-events: none;
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
+
+.chartjs-tooltip-key {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+}

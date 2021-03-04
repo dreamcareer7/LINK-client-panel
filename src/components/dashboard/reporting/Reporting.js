@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { createRef, useEffect, useRef, useState } from 'react';
 import moment from 'moment';
 import './Reporting.scss';
 import { Bar, Chart, Doughnut, Line } from 'react-chartjs-2';
@@ -106,11 +106,9 @@ function Reporting() {
   const [startDate] = useState(moment().subtract(5, 'days').format('YYYY-MM-DD'));
   const [endDate] = useState(moment().format('YYYY-MM-DD'));
   const totalSalesOptions = {
-    backgroundColor: '#f9f9f9',
     legend: {
       display: false,
     },
-    /* elements: { point: { radius: 0 } }, */
     scales: {
       xAxes: [
         {
@@ -144,33 +142,106 @@ function Reporting() {
               value.toLocaleString('en-US', {
                 style: 'currency',
                 currency: 'USD',
+                minimumFractionDigits: 0,
               }),
           },
         },
       ],
     },
   };
-  /* const [toolTip, setToolTip] = useState(undefined);
-  const showTooltip = tooltip => {
-    if (tooltip.opacity === 0) {
-      setToolTip(undefined);
-    } else {
-      setToolTip(tooltip);
-    }
-  };
-  */
-  /*  const getBody = bodyItem => {
-    console.log(bodyItem.lines);
-    return bodyItem.lines;
-  }; */
-  /* const tooltips = [
+
+  const _chartRef = createRef();
+
+  const tooltips = [
     'This is the percentage of people who have accepted your connection invite, you should be aiming for a 35 - 45% acceptance rate.',
     'The number of conversations opened up based on the total invitations accepted, the goal is to achieve a 15 - 20% conversion.',
     'This is the number of conversations that have turned into meetings. The goal is to get this to a 25 - 35% conversion rate.',
     'The number of meetings that have turned into a sale. This depends on your sales process but 10 - 30% is considered a good rate.',
   ];
-*/
-  const chartRef = React.createRef();
+
+  const onHandleCustomTooltips = tooltipModel => {
+    let tooltipEl = document.getElementById('chartjs-tooltip');
+    const chart = _chartRef.current;
+    if (!tooltipEl) {
+      tooltipEl = document.createElement('div');
+      tooltipEl.id = 'chartjs-tooltip';
+      tooltipEl.innerHTML = '<table></table>';
+      document.body.appendChild(tooltipEl);
+    }
+
+    if (tooltipModel.opacity === 0) {
+      tooltipEl.style.opacity = 0;
+      return;
+    }
+
+    const index = tooltipModel && tooltipModel.dataPoints && tooltipModel.dataPoints[0].index;
+    console.log(tooltips[index]);
+    tooltipEl.classList.remove('above', 'below', 'no-transform');
+    tooltipEl.classList.remove('above', 'below', 'no-transform');
+    if (tooltipModel.yAlign) {
+      tooltipEl.classList.add(tooltipModel.yAlign);
+    } else {
+      tooltipEl.classList.add('no-transform');
+    }
+
+    if (tooltipModel.body) {
+      const titleLines = tooltipModel.title || [];
+      console.log('titleLines', tooltipModel.body);
+      let innerHtml = '<thead>';
+
+      titleLines.forEach(() => {
+        innerHtml += `<tr><th>${tooltips[index]}</th></tr>`;
+      });
+      innerHtml += '</thead><tbody>';
+
+      innerHtml += '</tbody>';
+      const tableRoot = tooltipEl.querySelector('table');
+      tableRoot.innerHTML = innerHtml;
+      console.log('tooltipEl', tooltipEl);
+    }
+    const position = chart.chartInstance.canvas.getBoundingClientRect();
+    // Display, position, and set styles for font
+    const positionY = chart.chartInstance.canvas.offsetTop;
+    const positionX = chart.chartInstance.canvas.offsetLeft;
+    tooltipEl.style.opacity = 1;
+    console.log(
+      'position.left',
+      position.left,
+      'position.top',
+      position.top,
+      'positionX',
+      positionX,
+      'positionY',
+      positionY
+    );
+    let top = 0;
+
+    console.log(`tooltip.yAlign: ${tooltipModel.yAlign}`);
+    console.log(`tooltip.y: ${tooltipModel.y}`);
+    console.log(`tooltip.caretHeight: ${tooltipModel.caretHeight}`);
+    console.log(`tooltip.caretPadding: ${tooltipModel.caretPadding}`);
+
+    if (tooltipModel.yAlign) {
+      let ch = 0;
+      if (tooltipModel.caretHeight) {
+        ch = tooltipModel.caretHeight;
+      }
+      if (tooltipModel.yAlign === 'above') {
+        top = tooltipModel.y - ch - tooltipModel.caretPadding;
+      } else {
+        top = tooltipModel.y + ch + tooltipModel.caretPadding;
+      }
+    }
+
+    tooltipEl.style.left = `${position.left + tooltipModel.x}px`;
+    tooltipEl.style.top = `${position.top + top / 4}px`;
+    console.log(top, 'top', top / 2, 'top/2');
+    console.log(tooltipModel.caretX, 'tooltipModel.caretX');
+    tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
+    tooltipEl.style.fontSize = `${tooltipModel.bodyFontSize}px`;
+    tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
+    tooltipEl.style.padding = `${tooltipModel.yPadding}px ${tooltipModel.xPadding}px`;
+  };
   const conversionsOptions = {
     backgroundColor: '#00A8FF',
     legend: {
@@ -188,83 +259,8 @@ function Reporting() {
     },
     tooltips: {
       enabled: false,
-      wrap: true,
-      /*     callbacks: {
-        title(tooltipItem) {
-          return tooltips[tooltipItem[0].index];
-        },
-        label() {
-          return null;
-        },
-      }, */
-      // Disable the on-canvas tooltip
-
-      custom: tooltipModel => {
-        // Tooltip Element
-        let tooltipEl = document.getElementById('chartjs-tooltip');
-
-        // Create element on first render
-        if (!tooltipEl) {
-          tooltipEl = document.createElement('div');
-          tooltipEl.id = 'chartjs-tooltip';
-          tooltipEl.innerHTML = '<label></label>';
-          document.body.appendChild(tooltipEl);
-        }
-
-        // Hide if no tooltip
-        if (tooltipModel.opacity === 0) {
-          tooltipEl.style.opacity = '0';
-          return;
-        }
-
-        // Set caret Position
-        tooltipEl.classList.remove('above', 'below', 'no-transform');
-        if (tooltipModel.yAlign) {
-          tooltipEl.classList.add(tooltipModel.yAlign);
-        } else {
-          tooltipEl.classList.add('no-transform');
-        }
-        console.log(tooltipModel);
-        // Set Text
-        if (tooltipModel.body) {
-          const titleLines = tooltipModel.title;
-          console.log(titleLines);
-          console.log(tooltipModel.title[0].index);
-          //     const bodyLines = tooltipModel.body.map(getBody);
-          let innerHtml = '<div>';
-          titleLines.forEach((title, i) => {
-            const colors = tooltipModel.labelColors[i];
-            const width = '200px';
-            let style = `background: ${colors.backgroundColor} `;
-            style += `;width: ${width}`;
-            innerHtml += `<span style="${style}">${title}</span>`;
-          });
-          innerHtml += '</div>';
-          console.log(innerHtml);
-          const labelRoot = tooltipEl.querySelector('label');
-          if (labelRoot) {
-            labelRoot.innerHTML = innerHtml;
-          }
-        }
-
-        console.log(chartRef.current.chartInstance.canvas);
-
-        // `this` will be the overall tooltip
-        if (chartRef) {
-          const position = chartRef.current.chartInstance.canvas.getBoundingClientRect();
-
-          // Display, position, and set styles for font
-          tooltipEl.style.opacity = '1';
-          tooltipEl.style.position = 'absolute';
-          tooltipEl.style.left = `${position.left + window.pageXOffset + tooltipModel.caretX}px`;
-          tooltipEl.style.top = `${position.top + window.pageYOffset + tooltipModel.caretY}px`;
-          tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
-          tooltipEl.style.fontSize = `${tooltipModel.bodyFontSize}px`;
-          tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
-          tooltipEl.style.padding = `${tooltipModel.yPadding}px ${tooltipModel.xPadding}px`;
-          tooltipEl.style.pointerEvents = 'none';
-        }
-      },
+      mode: 'nearest',
+      custom: tooltipModel => onHandleCustomTooltips(tooltipModel),
     },
     /* elements: { point: { radius: 0 } }, */
     scales: {
@@ -301,30 +297,17 @@ function Reporting() {
       ],
     },
   };
-  /* const numberToUSD = new Intl.NumberFormat('en-US', {
+  const numberToUSD = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 0,
-  }); */
+  });
   const pipelineRef = useRef();
 
   const pipelineOptions = {
-    elements: {
-      center: {
-        text: '',
-        // text: pipelineValuesGraph.totalDealAmount
-        //   ? numberToUSD.format(pipelineValuesGraph.totalDealAmount)
-        //   : '',
-        color: '#07084B', // Default is #000000
-        fontStyle: 'roboto', // Default is Arial
-        fontSize: 10, // Default is 20 (in px), set to false and text will not wrap.
-        lineHeight: 1, // Default is 25 (in px), used for when text wraps
-      },
-    },
     plugins: {
       labels: {
         render: args => {
-          console.log(args);
           return args.dataset.dataTotal[args.index];
         },
         fontStyle: 'normal',
@@ -334,41 +317,13 @@ function Reporting() {
       },
     },
     aspectRatio: 1,
-    value: ['$10000', '$20000', '$52000'],
-    labels: {
-      render: 'value',
-      fontSize: 14,
-      fontStyle: 'bold',
-      fontColor: '#fff',
-      fontFamily: '"Lucida Console", Monaco, monospace',
-    },
     cutoutPercentage: 65,
-    backgroundColor: '#f9f9f9',
     legend: {
       display: false,
-      position: 'left',
-      align: 'start',
-      pointRadius: '30',
-      labels: {
-        pointStyle: 'point',
-        boxWidth: 30,
-        boxHeight: 2,
-        fontSize: 14,
-        padding: 12,
-        box: {
-          height: 2,
-        },
-        fontColor: '#464646',
-      },
     },
   };
 
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //
-  //
-  // }, [pipelineRef.current]);
 
   useEffect(() => {
     document.title = 'Reporting';
@@ -424,17 +379,6 @@ function Reporting() {
     }
   }, [pipelineValuesGraph]);
 
-  /*
-  const getPipelineTotalValues = () => {
-    let total = 0;
-    if (pipelineValuesGraph && pipelineValuesGraph.values) {
-      total = pipelineValuesGraph.values.reduce((accumulator, currentValue) => {
-        return accumulator + currentValue;
-      });
-    }
-    return total;
-  };
-*/
   console.log(totalSalesData, 'data');
   return (
     <>
@@ -471,7 +415,7 @@ function Reporting() {
         <div className="conversions-container">
           <div className="common-title mb-5">CONVERSIONS</div>
           <Bar
-            ref={chartRef}
+            ref={_chartRef}
             options={conversionsOptions}
             data={
               conversionsData && conversionsData.data && conversionsData.data.length === 0
@@ -482,7 +426,9 @@ function Reporting() {
         </div>
         <div className="pipeline-container">
           <div className="common-title">PIPELINE VALUE</div>
-          {pipelineValuesGraph && pipelineValuesGraph.values && pipelineValuesGraph.values.length === 0 ? (
+          {pipelineValuesGraph &&
+          pipelineValuesGraph.values &&
+          pipelineValuesGraph.values.length === 0 ? (
             <div className="no-data-style">
               <span>
                 Looks like you haven&#39;t added any opportunities, head to your LinkedIn account to
@@ -493,6 +439,9 @@ function Reporting() {
             <div className="graph-legend-container">
               <div id="pipeline-reporting-legends" />
               <div className="graph">
+                <div className="graph-center-text">
+                  {numberToUSD.format(pipelineValuesGraph.totalDealAmount)}
+                </div>
                 <Doughnut
                   height={null}
                   width={null}

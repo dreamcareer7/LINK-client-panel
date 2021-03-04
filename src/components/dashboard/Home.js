@@ -107,7 +107,7 @@ const Home = () => {
       }
     }
   }, [opportunity]);
-  console.log(pipeline);
+
   useEffect(() => {
     if (pipeline && pipeline.data && pipeline.data.data && pipeline.data.data.length > 0) {
       const element = document.getElementById('pipeline-chart-legends');
@@ -116,6 +116,11 @@ const Home = () => {
       }
     }
   }, [pipeline]);
+  const numberToUSD = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+  });
   return (
     <div>
       <div className="graph-container">
@@ -184,6 +189,7 @@ const Home = () => {
               <div className="graph-legend-container">
                 <div id="pipeline-chart-legends" />
                 <div className="graph">
+                  <div className='graph-center-text'>{numberToUSD.format(pipeline.data.totalDealAmount)}</div>
                   <DoughnutChart chartData={pipeline && pipeline.data && pipeline.data} />
                 </div>
               </div>
