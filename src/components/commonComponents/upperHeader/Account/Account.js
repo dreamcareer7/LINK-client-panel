@@ -35,7 +35,6 @@ function Account() {
   });
   const dispatch = useDispatch();
   const { company, client, industries, invoices } = useSelector(state => state.AccountReducer);
-  console.log('client', client);
 
   useEffect(() => {
     const data = {
@@ -63,6 +62,7 @@ function Account() {
       companyLocation: form.location,
     };
     dispatch(updateClientInfo(formData));
+    dispatch(getClientInfo());
   };
   const onEndDateChange = e => {
     setEndDate(e);
@@ -144,7 +144,8 @@ function Account() {
     client && client.data && client.data.companyLocation,
     client && client.data && client.data.companySize,
     client && client.data && client.data.industry,
-    client && client.data && client.data.notificationType,
+    client && client.data && client.data.notificationType && client.data.notificationType.browser,
+    client && client.data && client.data.notificationType && client.data.notificationType.email,
     client && client.data && client.data.isSubscriptionAppliedForCancellation,
   ]);
 
@@ -178,11 +179,9 @@ function Account() {
         },
       })
     );
+    dispatch(getClientInfo());
   };
 
-  console.log('*******************');
-  console.log(emailCheckBox);
-  console.log(browserCheckBox);
   /* const onCancelScriptRun = () => {
       try {
         window.barecancel.params = {

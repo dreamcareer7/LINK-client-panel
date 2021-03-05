@@ -56,6 +56,7 @@ export const updateNotification = data => {
             type: ACCOUNT_REDUX_CONSTANT.UPDATE_CLIENT_INFO,
             data: response.data.data,
           });
+          successNotification('Notification type updated successfully');
         }
       })
       .catch(e => {
