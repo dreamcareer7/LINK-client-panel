@@ -18,6 +18,7 @@ import { downloadInvoiceHistory } from '../../../../helpers/downloadInvoiceHisto
 import InvoicesList from './InvoicesList';
 import { errorNotification } from '../../../../constants/Toast';
 import runCode from '../../../../helpers/bareMetricsScript';
+import ACCOUNT_REDUX_CONSTANT from '../../../../redux/constants/accountConstant/AccountConstant';
 
 function Account() {
   const [startDate, setStartDate] = useState(null);
@@ -202,7 +203,16 @@ function Account() {
     }; */
   const callBack = () => {
     dispatch(getClientInfo());
-    AccountService.cancelSubscription().then(null).catch(null);
+    AccountService.cancelSubscription()
+      .then(response => {
+        if (response.data.status === 'SUCCESS') {
+          dispatch({
+            type: ACCOUNT_REDUX_CONSTANT.GET_CLIENT_INFO,
+            data: response.data.data,
+          });
+        }
+      })
+      .catch(null);
   };
 
   return (
