@@ -397,9 +397,7 @@ function Account() {
 
             <div className="d-flex">
               {client.data.isSubscriptionAppliedForCancellation ? (
-                <button type="button" id="barecancel-trigger">
-                  Cancelled
-                </button>
+                <label>Cancelled</label>
               ) : (
                 <button
                   type="button"
