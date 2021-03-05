@@ -35,8 +35,7 @@ function Account() {
   });
   const dispatch = useDispatch();
   const { company, client, industries, invoices } = useSelector(state => state.AccountReducer);
-  console.log('pagenum=>', pagenum);
-  console.log('client=>', client);
+  console.log('client', client);
 
   useEffect(() => {
     const data = {
@@ -124,6 +123,9 @@ function Account() {
         company_size: client.data.companySize && client.data.companySize,
         industry: client.data.industry && client.data.industry,
         notificationType: client.data.notificationType && client.data.notificationType,
+        isSubscriptionAppliedForCancellation:
+          client.data.isSubscriptionAppliedForCancellation &&
+          client.data.isSubscriptionAppliedForCancellation,
       });
 
       setEmailCheckBox(
@@ -143,6 +145,7 @@ function Account() {
     client && client.data && client.data.companySize,
     client && client.data && client.data.industry,
     client && client.data && client.data.notificationType,
+    client && client.data && client.data.isSubscriptionAppliedForCancellation,
   ]);
 
   const onHandleChange = e => {
@@ -203,7 +206,6 @@ function Account() {
     AccountService.cancelSubscription().then(null).catch(null);
   };
 
-  console.log(moment().format('YYYY-MM-DD'));
   return (
     <div className="account-container">
       <div className="account-left">
@@ -223,6 +225,7 @@ function Account() {
                 onChange={onHandleChange}
                 name="name"
                 placeholder="Michelle Obama"
+                disabled
               />
             </div>
             <div>
@@ -233,6 +236,7 @@ function Account() {
                 className="common-input"
                 name="email"
                 placeholder="john@abcmedia.com.au"
+                disabled
               />
             </div>
             <div>
@@ -393,15 +397,19 @@ function Account() {
             </div>
 
             <div className="d-flex">
-              {/* <button type='button' className='mr-10'>Pause</button> */}
-
-              <button
-                type="button"
-                id="barecancel-trigger"
-                onClick={() => runCode(client.data.stripeCustomerId, callBack)}
-              >
-                Cancel
-              </button>
+              {client.data.isSubscriptionAppliedForCancellation ? (
+                <button type="button" id="barecancel-trigger">
+                  Cancelled
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  id="barecancel-trigger"
+                  onClick={() => runCode(client.data.stripeCustomerId, callBack)}
+                >
+                  Cancel
+                </button>
+              )}
             </div>
           </div>
         </div>
