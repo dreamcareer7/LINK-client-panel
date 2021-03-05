@@ -16,7 +16,7 @@ import {
 import AccountService from '../../../../services/account-services/AccountServices';
 import { downloadInvoiceHistory } from '../../../../helpers/downloadInvoiceHistory';
 import InvoicesList from './InvoicesList';
-import { errorNotification } from '../../../../constants/Toast';
+import { errorNotification, successNotification } from '../../../../constants/Toast';
 import runCode from '../../../../helpers/bareMetricsScript';
 import ACCOUNT_REDUX_CONSTANT from '../../../../redux/constants/accountConstant/AccountConstant';
 
@@ -210,6 +210,7 @@ function Account() {
             type: ACCOUNT_REDUX_CONSTANT.GET_CLIENT_INFO,
             data: response.data.data,
           });
+          successNotification('Subscription will be cancelled!');
         }
       })
       .catch(null);
