@@ -77,7 +77,7 @@ export const updateClientInfo = data => {
             type: ACCOUNT_REDUX_CONSTANT.UPDATE_CLIENT_INFO,
             data: response.data.data,
           });
-          successNotification('Client Update successfully!');
+          successNotification('User details update successfully!');
         }
       })
       .catch(e => {
