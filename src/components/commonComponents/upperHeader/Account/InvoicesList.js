@@ -28,7 +28,7 @@ function InvoicesList({ invoice }) {
   return (
     <div className="transaction-history-table-row table-row">
       <div>{moment(createdAt).format('DD/MM/YYYY')}</div>
-      <div>{`$${totalAmount}`}</div>
+      <div>{`$${totalAmount / 100}`}</div>
       <div>{getLabelFromValues(paymentId.planType, subTypeObject)}</div>
       <div>{receiptNumber}</div>
       <div className="actions">
