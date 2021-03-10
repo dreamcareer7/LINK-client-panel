@@ -57,6 +57,7 @@
 }
 
 .notification-container {
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -64,7 +65,7 @@
   width: 46px;
   min-height: 46px;
   min-width: 46px;
-  margin: 0 20px;
+  margin: 0 20px 6px 20px;
   border-radius: 50%;
   background-color: #ffffff;
   cursor: pointer;
