@@ -201,7 +201,10 @@ function UpperHeader() {
       >
         <div className="upper-header--rounded-block user-settings">
           <img className="user-dp" src={userPic && userPic ? userPic : loggeduser} />
-          <label className="label-area">{accountInfo.client.data.firstName}</label>
+          <label className="label-area">
+            {accountInfo.client.data.firstName}{' '}
+            {accountInfo.client.data.lastName && accountInfo.client.data.lastName}
+          </label>
           <div className="down-arrow">
             <img src={downArrow} onClick={onDropDownClick} />
             {dropDown && (

@@ -115,7 +115,9 @@ function Account() {
     dispatch(getIndutries());
     if (client && client.data && client.data) {
       setFormValue({
-        name: client.data.firstName && client.data.firstName,
+        name: `${client.data.firstName && client.data.firstName} ${
+          client.data.lastName && client.data.lastName
+        }`,
         email: client.data.email && client.data.email,
         phone: client.data.phone && client.data.phone,
         title: client.data.title && client.data.title,
@@ -138,6 +140,7 @@ function Account() {
     }
   }, [
     client && client.data && client.data.firstName,
+    client && client.data && client.data.lastName,
     client && client.data && client.data.email,
     client && client.data && client.data.phone,
     client && client.data && client.data.title,
