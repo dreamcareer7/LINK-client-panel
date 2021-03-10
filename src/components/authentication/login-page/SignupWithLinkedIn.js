@@ -21,7 +21,7 @@ function SignupWithLinkedIn() {
     console.log({ message });
     if (message) {
       errorNotification(message);
-      history.push('/signUp');
+      history.push('/');
     }
   }, [message]);
   return (
