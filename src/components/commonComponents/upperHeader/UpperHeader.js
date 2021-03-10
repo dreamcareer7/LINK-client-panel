@@ -181,7 +181,7 @@ function UpperHeader() {
           <img src={search} />
           <div className="search-area">
             {searchStart && filtered.length === 0 && (
-              <div className="open-search-area">No such opportunity found</div>
+              <div className="open-search-area">No opportunity found</div>
             )}
             {filtered.map(e => (
               <div className="open-search-area" onClick={() => onClickSearchedVal(e._id)}>
