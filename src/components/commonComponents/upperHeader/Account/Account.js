@@ -47,7 +47,7 @@ function Account() {
   const docs = useMemo(() => (invoices && invoices.data ? invoices.data : null), [invoices]);
   const invoiceData = useMemo(() => (docs && docs.docs ? docs.docs : []), [docs]);
   const activePage = useMemo(() => (docs && docs.page ? docs.page : 1), [docs]);
-
+  console.log('active page', activePage, invoiceData);
   const [browserCheckBox, setBrowserCheckBox] = React.useState(false);
   const [emailCheckBox, setEmailCheckBox] = React.useState(false);
 
@@ -460,16 +460,16 @@ function Account() {
             <div>Receipt No.</div>
             <div className="actions" />
           </div>
-
           {invoiceData &&
             invoiceData.map((invoice, index) => (
               <InvoicesList key={index.toString()} invoice={invoice} />
             ))}
-          {invoices && invoices.data && invoices.data.docs && invoices.data.docs.length > 5 && (
+          {console.log('invoices', invoices)}
+          {invoices && invoices.data.total > 4 && (
             <Pagination
               activePage={activePage}
-              itemsCountPerPage={10}
-              totalItemsCount={invoices.total || 1}
+              itemsCountPerPage={4}
+              totalItemsCount={invoices.data.total || 1}
               pageRangeDisplayed={3}
               onChange={handlePageChange}
               itemClass="page-item"
