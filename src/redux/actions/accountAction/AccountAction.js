@@ -56,6 +56,10 @@ export const updateNotification = data => {
             type: ACCOUNT_REDUX_CONSTANT.UPDATE_CLIENT_INFO,
             data: response.data.data,
           });
+          dispatch({
+            type: ACCOUNT_REDUX_CONSTANT.GET_CLIENT_INFO,
+            data: response.data.data,
+          });
           successNotification('Settings updated successfully!');
         }
       })
@@ -76,6 +80,10 @@ export const updateClientInfo = data => {
         if (response.data.status === 'SUCCESS') {
           dispatch({
             type: ACCOUNT_REDUX_CONSTANT.UPDATE_CLIENT_INFO,
+            data: response.data.data,
+          });
+          dispatch({
+            type: ACCOUNT_REDUX_CONSTANT.GET_CLIENT_INFO,
             data: response.data.data,
           });
           successNotification('Details updated successfully!');

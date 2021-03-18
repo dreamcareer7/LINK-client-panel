@@ -63,7 +63,7 @@ function Account() {
       companyLocation: form.location,
     };
     dispatch(updateClientInfo(formData));
-    dispatch(getClientInfo());
+    // dispatch(getClientInfo());
   };
   const onEndDateChange = e => {
     setEndDate(e);
@@ -183,7 +183,7 @@ function Account() {
         },
       })
     );
-    dispatch(getClientInfo());
+    // dispatch(getClientInfo());
   };
 
   /* const onCancelScriptRun = () => {
