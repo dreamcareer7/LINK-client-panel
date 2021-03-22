@@ -39,6 +39,8 @@ function UpperHeader() {
   const [filtered, setFiltered] = useState([]);
   const [dateRangePicker, setDateRangePicker] = useState(false);
   const ref = useRef();
+  const searchRef = useRef();
+  const [searchDropDown, setSearchDropDown] = useState(false);
   const [dropDown, setDropDown] = useState(false);
   const [dateRangeVal, setDateRangeVal] = useState(
     moment.range(moment().clone().subtract(5, 'days'), moment().clone())
@@ -79,12 +81,14 @@ function UpperHeader() {
     } else {
       setFiltered([]);
     }
+    setSearchDropDown(!searchDropDown);
   };
   const onDropDownClick = () => {
     setDropDown(!dropDown);
   };
   useOnClickOutside(ref, () => setDropDown(false));
   useOnClickOutside(ref, () => setDateRangePicker(false));
+  useOnClickOutside(searchRef, () => setSearchDropDown(false));
 
   useEffect(() => {
     FollowUpService.getNotification()
@@ -179,16 +183,18 @@ function UpperHeader() {
         />
         <div className="search-icon">
           <img src={search} />
-          <div className="search-area">
-            {searchStart && filtered.length === 0 && (
-              <div className="open-search-area">No opportunity found</div>
-            )}
-            {filtered.map(e => (
-              <div className="open-search-area" onClick={() => onClickSearchedVal(e._id)}>
-                {e.firstName} {e.lastName}
-              </div>
-            ))}
-          </div>
+          {searchDropDown && (
+            <div className="search-area" ref={searchRef}>
+              {searchStart && filtered.length === 0 && (
+                <div className="open-search-area">No opportunity found</div>
+              )}
+              {filtered.map(e => (
+                <div className="open-search-area" onClick={() => onClickSearchedVal(e._id)}>
+                  {e.firstName} {e.lastName}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
       <div title="Notifications" className="notification-container" onClick={onClickNotification}>
