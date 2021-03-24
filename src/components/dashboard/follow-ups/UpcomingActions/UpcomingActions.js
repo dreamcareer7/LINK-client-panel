@@ -34,12 +34,14 @@ function UpcomingActions() {
   const upComingActions = useMemo(() => (docs && docs.docs ? docs.docs : []), [docs]);
 
   const activePage = useMemo(() => (docs && docs.page ? docs.page : 1), [docs]);
+
+  console.log('upComingActions', upComingActions.length);
   return (
     <div>
       <div className="heading">Upcoming Actions</div>
       <div className="client-detail-page">
         <div className="client-detail-blocks-container">
-          {upComingActions ? (
+          {upComingActions && upComingActions.length > 0 ? (
             upComingActions.map(opportunity => (
               <div onClick={() => onOpportunityClick(opportunity._id)}>
                 <ClientDetailsBlock key={opportunity._id} opportunity={opportunity} />
