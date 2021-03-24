@@ -52,18 +52,24 @@ function Account() {
   const [emailCheckBox, setEmailCheckBox] = React.useState(false);
 
   const onHandleSubmit = () => {
-    const formData = {
-      firstName: form.name,
-      email: form.email,
-      phone: form.phone,
-      title: form.title,
-      industry: form.industry,
-      companyName: form.company,
-      companySize: form.company_size,
-      companyLocation: form.location,
-    };
-    dispatch(updateClientInfo(formData));
-    // dispatch(getClientInfo());
+    if (form.industry === 'SELECT') {
+      errorNotification('Please select industry');
+    } else if (form.company_size === 'SELECT') {
+      errorNotification('Please select company size');
+    } else {
+      const formData = {
+        firstName: form.name,
+        email: form.email,
+        phone: form.phone,
+        title: form.title,
+        industry: form.industry,
+        companyName: form.company,
+        companySize: form.company_size,
+        companyLocation: form.location,
+      };
+      dispatch(updateClientInfo(formData));
+      // dispatch(getClientInfo());
+    }
   };
   const onEndDateChange = e => {
     setEndDate(e);
@@ -323,6 +329,7 @@ function Account() {
                 onChange={onHandleChange}
                 name="company_size"
               >
+                <option value="SELECT">Select</option>
                 {company &&
                   company.data &&
                   company.data.map(value => <option key={value}>{value}</option>)}
@@ -336,6 +343,7 @@ function Account() {
                 onChange={onHandleChange}
                 name="industry"
               >
+                <option value="SELECT">Select</option>
                 {industries &&
                   industries.data &&
                   industries.data.map(value => <option key={value}>{value}</option>)}
