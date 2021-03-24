@@ -127,6 +127,7 @@ function Filters() {
   };
 
   const applyFilters = () => {
+    console.log(startDate, endDate);
     if (moment(startDate).isAfter(endDate)) {
       errorNotification('Please enter from date before to date');
     } else if (moment(endDate).isBefore(startDate)) {
@@ -173,8 +174,6 @@ function Filters() {
   }, []);
 
   const onChangePotential = useCallback(e => {
-    setStartDate(null);
-    setEndDate(null);
     setPotentialCheckBox({
       type: 'UPDATE_CHECKBOX',
       name: e.target.name,
