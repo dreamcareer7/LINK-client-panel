@@ -265,12 +265,12 @@ function Account() {
                 value={form.phone || ''}
                 className="common-input"
                 name="phone"
-                placeholder="(+61)545-789-963"
+                placeholder="Enter Phone Number"
                 onFocus={e => {
                   e.target.placeholder = '';
                 }}
                 onBlur={e => {
-                  e.target.placeholder = '(+61)545-789-963';
+                  e.target.placeholder = 'Enter Phone Number';
                 }}
               />
             </div>
@@ -283,12 +283,12 @@ function Account() {
                 value={form.title || ''}
                 className="common-input"
                 name="title"
-                placeholder="ABC News"
+                placeholder="Enter Title"
                 onFocus={e => {
                   e.target.placeholder = '';
                 }}
                 onBlur={e => {
-                  e.target.placeholder = 'ABC News';
+                  e.target.placeholder = 'Enter Title';
                 }}
               />
             </div>
@@ -299,7 +299,13 @@ function Account() {
                 value={form.location || ''}
                 name="location"
                 className="common-input"
-                placeholder="Melbourne"
+                placeholder="Enter Location"
+                onFocus={e => {
+                  e.target.placeholder = '';
+                }}
+                onBlur={e => {
+                  e.target.placeholder = 'Enter Location';
+                }}
               />
             </div>
             <div />
@@ -312,12 +318,12 @@ function Account() {
                 onChange={onHandleChange}
                 value={form.company || ''}
                 name="company"
-                placeholder="ABC News"
+                placeholder="Enter Company Name"
                 onFocus={e => {
                   e.target.placeholder = '';
                 }}
                 onBlur={e => {
-                  e.target.placeholder = 'ABC News';
+                  e.target.placeholder = 'Enter Company Name';
                 }}
               />
             </div>
