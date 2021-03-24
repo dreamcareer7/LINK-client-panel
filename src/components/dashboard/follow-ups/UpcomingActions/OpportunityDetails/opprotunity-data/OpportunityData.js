@@ -95,13 +95,6 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
               className="common-input common-input-white ellipsis"
               value={phoneVal}
               onChange={e => setPhoneVal(e.target.value)}
-              placeholder="Enter Phone"
-              onFocus={e => {
-                e.target.placeholder = '';
-              }}
-              onBlur={e => {
-                e.target.placeholder = 'Enter Phone';
-              }}
             />
             <div className="content-title ellipsis">EMAIL</div>
             <input
