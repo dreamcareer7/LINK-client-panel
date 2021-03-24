@@ -265,12 +265,12 @@ function Account() {
                 value={form.phone || ''}
                 className="common-input"
                 name="phone"
-                placeholder="Enter Phone Number"
+                placeholder="Enter phone number"
                 onFocus={e => {
                   e.target.placeholder = '';
                 }}
                 onBlur={e => {
-                  e.target.placeholder = 'Enter Phone Number';
+                  e.target.placeholder = 'Enter phone number';
                 }}
               />
             </div>
@@ -283,12 +283,12 @@ function Account() {
                 value={form.title || ''}
                 className="common-input"
                 name="title"
-                placeholder="Enter Title"
+                placeholder="Enter title"
                 onFocus={e => {
                   e.target.placeholder = '';
                 }}
                 onBlur={e => {
-                  e.target.placeholder = 'Enter Title';
+                  e.target.placeholder = 'Enter title';
                 }}
               />
             </div>
@@ -299,12 +299,12 @@ function Account() {
                 value={form.location || ''}
                 name="location"
                 className="common-input"
-                placeholder="Enter Location"
+                placeholder="Enter location"
                 onFocus={e => {
                   e.target.placeholder = '';
                 }}
                 onBlur={e => {
-                  e.target.placeholder = 'Enter Location';
+                  e.target.placeholder = 'Enter location';
                 }}
               />
             </div>
@@ -318,12 +318,12 @@ function Account() {
                 onChange={onHandleChange}
                 value={form.company || ''}
                 name="company"
-                placeholder="Enter Company Name"
+                placeholder="Enter company"
                 onFocus={e => {
                   e.target.placeholder = '';
                 }}
                 onBlur={e => {
-                  e.target.placeholder = 'Enter Company Name';
+                  e.target.placeholder = 'Enter company';
                 }}
               />
             </div>
