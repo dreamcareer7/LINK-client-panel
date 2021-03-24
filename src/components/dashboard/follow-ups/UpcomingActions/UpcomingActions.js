@@ -35,7 +35,6 @@ function UpcomingActions() {
 
   const activePage = useMemo(() => (docs && docs.page ? docs.page : 1), [docs]);
 
-  console.log('upComingActions', upComingActions.length);
   return (
     <div>
       <div className="heading">Upcoming Actions</div>
@@ -55,7 +54,7 @@ function UpcomingActions() {
       {upComingActions.length ? (
         <Pagination
           activePage={activePage}
-          itemsCountPerPage={10}
+          itemsCountPerPage={9}
           totalItemsCount={docs.total || 1}
           pageRangeDisplayed={3}
           onChange={handlePageChange}
