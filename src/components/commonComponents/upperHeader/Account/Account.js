@@ -260,6 +260,12 @@ function Account() {
                 className="common-input"
                 name="phone"
                 placeholder="(+61)545-789-963"
+                onFocus={e => {
+                  e.target.placeholder = '';
+                }}
+                onBlur={e => {
+                  e.target.placeholder = '(+61)545-789-963';
+                }}
               />
             </div>
           </div>
@@ -272,6 +278,12 @@ function Account() {
                 className="common-input"
                 name="title"
                 placeholder="ABC News"
+                onFocus={e => {
+                  e.target.placeholder = '';
+                }}
+                onBlur={e => {
+                  e.target.placeholder = 'ABC News';
+                }}
               />
             </div>
             <div>
@@ -295,6 +307,12 @@ function Account() {
                 value={form.company || ''}
                 name="company"
                 placeholder="ABC News"
+                onFocus={e => {
+                  e.target.placeholder = '';
+                }}
+                onBlur={e => {
+                  e.target.placeholder = 'ABC News';
+                }}
               />
             </div>
             <div>
