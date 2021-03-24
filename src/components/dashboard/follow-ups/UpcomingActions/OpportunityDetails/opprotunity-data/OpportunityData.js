@@ -95,6 +95,13 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
               className="common-input common-input-white ellipsis"
               value={phoneVal}
               onChange={e => setPhoneVal(e.target.value)}
+              placeholder="Enter Phone"
+              onFocus={e => {
+                e.target.placeholder = '';
+              }}
+              onBlur={e => {
+                e.target.placeholder = 'Enter Phone';
+              }}
             />
             <div className="content-title ellipsis">EMAIL</div>
             <input
@@ -102,12 +109,12 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
               className="common-input common-input-white ellipsis"
               value={mail}
               onChange={e => setMail(e.target.value)}
-              placeholder="john@abcmedia.com.au"
+              placeholder="Enter Email"
               onFocus={e => {
                 e.target.placeholder = '';
               }}
               onBlur={e => {
-                e.target.placeholder = 'john@abcmedia.com.au';
+                e.target.placeholder = 'Enter Email';
               }}
             />
             <div className="content-title ellipsis">LOCATION</div>
