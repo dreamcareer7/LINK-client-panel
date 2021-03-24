@@ -53,9 +53,9 @@ function Account() {
 
   const onHandleSubmit = () => {
     if (form.industry === 'SELECT') {
-      errorNotification('Please select industry');
+      form.industry = '';
     } else if (form.company_size === 'SELECT') {
-      errorNotification('Please select company size');
+      form.company_size = '';
     } else {
       const formData = {
         firstName: form.name,
