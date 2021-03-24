@@ -127,7 +127,6 @@ function Filters() {
   };
 
   const applyFilters = () => {
-    console.log(startDate, endDate);
     if (moment(startDate).isAfter(endDate)) {
       errorNotification('Please enter from date before to date');
     } else if (moment(endDate).isBefore(startDate)) {

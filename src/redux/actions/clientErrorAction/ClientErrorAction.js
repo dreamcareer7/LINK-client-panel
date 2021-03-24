@@ -7,7 +7,6 @@ export const getClientError = () => {
   return dispatch => {
     ClientErrorServices.getClientError()
       .then(response => {
-        console.log('error response->', response);
         if (response.data.status === 'SUCCESS') {
           dispatch({
             type: CLIENT_ERROR_REDUX_CONSTANT.GET_CLIENT_ERROR,
