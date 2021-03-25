@@ -3,9 +3,9 @@ import { errorNotification, successNotification } from '../../../constants/Toast
 import FOLLOW_UP_REDUX_CONSTANT from '../../constants/FollowUpReduxConstant';
 import POPUP_REDUX_CONSTANT from '../../constants/popUpConstant/PopUpConstant';
 
-export const getUpcomingActions = (page, data) => {
+export const getUpcomingActions = (page, limits = 9, data) => {
   return dispatch => {
-    FollowUpService.getUpcomingActions(page, 9, data)
+    FollowUpService.getUpcomingActions(page, limits, data)
       .then(response => {
         if (response.data.status === 'SUCCESS') {
           dispatch({
