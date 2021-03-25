@@ -2,6 +2,7 @@ import React from 'react';
 import './ClientDetailsBlock.scss';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import account from '../../../../../assets/images/account.svg';
 import { getLabelFromValues } from '../../../../../helpers/chartHelper';
 import { stageMapperObjectForOne } from '../../../../../helpers/Mappers';
 
@@ -38,7 +39,7 @@ function ClientDetailsBlock({ opportunity }) {
       <div className="status-color" />
       <div className="common-block--detail-container">
         <div className="DP-name-container">
-          <img className="user-dp" src={profilePicUrl} />
+          <img className="user-dp" src={profilePicUrl || account} />
           <div>
             <div>
               <div className="common-subtitle client-name ellipsis">
