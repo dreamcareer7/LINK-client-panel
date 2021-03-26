@@ -186,7 +186,7 @@ function Filters() {
   });
   return (
     <div>
-      <div className="heading placeholder-color">Filters</div>
+      <div className="heading">Filters</div>
       <div className="filters-container">
         <div className="common-title">Follow-Up Date</div>
         <DatePicker

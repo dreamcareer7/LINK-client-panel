@@ -14,7 +14,12 @@
 .upcoming-action--no-record-after-filter {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
-  min-height: 200px;
+  min-height: 400px;
   padding: 0 30px;
+  span {
+    width: 50%;
+    text-align: center;
+  }
 }

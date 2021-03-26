@@ -73,12 +73,12 @@ function Crm() {
 
   const crmsData = useSelector(({ crms }) => crms);
   const crmsChartState = useSelector(({ crmsGraphData }) => crmsGraphData);
+
   const [page, setPage] = useState(1);
   const [filter, dispatchFilter] = useReducer(filterReducer, initialFilterState);
   const [dataAdd, setDataAdd] = useState(false);
 
   const docs = useMemo(() => (crmsData && crmsData.docs ? crmsData.docs : null), [crmsData]);
-
   const dealSizes = useMemo(
     () => (crmsData && crmsData.dealSize && crmsData.dealSize[0] ? crmsData.dealSize[0] : null),
     [crmsData]
@@ -105,7 +105,7 @@ function Crm() {
   console.log('crmsData', crmsData);
   const reloadCRMData = pageNum => {
     if (moment(startDate).isAfter(endDate)) {
-      errorNotification('Please enter from date before to date');
+      errorNotification('Please enter a date in the future.');
     } else if (moment(endDate).isBefore(startDate)) {
       errorNotification('Please enter to date after from date');
     } else {
@@ -329,7 +329,7 @@ function Crm() {
     <>
       {isModelOpen && (
         <Modal
-          description="Are you sure you want to delete contact?"
+          description="Are you sure want to delete this opportunity?"
           title="Delete Opportunity"
           deleteData={onDeleteData}
           onClosePopup={onClosePopup}
@@ -337,7 +337,16 @@ function Crm() {
       )}
       <div className="common-title">SALES OPPORTUNITIES</div>
       <div className="graph-container">
-        <Bar options={crmOptions} id="sales-opportunities" data={crmsChartState} height={80} />
+        {crmsChartState.datasets[0].data.reduce((a, b) => a + b, 0) > 0 ? (
+          <Bar options={crmOptions} id="sales-opportunities" data={crmsChartState} height={80} />
+        ) : (
+          <div className="no-data-style pt-4">
+            <div className="w-50 text-center">
+              No results found in your search, add more opportunities for the stages to display.
+              Head to your LinkedIn account to get started. Good luck!
+            </div>
+          </div>
+        )}
       </div>
       <div className="filter-container">
         <div>
@@ -541,7 +550,10 @@ function Crm() {
       ) : (
         <>
           <div className="row-container">
-            <div style={{ textAlign: 'center', marginTop: '5vh' }}>No Data Found!</div>
+            <div style={{ textAlign: 'center', marginTop: '5vh', minHeight: '200px' }}>
+              No results found in your search, hit reset and change the criteria within the filters.
+              All the best.
+            </div>
           </div>
         </>
       )}

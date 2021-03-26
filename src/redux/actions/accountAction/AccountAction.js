@@ -60,7 +60,7 @@ export const updateNotification = data => {
             type: ACCOUNT_REDUX_CONSTANT.GET_CLIENT_INFO,
             data: response.data.data,
           });
-          successNotification('Settings updated successfully!');
+          successNotification('Your account details were updated successfully');
         }
       })
       .catch(e => {

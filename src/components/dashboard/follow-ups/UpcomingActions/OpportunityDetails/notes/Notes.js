@@ -12,6 +12,7 @@ import {
   updateNote,
 } from '../../../../../../redux/actions/followUpAction/notesAction/NotesAction';
 import { errorNotification } from '../../../../../../constants/Toast';
+import Modal from '../../../../../commonComponents/Modal/Modal';
 
 function Notes() {
   const dispatch = useDispatch();
@@ -22,7 +23,8 @@ function Notes() {
   const onChaneNoteText = e => {
     setNewNote(e.target.value);
   };
-
+  const [isModelOpen, setIsModelOpen] = useState(false);
+  const [note, setNote] = useState('');
   useEffect(() => {
     dispatch(getNotes(id));
   }, []);
@@ -30,7 +32,7 @@ function Notes() {
 
   const onClickAddButton = () => {
     if (newNote.trim().length === 0) {
-      errorNotification('You can not add empty note');
+      errorNotification("You can't add an empty note");
     } else {
       const data = {
         note: newNote,
@@ -54,11 +56,28 @@ function Notes() {
     setNoteIdVal(data._id);
   };
 
-  const onClickDeleteNote = noteId => {
-    dispatch(deleteNote(id, noteId));
+  const onClosePopup = () => {
+    setIsModelOpen(false);
+  };
+  const onDeleteData = () => {
+    setIsModelOpen(false);
+    dispatch(deleteNote(id, note));
+  };
+
+  const onClickDeleteNote = noteID => {
+    setNote(noteID);
+    setIsModelOpen(true);
   };
   return (
     <div className="notes-container">
+      {isModelOpen && (
+        <Modal
+          description="Are you sure you want to delete this note?"
+          title="Delete Opportunity"
+          deleteData={onDeleteData}
+          onClosePopup={onClosePopup}
+        />
+      )}
       <div className="note-list">
         <div className="common-subtitle">NOTES</div>
         {notes && notes.length ? (

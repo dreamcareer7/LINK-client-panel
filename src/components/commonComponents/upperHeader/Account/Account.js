@@ -78,7 +78,7 @@ function Account() {
 
     if (date && startDate) {
       if (date.isBefore(moment(startDate))) {
-        errorNotification('You can not set end date before start date');
+        errorNotification('Please enter a date in the future.');
       } else {
         const data = {
           page: pagenum,
@@ -219,7 +219,7 @@ function Account() {
             type: ACCOUNT_REDUX_CONSTANT.GET_CLIENT_INFO,
             data: response.data.data,
           });
-          successNotification('Subscription will be cancelled!');
+          successNotification('Subscription cancelled, please check your email for more info.');
         }
       })
       .catch(null);

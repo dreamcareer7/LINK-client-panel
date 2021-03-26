@@ -63,9 +63,12 @@ function UpcomingActions() {
           </div>
         ) : (
           <div className="upcoming-action--no-record-after-filter">
-            There are no opportunities set to follow up, either add new ones via LinkedIn or change
-            your search filter. If there are prospects that haven’t been filled out with the right
-            data, search for them in the CRM section and update them for it to appear in this area.
+            <span>
+              There are no opportunities set to follow up, either add new ones via LinkedIn or
+              change your search filter. If there are prospects that haven’t been filled out with
+              the right data, search for them in the CRM section and update them for it to appear in
+              this area.
+            </span>
           </div>
         )}
       </div>
