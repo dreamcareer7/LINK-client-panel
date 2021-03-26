@@ -145,7 +145,7 @@ function Filters() {
         endDate: endDate ? endDate.toISOString() : undefined,
       };
 
-      dispatch(getUpcomingActions(followupData.docs.page, data));
+      dispatch(getUpcomingActions(followupData.docs.page, 9, data));
     }
   };
   const resetFilters = () => {
@@ -161,7 +161,7 @@ function Filters() {
       stages: [],
       likelyHoods: [],
     };
-    dispatch(getUpcomingActions(1, data));
+    dispatch(getUpcomingActions(1, 9, data));
   };
 
   const onChangeCheckbox = useCallback(e => {
