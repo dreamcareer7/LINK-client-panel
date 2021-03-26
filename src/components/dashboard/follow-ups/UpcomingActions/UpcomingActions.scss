@@ -10,3 +10,11 @@
 .client-detail-page{
    min-height: 80vh;
 }
+
+.upcoming-action--no-record-after-filter {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 200px;
+  padding: 0 30px;
+}

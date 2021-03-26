@@ -53,17 +53,21 @@ function UpcomingActions() {
     <div>
       <div className="heading">Sales Opportunities</div>
       <div className="client-detail-page">
-        <div className="client-detail-blocks-container">
-          {upComingActions && upComingActions.length > 0 ? (
-            upComingActions.map(opportunity => (
+        {upComingActions && upComingActions.length > 0 ? (
+          <div className="client-detail-blocks-container">
+            {upComingActions.map(opportunity => (
               <div onClick={() => onOpportunityClick(opportunity._id)}>
                 <ClientDetailsBlock key={opportunity._id} opportunity={opportunity} />
               </div>
-            ))
-          ) : (
-            <div>There is no data available</div>
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="upcoming-action--no-record-after-filter">
+            There are no opportunities set to follow up, either add new ones via LinkedIn or change
+            your search filter. If there are prospects that haven’t been filled out with the right
+            data, search for them in the CRM section and update them for it to appear in this area.
+          </div>
+        )}
       </div>
       {upComingActions.length ? (
         <Pagination

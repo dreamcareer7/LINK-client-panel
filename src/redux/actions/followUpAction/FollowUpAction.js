@@ -12,9 +12,6 @@ export const getUpcomingActions = (page, limits = 9, data) => {
             type: FOLLOW_UP_REDUX_CONSTANT.GET_FILTERED_FOLLOW_UPS,
             data: response.data.data,
           });
-          if (response.data.data.docs.docs.length === 0) {
-            errorNotification('Data not available, please try again');
-          }
         }
       })
       .catch(e => {
