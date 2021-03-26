@@ -128,7 +128,7 @@ function Filters() {
 
   const applyFilters = () => {
     if (moment(startDate).isAfter(endDate)) {
-      errorNotification('Please enter from date before to date');
+      errorNotification('Please enter a date in the future.');
     } else if (moment(endDate).isBefore(startDate)) {
       errorNotification('Please enter to date after from date');
     } else {
