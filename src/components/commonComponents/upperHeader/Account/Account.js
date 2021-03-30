@@ -16,7 +16,7 @@ import {
 import AccountService from '../../../../services/account-services/AccountServices';
 import { downloadInvoiceHistory } from '../../../../helpers/downloadInvoiceHistory';
 import InvoicesList from './InvoicesList';
-import { errorNotification, successNotification } from '../../../../constants/Toast';
+import { errorNotification } from '../../../../constants/Toast';
 import runCode from '../../../../helpers/bareMetricsScript';
 import ACCOUNT_REDUX_CONSTANT from '../../../../redux/constants/accountConstant/AccountConstant';
 
