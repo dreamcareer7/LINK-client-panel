@@ -219,7 +219,7 @@ function Account() {
             type: ACCOUNT_REDUX_CONSTANT.GET_CLIENT_INFO,
             data: response.data.data,
           });
-          successNotification('Subscription cancelled, please check your email for more info.');
+          errorNotification('Subscription cancelled, please check your email for more info.');
         }
       })
       .catch(null);
