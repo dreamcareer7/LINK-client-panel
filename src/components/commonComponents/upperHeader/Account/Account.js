@@ -229,7 +229,7 @@ function Account() {
     <div className="account-container">
       <div className="account-left">
         <div className="dashed-container">
-          <div className="absolute-position-title">USER DETAILS</div>
+          <div className="absolute-position-title">PERSONAL DETAILS</div>
           {/* <div className='success-message'>
             <span>!</span>
             <span>Account uploaded Successfully.</span>
