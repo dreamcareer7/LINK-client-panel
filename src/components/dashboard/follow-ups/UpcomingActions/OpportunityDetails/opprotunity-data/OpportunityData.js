@@ -5,6 +5,7 @@ import '../OpportunityDetails.scss';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
+import defaultUser from '../../../../../../assets/images/defaultUser.jpg';
 import { updateOpportunity } from '../../../../../../redux/actions/followUpAction/FollowUpAction';
 import { errorNotification } from '../../../../../../constants/Toast';
 
@@ -67,7 +68,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
       <div className="common-block--detail-container">
         <div className="opportunity-detail">
           <div className="DP-name-container">
-            <img className="user-dp" src={profilePicUrl} />
+            <img className="user-dp" src={profilePicUrl || defaultUser} />
             <div>
               <div>
                 <div className="common-subtitle client-name ellipsis">
