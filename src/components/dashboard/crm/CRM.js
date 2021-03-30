@@ -307,7 +307,7 @@ function Crm() {
   const numberToUSD = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
-    minimumFractionDigits: 0,
+    minimumFractionDigits: 2,
   });
 
   const onClosePopup = () => {
