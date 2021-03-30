@@ -120,6 +120,7 @@ function UpperHeader() {
             data: null,
           });
           history.push('/followUps');
+          window.location.reload(true);
         }
       })
       .catch(e => console.log(e));
