@@ -138,10 +138,10 @@ const Home = () => {
           <button
             className="button primary-button mr-4 btn-width"
             type="button"
-            onClick={() => history.push('/followUps')}
+            onClick={() => history.push('/followups')}
           >
             <img src={FollowUps} height="20" />
-            <span className="p-left">Follow-Ups</span>
+            <span className="p-left">Follow Ups</span>
           </button>
           <button
             className="button primary-button ml-4 btn-width"
@@ -174,7 +174,7 @@ const Home = () => {
               </div>
             ) : (
               <div className="no-data-style">
-                <span>
+                <span className="text-center">
                   Looks like you haven&#39;t added any opportunities, head to your LinkedIn account
                   to get started. Good luck!
                 </span>
@@ -189,13 +189,15 @@ const Home = () => {
               <div className="graph-legend-container">
                 <div id="pipeline-chart-legends" />
                 <div className="graph">
-                  <div className='graph-center-text'>{numberToUSD.format(pipeline.data.totalDealAmount)}</div>
+                  <div className="graph-center-text">
+                    {numberToUSD.format(pipeline.data.totalDealAmount)}
+                  </div>
                   <DoughnutChart chartData={pipeline && pipeline.data && pipeline.data} />
                 </div>
               </div>
             ) : (
               <div className="no-data-style">
-                <span>
+                <span className="text-center">
                   Looks like you haven&#39;t added any opportunities, head to your LinkedIn account
                   to get started. Good luck!
                 </span>

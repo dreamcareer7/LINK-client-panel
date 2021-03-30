@@ -61,7 +61,7 @@ function UpperHeader() {
   };
 
   const onClickSearchedVal = val => {
-    history.push(`/followUps/opportunityDetails/${val}`);
+    history.push(`/followups/opportunityDetails/${val}`);
     setFiltered([]);
     setSearchText('');
   };
@@ -119,7 +119,7 @@ function UpperHeader() {
             type: FCM_REDUX_CONSTANT.CLEAR_ALL_NOTIFICATION,
             data: null,
           });
-          history.push('/followUps');
+          history.push('/followups');
           window.location.reload(true);
         }
       })
@@ -142,7 +142,7 @@ function UpperHeader() {
   const [searchStart, setSearchStart] = useState(false);
   const searchBlurEvent = e => {
     setSearchText('');
-    e.target.placeholder = 'Search Opportunity';
+    e.target.placeholder = 'Search opportunity';
     setSearchStart(!e);
   };
   return (
@@ -173,7 +173,7 @@ function UpperHeader() {
 
       <div className="upper-header--rounded-block search-block">
         <input
-          placeholder="Search Opportunity"
+          placeholder="Search opportunity"
           value={searchText}
           onChange={onSearch}
           onKeyDown={setSearchStart}

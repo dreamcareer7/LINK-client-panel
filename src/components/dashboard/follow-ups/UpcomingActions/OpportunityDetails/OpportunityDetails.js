@@ -18,7 +18,7 @@ function OpportunityDetails() {
   const history = useHistory();
   const dispatch = useDispatch();
   const onBack = () => {
-    history.push('/followUps');
+    history.push('/followups');
   };
   const { id } = useParams();
   const [isModelOpen, setIsModelOpen] = useState(false);
@@ -56,7 +56,7 @@ function OpportunityDetails() {
     <>
       {isModelOpen && (
         <Modal
-          description="Are you sure you want to delete contact?"
+          description="Are you sure want to delete this opportunity?"
           title="Delete Opportunity"
           deleteData={onDeleteData}
           onClosePopup={onClosePopup}
@@ -64,7 +64,7 @@ function OpportunityDetails() {
       )}
       <div className="opportunity-header">
         <div className="breadcrumb common-subtitle">
-          <span onClick={onBack}>UPCOMING ACTIONS</span>
+          <span onClick={onBack}>Sales opportunity</span>
           <span> / OPPORTUNITY DETAILS</span>
         </div>
         <div className="buttons-row">

@@ -22,8 +22,8 @@ function SideBar() {
             <img alt="home" src={home} /> <span>Home</span>
           </NavLink>
 
-          <NavLink className="menu-item menu-link" to="/followUps" replace>
-            <img alt="followups" src={calendar} /> <span>Follow-Ups</span>
+          <NavLink className="menu-item menu-link" to="/followups" replace>
+            <img alt="followups" src={calendar} /> <span>Follow Ups</span>
           </NavLink>
 
           <NavLink className="menu-item menu-link" to="/crm" replace>

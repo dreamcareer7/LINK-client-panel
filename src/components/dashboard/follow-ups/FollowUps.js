@@ -5,7 +5,7 @@ import UpcomingActions from './UpcomingActions/UpcomingActions';
 
 function FollowUps() {
   useEffect(() => {
-    document.title = 'Follow-Ups';
+    document.title = 'Follow Ups';
   }, []);
   return (
     <div className="follow-ups-container">

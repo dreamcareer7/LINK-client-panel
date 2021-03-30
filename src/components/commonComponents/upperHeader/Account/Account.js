@@ -243,7 +243,7 @@ function Account() {
                 value={form.name || ''}
                 onChange={onHandleChange}
                 name="name"
-                placeholder="Michelle Obama"
+                placeholder="Enter name"
                 disabled
               />
             </div>
@@ -254,7 +254,7 @@ function Account() {
                 value={form.email || ''}
                 className="common-input"
                 name="email"
-                placeholder="john@abcmedia.com.au"
+                placeholder="Enter Email"
                 disabled
               />
             </div>

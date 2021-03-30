@@ -28,7 +28,7 @@ const stageInitialState = {
     value: false,
   },
   POTENTIAL: {
-    name: 'Potential Deal',
+    name: 'Potential Deals',
     value: false,
   },
   CLOSED: {
@@ -182,16 +182,16 @@ function Filters() {
   const numberToUSD = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
-    minimumFractionDigits: 2,
+    minimumFractionDigits: 0,
   });
   return (
     <div>
       <div className="heading">Filters</div>
       <div className="filters-container">
-        <div className="common-title">Follow-Up Date</div>
+        <div className="common-title">Follow Up Date </div>
         <DatePicker
           className="mt-10"
-          placeholderText="From"
+          placeholderText="From date"
           dateFormat="dd/MM/yyyy"
           selected={startDate}
           onChange={date => setStartDate(date)}
@@ -199,12 +199,12 @@ function Filters() {
             e.target.placeholder = '';
           }}
           onBlur={e => {
-            e.target.placeholder = 'From';
+            e.target.placeholder = 'From date';
           }}
         />
         <DatePicker
           className="mt-10"
-          placeholderText="To"
+          placeholderText="To date"
           dateFormat="dd/MM/yyyy"
           selected={endDate}
           onChange={date => setEndDate(date)}
@@ -212,7 +212,7 @@ function Filters() {
             e.target.placeholder = '';
           }}
           onBlur={e => {
-            e.target.placeholder = 'To';
+            e.target.placeholder = 'To date';
           }}
         />
 
@@ -232,21 +232,25 @@ function Filters() {
             value={rangeState}
           />
           <div className="deal-value-container">
-            <span className="common-subtitle mr-5">Min-value: </span>
+            <span className="common-subtitle mr-5">Min: </span>
             <span>{numberToUSD.format(rangeState.min)}</span>
           </div>
           <div className="deal-value-container">
-            <span className="common-subtitle mr-5">Max-value: </span>
+            <span className="common-subtitle mr-5">Max: </span>
             <span>{numberToUSD.format(rangeState.max)}</span>
           </div>
         </div>
 
-        <div className="common-title mt-4 mb-10">Likelihoods</div>
+        <div className="common-title mt-4 mb-10">Likelihood</div>
         {Object.entries(potentialCheckBox).map(data => (
           <PotentialCheckBox key={Math.random()} onChange={onChangePotential} data={data} />
         ))}
 
-        <button type="submit" className="button success-button mt-20" onClick={applyFilters}>
+        <button
+          type="submit"
+          className="button success-button filter-apply-filters-button"
+          onClick={applyFilters}
+        >
           Apply Filters
         </button>
         <button type="button" className="button primary-button mt-10" onClick={resetFilters}>

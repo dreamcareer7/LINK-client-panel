@@ -295,7 +295,7 @@ function Crm() {
   };
 
   const handleEditCRMUser = id => {
-    history.push(`/followUps/opportunityDetails/${id}`);
+    history.push(`/followups/opportunityDetails/${id}`);
   };
   const [id, setId] = useState('');
   const [isModelOpen, setIsModelOpen] = useState(false);
@@ -307,7 +307,7 @@ function Crm() {
   const numberToUSD = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
-    minimumFractionDigits: 2,
+    minimumFractionDigits: 0,
   });
 
   const onClosePopup = () => {
@@ -363,7 +363,7 @@ function Crm() {
           <div className="common-subtitle">DATE RANGE</div>
           <div className="d-flex">
             <DatePicker
-              placeholderText="From"
+              placeholderText="From date"
               dateFormat="dd/MM/yyyy"
               className="common-input mt-5"
               selected={startDate}
@@ -372,11 +372,11 @@ function Crm() {
                 e.target.placeholder = '';
               }}
               onBlur={e => {
-                e.target.placeholder = 'From';
+                e.target.placeholder = 'From date';
               }}
             />
             <DatePicker
-              placeholderText="To"
+              placeholderText="To date"
               dateFormat="dd/MM/yyyy"
               className="common-input mt-5 ml-10"
               selected={endDate}
@@ -385,13 +385,13 @@ function Crm() {
                 e.target.placeholder = '';
               }}
               onBlur={e => {
-                e.target.placeholder = 'To';
+                e.target.placeholder = 'To date';
               }}
             />
           </div>
         </div>
         <div>
-          <div className="common-subtitle">DEAL VALUE</div>
+          <div className="common-subtitle">DEAL SIZE</div>
           <InputRange
             minValue={dealSizes && dealSizes?.minDealValue ? dealSizes.minDealValue : 1}
             maxValue={dealSizes && dealSizes?.maxDealValue ? dealSizes.maxDealValue : 999999999}
@@ -400,11 +400,11 @@ function Crm() {
             value={rangeState}
           />
           <div className="deal-value-container">
-            <span className="common-subtitle mr-5">Min-value: </span>
+            <span className="common-subtitle mr-5">Min: </span>
             <span>{numberToUSD.format(rangeState.min)}</span>
           </div>
           <div className="deal-value-container">
-            <span className="common-subtitle mr-5">Max-value: </span>
+            <span className="common-subtitle mr-5">Max: </span>
             <span>{numberToUSD.format(rangeState.max)}</span>
           </div>
         </div>
@@ -478,9 +478,9 @@ function Crm() {
           <div className="customer-list-heading">
             <div>NAME</div>
             <div>DATE ADDED</div>
-            <div>FOLLOW-UP DATE</div>
+            <div>Follow Up Date </div>
             <div>LOCATION</div>
-            <div>POTENTIAL</div>
+            <div>LIKELIHOOD</div>
             <div>DEAL VALUE</div>
             <div />
           </div>

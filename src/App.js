@@ -65,12 +65,12 @@ function App() {
             <PrivateRoute exact path="/" />
             <Layout>
               <PrivateRoute exact path="/home" component={Home} />
-              <PrivateRoute exact path="/followUps" component={FollowUps} />
+              <PrivateRoute exact path="/followups" component={FollowUps} />
               <PrivateRoute exact path="/crm" component={Crm} />
               <PrivateRoute exact path="/reporting" component={Reporting} />
               <PrivateRoute
                 exact
-                path="/followUps/opportunityDetails/:id"
+                path="/followups/opportunityDetails/:id"
                 component={OpportunityDetails}
               />
               <PrivateRoute exact path="/account" component={Account} />

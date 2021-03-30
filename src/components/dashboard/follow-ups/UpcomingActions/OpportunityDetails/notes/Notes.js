@@ -115,12 +115,12 @@ function Notes() {
             className="note add-or-edit-note w-100"
             value={newNote}
             onChange={onChaneNoteText}
-            placeholder="Add new note here.."
+            placeholder="Enter your note here..."
             onFocus={e => {
               e.target.placeholder = '';
             }}
             onBlur={e => {
-              e.target.placeholder = 'Add new note here..';
+              e.target.placeholder = 'Enter your note here...';
             }}
           />
         </div>

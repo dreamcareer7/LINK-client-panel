@@ -27,7 +27,7 @@ function UpcomingActions() {
     dispatch(getUpcomingActions(1, limits, data));
   }, [limits]);
   const onOpportunityClick = id => {
-    history.push(`/followUps/opportunityDetails/${id}`);
+    history.push(`/followups/opportunityDetails/${id}`);
   };
 
   const handlePageChange = useCallback(
@@ -46,14 +46,13 @@ function UpcomingActions() {
     [allUpcomingActions]
   );
   const upComingActions = useMemo(() => (docs && docs.docs ? docs.docs : []), [docs]);
-
   const activePage = useMemo(() => (docs && docs.page ? docs.page : 1), [docs]);
 
   return (
     <div>
       <div className="heading">Sales Opportunities</div>
       <div className="client-detail-page">
-        {upComingActions && upComingActions.length > 0 ? (
+        {upComingActions && upComingActions.length > 0 && (
           <div className="client-detail-blocks-container">
             {upComingActions.map(opportunity => (
               <div onClick={() => onOpportunityClick(opportunity._id)}>
@@ -61,7 +60,8 @@ function UpcomingActions() {
               </div>
             ))}
           </div>
-        ) : (
+        )}
+        {upComingActions && docs !== null && upComingActions.length === 0 && (
           <div className="upcoming-action--no-record-after-filter">
             <span>
               There are no opportunities set to follow up, either add new ones via LinkedIn or

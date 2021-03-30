@@ -12,7 +12,7 @@ function AuthRedirect({ ...options }) {
   }, []);
   return (
     <Route {...options}>
-      <Redirect to={opportunityId ? `/followUps/opportunityDetails/${opportunityId}` : '/home'} />
+      <Redirect to={opportunityId ? `/followups/opportunityDetails/${opportunityId}` : '/home'} />
     </Route>
   );
 }

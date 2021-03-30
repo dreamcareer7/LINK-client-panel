@@ -43,7 +43,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
       setStageValue('');
       // eslint-disable-next-line no-restricted-globals
     } else if (dealSizeVal && isNaN(dealSizeVal) === true) {
-      errorNotification('Deal size should be number');
+      errorNotification('Deal size should only be in numbers');
     } else {
       const data = {
         firstName,
@@ -95,6 +95,13 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
               className="common-input common-input-white ellipsis"
               value={phoneVal}
               onChange={e => setPhoneVal(e.target.value)}
+              placeholder="Enter phone number"
+              onFocus={e => {
+                e.target.placeholder = '';
+              }}
+              onBlur={e => {
+                e.target.placeholder = 'Enter phone number';
+              }}
             />
             <div className="content-title ellipsis">EMAIL</div>
             <input
@@ -116,12 +123,12 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
               className="common-input common-input-white  ellipsis"
               value={locationVal}
               onChange={e => setLocationVal(e.target.value)}
-              placeholder="Enter Location"
+              placeholder="Enter location"
               onFocus={e => {
                 e.target.placeholder = '';
               }}
               onBlur={e => {
-                e.target.placeholder = 'Enter Location';
+                e.target.placeholder = 'Enter location';
               }}
             />
           </div>
@@ -143,7 +150,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
               <option value="IN_CONVERSION"> In Conversation</option>
               <option value="MEETING_BOOKED">Meeting Booked</option>
               <option value="FOLLOW_UP">Follow Up</option>
-              <option value="POTENTIAL">Potential Deal</option>
+              <option value="POTENTIAL">Potential Deals</option>
               <option value="CLOSED">Closed</option>
               <option value="LOST">Lost</option>
             </select>
@@ -152,7 +159,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             <div className="common-subtitle">DEAL SIZE</div>
             <input
               className="common-input common-input-white mt-5"
-              placeholder="-"
+              placeholder="$0"
               value={dealSizeVal}
               onChange={e => {
                 setDealSizeVal(e.target.value);
@@ -161,7 +168,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
                 e.target.placeholder = '';
               }}
               onBlur={e => {
-                e.target.placeholder = '-';
+                e.target.placeholder = '$0';
               }}
               maxLength={9}
             />
@@ -180,10 +187,16 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             </select>
           </div>
           <div>
-            <div className="common-subtitle">FOLLOW-UP DATE</div>
+            <div className="common-subtitle">Follow Up Date</div>
             <DatePicker
               className="mt-5"
-              placeholderText="Follow-Up date"
+              placeholderText="Set a date"
+              onFocus={e => {
+                e.target.placeholder = '';
+              }}
+              onBlur={e => {
+                e.target.placeholder = 'Set a date';
+              }}
               value={followUpDate ? moment(followUpDate).format('DD/MM/YYYY') : followUpDate}
               dateFormat="dd/MM/yyyy"
               minDate={new Date()}
