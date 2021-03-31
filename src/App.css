@@ -7,3 +7,7 @@
 *::placeholder {
   color: #999999!important;
 }
+
+canvas {
+  width: 100%;
+}
