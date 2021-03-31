@@ -12,8 +12,12 @@
 .filter-container {
   display: grid;
   justify-content: space-between;
-  grid-template-columns: calc(25% - 64px) calc(35% - 64px) calc(20% - 64px) calc(20% - 64px) 175px;
+  grid-template-columns: calc(25% - 79px) calc(35% - 70px) calc(20% - 70px) calc(20% - 70px) 175px;
   gap: 20px;
+
+  select {
+    min-width: 130px;
+  }
 }
 
 .filter-date-range {
@@ -26,6 +30,7 @@
   justify-content: flex-end;
   align-items: center;
   height: 100%;
+  max-width: 100%;
   margin-left: 15px;
 }
 
