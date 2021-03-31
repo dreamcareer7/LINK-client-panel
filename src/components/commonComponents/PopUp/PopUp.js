@@ -36,7 +36,6 @@ const PopUp = ({ popupData, onClosePopup = () => {} }) => {
   if (!data) {
     return null;
   }
-  console.log(popupData);
   return (
     <div
       className={`${
