@@ -78,7 +78,7 @@ function Account() {
 
     if (date && startDate) {
       if (date.isBefore(moment(startDate))) {
-        errorNotification('Please enter a date in the future.');
+        errorNotification('Please enter a valid date range');
       } else {
         const data = {
           page: pagenum,
@@ -465,7 +465,7 @@ function Account() {
             <div className="d-flex">
               <div className="date-picker">
                 <DatePicker
-                  placeholderText="From"
+                  placeholderText="From date"
                   className="common-input"
                   selected={startDate}
                   maxDate={moment().toDate()}
@@ -475,7 +475,7 @@ function Account() {
 
               <div className="date-picker">
                 <DatePicker
-                  placeholderText="To"
+                  placeholderText="To date"
                   className="common-input"
                   selected={endDate}
                   minDate={startDate}
