@@ -94,6 +94,7 @@ function Filters() {
   const [stageCheckBox, setStageCheckBox] = useReducer(reducer, stageInitialState);
   const [potentialCheckBox, setPotentialCheckBox] = useReducer(reducer, potentialInitialState);
   const [deal, setDeal] = useReducer(reducer, initialDeal);
+  const [limits, setLimits] = useState(9);
 
   const dealSizes = useMemo(
     () =>
@@ -107,6 +108,13 @@ function Filters() {
     min: dealSizes?.minDealValue || 1,
     max: dealSizes?.maxDealValue || 999999999,
   });
+  useEffect(() => {
+    if (document.getElementsByClassName('client-detail-page')[0].offsetWidth <= 963) {
+      setLimits(10);
+    } else {
+      setLimits(9);
+    }
+  }, []);
 
   useEffect(() => {
     setRangeState({ min: dealSizes?.minDealValue || 1, max: dealSizes?.maxDealValue || 999999999 });
@@ -145,7 +153,7 @@ function Filters() {
         endDate: endDate ? endDate.toISOString() : undefined,
       };
 
-      dispatch(getUpcomingActions(followupData.docs.page, 9, data));
+      dispatch(getUpcomingActions(followupData.docs.page, limits, data));
     }
   };
   const resetFilters = () => {
@@ -161,7 +169,7 @@ function Filters() {
       stages: [],
       likelyHoods: [],
     };
-    dispatch(getUpcomingActions(1, 9, data));
+    dispatch(getUpcomingActions(1, limits, data));
   };
 
   const onChangeCheckbox = useCallback(e => {
