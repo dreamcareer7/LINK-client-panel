@@ -73,6 +73,7 @@ function Account() {
   };
   const onEndDateChange = e => {
     setEndDate(e);
+    e.setHours(23, 59, 59);
     const date = moment(e);
     // const today = new Date();
 
@@ -82,16 +83,16 @@ function Account() {
       } else {
         const data = {
           page: pagenum,
-          startDate: moment(startDate).format('YYYY-MM-DD'),
-          endDate: date.format('YYYY-MM-DD'),
+          startDate: moment(startDate).toISOString(),
+          endDate: date.toISOString(),
         };
         dispatch(getInvoices(data));
       }
     } else {
       const data = {
         page: pagenum,
-        startDate: moment(date).subtract(30, 'days').format('YYYY-MM-DD'),
-        endDate: date.format('YYYY-MM-DD'),
+        startDate: moment(date).subtract(30, 'days').toISOString(),
+        endDate: date.toISOString(),
       };
       dispatch(getInvoices(data));
     }
@@ -103,11 +104,11 @@ function Account() {
         errorNotification('You can not set end date before start date');
       } else {
         const today = new Date();
-
+        today.setHours(23, 59, 59);
         const data = {
           page: pagenum,
-          startDate: moment(date).format('YYYY-MM-DD'),
-          endDate: moment(today).format('YYYY-MM-DD'),
+          startDate: moment(date).toISOString(),
+          endDate: moment(today).toISOString(),
         };
         dispatch(getInvoices(data));
       }
