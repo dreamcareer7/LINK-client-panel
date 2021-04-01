@@ -27,7 +27,7 @@ function ClientDetailsBlock({ opportunity }) {
     phone,
     likelyHood,
   } = opportunity;
-  console.log('companyName', title.length);
+
   return (
     <div
       className={`common-block upcoming-action-block-size cursor-pointer ${getLabelFromValues(
