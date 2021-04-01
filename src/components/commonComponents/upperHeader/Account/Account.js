@@ -170,7 +170,7 @@ function Account() {
     AccountService.downloadInvoice()
       .then(r => {
         const invoice = r.data;
-        downloadInvoiceHistory(invoice, 'invoice.csv');
+        downloadInvoiceHistory(invoice, 'Jayla Transaction History');
       })
       .catch(e => console.log(e));
   };
@@ -463,7 +463,7 @@ function Account() {
           <div className="absolute-position-title">TRANSACTION HISTORY</div>
           <div className="common-subtitle mar-bott-5">Date Range</div>
           <div className="date-range-button-container">
-            <div className="d-flex">
+            <div className="d-flex align-items-center">
               <div className="date-picker">
                 <DatePicker
                   placeholderText="From date"
@@ -473,7 +473,6 @@ function Account() {
                   onChange={onStartDateChange}
                 />
               </div>
-
               <div className="date-picker">
                 <DatePicker
                   placeholderText="To date"
@@ -492,7 +491,7 @@ function Account() {
           <div className="transaction-history-table-row mt-20">
             <div>Date</div>
             <div>Amount</div>
-            <div>Subscription Type</div>
+            <div>Plan</div>
             <div>Receipt No.</div>
             <div className="actions" />
           </div>

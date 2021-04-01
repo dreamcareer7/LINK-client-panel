@@ -108,13 +108,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
   width: 100%;
 }
 
 .date-picker {
   max-width: 150px;
   margin-right: 20px;
+}
+
+.date-picker:last-of-type {
+  margin-right: 10px
 }
 
 .transaction-history-table-row {
@@ -177,12 +180,6 @@
 @media (max-width: 1600px) {
   .date-range-button-container {
     flex-wrap: wrap;
-
-    button {
-      margin-top: 10px;
-    }
   }
 }
-.cancelled-text-style{
 
-}
