@@ -34,6 +34,18 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
   const [locationVal, setLocationVal] = useState(location);
   const [dealSizeVal, setDealSizeVal] = useState(dealSize);
   const allConversationData = useSelector(state => state.opportunityHistory);
+  const [dateAgain, setDateAgain] = useState('');
+
+  const onChangeStage = e => {
+    if (e.target.value === 'CLOSED' || 'LOST') {
+      setFollowUpDate(null);
+      setDateAgain(followUpDate);
+    }
+    if (e.target.value !== 'CLOSED' || 'LOST') {
+      setFollowUpDate(dateAgain);
+    }
+    setStageValue(e.target.value);
+  };
 
   const onSaveOpportunityData = () => {
     if (dealSizeVal === '-') {
@@ -57,11 +69,12 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
         dealSize: dealSizeVal,
         likelyHood: potentialValue,
         location: locationVal,
-        followUp: followUpDate,
+        followUp: followUpDate || null,
       };
       dispatch(updateOpportunity(_id, data));
     }
   };
+
   return (
     <div className="common-block opportunity-detail-block blue">
       <div className="status-color" />
@@ -144,7 +157,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
                   ? 'IN_CONVERSION'
                   : stageValue
               }
-              onChange={e => setStageValue(e.target.value)}
+              onChange={e => onChangeStage(e)}
             >
               <option value="SELECT">Select</option>
               <option value="INITIAL_CONTACT">Initial Contact</option>
