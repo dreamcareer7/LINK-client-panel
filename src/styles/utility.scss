@@ -217,6 +217,11 @@ input {
   font-weight: 500;
   color: $secondary-font-color;
 }
+.hide-detail{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .content-title {
   font-size: 14px;

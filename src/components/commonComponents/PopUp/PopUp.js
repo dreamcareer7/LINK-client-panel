@@ -6,7 +6,7 @@ import { BASE_URL, LINKEDIN_CLIENT_ID } from '../../../constants/UrlConstant';
 import { popUpData } from '../../../redux/actions/popUpAction/PopUpAction';
 import { useOnClickOutside } from '../../../helpers/UseClickOutsideHook';
 
-const errorTitles = ['cookie_expired', 'extension_not_installed'];
+const errorTitles = ['cookie_expired', 'extension_not_installed', 'browser_not_supported'];
 
 // eslint-disable-next-line react/prop-types
 const PopUp = ({ popupData, onClosePopup = () => {} }) => {
@@ -23,6 +23,11 @@ const PopUp = ({ popupData, onClosePopup = () => {} }) => {
     if (findError.title === 'cookie_expired') {
       window.open(
         `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${LINKEDIN_CLIENT_ID}&redirect_uri=${BASE_URL}client-auth/sign-up-extension&state=fooobar&scope=r_emailaddress,r_liteprofile`,
+        '_blank'
+      );
+    } else if (findError.title === 'browser_not_supported') {
+      window.open(
+        'https://www.google.com/chrome/thank-you.html?brand=JJTC&statcb=0&installdataindex=empty&defaultbrowser=0',
         '_blank'
       );
     } else {

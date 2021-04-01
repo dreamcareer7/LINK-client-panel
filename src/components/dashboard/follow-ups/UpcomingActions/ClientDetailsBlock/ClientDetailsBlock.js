@@ -27,7 +27,7 @@ function ClientDetailsBlock({ opportunity }) {
     phone,
     likelyHood,
   } = opportunity;
-
+  console.log('companyName', title.length);
   return (
     <div
       className={`common-block upcoming-action-block-size cursor-pointer ${getLabelFromValues(
@@ -45,10 +45,20 @@ function ClientDetailsBlock({ opportunity }) {
               <div className="common-subtitle client-name ellipsis">
                 {firstName} {lastName}
               </div>
-              <div className="common-content client-designation placeholder-color">
-                {title}
-                {`${title && companyName ? ', ' : ''}`}
-                {companyName}
+              <div className="common-content client-designation placeholder-color ">
+                {title.length > 124 ? (
+                  <div className="hide-detail">
+                    {title}
+                    {`${title && companyName ? ', ' : ''}`}
+                    {companyName}
+                  </div>
+                ) : (
+                  <div>
+                    {title}
+                    {`${title && companyName ? ', ' : ''}`}
+                    {companyName}
+                  </div>
+                )}
               </div>
             </div>
           </div>

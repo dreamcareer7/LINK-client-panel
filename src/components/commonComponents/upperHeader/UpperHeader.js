@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import _ from 'lodash';
 import DateRangePicker from 'react-daterange-picker';
 import 'react-daterange-picker/dist/css/react-calendar.css';
 import { useHistory, useRouteMatch } from 'react-router-dom';
@@ -83,6 +84,8 @@ function UpperHeader() {
     }
     setSearchDropDown(!searchDropDown);
   };
+  const onSearchThrottle = _.throttle(onSearch, 2000);
+
   const onDropDownClick = () => {
     setDropDown(!dropDown);
   };
@@ -175,7 +178,7 @@ function UpperHeader() {
         <input
           placeholder="Search opportunity"
           value={searchText}
-          onChange={onSearch}
+          onChange={onSearchThrottle}
           onKeyDown={setSearchStart}
           onFocus={e => {
             e.target.placeholder = '';
