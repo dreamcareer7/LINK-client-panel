@@ -17,7 +17,7 @@ function UpcomingActions() {
     } else {
       setLimits(9);
     }
-  });
+  }, []);
 
   useEffect(() => {
     const data = {
