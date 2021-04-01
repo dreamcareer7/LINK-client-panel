@@ -81,28 +81,30 @@ function Notes() {
       <div className="note-list">
         <div className="common-subtitle">NOTES</div>
         {notes && notes.length ? (
-          notes.map(noteData => (
-            <div key={noteData._id} className="note-block mt-10">
-              <span className="note note-container">{noteData.text}</span>
-              <div className="note-action">
-                <img
-                  alt="edit"
-                  src={edit}
-                  title="Edit Note"
-                  onClick={() => onClickUpdateNote(noteData)}
-                />
-                <img
-                  className="close-circle"
-                  src={close}
-                  title="Delete Note"
-                  onClick={() => onClickDeleteNote(noteData._id)}
-                />
+          notes
+            .sort((a, b) => new Date(b.creationTime).getTime() - new Date(a.creationTime).getTime())
+            .map(noteData => (
+              <div key={noteData._id} className="note-block mt-10">
+                <span className="note note-container">{noteData.text}</span>
+                <div className="note-action">
+                  <img
+                    alt="edit"
+                    src={edit}
+                    title="Edit Note"
+                    onClick={() => onClickUpdateNote(noteData)}
+                  />
+                  <img
+                    className="close-circle"
+                    src={close}
+                    title="Delete Note"
+                    onClick={() => onClickDeleteNote(noteData._id)}
+                  />
+                </div>
+                <div className="note-time-stamp">
+                  {moment(noteData.creationTime).format('DD-MM-YYYY | hh:mm A')}
+                </div>
               </div>
-              <div className="note-time-stamp">
-                {moment(noteData.creationTime).format('DD-MM-YYYY | hh:mm A')}
-              </div>
-            </div>
-          ))
+            ))
         ) : (
           <div className="notes-not-available">Notes not available</div>
         )}
@@ -129,7 +131,7 @@ function Notes() {
           className="button success-button"
           onClick={isEditNote ? onclickEditButton : onClickAddButton}
         >
-          {isEditNote ? 'EDIT' : 'ADD'}
+          {isEditNote ? 'UPDATE' : 'ADD'}
         </button>
       </div>
     </div>
