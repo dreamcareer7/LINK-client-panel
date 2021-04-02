@@ -102,7 +102,7 @@ function Crm() {
     startDate,
     endDate,
   } = filter;
-  console.log('crmsData', crmsData);
+
   const reloadCRMData = pageNum => {
     if (moment(startDate).isAfter(endDate)) {
       errorNotification('Please enter a valid date range');
@@ -442,8 +442,7 @@ function Crm() {
       <div className="applied-filter-container">
         {docs && (
           <div>
-            Showing {(docs.page - 1) * (docs.limit + 1)}-
-            {docs.total < docs.page * docs.limit ? docs.total : docs.page * docs.limit} of{' '}
+            Showing {docs.total < docs.page * docs.limit ? docs.total : docs.page * docs.limit} of{' '}
             {docs.total} results
           </div>
         )}
@@ -478,10 +477,10 @@ function Crm() {
           <div className="customer-list-heading">
             <div>NAME</div>
             <div>DATE ADDED</div>
-            <div>Follow Up Date </div>
+            <div>FOLLOW UP</div>
             <div>LOCATION</div>
             <div>LIKELIHOOD</div>
-            <div>DEAL VALUE</div>
+            <div>DEAL SIZE</div>
             <div />
           </div>
           {crmsArray.map(singleCrm => {
