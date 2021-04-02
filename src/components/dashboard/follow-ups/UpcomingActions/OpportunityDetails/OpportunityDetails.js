@@ -65,7 +65,7 @@ function OpportunityDetails() {
       <div className="opportunity-header">
         <div className="breadcrumb common-subtitle">
           <span onClick={onBack}>Sales opportunity</span>
-          <span> / OPPORTUNITY DETAILS</span>
+          <span>&nbsp;{'> Contact Details'}</span>
         </div>
         <div className="buttons-row">
           <button type="submit" className="button success-button btn-size" onClick={onSyncClick}>
