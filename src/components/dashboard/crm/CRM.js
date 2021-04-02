@@ -515,10 +515,12 @@ function Crm() {
                   <div>
                     {/* eslint-disable-next-line no-nested-ternary */}
                     {dealSize
-                      ? Number.isInteger(dealSize)
-                        ? dealSize
-                        : dealSize.toFixed(2)
-                      : dealSize}
+                      ? dealSize.toLocaleString('en-US', {
+                          style: 'currency',
+                          currency: 'USD',
+                          minimumFractionDigits: 2,
+                        })
+                      : ''}
                   </div>
                   <div className="table-action-field">
                     <img
