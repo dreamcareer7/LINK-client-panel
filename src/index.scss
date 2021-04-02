@@ -19,3 +19,8 @@ select, .react-datepicker__input-container input {
 select:disabled, input:disabled {
   cursor: not-allowed!important;
 }
+
+.bm-cancel, .bm-cancel-modal{
+  height: 100vh;
+  overflow-y: auto !important;
+}
