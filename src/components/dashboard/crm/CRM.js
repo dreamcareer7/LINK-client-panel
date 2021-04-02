@@ -281,8 +281,8 @@ function Crm() {
 
   const handleResetClick = () => {
     const data = {
-      startDate: startDate || undefined,
-      endDate: endDate || undefined,
+      startDate: null,
+      endDate: null,
     };
     setRangeState({
       min: dealSizes?.minDealValue || 1,
