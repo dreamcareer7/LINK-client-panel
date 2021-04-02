@@ -361,7 +361,7 @@ function Crm() {
           />
         </div>
         <div className="mr-10">
-          <div className="common-subtitle">DATE RANGE</div>
+          <div className="common-subtitle">Follow Up Date</div>
           <div className="d-flex">
             <DatePicker
               placeholderText="From date"
