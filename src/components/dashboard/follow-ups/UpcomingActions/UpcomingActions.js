@@ -50,7 +50,7 @@ function UpcomingActions() {
 
   return (
     <div>
-      <div className="heading">Sales Opportunities</div>
+      <div className="common-title">Sales Opportunities</div>
       <div className="client-detail-page">
         {upComingActions && upComingActions.length > 0 && (
           <div className="client-detail-blocks-container">
