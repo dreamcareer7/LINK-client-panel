@@ -220,7 +220,10 @@ function Account() {
             type: ACCOUNT_REDUX_CONSTANT.GET_CLIENT_INFO,
             data: response.data.data,
           });
-          errorNotification('Subscription cancelled, please check your email for more info.');
+          errorNotification(
+            'Subscription cancelled, please check your email for more info.',
+            15000
+          );
         }
       })
       .catch(null);
