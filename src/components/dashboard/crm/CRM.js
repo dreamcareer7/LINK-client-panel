@@ -146,9 +146,10 @@ function Crm() {
 
   const chartClickCallback = useCallback(
     (event, element) => {
+      const el = document.getElementById('crmList');
+      el.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });
       if (element.length > 0) {
         const index = element[0]._index;
-
         handleStageChange(index);
       }
     },
@@ -439,7 +440,7 @@ function Crm() {
           </button>
         </div>
       </div>
-      <div className="applied-filter-container">
+      <div className="applied-filter-container" id="crmList">
         {docs && (
           <div>
             Showing {docs.total < docs.page * docs.limit ? docs.total : docs.page * docs.limit} of{' '}
