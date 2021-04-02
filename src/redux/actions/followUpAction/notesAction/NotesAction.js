@@ -16,7 +16,7 @@ export const getNotes = id => {
       })
       .catch(e => {
         if (e.response.data.status === undefined) {
-          errorNotification('It seems like server is down, Please try after sometime.');
+          errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
           errorNotification('Internal server error');
         }
@@ -37,7 +37,7 @@ export const addNewNote = (id, data) => {
       })
       .catch(e => {
         if (e.response.data.status === undefined) {
-          errorNotification('It seems like server is down, Please try after sometime.');
+          errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
           errorNotification('Internal server error');
         }
@@ -57,7 +57,7 @@ export const deleteNote = (id, noteId) => {
       })
       .catch(e => {
         if (e.response.data.status === undefined) {
-          errorNotification('It seems like server is down, Please try after sometime.');
+          errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
           errorNotification('Internal server error');
         }
@@ -77,7 +77,7 @@ export const updateNote = (id, noteId, data) => {
       })
       .catch(e => {
         if (e.response.data.status === undefined) {
-          errorNotification('It seems like server is down, Please try after sometime.');
+          errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
           errorNotification('Internal server error');
         }

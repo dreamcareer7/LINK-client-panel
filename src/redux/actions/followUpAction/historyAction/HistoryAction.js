@@ -37,7 +37,7 @@ export const fetchConversation = (id, data) => {
           dispatch({
             type: HISTORY_REDUX_CONSTANT.ERROR_OPPORTUNITY_CONVERSATION,
           });
-          errorNotification('It seems like server is down, Please try after sometime.');
+          errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
           dispatch({
             type: HISTORY_REDUX_CONSTANT.ERROR_OPPORTUNITY_CONVERSATION,

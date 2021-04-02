@@ -16,7 +16,7 @@ export const getUpcomingActions = (page, limits = 9, data) => {
       })
       .catch(e => {
         if (e.response.data.status === undefined) {
-          errorNotification('It seems like server is down, Please try after sometime.');
+          errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
           errorNotification('Internal server error');
         }
@@ -41,7 +41,7 @@ export const getOpportunity = id => {
       .catch(e => {
         console.log(e);
         if (e.response.data.status === undefined) {
-          errorNotification('It seems like server is down, Please try after sometime.');
+          errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
           errorNotification('Internal server error');
         }
@@ -59,7 +59,7 @@ export const syncWithLinkedIn = id => {
             type: FOLLOW_UP_REDUX_CONSTANT.GET_OPPORTUNITY_DETAIL,
             data: response.data.data,
           });
-          successNotification('Data has been successfully synced.');
+          successNotification('Data has been successfully synced');
         }
       })
       .catch(e => {
@@ -70,7 +70,7 @@ export const syncWithLinkedIn = id => {
             data: e.response.data.message,
           });
         } else if (e.response.data.status === undefined) {
-          errorNotification('It seems like server is down, Please try after sometime.');
+          errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
           errorNotification('Internal server error');
         }
@@ -93,7 +93,7 @@ export const updateOpportunity = (id, data) => {
       .catch(e => {
         console.log(e);
         if (e.response.data.status === undefined) {
-          errorNotification('It seems like server is down, Please try after sometime.');
+          errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
           errorNotification('Internal server error');
         }
@@ -113,7 +113,7 @@ export const deleteOpportunity = (id, cb) => {
     })
     .catch(e => {
       if (e.response.data.status === undefined) {
-        errorNotification('It seems like server is down, Please try after sometime.');
+        errorNotification('It seems like server is down, Please try after sometime');
       } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
         errorNotification('Internal server error');
       }

@@ -15,7 +15,7 @@ export const getActivityBreakdownGraphData = ({ startDate, endDate }) => {
       })
       .catch(e => {
         if (e.response.data.status === undefined) {
-          errorNotification('It seems like server is down, Please try after sometime.');
+          errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
           errorNotification('Internal server error');
         }
@@ -36,7 +36,7 @@ export const getPipelineValuesGraphData = ({ startDate, endDate }) => {
       })
       .catch(e => {
         if (e.response.data.status === undefined) {
-          errorNotification('It seems like server is down, Please try after sometime.');
+          errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
           errorNotification('Internal server error');
         }
@@ -57,7 +57,7 @@ export const getConversationGraphData = ({ startDate, endDate }) => {
       })
       .catch(e => {
         if (e.response.data.status === undefined) {
-          errorNotification('It seems like server is down, Please try after sometime.');
+          errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
           errorNotification('Internal server error');
         }
@@ -78,7 +78,7 @@ export const getTotalSalesGraphData = ({ startDate, endDate }) => {
       })
       .catch(e => {
         if (e.response.data.status === undefined) {
-          errorNotification('It seems like server is down, Please try after sometime.');
+          errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
           errorNotification('Internal server error');
         }

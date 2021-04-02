@@ -17,7 +17,7 @@ export const checkingCookiee = () => {
       })
       .catch(e => {
         if (e.response.data.status === undefined) {
-          errorNotification('It seems like server is down, Please try after sometime.');
+          errorNotification('It seems like server is down, Please try after sometime');
         }
         if (e.response.data.status === 'ERROR') {
           errorNotification('Internal server error');
