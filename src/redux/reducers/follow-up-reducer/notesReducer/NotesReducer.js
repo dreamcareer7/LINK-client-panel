@@ -6,7 +6,15 @@ export const opportunityNotes = (state = [], action) => {
     case NOTES_REDUX_CONSTANT.GET_OPPORTUNITY_NOTE:
       return action.data;
     case NOTES_REDUX_CONSTANT.UPDATE_OPPORTUNITY_NOTE:
-      return action.data;
+      return state.map(e => {
+        if (e._id === action.id) {
+          return {
+            ...e,
+            text: action.text,
+          };
+        }
+        return e;
+      });
     case NOTES_REDUX_CONSTANT.ADD_OPPORTUNITY_NOTE:
       return action.data;
     case NOTES_REDUX_CONSTANT.DELETE_OPPORTUNITY_NOTE:

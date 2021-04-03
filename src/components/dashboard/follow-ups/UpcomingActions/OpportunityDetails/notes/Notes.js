@@ -4,6 +4,7 @@ import './notes.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import edit from '../../../../../../assets/images/edit.svg';
+import save from '../../../../../../assets/images/save.svg';
 import close from '../../../../../../assets/images/cancel.svg';
 import {
   addNewNote,
@@ -19,7 +20,7 @@ function Notes() {
   const { id } = useParams();
   const [newNote, setNewNote] = useState('');
   const [noteIdVal, setNoteIdVal] = useState('');
-  const [isEditNote, setIsEditNote] = useState(false);
+  const [editNoteIndex, setEditNoteIndex] = useState('');
   const onChaneNoteText = e => {
     setNewNote(e.target.value);
   };
@@ -41,18 +42,19 @@ function Notes() {
     }
     setNewNote('');
   };
-  const onclickEditButton = () => {
+
+  const onclickSaveButton = index => {
+    const updatedNoteData = document.getElementById(`updateNote-${index}`);
+
     const data = {
-      note: newNote,
+      note: updatedNoteData.value,
     };
     dispatch(updateNote(id, noteIdVal, data));
-    setNewNote('');
-    setIsEditNote(false);
+    setEditNoteIndex(-1);
   };
 
-  const onClickUpdateNote = data => {
-    setIsEditNote(true);
-    setNewNote(data.text);
+  const onClickUpdateNote = (data, indx) => {
+    setEditNoteIndex(indx);
     setNoteIdVal(data._id);
   };
 
@@ -83,16 +85,33 @@ function Notes() {
         {notes && notes.length ? (
           notes
             .sort((a, b) => new Date(b.creationTime).getTime() - new Date(a.creationTime).getTime())
-            .map(noteData => (
+            .map((noteData, index) => (
               <div key={noteData._id} className="note-block mt-10">
-                <span className="note note-container">{noteData.text}</span>
+                {editNoteIndex === index ? (
+                  <textarea className="note note-container" id={`updateNote-${index}`}>
+                    {noteData.text}
+                  </textarea>
+                ) : (
+                  <span className="note note-container" id={`updateNote-${index}`}>
+                    {noteData.text}
+                  </span>
+                )}
                 <div className="note-action">
-                  <img
-                    alt="edit"
-                    src={edit}
-                    title="Edit Note"
-                    onClick={() => onClickUpdateNote(noteData)}
-                  />
+                  {editNoteIndex === index ? (
+                    <img
+                      alt="Save"
+                      src={save}
+                      title="Save Note"
+                      onClick={() => onclickSaveButton(index)}
+                    />
+                  ) : (
+                    <img
+                      alt="edit"
+                      src={edit}
+                      title="Edit Note"
+                      onClick={() => onClickUpdateNote(noteData, index)}
+                    />
+                  )}
                   <img
                     className="close-circle"
                     src={close}
@@ -111,7 +130,7 @@ function Notes() {
       </div>
 
       <div className="add-new-note-container">
-        <div className="common-subtitle">{isEditNote ? 'EDIT NOTE' : 'ADD NEW NOTE'}</div>
+        <div className="common-subtitle">ADD NEW NOTE</div>
         <div className="note-block mt-10">
           <textarea
             className="note add-or-edit-note w-100"
@@ -126,12 +145,8 @@ function Notes() {
             }}
           />
         </div>
-        <button
-          type="button"
-          className="button success-button"
-          onClick={isEditNote ? onclickEditButton : onClickAddButton}
-        >
-          {isEditNote ? 'UPDATE' : 'ADD'}
+        <button type="button" className="button success-button" onClick={onClickAddButton}>
+          ADD
         </button>
       </div>
     </div>

@@ -66,21 +66,17 @@ export const deleteNote = (id, noteId) => {
 };
 export const updateNote = (id, noteId, data) => {
   return dispatch => {
-    NotesService.updateNote(id, noteId, data)
-      .then(response => {
-        if (response.data.status === 'SUCCESS') {
-          dispatch({
-            type: NOTES_REDUX_CONSTANT.UPDATE_OPPORTUNITY_NOTE,
-            data: response.data.data,
-          });
-        }
-      })
-      .catch(e => {
-        if (e.response.data.status === undefined) {
-          errorNotification('It seems like server is down, Please try after sometime');
-        } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
-          errorNotification('Internal server error');
-        }
-      });
+    dispatch({
+      type: NOTES_REDUX_CONSTANT.UPDATE_OPPORTUNITY_NOTE,
+      id: noteId,
+      text: data.note,
+    });
+    NotesService.updateNote(id, noteId, data).catch(e => {
+      if (e.response.data.status === undefined) {
+        errorNotification('It seems like server is down, Please try after sometime');
+      } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
+        errorNotification('Internal server error');
+      }
+    });
   };
 };
