@@ -87,7 +87,7 @@ export const updateOpportunity = (id, data) => {
             type: FOLLOW_UP_REDUX_CONSTANT.UPDATE_OPPORTUNITY_DETAIL,
             data: response.data.data,
           });
-          successNotification('Opportunity data updated successfully');
+          successNotification('Opportunity details updated successfully');
         }
       })
       .catch(e => {
