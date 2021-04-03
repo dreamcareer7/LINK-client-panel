@@ -101,7 +101,7 @@ function Account() {
     setStartDate(date);
     if (date) {
       if (endDate && moment(endDate).isBefore(date)) {
-        errorNotification('You can not set end date before start date');
+        errorNotification('Please enter a valid date range');
       } else {
         const today = new Date();
         today.setHours(23, 59, 59);
