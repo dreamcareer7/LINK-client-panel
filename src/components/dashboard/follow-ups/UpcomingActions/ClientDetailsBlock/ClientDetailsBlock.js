@@ -72,11 +72,9 @@ function ClientDetailsBlock({ opportunity }) {
           <div className="common-content placeholder-color ellipsis">
             {getLabelFromValues(stage, stageMapperObjectForOne)}
           </div>
-          <div className="content-title">Follow Up Date </div>
+          <div className="content-title">FOLLOW UP DATE</div>
           <div className="common-content placeholder-color ellipsis">
-            {followUp
-              ? moment(followUp).format('DD/MM/YYYY')
-              : ''}
+            {followUp ? moment(followUp).format('DD/MM/YYYY') : ''}
           </div>
         </div>
       </div>
