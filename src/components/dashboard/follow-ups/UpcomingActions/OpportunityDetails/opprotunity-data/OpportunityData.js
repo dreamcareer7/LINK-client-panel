@@ -42,10 +42,8 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
       setDateAgain(followUpDate);
     }
     if (e.target.value !== 'CLOSED' && e.target.value !== 'LOST') {
-        if(!followUpDate)
-            setFollowUpDate(dateAgain);
-        else
-            setFollowUpDate(followUpDate);
+      if (!followUpDate) setFollowUpDate(dateAgain);
+      else setFollowUpDate(followUpDate);
     }
     setStageValue(e.target.value);
   };
@@ -191,7 +189,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             />
           </div>
           <div>
-            <div className="common-subtitle">LIKELIHOODS</div>
+            <div className="common-subtitle">LIKELIHOOD</div>
             <select
               className="common-select common-select-white mt-5"
               value={potentialValue}
