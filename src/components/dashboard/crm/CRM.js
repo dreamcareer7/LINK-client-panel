@@ -8,7 +8,7 @@ import Pagination from 'react-js-pagination';
 import DatePicker from 'react-datepicker';
 import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css';
-import user from '../../../assets/images/dummy-user.jpg';
+import user from '../../../assets/images/defaultUser.jpg';
 import edit from '../../../assets/images/pencil.png';
 import bin from '../../../assets/images/delete.png';
 import {
@@ -490,7 +490,7 @@ function Crm() {
               profilePicUrl,
               firstName,
               lastName,
-              stage: stageValue,
+              // stage: stageValue,
               location: userLocation,
               dealSize,
               createdAt,
@@ -507,7 +507,7 @@ function Crm() {
                   </div>
                   <div>{moment(createdAt).format('DD/MM/YYYY')}</div>
                   <div>
-                    {followUp && stageValue !== 'LOST' && stageValue !== 'CLOSED'
+                    {followUp
                       ? moment(followUp).format('DD/MM/YYYY')
                       : ''}
                   </div>

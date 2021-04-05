@@ -37,12 +37,15 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
   const [dateAgain, setDateAgain] = useState('');
 
   const onChangeStage = e => {
-    if (e.target.value === 'CLOSED' || 'LOST') {
+    if (e.target.value === 'CLOSED' || e.target.value === 'LOST') {
       setFollowUpDate(null);
       setDateAgain(followUpDate);
     }
-    if (e.target.value !== 'CLOSED' || 'LOST') {
-      setFollowUpDate(dateAgain);
+    if (e.target.value !== 'CLOSED' && e.target.value !== 'LOST') {
+        if(!followUpDate)
+            setFollowUpDate(dateAgain);
+        else
+            setFollowUpDate(followUpDate);
     }
     setStageValue(e.target.value);
   };
