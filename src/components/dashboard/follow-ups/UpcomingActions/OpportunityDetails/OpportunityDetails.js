@@ -56,7 +56,7 @@ function OpportunityDetails() {
     <>
       {isModelOpen && (
         <Modal
-          description="Are you sure want to delete this opportunity?"
+          description="Are you sure you want to delete this opportunity?"
           title="Delete Opportunity"
           deleteData={onDeleteData}
           onClosePopup={onClosePopup}
