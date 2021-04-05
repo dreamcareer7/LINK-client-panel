@@ -74,7 +74,7 @@ function ClientDetailsBlock({ opportunity }) {
           </div>
           <div className="content-title">Follow Up Date </div>
           <div className="common-content placeholder-color ellipsis">
-            {followUp && stage !== 'LOST' && stage !== 'CLOSED'
+            {followUp
               ? moment(followUp).format('DD/MM/YYYY')
               : ''}
           </div>
