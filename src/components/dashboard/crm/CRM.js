@@ -162,6 +162,14 @@ function Crm() {
         top: 30,
       },
     },
+    tooltips: {
+      enabled: false,
+    },
+    hover: {
+      onHover: (e, chartElement) => {
+        e.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
+      },
+    },
     legend: {
       display: false,
     },
@@ -195,6 +203,7 @@ function Crm() {
             zeroLineWidth: 1.5,
           },
           ticks: {
+            beingAtZero: true,
             fontSize: 14,
             fontStyle: 700,
             fontColor: '#212152',
