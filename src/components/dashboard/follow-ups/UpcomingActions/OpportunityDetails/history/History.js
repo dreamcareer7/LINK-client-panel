@@ -66,7 +66,7 @@ function History() {
       <div className="common-block--detail-container chat-history">
         <div className="common-subtitle">HISTORY</div>
         <div className="whole-chat-container" ref={chatContainer} onScroll={handleScroll}>
-          {allConversation && allConversation.data ? (
+          {allConversation && allConversation.data && allConversation.data.length > 0 ? (
             allConversation.data.map(convo => (
               <div className="chat-container" key={Math.random()}>
                 {convo.id === '2' ? (
@@ -93,7 +93,10 @@ function History() {
               </div>
             ))
           ) : (
-            <div>No conversation</div>
+            <div className="no-data-style text-center">
+              It looks like there&apos;s no conversation history with this opportunity, visit their
+              profile to start building a relationship with them today.
+            </div>
           )}
         </div>
       </div>
