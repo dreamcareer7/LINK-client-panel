@@ -1,0 +1,42 @@
+@import '../../../index';
+
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 200px;
+}
+
+.dot {
+  margin-right: 5px;
+  will-change: transform;
+  height: calc((100px / 3) - 10px);
+  width: calc((100px / 3) - 10px);
+  border-radius: 50%;
+  background-color: #07084B;
+  animation: grow 1s ease-in-out infinite alternate;
+}
+
+.dot-1 {
+}
+
+.dot-2 {
+  animation-delay: 0.33s;
+}
+
+.dot-3 {
+  animation-delay: 0.66s;
+}
+
+.dot-4 {
+ animation-delay: 0.99s;
+}
+
+@keyframes grow{
+  to{
+    transform: translateX(-50%) scale(0);
+  }
+}
+
+
