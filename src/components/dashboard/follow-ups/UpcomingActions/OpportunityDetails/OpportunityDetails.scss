@@ -106,12 +106,6 @@
   resize: none;
 }
 
-.add-note {
-  min-height: 75px;
-  max-height: 140px;
-  padding: 0;
-}
-
 .note-container {
   max-height: 140px;
   margin-bottom: 15px;
@@ -120,6 +114,10 @@
 .note-space {
   max-height: 140px;
   margin-bottom: 30px;
+}
+
+.add-note {
+  margin: 0;
 }
 
 .note-time-stamp, .chat-time-stamp {

@@ -141,8 +141,8 @@ function Notes() {
         <div className="common-subtitle">ADD NEW NOTE</div>
         <div className="note-block edit-note-block mt-10">
           <textarea
-            rows={5}
-            className="note note-container note-space w-100"
+            rows={6}
+            className="note note-container note-space add-note w-100"
             value={newNote}
             onChange={onChaneNoteText}
             placeholder="Enter your note here..."
