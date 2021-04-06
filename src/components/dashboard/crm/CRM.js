@@ -207,6 +207,7 @@ function Crm() {
             fontSize: 14,
             fontStyle: 700,
             fontColor: '#212152',
+            precision: 0,
           },
         },
       ],
