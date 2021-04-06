@@ -13,6 +13,7 @@ import History from './history/History';
 import Notes from './notes/Notes';
 // import { fetchConversation } from '../../../../../redux/actions/followUpAction/historyAction/HistoryAction';
 import Modal from '../../../../commonComponents/Modal/Modal';
+import Loader from '../../../../commonComponents/Loader/Loader';
 
 function OpportunityDetails() {
   const history = useHistory();
@@ -83,17 +84,17 @@ function OpportunityDetails() {
         before a conversation has opened up on LinkedIn.
       </div>
 
-      <div className="opportunity-container">
-        <div className="opportunity-left">
-          {opportunity && (
-            <>
-              <OpportunityData opportunityData={opportunity} goToLinkedIn={goToLinkedInProfile} />
-              <Notes />
-            </>
-          )}
+      {opportunity ? (
+        <div className="opportunity-container">
+          <div className="opportunity-left">
+            <OpportunityData opportunityData={opportunity} goToLinkedIn={goToLinkedInProfile} />
+            <Notes />
+          </div>
+          <History />
         </div>
-        {opportunity && <History />}
-      </div>
+      ) : (
+        <Loader />
+      )}
     </>
   );
 }
