@@ -202,7 +202,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             </select>
           </div>
           <div>
-            <div className="common-subtitle">Follow Up Date</div>
+            <div className="common-subtitle">FOLLOW UP DATE</div>
             <DatePicker
               className="mt-5"
               placeholderText="Set a date"
