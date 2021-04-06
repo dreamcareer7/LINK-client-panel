@@ -361,7 +361,7 @@ function Crm() {
           />
         </div>
         <div className="mr-10">
-          <div className="common-subtitle">Follow Up Date</div>
+          <div className="common-subtitle">FOLLOW UP DATE</div>
           <div className="d-flex">
             <DatePicker
               placeholderText="From date"
@@ -506,11 +506,7 @@ function Crm() {
                     {`${firstName} ${lastName}`}
                   </div>
                   <div>{moment(createdAt).format('DD/MM/YYYY')}</div>
-                  <div>
-                    {followUp
-                      ? moment(followUp).format('DD/MM/YYYY')
-                      : ''}
-                  </div>
+                  <div>{followUp ? moment(followUp).format('DD/MM/YYYY') : ''}</div>
                   <div>{userLocation}</div>
                   <div>{getLabelFromValues(likelyHood, potentialMapperObject)}</div>
                   <div>
