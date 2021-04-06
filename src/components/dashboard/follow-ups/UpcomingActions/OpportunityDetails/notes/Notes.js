@@ -45,12 +45,16 @@ function Notes() {
 
   const onclickSaveButton = index => {
     const updatedNoteData = document.getElementById(`updateNote-${index}`);
-
-    const data = {
-      note: updatedNoteData.value,
-    };
-    dispatch(updateNote(id, noteIdVal, data));
-    setEditNoteIndex(-1);
+    console.log(updatedNoteData.value);
+    if (updatedNoteData.value.trim().length === 0) {
+      errorNotification("You can't add an empty note");
+    } else {
+      const data = {
+        note: updatedNoteData.value,
+      };
+      dispatch(updateNote(id, noteIdVal, data));
+      setEditNoteIndex(-1);
+    }
   };
 
   const onClickUpdateNote = (data, indx) => {
@@ -86,13 +90,17 @@ function Notes() {
           notes
             .sort((a, b) => new Date(b.creationTime).getTime() - new Date(a.creationTime).getTime())
             .map((noteData, index) => (
-              <div key={noteData._id} className="note-block mt-10">
+              <div key={noteData._id} className="note-block edit-note-block mt-10">
                 {editNoteIndex === index ? (
-                  <textarea className="note note-container" id={`updateNote-${index}`}>
+                  <textarea
+                    rows={6}
+                    className="note note-container edit-note-space"
+                    id={`updateNote-${index}`}
+                  >
                     {noteData.text}
                   </textarea>
                 ) : (
-                  <span className="note note-container" id={`updateNote-${index}`}>
+                  <span className="note note-container edit-note-space" id={`updateNote-${index}`}>
                     {noteData.text}
                   </span>
                 )}
@@ -133,7 +141,7 @@ function Notes() {
         <div className="common-subtitle">ADD NEW NOTE</div>
         <div className="note-block mt-10">
           <textarea
-            className="note add-or-edit-note w-100"
+            className="note add-note w-100"
             value={newNote}
             onChange={onChaneNoteText}
             placeholder="Enter your note here..."

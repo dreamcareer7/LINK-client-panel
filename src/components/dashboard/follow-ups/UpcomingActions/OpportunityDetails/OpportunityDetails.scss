@@ -86,9 +86,15 @@
   border-radius: 5px;
 }
 
+.edit-note-block {
+  min-height: 88px;
+  height: unset;
+  max-height: 180px;
+}
+
 .note {
   width: calc(100% - 45px);
-  padding: 5px 15px 25px 5px;
+  padding: 5px;
   font-size: 14px;
   font-weight: 400;
   color: $secondary-font-color;
@@ -98,7 +104,7 @@
   resize: none;
 }
 
-.add-or-edit-note {
+.add-note {
   height: 75px;
   padding: 0;
 }
@@ -107,6 +113,10 @@
   max-height: 50px;
   margin-bottom: 15px;
   overflow-y: auto;
+}
+.edit-note-space {
+  max-height: 140px;
+  margin-bottom: 30px;
 }
 
 .note-time-stamp, .chat-time-stamp {
