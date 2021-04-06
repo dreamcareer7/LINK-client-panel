@@ -138,7 +138,7 @@ function Filters() {
     if (moment(startDate).isAfter(endDate)) {
       errorNotification('Please enter a valid date range');
     } else if (moment(endDate).isBefore(startDate)) {
-      errorNotification('Please enter to date after from date');
+      errorNotification('Please enter a valid date range');
     } else {
       const data = {
         stages: Object.entries(stageCheckBox)
