@@ -180,13 +180,15 @@ function Crm() {
           gridLines: {
             color: 'rgba(0, 0, 0, 0)',
             zeroLineColor: '#212152',
-            zeroLineWidth: 1.5,
+            zeroLineWidth: 2,
+            tickMarkLength: 1,
           },
           ticks: {
             beginAtZero: true,
             fontSize: 14,
             fontStyle: 700,
             fontColor: '#212152',
+            padding: 10,
           },
         },
       ],
@@ -200,7 +202,8 @@ function Crm() {
           gridLines: {
             color: 'rgba(0, 0, 0, 0)',
             zeroLineColor: '#212152',
-            zeroLineWidth: 1.5,
+            zeroLineWidth: 2,
+            tickMarkLength: 1,
           },
           ticks: {
             beingAtZero: true,
@@ -208,6 +211,7 @@ function Crm() {
             fontStyle: 700,
             fontColor: '#212152',
             precision: 0,
+            padding: 10,
           },
         },
       ],

@@ -116,13 +116,15 @@ function Reporting() {
           gridLines: {
             color: 'rgba(0, 0, 0, 0)',
             zeroLineColor: '#212152',
-            zeroLineWidth: 1.5,
+            zeroLineWidth: 2,
+            tickMarkLength: 1,
           },
           ticks: {
             beginAtZero: true,
             fontSize: 14,
             fontStyle: 700,
             fontColor: '#212152',
+            padding: 10,
           },
         },
       ],
@@ -131,7 +133,8 @@ function Reporting() {
           gridLines: {
             color: 'rgba(0, 0, 0, 0)',
             zeroLineColor: '#212152',
-            zeroLineWidth: 1.5,
+            zeroLineWidth: 2,
+            tickMarkLength: 1,
           },
           ticks: {
             min: 0,
@@ -139,6 +142,7 @@ function Reporting() {
             fontSize: 14,
             fontStyle: 700,
             fontColor: '#212152',
+            padding: 10,
             callback: value =>
               value.toLocaleString('en-US', {
                 style: 'currency',
@@ -236,12 +240,14 @@ function Reporting() {
             color: 'rgba(0, 0, 0, 0)',
             zeroLineColor: '#212152',
             zeroLineWidth: 1.5,
+            tickMarkLength: 1,
           },
           ticks: {
             beginAtZero: true,
             fontSize: 14,
             fontStyle: 700,
             fontColor: '#212152',
+            padding: 10,
           },
         },
       ],
@@ -251,6 +257,7 @@ function Reporting() {
             color: 'rgba(0, 0, 0, 0)',
             zeroLineColor: '#212152',
             zeroLineWidth: 1.5,
+            tickMarkLength: 1,
           },
           ticks: {
             fontSize: 14,
@@ -258,6 +265,7 @@ function Reporting() {
             fontColor: '#212152',
             suggestedMin: 50,
             suggestedMax: 100,
+            padding: 10,
           },
         },
       ],
