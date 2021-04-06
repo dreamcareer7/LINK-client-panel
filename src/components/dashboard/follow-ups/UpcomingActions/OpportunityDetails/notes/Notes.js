@@ -94,13 +94,13 @@ function Notes() {
                 {editNoteIndex === index ? (
                   <textarea
                     rows={6}
-                    className="note note-container edit-note-space"
+                    className="note note-container note-space"
                     id={`updateNote-${index}`}
                   >
                     {noteData.text}
                   </textarea>
                 ) : (
-                  <span className="note note-container edit-note-space" id={`updateNote-${index}`}>
+                  <span className="note note-container note-space" id={`updateNote-${index}`}>
                     {noteData.text}
                   </span>
                 )}
@@ -139,9 +139,10 @@ function Notes() {
 
       <div className="add-new-note-container">
         <div className="common-subtitle">ADD NEW NOTE</div>
-        <div className="note-block mt-10">
+        <div className="note-block edit-note-block mt-10">
           <textarea
-            className="note add-note w-100"
+            rows={5}
+            className="note note-container note-space w-100"
             value={newNote}
             onChange={onChaneNoteText}
             placeholder="Enter your note here..."

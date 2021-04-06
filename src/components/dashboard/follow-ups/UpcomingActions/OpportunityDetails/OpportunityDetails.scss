@@ -78,7 +78,10 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  height: 88px;
+  min-height: 88px;
+  height: unset;
+  max-height: 180px;
+//  height: 88px;
   margin-bottom: 20px;
   padding: 7px 10px;
   color: $placeholder-color;
@@ -104,16 +107,17 @@
 }
 
 .add-note {
-  height: 75px;
+  min-height: 75px;
+  max-height: 140px;
   padding: 0;
 }
 
 .note-container {
-  max-height: 50px;
+  max-height: 140px;
   margin-bottom: 15px;
   overflow-y: auto;
 }
-.edit-note-space {
+.note-space {
   max-height: 140px;
   margin-bottom: 30px;
 }
