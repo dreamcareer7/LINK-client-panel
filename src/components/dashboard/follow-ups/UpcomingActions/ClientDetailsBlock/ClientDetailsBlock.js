@@ -27,7 +27,8 @@ function ClientDetailsBlock({ opportunity }) {
     phone,
     likelyHood,
   } = opportunity;
-
+  const today = moment(Date.now()).format('DD/MM/YYYY');
+  const followUpDate = moment(followUp).format('DD/MM/YYYY');
   return (
     <div
       className={`common-block upcoming-action-block-size cursor-pointer ${getLabelFromValues(
@@ -73,8 +74,12 @@ function ClientDetailsBlock({ opportunity }) {
             {getLabelFromValues(stage, stageMapperObjectForOne)}
           </div>
           <div className="content-title">FOLLOW UP DATE</div>
-          <div className="common-content placeholder-color ellipsis">
-            {followUp ? moment(followUp).format('DD/MM/YYYY') : ''}
+          <div
+            className={`common-content ellipsis ${
+              followUpDate < today ? 'font-danger' : 'placeholder-color'
+            }`}
+          >
+            {followUp ? followUpDate : ''}
           </div>
         </div>
       </div>

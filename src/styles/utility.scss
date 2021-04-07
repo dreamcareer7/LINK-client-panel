@@ -238,6 +238,10 @@ input::placeholder {
   color: $placeholder-color !important;
 }
 
+.font-danger {
+  color: $danger-color!important;
+}
+
 /* HTML date picker changes starts here */
 .unstyled::-webkit-inner-spin-button,
 .unstyled::-webkit-calendar-picker-indicator {
