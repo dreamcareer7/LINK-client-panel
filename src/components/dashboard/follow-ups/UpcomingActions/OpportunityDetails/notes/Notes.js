@@ -45,7 +45,6 @@ function Notes() {
 
   const onclickSaveButton = index => {
     const updatedNoteData = document.getElementById(`updateNote-${index}`);
-    console.log(updatedNoteData.value);
     if (updatedNoteData.value.trim().length === 0) {
       errorNotification("You can't add an empty note");
     } else {

@@ -64,7 +64,6 @@ export const syncWithLinkedIn = id => {
       })
       .catch(e => {
         if (e.response.data.status === 'READ_ERROR_MESSAGE') {
-          console.log(e.response.data.message);
           dispatch({
             type: POPUP_REDUX_CONSTANT.POP_UP_MESSAGE,
             data: e.response.data.message,

@@ -199,7 +199,6 @@ function Account() {
           access_token_id: 'f3f1ef18-d0de-46c2-9038-31eb84adc7a4', // Your Cancellation API public key
           customer_oid: client.data.stripeCustomerId, // The provider id of this customer. For example, the Stripe Customer ID
           callback_send(data) {
-            console.log(165);
             console.log(data);
           },
           callback_error(error) {

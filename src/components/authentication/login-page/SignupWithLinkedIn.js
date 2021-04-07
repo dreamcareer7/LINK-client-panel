@@ -12,13 +12,11 @@ function SignupWithLinkedIn() {
     window.location = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${LINKEDIN_CLIENT_ID}&redirect_uri=${BASE_URL}client-auth/sign-up&state=fooobar&scope=r_emailaddress,r_liteprofile`;
   };
   const { message } = useQueryParams();
-  console.log('message->', message);
   const history = useHistory();
   useEffect(() => {
     document.title = 'Login';
   }, []);
   useEffect(() => {
-    console.log({ message });
     if (message) {
       errorNotification(message);
       history.push('/');
