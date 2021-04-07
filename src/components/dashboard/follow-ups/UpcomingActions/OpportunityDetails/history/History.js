@@ -94,8 +94,10 @@ function History() {
             ))
           ) : (
             <div className="no-data-style text-center">
-              It looks like there&apos;s no conversation history with this opportunity, visit their
-              profile to start building a relationship with them today.
+              <span>
+                It looks like there&apos;s no conversation history with this opportunity, visit
+                their profile to start building a relationship with them today.
+              </span>
             </div>
           )}
         </div>
