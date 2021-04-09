@@ -77,7 +77,7 @@ function Notes() {
     <div className="notes-container">
       {isModelOpen && (
         <Modal
-          description="Are you sure you want to delete this note?"
+          description="Are you sure you want to delete your note?"
           title="Delete Opportunity"
           deleteData={onDeleteData}
           onClosePopup={onClosePopup}
