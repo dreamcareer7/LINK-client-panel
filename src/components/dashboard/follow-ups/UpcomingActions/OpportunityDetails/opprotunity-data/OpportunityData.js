@@ -75,8 +75,10 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
       dispatch(updateOpportunity(_id, data));
     }
   };
-  const decimalRegex = /^\d{1,5}|\d{0,5}\.\d{1,2}$/;
+  const decimalRegex = new RegExp(/(^[0-9]{0,9}(\.\d{0,2})?$)/);
   const handleDealSizeChange = e => {
+    console.log(e.target.value);
+    console.log(decimalRegex.test(e.target.value));
     if (decimalRegex.test(e.target.value)) setDealSizeVal(e.target.value);
   };
   return (
@@ -188,7 +190,6 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
               onBlur={e => {
                 e.target.placeholder = '$0';
               }}
-              maxLength={9}
             />
           </div>
           <div>
