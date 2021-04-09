@@ -75,7 +75,10 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
       dispatch(updateOpportunity(_id, data));
     }
   };
-
+  const decimalRegex = /^\d{1,5}|\d{0,5}\.\d{1,2}$/;
+  const handleDealSizeChange = e => {
+    if (decimalRegex.test(e.target.value)) setDealSizeVal(e.target.value);
+  };
   return (
     <div className="common-block opportunity-detail-block blue">
       <div className="status-color" />
@@ -177,7 +180,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
               placeholder="$0"
               value={dealSizeVal}
               onChange={e => {
-                setDealSizeVal(e.target.value);
+                handleDealSizeChange(e);
               }}
               onFocus={e => {
                 e.target.placeholder = '';

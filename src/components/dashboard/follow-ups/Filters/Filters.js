@@ -84,6 +84,12 @@ const reducer = (state, action) => {
   }
 };
 
+const numberToUSD = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 0,
+});
+
 function Filters() {
   const dispatch = useDispatch();
   const [startDate, setStartDate] = useState(null);
@@ -117,7 +123,10 @@ function Filters() {
   }, []);
 
   useEffect(() => {
-    setRangeState({ min: dealSizes?.minDealValue || 1, max: dealSizes?.maxDealValue || 999999999 });
+    setRangeState({
+      min: dealSizes?.minDealValue || 1,
+      max: dealSizes?.maxDealValue || 999999999,
+    });
   }, [dealSizes?.minDealValue, dealSizes?.maxDealValue]);
 
   const handleRangePickerChange = value => {
@@ -187,11 +196,7 @@ function Filters() {
       value: e.target.checked,
     });
   }, []);
-  const numberToUSD = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 0,
-  });
+
   return (
     <div>
       <div className="heading">Filters</div>
@@ -233,8 +238,14 @@ function Filters() {
 
         <div className="filter-deal-range-container">
           <InputRange
-            minValue={dealSizes && dealSizes?.minDealValue ? dealSizes.minDealValue : 1}
-            maxValue={dealSizes && dealSizes?.maxDealValue ? dealSizes.maxDealValue : 999999999}
+            minValue={
+              dealSizes && dealSizes?.minDealValue ? numberToUSD.format(dealSizes.minDealValue) : 1
+            }
+            maxValue={
+              dealSizes && dealSizes?.maxDealValue
+                ? numberToUSD.format(dealSizes.maxDealValue)
+                : 999999999
+            }
             formatLabel={a => `$${a}`}
             onChange={handleRangePickerChange}
             value={rangeState}
