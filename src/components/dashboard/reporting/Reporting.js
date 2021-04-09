@@ -104,8 +104,8 @@ function Reporting() {
   const pipelineValuesGraph = useSelector(({ pipelineValuesGraphData }) => pipelineValuesGraphData);
   const conversionsData = useSelector(({ conversationGraphData }) => conversationGraphData);
   const totalSalesData = useSelector(({ totalSalesGraphData }) => totalSalesGraphData);
-  const [startDate] = useState(moment().subtract(5, 'days').format('YYYY-MM-DD'));
-  const [endDate] = useState(moment().format('YYYY-MM-DD'));
+  const [startDate] = useState(moment().subtract(5, 'days').format('DD/MM/YYYY'));
+  const [endDate] = useState(moment().format('DD/MM/YYYY'));
   const totalSalesOptions = {
     legend: {
       display: false,
@@ -352,7 +352,6 @@ function Reporting() {
       }
     }
   }, [pipelineValuesGraph]);
-
   return (
     <>
       <div className="total-sales-container">
@@ -361,7 +360,9 @@ function Reporting() {
           height={80}
           options={totalSalesOptions}
           data={
-            totalSalesData && totalSalesData.data && totalSalesData.data.length === 0
+            totalSalesData &&
+            totalSalesData.datasets?.data &&
+            totalSalesData.datasets?.data.length === 0
               ? 'No Data Available'
               : totalSalesData
           }
@@ -403,7 +404,7 @@ function Reporting() {
           pipelineValuesGraph.values &&
           pipelineValuesGraph.values.length === 0 ? (
             <div className="no-data-style">
-              <span>
+              <span className="text-center">
                 Looks like you haven&#39;t added any opportunities, head to your LinkedIn account to
                 get started. Good luck!
               </span>

@@ -213,7 +213,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
                 e.target.placeholder = 'Set a date';
               }}
               value={followUpDate ? moment(followUpDate).format('DD/MM/YYYY') : followUpDate}
-              dateFormat="dd/MM/yyyy"
+              dateFormat="DD/MM/YYYY"
               minDate={new Date()}
               onChange={date => setFollowUpDate(date)}
             />

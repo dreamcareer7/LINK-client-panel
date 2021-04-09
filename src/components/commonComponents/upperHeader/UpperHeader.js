@@ -51,8 +51,8 @@ function UpperHeader() {
   const onSelectDateRange = e => {
     setDateRangeVal(e);
     const data = {
-      startDate: moment(e.start).format('YYYY-MM-DD'),
-      endDate: moment(e.end).format('YYYY-MM-DD'),
+      startDate: moment(e.start).format('DD/MM/YYYY'),
+      endDate: moment(e.end).format('DD/MM/YYYY'),
     };
 
     dispatch(getActivityBreakdownGraphData(data));
@@ -154,8 +154,8 @@ function UpperHeader() {
         <div className="upper-header--rounded-block search-block mr-20">
           <input
             placeholder="Select Report Date"
-            value={`${dateRangeVal.start.format('DD-MM-YYYY')} ${dateRangeVal.end.format(
-              'DD-MM-YYYY'
+            value={`${dateRangeVal.start.format('DD/MM/YYYY')} ${dateRangeVal.end.format(
+              'DD/MM/YYYY'
             )} `}
           />
           <button type="button" className="date-picker-btn">
