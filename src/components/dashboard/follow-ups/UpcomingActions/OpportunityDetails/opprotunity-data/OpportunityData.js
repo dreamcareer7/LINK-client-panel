@@ -77,8 +77,6 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
   };
   const decimalRegex = new RegExp(/(^[0-9]{0,9}(\.\d{0,2})?$)/);
   const handleDealSizeChange = e => {
-    console.log(e.target.value);
-    console.log(decimalRegex.test(e.target.value));
     if (decimalRegex.test(e.target.value)) setDealSizeVal(e.target.value);
   };
   return (
