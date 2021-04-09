@@ -73,7 +73,7 @@ function Account() {
   };
   const onEndDateChange = e => {
     setEndDate(e);
-    e.setHours(23, 59, 59);
+    e?.setHours(23, 59, 59);
     const date = moment(e);
     // const today = new Date();
 
@@ -463,14 +463,15 @@ function Account() {
       <div className="account-right">
         <div className="dashed-container">
           <div className="absolute-position-title">TRANSACTION HISTORY</div>
-          <div className="common-subtitle mar-bott-5">Date Range</div>
+          <div className="common-subtitle">Date Range</div>
           <div className="date-range-button-container">
-            <div className="d-flex align-items-center">
+            <div className="date-range-container">
               <div className="date-picker">
                 <DatePicker
                   placeholderText="From date"
                   className="common-input"
                   selected={startDate}
+                  dateFormat="dd/MM/yyyy"
                   maxDate={moment().toDate()}
                   onChange={onStartDateChange}
                 />
@@ -481,14 +482,21 @@ function Account() {
                   className="common-input"
                   selected={endDate}
                   minDate={startDate}
+                  dateFormat="dd/MM/yyyy"
                   maxDate={moment().toDate()}
                   onChange={onEndDateChange}
                 />
               </div>
             </div>
-            <button type="button" className="button primary-button" onClick={onDownloadFullHistory}>
-              DOWNLOAD FULL HISTORY
-            </button>
+            <div className="d-flex justify-content-end w-100">
+              <button
+                type="button"
+                className="button primary-button mt-5"
+                onClick={onDownloadFullHistory}
+              >
+                DOWNLOAD FULL HISTORY
+              </button>
+            </div>
           </div>
           <div className="transaction-history-table-row mt-20">
             <div>Date</div>

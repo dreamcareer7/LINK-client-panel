@@ -111,6 +111,12 @@
   width: 100%;
 }
 
+.date-range-container {
+  display: flex;
+  align-items: center;
+  min-width: 60%;
+}
+
 .date-picker {
   max-width: 150px;
   margin-right: 20px;
