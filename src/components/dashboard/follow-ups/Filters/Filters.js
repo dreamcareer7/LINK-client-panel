@@ -238,14 +238,8 @@ function Filters() {
 
         <div className="filter-deal-range-container">
           <InputRange
-            minValue={
-              dealSizes && dealSizes?.minDealValue ? numberToUSD.format(dealSizes.minDealValue) : 1
-            }
-            maxValue={
-              dealSizes && dealSizes?.maxDealValue
-                ? numberToUSD.format(dealSizes.maxDealValue)
-                : 999999999
-            }
+            minValue={dealSizes && dealSizes?.minDealValue ? dealSizes.minDealValue : 1}
+            maxValue={dealSizes && dealSizes?.maxDealValue ? dealSizes.maxDealValue : 999999999}
             formatLabel={a => `$${a}`}
             onChange={handleRangePickerChange}
             value={rangeState}
