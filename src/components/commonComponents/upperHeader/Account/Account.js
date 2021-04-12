@@ -451,7 +451,7 @@ function Account() {
                 <button
                   type="button"
                   id="barecancel-trigger"
-                  onClick={() => runCode(client.data.stripeCustomerId, callBack)}
+                  onClick={runCode(client.data.stripeCustomerId, callBack)}
                 >
                   Cancel
                 </button>

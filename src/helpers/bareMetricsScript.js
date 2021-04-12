@@ -1,6 +1,4 @@
 function runCode(param, cb) {
-  console.log('google doodle');
-  console.log(param);
   if (window.barecancel && window.barecancel.created)
     // eslint-disable-next-line no-unused-expressions
     window.console && console.error && console.error('Barecancel snippet included twice.');
@@ -24,9 +22,6 @@ function runCode(param, cb) {
           if (cb) {
             cb();
           }
-          // Once the cancellation is recorded in Baremetrics, you should actually cancel the customer.
-          // This should use the same logic you used before adding Cancellation Insights. For example:
-          // axios.delete(`/api/users/example_customer_123`)
         },
         callback_error(error) {
           // You can also catch any errors that happen when sending the cancellation event to Baremetrics.
