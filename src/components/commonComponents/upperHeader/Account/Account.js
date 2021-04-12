@@ -472,8 +472,14 @@ function Account() {
                   className="common-input"
                   selected={startDate}
                   dateFormat="dd/MM/yyyy"
-                  maxDate={moment().toDate()}
+                  // maxDate={moment().toDate()}
                   onChange={onStartDateChange}
+                  onFocus={e => {
+                    e.target.placeholder = '';
+                  }}
+                  onBlur={e => {
+                    e.target.placeholder = 'From date';
+                  }}
                 />
               </div>
               <div className="date-picker">
@@ -481,10 +487,16 @@ function Account() {
                   placeholderText="To date"
                   className="common-input"
                   selected={endDate}
-                  minDate={startDate}
+                  // minDate={startDate}
                   dateFormat="dd/MM/yyyy"
-                  maxDate={moment().toDate()}
+                  // maxDate={moment().toDate()}
                   onChange={onEndDateChange}
+                  onFocus={e => {
+                    e.target.placeholder = '';
+                  }}
+                  onBlur={e => {
+                    e.target.placeholder = 'From date';
+                  }}
                 />
               </div>
             </div>
