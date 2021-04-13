@@ -24,6 +24,7 @@ function OpportunityDetails() {
   const { id } = useParams();
   const [isModelOpen, setIsModelOpen] = useState(false);
   const opportunity = useSelector(state => state.opportunityDetail);
+  console.log('opportunity', opportunity);
   useEffect(() => {
     document.title = 'Opportunity Details';
   }, []);
@@ -34,6 +35,7 @@ function OpportunityDetails() {
       dispatch(clearOpportunity);
     };
   }, [id]);
+
   const goToLinkedInProfile = () => {
     window.open(`${opportunity.linkedInUrl}`, '_blank');
   };
@@ -78,20 +80,24 @@ function OpportunityDetails() {
         </div>
       </div>
 
-      <div className="warning">
-        <span>!</span>
-        Only add opportunities that are good prospects, we don&apos;t recommend adding someone
-        before a conversation has opened up on LinkedIn.
-      </div>
+      {opportunity && !opportunity.isVisited && (
+        <div className="warning">
+          <span>!</span>
+          Only add opportunities that are good prospects, we don&apos;t recommend adding someone
+          before a conversation has opened up on LinkedIn.
+        </div>
+      )}
 
       {opportunity ? (
-        <div className="opportunity-container">
-          <div className="opportunity-left">
-            <OpportunityData opportunityData={opportunity} goToLinkedIn={goToLinkedInProfile} />
-            <Notes />
+        <>
+          <div className="opportunity-container">
+            <div className="opportunity-left">
+              <OpportunityData opportunityData={opportunity} goToLinkedIn={goToLinkedInProfile} />
+              <Notes />
+            </div>
+            <History />
           </div>
-          <History />
-        </div>
+        </>
       ) : (
         <Loader />
       )}
