@@ -24,7 +24,6 @@ function OpportunityDetails() {
   const { id } = useParams();
   const [isModelOpen, setIsModelOpen] = useState(false);
   const opportunity = useSelector(state => state.opportunityDetail);
-  console.log('opportunity', opportunity);
   useEffect(() => {
     document.title = 'Opportunity Details';
   }, []);
