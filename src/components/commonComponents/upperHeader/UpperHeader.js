@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import _ from 'lodash';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import DateRangePicker from 'react-daterange-picker';
 import 'react-daterange-picker/dist/css/react-calendar.css';
 import { useHistory, useRouteMatch } from 'react-router-dom';
@@ -24,6 +23,7 @@ import {
   getTotalSalesGraphData,
 } from '../../../redux/actions/ReportingActions/ReportingAction';
 import FCM_REDUX_CONSTANT from '../../../redux/constants/fcmConstant/FcmConstant';
+import { getUpcomingActions } from '../../../redux/actions/followUpAction/FollowUpAction';
 
 function UpperHeader() {
   const history = useHistory();
@@ -67,24 +67,26 @@ function UpperHeader() {
     setSearchText('');
   };
 
-  const onSearch = e => {
-    const text = e.target.value;
-    setSearchText(text);
-    if (text && text.trim().length > 0) {
-      const data = {
-        name: text,
-      };
-      FollowUpService.searchSubscriber(data).then(r => {
-        const searchResult = r.data.data;
-        setFiltered(searchResult);
-      });
-      /* setFiltered(array.filter(f => f.match(e.target.value))); */
-    } else {
-      setFiltered([]);
-    }
-    setSearchDropDown(!searchDropDown);
-  };
-  const onSearchThrottle = _.throttle(onSearch, 2000);
+  const onSearch = useCallback(
+    e => {
+      const text = e.target.value;
+      setSearchText(text);
+      if (text && text.trim().length > 0) {
+        const data = {
+          name: text,
+        };
+        FollowUpService.searchSubscriber(data).then(r => {
+          const searchResult = r.data.data;
+          setFiltered(searchResult);
+        });
+        /* setFiltered(array.filter(f => f.match(e.target.value))); */
+      } else {
+        setFiltered([]);
+      }
+      setSearchDropDown(!searchDropDown);
+    },
+    [setSearchText, setFiltered, setSearchDropDown]
+  );
 
   const onDropDownClick = () => {
     setDropDown(!dropDown);
@@ -122,8 +124,13 @@ function UpperHeader() {
             type: FCM_REDUX_CONSTANT.CLEAR_ALL_NOTIFICATION,
             data: null,
           });
-          history.push('/followups');
-          window.location.reload(true);
+          const data = {
+            stages: [],
+            likelyHoods: [],
+          };
+          dispatch(getUpcomingActions(1, 9, data));
+          /*   history.push('/followups');
+          window.location.reload(true); */
         }
       })
       .catch(e => console.log(e));
@@ -178,7 +185,7 @@ function UpperHeader() {
         <input
           placeholder="Search opportunity"
           value={searchText}
-          onChange={onSearchThrottle}
+          onChange={onSearch}
           onKeyDown={setSearchStart}
           onFocus={e => {
             e.target.placeholder = '';
@@ -189,14 +196,14 @@ function UpperHeader() {
           <img src={search} />
           {searchDropDown && (
             <div className="search-area" ref={searchRef}>
-              {searchStart && filtered.length === 0 && (
-                <div className="open-search-area">No opportunity found</div>
-              )}
               {filtered.map(e => (
                 <div className="open-search-area" onClick={() => onClickSearchedVal(e._id)}>
                   {e.firstName} {e.lastName}
                 </div>
               ))}
+              {searchStart && filtered.length === 0 && (
+                <div className="open-search-area">No opportunity found</div>
+              )}
             </div>
           )}
         </div>
