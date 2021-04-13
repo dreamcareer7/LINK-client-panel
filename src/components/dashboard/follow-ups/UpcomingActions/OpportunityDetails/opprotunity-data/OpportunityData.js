@@ -30,7 +30,9 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
   const [phoneVal, setPhoneVal] = useState(phone);
   const [mail, setMail] = useState(email);
   const [stageValue, setStageValue] = useState(stage);
-  const [potentialValue, setPotentialValue] = useState(likelyHood);
+  const [potentialValue, setPotentialValue] = useState(
+    likelyHood !== undefined ? likelyHood : 'SELECT'
+  );
   const [locationVal, setLocationVal] = useState(location);
   const [dealSizeVal, setDealSizeVal] = useState(dealSize);
   const allConversationData = useSelector(state => state.opportunityHistory);
@@ -60,6 +62,8 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
       // eslint-disable-next-line no-restricted-globals
     } else if (dealSizeVal && isNaN(dealSizeVal) === true) {
       errorNotification('Deal size should only be in numbers');
+    } else if (!followUpDate) {
+      errorNotification('Please enter follow up date before save');
     } else {
       const data = {
         firstName,
