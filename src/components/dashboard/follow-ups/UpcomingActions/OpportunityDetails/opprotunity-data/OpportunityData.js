@@ -34,27 +34,29 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
   const [locationVal, setLocationVal] = useState(location);
   const [dealSizeVal, setDealSizeVal] = useState(dealSize);
   const allConversationData = useSelector(state => state.opportunityHistory);
-  const [dateAgain, setDateAgain] = useState('');
 
   const onChangeStage = e => {
-    if (e.target.value === 'CLOSED' || e.target.value === 'LOST') {
+    /* if (e.target.value === 'CLOSED' || e.target.value === 'LOST') {
       setFollowUpDate(null);
       setDateAgain(followUpDate);
     }
     if (e.target.value !== 'CLOSED' && e.target.value !== 'LOST') {
       if (!followUpDate) setFollowUpDate(dateAgain);
       else setFollowUpDate(followUpDate);
-    }
+    } */
     setStageValue(e.target.value);
   };
 
   const onSaveOpportunityData = () => {
-    if (dealSizeVal === '-') {
-      setDealSizeVal('');
+    if (!dealSizeVal) {
+      // setDealSizeVal('');
+      errorNotification('Please enter deal size before save');
     } else if (potentialValue === 'SELECT') {
-      setPotentialValue('');
+      errorNotification('Please select likelihood before save');
+      // setPotentialValue('');
     } else if (stageValue === 'SELECT') {
-      setStageValue('');
+      errorNotification('Please select stage before save');
+      // setStageValue('');
       // eslint-disable-next-line no-restricted-globals
     } else if (dealSizeVal && isNaN(dealSizeVal) === true) {
       errorNotification('Deal size should only be in numbers');
