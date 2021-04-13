@@ -561,10 +561,10 @@ function Crm() {
         </>
       ) : (
         <>
-          <div className="row-container">
-            <div style={{ textAlign: 'center', marginTop: '5vh', minHeight: '200px' }}>
-              No results found in your search, hit reset and change the criteria within the filters.
-              All the best.
+          <div className="no-data-style pt-4">
+            <div className="w-50 text-center">
+              No results found in your search, either add opportunities on LinkedIn or hit the reset
+              button and change the criteria within the filters. All the best!
             </div>
           </div>
         </>
