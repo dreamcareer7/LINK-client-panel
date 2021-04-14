@@ -18,3 +18,11 @@ export const changePotentialCheckbox = data => {
     });
   };
 };
+export const changeDealValue = value => {
+  return dispatch => {
+    dispatch({
+      type: FILTER_REDUX_CONSTANT.UPDATE_DEAL_VALUE,
+      value,
+    });
+  };
+};
