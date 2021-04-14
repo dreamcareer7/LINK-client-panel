@@ -79,6 +79,18 @@ export const filterReducer = (state = initialValue, action) => {
           },
         },
       };
+    case FILTER_REDUX_CONSTANT.UPDATE_DEAL_VALUE:
+      return {
+        ...state,
+        startDeal: {
+          name: 'startDeal',
+          value: action.value.min,
+        },
+        endDeal: {
+          name: 'endDeal',
+          value: action.value.max,
+        },
+      };
     case 'RESET_STAGE_FILTER':
       return { ...initialValue };
     default:
