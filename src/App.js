@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import is from 'is_js';
 import { useDispatch } from 'react-redux';
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import socketIOClient from 'socket.io-client';
 import './App.css';
 import PropTypes from 'prop-types';
 import Notifications from 'react-notify-toast';
@@ -19,6 +20,8 @@ import Account from './components/commonComponents/upperHeader/Account/Account';
 
 import PopUp from './components/commonComponents/PopUp/PopUp';
 import { getClientError } from './redux/actions/clientErrorAction/ClientErrorAction';
+import { SOCKET_URL } from './constants/UrlConstant';
+import { logoutUser } from './redux/actions/accountAction/AccountAction';
 
 const PrivateRoute = ({ component, ...options }) => {
   const isLoggedIn =
@@ -47,8 +50,21 @@ const browserName = uaParser.getBrowser().name;
 
 function App() {
   const dispatch = useDispatch();
+  const history = useHistory();
+
   useEffect(() => {
     dispatch(getClientError());
+    const socket = socketIOClient(`${SOCKET_URL}?token=${localStorage.getItem('userToken')}`);
+
+    if (socket !== null) {
+      socket.on('FromAPI', data => {
+        console.log(data);
+        if (data.type === 'LOGOUT_USER') {
+          logoutUser();
+          history.push('/signUp');
+        }
+      });
+    }
   }, []);
 
   return (
