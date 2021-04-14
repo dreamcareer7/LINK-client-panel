@@ -5,6 +5,8 @@ export const BASE_URL = 'https://jayla.linkfluencer.com/app/'; // <-- Production
 // export const BASE_URL = 'https://97a229f815ab.ngrok.io/';
 export const LINKEDIN_CLIENT_ID = '86mz67ydcyjqc2'; // <-- client
 // export const LINKEDIN_CLIENT_ID = '776gktki6ukrgj';
+
+export const SOCKET_URL = 'https://jayla.linkfluencer.com/app/';
 export const API_METHODS = {
   GET: 'GET',
   POST: 'POST',
