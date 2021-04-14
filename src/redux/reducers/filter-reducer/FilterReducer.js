@@ -91,8 +91,18 @@ export const filterReducer = (state = initialValue, action) => {
           value: action.value.max,
         },
       };
-    case 'RESET_STAGE_FILTER':
-      return { ...initialValue };
+    case FILTER_REDUX_CONSTANT.RESET_FILTER:
+      return {
+        ...initialValue,
+        startDeal: {
+          name: 'startDeal',
+          value: action.data.startDealValue,
+        },
+        endDeal: {
+          name: 'endDeal',
+          value: action.data.endDealValue,
+        },
+      };
     default:
       return state;
   }
