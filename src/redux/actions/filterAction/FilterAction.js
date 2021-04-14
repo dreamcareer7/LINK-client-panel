@@ -26,3 +26,12 @@ export const changeDealValue = value => {
     });
   };
 };
+
+export const resetFilterData = data => {
+  return dispatch => {
+    dispatch({
+      type: FILTER_REDUX_CONSTANT.RESET_FILTER,
+      data,
+    });
+  };
+};
