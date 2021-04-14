@@ -15,6 +15,7 @@ import { fcmReducer } from './fcm-reducer/FcmReducer';
 import { cookieeReducer } from './cookiee-reducer/CookieeReducer';
 import { clientErrorReducer } from './error -reducer/ClientErrorReducer';
 import { popUpReducer } from './popup-reducer/PopupReducer';
+import { filterReducer } from './filter-reducer/FilterReducer';
 
 const rootReducer = combineReducers({
   followUps,
@@ -33,5 +34,6 @@ const rootReducer = combineReducers({
   pipelineValuesGraphData,
   conversationGraphData,
   totalSalesGraphData,
+  filterReducer,
 });
 export default rootReducer;
