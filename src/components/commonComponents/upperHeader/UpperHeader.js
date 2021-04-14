@@ -151,7 +151,7 @@ function UpperHeader() {
   };
 
   const onLogOut = () => {
-    logoutUser(localStorage.getItem('fcmToken'));
+    logoutUser();
     history.push('/signUp');
   };
   const onAccountClick = () => {

@@ -150,8 +150,10 @@ export const addFCMToken = token => {
     });
 };
 
-export const logoutUser = token => {
-  AccountService.logoutUser({ fcmToken: token })
+export const logoutUser = () => {
+  const fcmToken = localStorage.getItem('fcmToken');
+
+  AccountService.logoutUser({ fcmToken })
     .then(response => {
       console.log(response);
       clearAuthToken();
