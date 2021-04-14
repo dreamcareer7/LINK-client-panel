@@ -1,5 +1,4 @@
-import FILTER_REDUX_CONSTANT from '../../constants/filterConstant/FilterCoanstant';
-import {potentialInitialState, stageInitialState} from "../../../components/dashboard/follow-ups/Filters/Filters";
+import FILTER_REDUX_CONSTANT from '../../constants/filterConstant/FilterConstant';
 
 const initialValue = {
   startDeal: {
@@ -10,22 +9,78 @@ const initialValue = {
     name: 'endDeal',
     value: 1000,
   },
+  stageInitialState: {
+    INITIAL_CONTACT: {
+      name: 'Initial Contact',
+      value: false,
+    },
+    IN_CONVERSION: {
+      name: 'In Conversation',
+      value: false,
+    },
+    MEETING_BOOKED: {
+      name: 'Meeting Booked',
+      value: false,
+    },
+    FOLLOW_UP: {
+      name: 'Follow Up',
+      value: false,
+    },
+    POTENTIAL: {
+      name: 'Potential Deals',
+      value: false,
+    },
+    CLOSED: {
+      name: 'Closed',
+      value: false,
+    },
+    LOST: {
+      name: 'Lost',
+      value: false,
+    },
+  },
+  potentialInitialState: {
+    VERY_LIKELY: {
+      name: 'Very Likely Deals',
+      value: false,
+    },
+    LIKELY: {
+      name: 'Likely Deals',
+      value: false,
+    },
+    NOT_LIKELY: {
+      name: 'Not Likely Deals',
+      value: false,
+    },
+  },
 };
 // eslint-disable-next-line import/prefer-default-export
-export const FilterReducer = (state = initialValue, action) => {
+export const filterReducer = (state = initialValue, action) => {
   switch (action.type) {
-    case FILTER_REDUX_CONSTANT.UPDATE_CHECKBOX:
+    case FILTER_REDUX_CONSTANT.UPDATE_STAGE_CHECKBOX:
       return {
         ...state,
-        [`${action.name}`]: {
-          ...state[`${action.name}`],
-          value: action.value,
+        stageInitialState: {
+          ...state.stageInitialState,
+          [action.name]: {
+            ...state.stageInitialState[action.name],
+            value: action.value,
+          },
+        },
+      };
+    case FILTER_REDUX_CONSTANT.UPDATE_POTENTIAL_CHECKBOX:
+      return {
+        ...state,
+        potentialInitialState: {
+          ...state.potentialInitialState,
+          [action.name]: {
+            ...state.potentialInitialState[action.name],
+            value: action.value,
+          },
         },
       };
     case 'RESET_STAGE_FILTER':
-      return stageInitialState;
-    case 'RESET_POTENTIAL_FILTER':
-      return potentialInitialState;
+      return { ...initialValue };
     default:
       return state;
   }
