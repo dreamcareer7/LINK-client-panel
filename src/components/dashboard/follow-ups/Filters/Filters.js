@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import './Filters.scss';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -9,80 +9,11 @@ import FollowUpCheckBox from './FollowUpCheckBox';
 import PotentialCheckBox from './PotentialCheckBox';
 import { getUpcomingActions } from '../../../../redux/actions/followUpAction/FollowUpAction';
 import { errorNotification } from '../../../../constants/Toast';
-
-const stageInitialState = {
-  INITIAL_CONTACT: {
-    name: 'Initial Contact',
-    value: false,
-  },
-  IN_CONVERSION: {
-    name: 'In Conversation',
-    value: false,
-  },
-  MEETING_BOOKED: {
-    name: 'Meeting Booked',
-    value: false,
-  },
-  FOLLOW_UP: {
-    name: 'Follow Up',
-    value: false,
-  },
-  POTENTIAL: {
-    name: 'Potential Deals',
-    value: false,
-  },
-  CLOSED: {
-    name: 'Closed',
-    value: false,
-  },
-  LOST: {
-    name: 'Lost',
-    value: false,
-  },
-};
-const potentialInitialState = {
-  VERY_LIKELY: {
-    name: 'Very Likely Deals',
-    value: false,
-  },
-  LIKELY: {
-    name: 'Likely Deals',
-    value: false,
-  },
-  NOT_LIKELY: {
-    name: 'Not Likely Deals',
-    value: false,
-  },
-};
-const initialDeal = {
-  startDeal: {
-    name: 'startDeal',
-    value: 0,
-  },
-  endDeal: {
-    name: 'endDeal',
-    value: 1000,
-  },
-};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'UPDATE_CHECKBOX':
-      return {
-        ...state,
-        [`${action.name}`]: {
-          ...state[`${action.name}`],
-          value: action.value,
-        },
-      };
-    case 'RESET_STAGE_FILTER':
-      return stageInitialState;
-    case 'RESET_POTENTIAL_FILTER':
-      return potentialInitialState;
-    default:
-      return state;
-  }
-};
+import {
+  changeCheckbox,
+  changeDealValue,
+  changePotentialCheckbox,
+} from '../../../../redux/actions/filterAction/FilterAction';
 
 const numberToUSD = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -97,10 +28,11 @@ function Filters() {
 
   const followupData = useSelector(state => state.followUps);
 
-  const [stageCheckBox, setStageCheckBox] = useReducer(reducer, stageInitialState);
-  const [potentialCheckBox, setPotentialCheckBox] = useReducer(reducer, potentialInitialState);
-  const [deal, setDeal] = useReducer(reducer, initialDeal);
   const [limits, setLimits] = useState(9);
+  // startDeal, endDeal,
+  const { stageInitialState, potentialInitialState, startDeal, endDeal } = useSelector(
+    ({ filterReducer }) => filterReducer
+  );
 
   const dealSizes = useMemo(
     () =>
@@ -131,16 +63,7 @@ function Filters() {
 
   const handleRangePickerChange = value => {
     setRangeState(value);
-    setDeal({
-      type: 'UPDATE_CHECKBOX',
-      name: 'startDeal',
-      value: value?.min || null,
-    });
-    setDeal({
-      type: 'UPDATE_CHECKBOX',
-      name: 'endDeal',
-      value: value?.max || null,
-    });
+    dispatch(changeDealValue(value));
   };
 
   const applyFilters = () => {
@@ -150,14 +73,14 @@ function Filters() {
       errorNotification('Please enter a valid date range');
     } else {
       const data = {
-        stages: Object.entries(stageCheckBox)
+        stages: Object.entries(stageInitialState)
           .filter(e => e[1].value)
           .map(e => e[0]),
-        likelyHoods: Object.entries(potentialCheckBox)
+        likelyHoods: Object.entries(potentialInitialState)
           .filter(e => e[1].value)
           .map(e => e[0]),
-        startDeal: deal.startDeal.value,
-        endDeal: deal.endDeal.value,
+        startDeal: startDeal.startDeal.value,
+        endDeal: endDeal.endDeal.value,
         startDate: startDate ? startDate.toISOString() : undefined,
         endDate: endDate ? endDate.toISOString() : undefined,
       };
@@ -168,8 +91,7 @@ function Filters() {
   const resetFilters = () => {
     setStartDate(null);
     setEndDate(null);
-    setStageCheckBox({ type: 'RESET_STAGE_FILTER' });
-    setPotentialCheckBox({ type: 'RESET_POTENTIAL_FILTER' });
+    // setPotentialCheckBox({ type: 'RESET_POTENTIAL_FILTER' });
     setRangeState({
       min: dealSizes?.minDealValue || 1,
       max: dealSizes?.maxDealValue || 999999999,
@@ -182,19 +104,11 @@ function Filters() {
   };
 
   const onChangeCheckbox = useCallback(e => {
-    setStageCheckBox({
-      type: 'UPDATE_CHECKBOX',
-      name: e.target.name,
-      value: e.target.checked,
-    });
+    dispatch(changeCheckbox({ name: e.target.name, value: e.target.checked }));
   }, []);
 
   const onChangePotential = useCallback(e => {
-    setPotentialCheckBox({
-      type: 'UPDATE_CHECKBOX',
-      name: e.target.name,
-      value: e.target.checked,
-    });
+    dispatch(changePotentialCheckbox({ name: e.target.name, value: e.target.checked }));
   }, []);
 
   return (
@@ -230,7 +144,7 @@ function Filters() {
         />
 
         <div className="common-title mt-4 mb-10">Stage</div>
-        {Object.entries(stageCheckBox).map(data => (
+        {Object.entries(stageInitialState).map(data => (
           <FollowUpCheckBox key={Math.random()} onChange={onChangeCheckbox} data={data} />
         ))}
 
@@ -255,7 +169,7 @@ function Filters() {
         </div>
 
         <div className="common-title mt-4 mb-10">Likelihood</div>
-        {Object.entries(potentialCheckBox).map(data => (
+        {Object.entries(potentialInitialState).map(data => (
           <PotentialCheckBox key={Math.random()} onChange={onChangePotential} data={data} />
         ))}
 
