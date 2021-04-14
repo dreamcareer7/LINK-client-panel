@@ -13,6 +13,7 @@ import {
   changeCheckbox,
   changeDealValue,
   changePotentialCheckbox,
+  resetFilterData,
 } from '../../../../redux/actions/filterAction/FilterAction';
 
 const numberToUSD = new Intl.NumberFormat('en-US', {
@@ -42,10 +43,6 @@ function Filters() {
     [followupData]
   );
 
-  const [rangeState, setRangeState] = useState({
-    min: dealSizes?.minDealValue || 1,
-    max: dealSizes?.maxDealValue || 999999999,
-  });
   useEffect(() => {
     if (document.getElementsByClassName('client-detail-page')[0].offsetWidth <= 963) {
       setLimits(10);
@@ -54,15 +51,7 @@ function Filters() {
     }
   }, []);
 
-  useEffect(() => {
-    setRangeState({
-      min: dealSizes?.minDealValue || 1,
-      max: dealSizes?.maxDealValue || 999999999,
-    });
-  }, [dealSizes?.minDealValue, dealSizes?.maxDealValue]);
-
   const handleRangePickerChange = value => {
-    setRangeState(value);
     dispatch(changeDealValue(value));
   };
 
@@ -79,8 +68,8 @@ function Filters() {
         likelyHoods: Object.entries(potentialInitialState)
           .filter(e => e[1].value)
           .map(e => e[0]),
-        startDeal: startDeal.startDeal.value,
-        endDeal: endDeal.endDeal.value,
+        startDeal: startDeal.value,
+        endDeal: endDeal.value,
         startDate: startDate ? startDate.toISOString() : undefined,
         endDate: endDate ? endDate.toISOString() : undefined,
       };
@@ -91,11 +80,11 @@ function Filters() {
   const resetFilters = () => {
     setStartDate(null);
     setEndDate(null);
-    // setPotentialCheckBox({ type: 'RESET_POTENTIAL_FILTER' });
-    setRangeState({
-      min: dealSizes?.minDealValue || 1,
-      max: dealSizes?.maxDealValue || 999999999,
-    });
+    const dealData = {
+      endDealValue: dealSizes?.maxDealValue || 999999999,
+      startDealValue: dealSizes?.minDealValue || 1,
+    };
+    dispatch(resetFilterData(dealData));
     const data = {
       stages: [],
       likelyHoods: [],
@@ -156,15 +145,18 @@ function Filters() {
             maxValue={dealSizes && dealSizes?.maxDealValue ? dealSizes.maxDealValue : 999999999}
             formatLabel={a => `$${a}`}
             onChange={handleRangePickerChange}
-            value={rangeState}
+            value={{
+              min: startDeal?.value || 1,
+              max: endDeal?.value || 999999999,
+            }}
           />
           <div className="deal-value-container">
             <span className="common-subtitle mr-5">Min: </span>
-            <span>{numberToUSD.format(rangeState.min)}</span>
+            <span>{numberToUSD.format(startDeal?.value)}</span>
           </div>
           <div className="deal-value-container">
             <span className="common-subtitle mr-5">Max: </span>
-            <span>{numberToUSD.format(rangeState.max)}</span>
+            <span>{numberToUSD.format(endDeal?.value)}</span>
           </div>
         </div>
 
