@@ -3,11 +3,19 @@ import FILTER_REDUX_CONSTANT from '../../constants/filterConstant/FilterConstant
 const initialValue = {
   startDeal: {
     name: 'startDeal',
-    value: 0,
+    value: 1,
   },
   endDeal: {
     name: 'endDeal',
-    value: 1000,
+    value: 999999999,
+  },
+  startDate: {
+    name: 'startDate',
+    value: null,
+  },
+  endDate: {
+    name: 'endDate',
+    value: null,
   },
   stageInitialState: {
     INITIAL_CONTACT: {
@@ -91,6 +99,24 @@ export const filterReducer = (state = initialValue, action) => {
           value: action.value.max,
         },
       };
+
+    case FILTER_REDUX_CONSTANT.UPDATE_START_DATE_VALUE:
+      return {
+        ...state,
+        startDate: {
+          name: 'startDate',
+          value: action.value,
+        },
+      };
+    case FILTER_REDUX_CONSTANT.UPDATE_END_DATE_VALUE:
+      return {
+        ...state,
+        endDate: {
+          name: 'endDate',
+          value: action.value,
+        },
+      };
+
     case FILTER_REDUX_CONSTANT.RESET_FILTER:
       return {
         ...initialValue,

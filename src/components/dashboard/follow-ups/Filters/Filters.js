@@ -12,7 +12,9 @@ import { errorNotification } from '../../../../constants/Toast';
 import {
   changeCheckbox,
   changeDealValue,
+  changeEndDateValue,
   changePotentialCheckbox,
+  changeStartDateValue,
   resetFilterData,
 } from '../../../../redux/actions/filterAction/FilterAction';
 
@@ -24,16 +26,21 @@ const numberToUSD = new Intl.NumberFormat('en-US', {
 
 function Filters() {
   const dispatch = useDispatch();
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  /* const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null); */
 
   const followupData = useSelector(state => state.followUps);
 
   const [limits, setLimits] = useState(9);
   // startDeal, endDeal,
-  const { stageInitialState, potentialInitialState, startDeal, endDeal } = useSelector(
-    ({ filterReducer }) => filterReducer
-  );
+  const {
+    stageInitialState,
+    potentialInitialState,
+    startDeal,
+    endDeal,
+    startDate,
+    endDate,
+  } = useSelector(({ filterReducer }) => filterReducer);
 
   const dealSizes = useMemo(
     () =>
@@ -54,11 +61,18 @@ function Filters() {
   const handleRangePickerChange = value => {
     dispatch(changeDealValue(value));
   };
+  const changeStartDate = val => {
+    dispatch(changeStartDateValue(val));
+  };
+
+  const changeEndDate = val => {
+    dispatch(changeEndDateValue(val));
+  };
 
   const applyFilters = () => {
-    if (moment(startDate).isAfter(endDate)) {
+    if (moment(startDate.value).isAfter(endDate.value)) {
       errorNotification('Please enter a valid date range');
-    } else if (moment(endDate).isBefore(startDate)) {
+    } else if (moment(endDate.value).isBefore(endDate.value)) {
       errorNotification('Please enter a valid date range');
     } else {
       const data = {
@@ -70,16 +84,16 @@ function Filters() {
           .map(e => e[0]),
         startDeal: startDeal.value,
         endDeal: endDeal.value,
-        startDate: startDate ? startDate.toISOString() : undefined,
-        endDate: endDate ? endDate.toISOString() : undefined,
+        startDate: startDate.value ? startDate.value.toISOString() : undefined,
+        endDate: endDate.value ? endDate.value.toISOString() : undefined,
       };
 
       dispatch(getUpcomingActions(followupData.docs.page, limits, data));
     }
   };
   const resetFilters = () => {
-    setStartDate(null);
-    setEndDate(null);
+    /* setStartDate(null);
+    setEndDate(null); */
     const dealData = {
       endDealValue: dealSizes?.maxDealValue || 999999999,
       startDealValue: dealSizes?.minDealValue || 1,
@@ -109,8 +123,8 @@ function Filters() {
           className="mt-10"
           placeholderText="From date"
           dateFormat="dd/MM/yyyy"
-          selected={startDate}
-          onChange={date => setStartDate(date)}
+          selected={startDate.value}
+          onChange={changeStartDate}
           onFocus={e => {
             e.target.placeholder = '';
           }}
@@ -122,8 +136,8 @@ function Filters() {
           className="mt-10"
           placeholderText="To date"
           dateFormat="dd/MM/yyyy"
-          selected={endDate}
-          onChange={date => setEndDate(date)}
+          selected={endDate.value}
+          onChange={changeEndDate}
           onFocus={e => {
             e.target.placeholder = '';
           }}

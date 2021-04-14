@@ -27,6 +27,23 @@ export const changeDealValue = value => {
   };
 };
 
+export const changeStartDateValue = value => {
+  return dispatch => {
+    dispatch({
+      type: FILTER_REDUX_CONSTANT.UPDATE_START_DATE_VALUE,
+      value,
+    });
+  };
+};
+export const changeEndDateValue = value => {
+  return dispatch => {
+    dispatch({
+      type: FILTER_REDUX_CONSTANT.UPDATE_END_DATE_VALUE,
+      value,
+    });
+  };
+};
+
 export const resetFilterData = data => {
   return dispatch => {
     dispatch({
