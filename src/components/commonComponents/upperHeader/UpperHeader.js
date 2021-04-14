@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import DateRangePicker from 'react-daterange-picker';
 import 'react-daterange-picker/dist/css/react-calendar.css';
 import { useHistory, useRouteMatch } from 'react-router-dom';
@@ -24,6 +24,7 @@ import {
 } from '../../../redux/actions/ReportingActions/ReportingAction';
 import FCM_REDUX_CONSTANT from '../../../redux/constants/fcmConstant/FcmConstant';
 import { getUpcomingActions } from '../../../redux/actions/followUpAction/FollowUpAction';
+import { resetFilterData } from '../../../redux/actions/filterAction/FilterAction';
 
 function UpperHeader() {
   const history = useHistory();
@@ -47,6 +48,14 @@ function UpperHeader() {
     moment.range(moment().clone().subtract(5, 'days'), moment().clone())
   );
   const notificationData = useSelector(state => state.fcmReducer);
+  const followupData = useSelector(state => state.followUps);
+  const dealSizes = useMemo(
+    () =>
+      followupData && followupData.dealSize && followupData.dealSize[0]
+        ? followupData.dealSize[0]
+        : null,
+    [followupData]
+  );
 
   const onSelectDateRange = e => {
     setDateRangeVal(e);
@@ -128,6 +137,11 @@ function UpperHeader() {
             stages: [],
             likelyHoods: [],
           };
+          const dealData = {
+            endDealValue: dealSizes?.maxDealValue || 999999999,
+            startDealValue: dealSizes?.minDealValue || 1,
+          };
+          dispatch(resetFilterData(dealData));
           dispatch(getUpcomingActions(1, 9, data));
           /*   history.push('/followups');
           window.location.reload(true); */
