@@ -6,13 +6,18 @@ function AuthRedirect({ ...options }) {
   const { search } = useLocation();
   const authToken = new URLSearchParams(search).get('token');
   const opportunityId = new URLSearchParams(search).get('opportunityId');
+  const redirectTo = new URLSearchParams(search).get('redirectTo');
 
   useEffect(() => {
     saveAuthTokenLocalStorage({ authToken });
   }, []);
   return (
     <Route {...options}>
-      <Redirect to={opportunityId ? `/followups/opportunityDetails/${opportunityId}` : '/home'} />
+      {opportunityId ? (
+        <Redirect to={`/followups/opportunityDetails/${opportunityId}`} />
+      ) : (
+        <Redirect to={redirectTo ? `/${redirectTo}` : '/home'} />
+      )}
     </Route>
   );
 }
