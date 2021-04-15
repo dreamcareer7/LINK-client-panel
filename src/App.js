@@ -22,6 +22,7 @@ import PopUp from './components/commonComponents/PopUp/PopUp';
 import { getClientError } from './redux/actions/clientErrorAction/ClientErrorAction';
 import { SOCKET_URL } from './constants/UrlConstant';
 import { logoutUser } from './redux/actions/accountAction/AccountAction';
+import Strategy from './components/dashboard/strategy/Strategy';
 /* import { SOCKET_URL } from './constants/UrlConstant';
 import { logoutUser } from './redux/actions/accountAction/AccountAction'; */
 
@@ -92,6 +93,7 @@ function App() {
               <PrivateRoute exact path="/home" component={Home} />
               <PrivateRoute exact path="/followups" component={FollowUps} />
               <PrivateRoute exact path="/crm" component={Crm} />
+              <PrivateRoute exact path="/strategy" component={Strategy} />
               <PrivateRoute exact path="/reporting" component={Reporting} />
               <PrivateRoute
                 exact
