@@ -1,0 +1,30 @@
+@import "src/styles/index";
+.strategy-container{
+    display: grid;
+    grid-template-columns:repeat(auto-fit ,calc(50% - 15px));
+    gap: 40px 20px;
+    min-width: 768px;
+    margin-top: 20px;
+    padding: 0 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.strategy-title{
+  padding: 0 0 10px 0;
+}
+
+.strategy-data{
+  font-weight: 400;
+  color: $secondary-font-color;
+  font-family: 'Roboto', 'sans-serif' !important;
+  min-height: 200px;
+  height: 200px;
+  padding: 0 0 20px 0;
+  span{
+    width: 40%;
+    word-break: normal;
+    overflow: hidden;
+    text-overflow: ellipsis
+  }
+}
