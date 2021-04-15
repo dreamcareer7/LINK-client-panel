@@ -6,7 +6,7 @@ export const BASE_URL = 'https://jayla.linkfluencer.com/app/'; // <-- Production
 export const LINKEDIN_CLIENT_ID = '86mz67ydcyjqc2'; // <-- client
 // export const LINKEDIN_CLIENT_ID = '776gktki6ukrgj';
 
-export const SOCKET_URL = 'https://jayla.linkfluencer.com/app/';
+export const SOCKET_URL = 'wss://link.test.humanpixel.com.au/';
 export const API_METHODS = {
   GET: 'GET',
   POST: 'POST',

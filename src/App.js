@@ -22,6 +22,8 @@ import PopUp from './components/commonComponents/PopUp/PopUp';
 import { getClientError } from './redux/actions/clientErrorAction/ClientErrorAction';
 import { SOCKET_URL } from './constants/UrlConstant';
 import { logoutUser } from './redux/actions/accountAction/AccountAction';
+/* import { SOCKET_URL } from './constants/UrlConstant';
+import { logoutUser } from './redux/actions/accountAction/AccountAction'; */
 
 const PrivateRoute = ({ component, ...options }) => {
   const isLoggedIn =
@@ -51,20 +53,27 @@ const browserName = uaParser.getBrowser().name;
 function App() {
   const dispatch = useDispatch();
   const history = useHistory();
-
   useEffect(() => {
     dispatch(getClientError());
-    const socket = socketIOClient(`${SOCKET_URL}?token=${localStorage.getItem('userToken')}`);
-
-    if (socket !== null) {
-      socket.on('FromAPI', data => {
-        console.log(data);
-        if (data.type === 'LOGOUT_USER') {
-          logoutUser();
-          history.push('/signUp');
-        }
-      });
+  }, []);
+  useEffect(() => {
+    let socket = null;
+    async function setSocketConnection() {
+      if (localStorage.getItem('userToken') !== null) {
+        socket = await socketIOClient(`${SOCKET_URL}?token=${localStorage.getItem('userToken')}`);
+      }
     }
+    setSocketConnection().then(r => {
+      if (socket) {
+        console.log('r->', r);
+        socket.on('FromAPI', data => {
+          if (data.type === 'LOGOUT_USER') {
+            logoutUser();
+            history.push('/signUp');
+          }
+        });
+      }
+    });
   }, []);
 
   return (
@@ -93,7 +102,7 @@ function App() {
             </Layout>
           </Switch>
         </Route>
-      </Router>
+      </Router>{' '}
     </div>
   );
 }
