@@ -51,14 +51,14 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
 
   const onSaveOpportunityData = () => {
     if (!dealSizeVal) {
-      // setDealSizeVal('');
-      errorNotification('Please enter deal size before save');
+      setDealSizeVal('');
+      // errorNotification('Please enter deal size before save');
     } else if (potentialValue === 'SELECT') {
-      errorNotification('Please select likelihood before save');
-      // setPotentialValue('');
+      // errorNotification('Please select likelihood before save');
+      setPotentialValue('');
     } else if (stageValue === 'SELECT') {
-      errorNotification('Please select stage before save');
-      // setStageValue('');
+      // errorNotification('Please select stage before save');
+      setStageValue('');
       // eslint-disable-next-line no-restricted-globals
     } else if (dealSizeVal && isNaN(dealSizeVal) === true) {
       errorNotification('Deal size should only be in numbers');
