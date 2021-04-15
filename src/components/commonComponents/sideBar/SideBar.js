@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import linkfluencer from '../../../assets/images/linkfluencer.png';
 import home from '../../../assets/home.svg';
-/* import group from '../../../assets/group.png'; */
+import strategy from '../../../assets/images/horse-chess-piece.png';
 import crm from '../../../assets/crm.svg';
 import reporting from '../../../assets/reporting.svg';
 import calendar from '../../../assets/calendar.svg';
@@ -56,7 +56,7 @@ function SideBar() {
           </NavLink>
 
           <NavLink className="menu-item menu-link" to="/strategy" replace>
-            <img alt="crm" src={crm} /> <span>Strategy</span>
+            <img alt="crm" src={strategy} /> <span>Strategy</span>
           </NavLink>
 
           <NavLink className="menu-item menu-link" to="/reporting" replace>
