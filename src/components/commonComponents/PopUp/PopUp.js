@@ -58,8 +58,12 @@ const PopUp = ({ popupData, onClosePopup = () => {} }) => {
         </div>
         <div className="whoops-content">{findError && findError.text}</div>
         {findError && errorTitles.includes(findError.title) && (
-          <div className="button success-button popup-button" onClick={openUrl}>
-            {findError.title === 'cookie_expired' ? 'SYNC NOW' : 'DOWNLOAD NOW'}
+          <div
+            className="button success-button popup-button"
+            style={{ padding: '8px 50px' }}
+            onClick={openUrl}
+          >
+            {findError.title === 'cookie_expired' ? 'SYNC NOW' : 'DOWNLOAD'}
           </div>
         )}
       </div>
