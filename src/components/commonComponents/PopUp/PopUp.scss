@@ -26,12 +26,11 @@
 .pop-up-container {
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
   height: 350px;
   width: 350px;
   margin: auto;
-  padding: 40px;
+  padding: 30px 40px 40px 40px;
   background-color: #201F5F;
   border-radius: 10px;
 }
@@ -45,9 +44,11 @@
   display: flex;
   align-items: center;
   width: 100%;
+  flex-direction: column;
   img {
     height: 30px;
     margin-right: 20px;
+    margin-bottom: 20px
   }
   span {
     font-size: 28px;
@@ -57,9 +58,14 @@
 }
 
 .whoops-content {
-  margin: 20px 0;
-  font-size: 15px;
-  font-weight: 100;
+  margin: 20px 0 35px 0;
+  font-size: 18px;
+  font-weight: 300;
   color: #F9FAFF;
   text-align: center;
+  line-height: initial;
+}
+
+.popup-button{
+  padding: 10px 35px;
 }

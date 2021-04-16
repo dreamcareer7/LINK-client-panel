@@ -54,12 +54,12 @@ const PopUp = ({ popupData, onClosePopup = () => {} }) => {
       <div id="pop-up" ref={popupRef} className="pop-up-container">
         <div className="whoops-title">
           <img src={bell} />
-          <span>WHOOPS!</span>
+          <span>ATTENTION!</span>
         </div>
         <div className="whoops-content">{findError && findError.text}</div>
         {findError && errorTitles.includes(findError.title) && (
-          <div className="button success-button" onClick={openUrl}>
-            {findError.title === 'cookie_expired' ? 'RELOAD EXTENSION' : 'DOWNLOAD NOW'}
+          <div className="button success-button popup-button" onClick={openUrl}>
+            {findError.title === 'cookie_expired' ? 'SYNC NOW' : 'DOWNLOAD NOW'}
           </div>
         )}
       </div>
