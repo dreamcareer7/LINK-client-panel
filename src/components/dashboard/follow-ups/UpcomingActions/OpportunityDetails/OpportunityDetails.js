@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import './OpportunityDetails.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
@@ -14,6 +14,7 @@ import Notes from './notes/Notes';
 // import { fetchConversation } from '../../../../../redux/actions/followUpAction/historyAction/HistoryAction';
 import Modal from '../../../../commonComponents/Modal/Modal';
 import Loader from '../../../../commonComponents/Loader/Loader';
+import { resetFilterData } from '../../../../../redux/actions/filterAction/FilterAction';
 
 function OpportunityDetails() {
   const history = useHistory();
@@ -24,8 +25,25 @@ function OpportunityDetails() {
   const { id } = useParams();
   const [isModelOpen, setIsModelOpen] = useState(false);
   const opportunity = useSelector(state => state.opportunityDetail);
+  const followupData = useSelector(state => state.followUps);
+
+  const dealSizes = useMemo(
+    () =>
+      followupData && followupData.dealSize && followupData.dealSize[0]
+        ? followupData.dealSize[0]
+        : null,
+    [followupData]
+  );
+
   useEffect(() => {
     document.title = 'Opportunity Details';
+    return () => {
+      const dealData = {
+        endDealValue: dealSizes?.maxDealValue || 999999999,
+        startDealValue: dealSizes?.minDealValue || 1,
+      };
+      dispatch(resetFilterData(dealData));
+    };
   }, []);
 
   useEffect(() => {
