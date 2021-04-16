@@ -18,13 +18,22 @@
   font-weight: 400;
   color: $secondary-font-color;
   font-family: 'Roboto', 'sans-serif' !important;
-  min-height: 200px;
-  height: 200px;
-  padding: 0 0 20px 0;
-  span{
-    width: 40%;
-    word-break: normal;
-    overflow: hidden;
-    text-overflow: ellipsis
-  }
+  position: relative;
+  margin-bottom: 20px;
+  max-height: 150px;
+  overflow: hidden;
+}
+
+.read-more{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+.read-more-text{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: white;
+  padding: 0 5px;
 }

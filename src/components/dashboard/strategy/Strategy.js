@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import './Strategy.scss';
 
 const Strategy = () => {
@@ -6,7 +6,7 @@ const Strategy = () => {
     {
       title: 'STEP 1 : OUTCOME',
       data:
-        'yiuidsd uuuu  Donec bibendum vel est id ornare.{{click here$$https://www.google.com/}} Quisque purus odio, pharetra vel sodales in, consequat non mauris. Quisque non tellus eget mi ornare rutrum sit amet non sem. Fusce in pharetra lacus. Integer et elementum leo.',
+        'yiuidsd uuuu  Donec bibendum vel est id ornare.{{click here$$https://www.google.com/}} Quisque purus odio',
       video: 'VIDEO',
     },
     {
@@ -41,27 +41,44 @@ const Strategy = () => {
     return target.data;
   };
 
-  /* const show = document.getElementsByClassName('strategy-data')?.[0]?.scrollHeight;
-  console.log(show); */
   const readMoreData = useCallback(
     e => {
       setIsReadMoreClick(e);
     },
     [setIsReadMoreClick]
   );
+
+  const showReadMore = useCallback(
+    elem => {
+      const target = document.getElementById(elem);
+      if (!target) return false;
+      return target.scrollHeight > target.offsetHeight;
+    },
+    [steps]
+  );
+
   return (
     <div className="strategy-container">
-      {steps.map((step, i) => (
+      {steps.map((step, index) => (
         <div>
           <div className="common-title chart-title strategy-title">{step.title}</div>
-          <span className={`strategy-data ${isReadMoreClick !== i && 'read-more'}`}>
-            <span dangerouslySetInnerHTML={{ __html: getData(i) }} />(
-            <span
-              className="common-subtitle cursor-pointer read-more-text"
-              onClick={isReadMoreClick !== i ? () => readMoreData(i) : () => setIsReadMoreClick(-1)}
-            >
-              {isReadMoreClick !== i ? 'Read more' : 'Read less'}
-            </span>
+          <span
+            id={`data-${index}`}
+            className={`strategy-data ${isReadMoreClick !== index && 'read-more'}`}
+          >
+            <span dangerouslySetInnerHTML={{ __html: getData(index) }} />(
+            {showReadMore(`data-${index}`) && (
+              <span
+                className="common-subtitle cursor-pointer read-more-text"
+                onClick={
+                  isReadMoreClick !== index
+                    ? () => readMoreData(index)
+                    : () => setIsReadMoreClick(-1)
+                }
+              >
+                {isReadMoreClick !== index ? 'Read more' : 'Read less'}
+              </span>
+            )}
             )
           </span>
 
