@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import './Strategy.scss';
 
 const Strategy = () => {
@@ -29,6 +29,7 @@ const Strategy = () => {
     },
   ];
   const [isReadMoreClick, setIsReadMoreClick] = useState(-1);
+  const elRefs = useRef([]);
 
   const getData = index => {
     const target = steps[index];
@@ -49,12 +50,26 @@ const Strategy = () => {
   );
 
   const showReadMore = useCallback(
-    elem => {
-      const target = document.getElementById(elem);
-      if (!target) return false;
-      return target.scrollHeight > target.offsetHeight;
+    target => {
+      console.log('showMore', target);
+      if (target) {
+        console.log('target.scrollHeight', target?.scrollHeight);
+        console.log('target.height', target?.offsetHeight);
+        return target?.scrollHeight > target?.offsetHeight;
+      }
+      return false;
     },
-    [steps]
+    [elRefs.current]
+  );
+
+  const measuredRef = useCallback(
+    (node, index) => {
+      if (node !== null) {
+        elRefs.current[index] = showReadMore(node);
+        setIsReadMoreClick(false);
+      }
+    },
+    [elRefs.current, showReadMore]
   );
 
   return (
@@ -64,10 +79,12 @@ const Strategy = () => {
           <div className="common-title chart-title strategy-title">{step.title}</div>
           <span
             id={`data-${index}`}
-            className={`strategy-data ${isReadMoreClick !== index && 'read-more'}`}
+            ref={node => measuredRef(node, index)}
+            className={`strategy-data  ${isReadMoreClick !== index && 'read-more'}`}
           >
+            {console.log(elRefs.current[index])}
             <span dangerouslySetInnerHTML={{ __html: getData(index) }} />(
-            {showReadMore(`data-${index}`) && (
+            {elRefs.current[index] && (
               <span
                 className="common-subtitle cursor-pointer read-more-text"
                 onClick={
@@ -89,7 +106,13 @@ const Strategy = () => {
             >
               <div
                 className="wistia_responsive_wrapper"
-                style={{ height: '100%', left: 0, position: 'absolute', top: 0, width: '100%' }}
+                style={{
+                  height: '100%',
+                  left: 0,
+                  position: 'absolute',
+                  top: 0,
+                  width: '100%',
+                }}
               >
                 <span
                   className="wistia_embed wistia_async_wks36r0sz0 popover=true popoverAnimateThumbnail=true videoFoam=true"

@@ -20,15 +20,16 @@
   font-family: 'Roboto', 'sans-serif' !important;
   position: relative;
   margin-bottom: 20px;
-  max-height: 150px;
+  max-height: 63px;
   overflow: hidden;
 }
 
 .read-more{
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  // -webkit-line-clamp: 3;
   overflow: hidden;
+  min-height: 63px;
 }
 .read-more-text{
   position: absolute;
