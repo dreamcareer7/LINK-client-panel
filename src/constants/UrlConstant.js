@@ -1,7 +1,7 @@
 // export const BASE_URL = 'https://link.dev.gradlesol.com/app/'; // <-- Kevit Dev
 // export const BASE_URL = 'https://link.dev.humanpixel.com.au/app/'; // <-- HP Dev
-export const BASE_URL = 'https://link.test.humanpixel.com.au/app/'; // <-- HP Staging
-// export const BASE_URL = 'https://jayla.linkfluencer.com/app/'; // <-- Production
+// export const BASE_URL = 'https://link.test.humanpixel.com.au/app/'; // <-- HP Staging
+export const BASE_URL = 'https://jayla.linkfluencer.com/app/'; // <-- Production
 // export const BASE_URL = 'https://97a229f815ab.ngrok.io/';
 export const LINKEDIN_CLIENT_ID = '86mz67ydcyjqc2'; // <-- client
 // export const LINKEDIN_CLIENT_ID = '776gktki6ukrgj';
@@ -49,6 +49,9 @@ export const DASHBOARD_URL = {
   OPPORTUNITY_URL: `${BASE_URL}client-dashboard/opportunities`,
   PIPELINE_VALUE: `${BASE_URL}client-dashboard/pipeline-value`,
   CLIENT_QUOTE: `${BASE_URL}organization/client-today-quote`,
+};
+export const STRATEGY_URL = {
+  GET_STRATEGY_URL: `${BASE_URL}strategy`,
 };
 
 export const ACCOUNTS_URL = {
