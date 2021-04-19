@@ -1,8 +1,10 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import './Strategy.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { getStrategies } from '../../../redux/actions/strategyAction/StrategyAction';
 
 const Strategy = () => {
-  const steps = [
+  /*  const steps = [
     {
       title: 'STEP 1 : OUTCOME',
       data:
@@ -27,23 +29,32 @@ const Strategy = () => {
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Praesent a nisl vitae lorem malesuada posuere ut a magna. Quisque consectetur velit ac lobortis tristique. Curabitur at sapien nec nisi venenatis tincidunt. Nunc turpis velit, rutrum non posuere eu, convallis sed ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Cras sed faucibus odio, non consectetur leo. Ut convallis sem ultricies accumsan condimentum. Donec bibendum vel est id ornare. Quisque purus odio, pharetra vel sodales in, consequat non mauris. Quisque non tellus eget mi ornare rutrum sit amet non sem. Fusce in pharetra lacus. Integer et elementum leo.',
       video: 'VIDEO 3',
     },
-  ];
+  ]; */
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getStrategies());
+  }, []);
+
   const [isReadMoreClick, setIsReadMoreClick] = useState(-1);
+  const forceUpdate = useState(false);
   const elRefs = useRef([]);
 
+  const strategyData = useSelector(({ strategy }) => strategy);
+
   const getData = index => {
-    const target = steps[index];
-    const b = target.data.match(/(?<={{)(.*?)(?=}})/);
+    const target = strategyData[index];
+    const b = target?.description?.match(/(?<={{)(.*?)(?=}})/);
     if (b) {
       const aa = b[1].split('$$');
       const link = `<a href='${aa[1]}' target="_blank">${aa[0]}</a>`;
-      return target.data.replace(/{{(.*?)}}/, link);
+      return target?.description.replace(/{{(.*?)}}/, link);
     }
-    return target.data;
+    return target?.description;
   };
 
   const readMoreData = useCallback(
     e => {
+      console.log('e->', e);
       setIsReadMoreClick(e);
     },
     [setIsReadMoreClick]
@@ -51,10 +62,7 @@ const Strategy = () => {
 
   const showReadMore = useCallback(
     target => {
-      console.log('showMore', target);
       if (target) {
-        console.log('target.scrollHeight', target?.scrollHeight);
-        console.log('target.height', target?.offsetHeight);
         return target?.scrollHeight > target?.offsetHeight;
       }
       return false;
@@ -66,7 +74,7 @@ const Strategy = () => {
     (node, index) => {
       if (node !== null) {
         elRefs.current[index] = showReadMore(node);
-        setIsReadMoreClick(false);
+        forceUpdate[1](true);
       }
     },
     [elRefs.current, showReadMore]
@@ -74,7 +82,7 @@ const Strategy = () => {
 
   return (
     <div className="strategy-container">
-      {steps.map((step, index) => (
+      {strategyData?.map((step, index) => (
         <div>
           <div className="common-title chart-title strategy-title">{step.title}</div>
           <span
@@ -82,7 +90,6 @@ const Strategy = () => {
             ref={node => measuredRef(node, index)}
             className={`strategy-data  ${isReadMoreClick !== index && 'read-more'}`}
           >
-            {console.log(elRefs.current[index])}
             <span dangerouslySetInnerHTML={{ __html: getData(index) }} />(
             {elRefs.current[index] && (
               <span
@@ -98,35 +105,12 @@ const Strategy = () => {
             )}
             )
           </span>
-
           <div style={{ borderRadius: '10px' }}>
             <div
-              className="wistia_responsive_padding"
-              style={{ padding: '56.25% 0 0 0', position: 'relative' }}
-            >
-              <div
-                className="wistia_responsive_wrapper"
-                style={{
-                  height: '100%',
-                  left: 0,
-                  position: 'absolute',
-                  top: 0,
-                  width: '100%',
-                }}
-              >
-                <span
-                  className="wistia_embed wistia_async_wks36r0sz0 popover=true popoverAnimateThumbnail=true videoFoam=true"
-                  style={{
-                    display: 'inline-block',
-                    height: '100%',
-                    position: 'relative',
-                    width: '100%',
-                  }}
-                >
-                  &nbsp;
-                </span>
-              </div>
-            </div>
+              dangerouslySetInnerHTML={{
+                __html: strategyData[index].videoScript,
+              }}
+            />
           </div>
         </div>
       ))}
