@@ -47,11 +47,6 @@ function CardBox(props) {
 
   const showReadMore = useCallback(target => {
     if (target) {
-      console.log('');
-      console.log(target);
-      console.log(target.scrollHeight);
-      console.log(target.offsetHeight);
-      console.log('');
       return (target?.scrollHeight ?? 0) > (target?.offsetHeight ?? 0);
     }
     return false;
@@ -70,6 +65,17 @@ function CardBox(props) {
     [component.current, showReadMore, forceUpdate, shouldShowReadMore.current]
   );
 
+  useEffect(() => {
+    const element = document.getElementById('read-more-container');
+    if (element) {
+      if (expanded) {
+        element.style.position = 'absolute';
+      } else {
+        element.style.position = 'static';
+      }
+    }
+  }, [expanded]);
+
   return (
     <div>
       <div className="common-title chart-title strategy-title">{step.title}</div>
@@ -78,6 +84,7 @@ function CardBox(props) {
         {shouldShowReadMore.current && (
           <span
             className="common-subtitle cursor-pointer read-more-text"
+            id="read-more-container"
             onClick={() => setExpanded(e => !e)}
           >
             {expanded ? 'Read more' : 'Read less'}
