@@ -27,6 +27,7 @@ function CardBox(props) {
   const { step } = props;
 
   const component = useRef(null);
+  const readMore = useRef(null);
   const shouldShowReadMore = useRef(false);
   const [expanded, setExpanded] = useState(true);
   const forceUpdate = useState(false);
@@ -66,7 +67,7 @@ function CardBox(props) {
   );
 
   useEffect(() => {
-    const element = document.getElementById('read-more-container');
+    const element = readMore.current;
     if (element) {
       if (expanded) {
         element.style.position = 'absolute';
@@ -74,7 +75,7 @@ function CardBox(props) {
         element.style.position = 'static';
       }
     }
-  }, [expanded]);
+  }, [expanded, readMore.current]);
 
   return (
     <div>
@@ -84,7 +85,7 @@ function CardBox(props) {
         {shouldShowReadMore.current && (
           <span
             className="common-subtitle cursor-pointer read-more-text"
-            id="read-more-container"
+            ref={readMore}
             onClick={() => setExpanded(e => !e)}
           >
             {expanded ? 'Read more' : 'Read less'}
