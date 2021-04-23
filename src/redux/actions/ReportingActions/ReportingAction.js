@@ -69,7 +69,7 @@ export const getTotalSalesGraphData = ({ startDate, endDate }) => {
   return dispatch => {
     ReportingService.getTotalSales({ startDate, endDate })
       .then(response => {
-        if (response.data.status === 'SUCCESS') {
+        if (response?.data?.status === 'SUCCESS') {
           dispatch({
             type: REPORT_REDUX_CONSTANT.GET_TOTAL_SALES_GRAPH_DATA,
             data: response.data,
@@ -77,7 +77,7 @@ export const getTotalSalesGraphData = ({ startDate, endDate }) => {
         }
       })
       .catch(e => {
-        if (e.response.data.status === undefined) {
+        if (e.response?.data?.status === undefined) {
           errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
           errorNotification('Internal server error');

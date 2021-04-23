@@ -3,7 +3,7 @@ import './sidebar.scss';
 import { NavLink } from 'react-router-dom';
 import linkfluencer from '../../../assets/images/linkfluencer.png';
 import dashboard from '../../../assets/home.svg';
-import strategy from '../../../assets/images/horse-chess-piece.png';
+// import strategy from '../../../assets/images/horse-chess-piece.png';
 import crm from '../../../assets/crm.svg';
 import reporting from '../../../assets/reporting.svg';
 import calendar from '../../../assets/calendar.svg';
@@ -30,9 +30,9 @@ function SideBar() {
             <img alt="crm" src={crm} /> <span>CRM</span>
           </NavLink>
 
-          <NavLink className="menu-item menu-link" to="/strategy" replace>
+          {/*  <NavLink className="menu-item menu-link" to="/strategy" replace>
             <img alt="crm" src={strategy} /> <span>Strategy</span>
-          </NavLink>
+          </NavLink> */}
 
           <NavLink className="menu-item menu-link" to="/reporting" replace>
             <img alt="reporting" src={reporting} /> <span>Reporting</span>
