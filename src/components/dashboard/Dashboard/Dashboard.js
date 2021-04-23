@@ -74,7 +74,6 @@ const Dashboard = () => {
       },
     ],
   };
-  console.log(totalSales);
   const dispatch = useDispatch();
 
   useEffect(() => {
