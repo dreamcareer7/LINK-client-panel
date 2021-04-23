@@ -74,6 +74,7 @@ const Dashboard = () => {
       },
     ],
   };
+  console.log(totalSales);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -113,6 +114,7 @@ const Dashboard = () => {
             fontSize: 14,
             fontStyle: 700,
             fontColor: '#464646',
+            padding: 10,
           },
         },
       ],
@@ -158,6 +160,7 @@ const Dashboard = () => {
     scales: {
       xAxes: [
         {
+          barPercentage: 1.1,
           categorySpacing: 0,
           gridLines: {
             display: false,
@@ -170,6 +173,7 @@ const Dashboard = () => {
             fontSize: 14,
             fontStyle: 700,
             fontColor: '#464646',
+            padding: 10,
           },
         },
       ],
