@@ -9,7 +9,6 @@ import Notifications from 'react-notify-toast';
 import UAParser from 'ua-parser-js';
 
 import Layout from './components/commonComponents/layout/Layout';
-import Home from './components/dashboard/Home';
 import SignupWithLinkedIn from './components/authentication/login-page/SignupWithLinkedIn';
 import FollowUps from './components/dashboard/follow-ups/FollowUps';
 import Crm from './components/dashboard/crm/CRM';
@@ -23,8 +22,7 @@ import { getClientError } from './redux/actions/clientErrorAction/ClientErrorAct
 import { SOCKET_URL } from './constants/UrlConstant';
 import { logoutUser } from './redux/actions/accountAction/AccountAction';
 import Strategy from './components/dashboard/strategy/Strategy';
-/* import { SOCKET_URL } from './constants/UrlConstant';
-import { logoutUser } from './redux/actions/accountAction/AccountAction'; */
+import Dashboard from './components/dashboard/Dashboard/Dashboard';
 
 const PrivateRoute = ({ component, ...options }) => {
   const isLoggedIn =
@@ -35,7 +33,7 @@ const PrivateRoute = ({ component, ...options }) => {
     return (
       <Route {...options}>
         {' '}
-        <Redirect to="/home" />
+        <Redirect to="/dashboard" />
       </Route>
     );
   }
@@ -90,7 +88,7 @@ function App() {
             <Route exact path="/auth-verify" component={AuthRedirect} />
             <PrivateRoute exact path="/" />
             <Layout>
-              <PrivateRoute exact path="/home" component={Home} />
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/followups" component={FollowUps} />
               <PrivateRoute exact path="/crm" component={Crm} />
               <PrivateRoute exact path="/strategy" component={Strategy} />

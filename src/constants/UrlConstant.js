@@ -46,9 +46,11 @@ export const REPORTING_URL = {
 };
 
 export const DASHBOARD_URL = {
-  OPPORTUNITY_URL: `${BASE_URL}client-dashboard/opportunities`,
-  PIPELINE_VALUE: `${BASE_URL}client-dashboard/pipeline-value`,
+  OPPORTUNITY_URL: `${BASE_URL}client-dashboard/opportunities/`,
+  DASHBOARD_GENERAL: `${BASE_URL}client-dashboard-updated/general-values/`,
+  PIPELINE_VALUE: `${BASE_URL}client-dashboard-updated/pipeline-value`,
   CLIENT_QUOTE: `${BASE_URL}organization/client-today-quote`,
+  GET_TOTAL_SALES: `${BASE_URL}client-dashboard-updated/sales-between`,
 };
 export const STRATEGY_URL = {
   GET_STRATEGY_URL: `${BASE_URL}strategy`,

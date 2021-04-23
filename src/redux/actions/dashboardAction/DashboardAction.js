@@ -25,6 +25,29 @@ export const fetchOpportunity = () => {
   };
 };
 
+export const getDashboardData = () => {
+  return dispatch => {
+    DashboardService.getDashboardData()
+      .then(response => {
+        if (response.data.status === 'SUCCESS') {
+          dispatch({
+            type: DASHBOARD_REDUX_CONSTANT.DASHBOARD_DATA,
+            data: response.data.data,
+          });
+        }
+      })
+      .catch(e => {
+        if (e && e?.response) {
+          if (e.response.data.status === undefined) {
+            errorNotification('It seems like server is down, Please try after sometime');
+          } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
+            errorNotification('Internal server error');
+          }
+        }
+      });
+  };
+};
+
 export const fetchPipeLine = () => {
   return dispatch => {
     DashboardService.getPipeline()
@@ -37,10 +60,12 @@ export const fetchPipeLine = () => {
         }
       })
       .catch(e => {
-        if (e.response.data.status === undefined) {
-          errorNotification('It seems like server is down, Please try after sometime');
-        } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
-          errorNotification('Internal server error');
+        if (e && e?.response) {
+          if (e.response.data.status === undefined) {
+            errorNotification('It seems like server is down, Please try after sometime');
+          } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
+            errorNotification('Internal server error');
+          }
         }
       });
   };
@@ -65,4 +90,98 @@ export const fetchClientQuote = () => {
         }
       });
   };
+};
+
+// export const getTotalSalesGraphData = () => {
+//   return dispatch => {
+//     DashboardService.getTotalSales()
+//       .then(response => {
+//         if (response.data.status === 'SUCCESS') {
+//           dispatch({
+//             type: DASHBOARD_REDUX_CONSTANT.TOTAL_SALES_REDUX_CONSTANT,
+//             data: response.data,
+//           });
+//         }
+//       })
+//       .catch(e => {
+//         if (e.response.data.status === undefined) {
+//           errorNotification('It seems like server is down, Please try after sometime');
+//         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
+//           errorNotification('Internal server error');
+//         }
+//       });
+//   };
+// };
+
+export const changeStartDateValue = value => {
+  return dispatch => {
+    dispatch({
+      type: DASHBOARD_REDUX_CONSTANT.UPDATE_START_DATE_VALUE,
+      value,
+    });
+  };
+};
+
+export const changeEndDateValue = value => {
+  return dispatch => {
+    dispatch({
+      type: DASHBOARD_REDUX_CONSTANT.UPDATE_END_DATE_VALUE,
+      value,
+    });
+  };
+};
+
+export const totalSalesDateFilter = data => {
+  return dispatch => {
+    DashboardService.getTotalSales(data)
+      .then(response => {
+        if (response.data.status === 'SUCCESS') {
+          dispatch({
+            type: DASHBOARD_REDUX_CONSTANT.TOTAL_SALES_REDUX_CONSTANT,
+            data: response.data,
+          });
+        }
+      })
+      .catch(e => {
+        if (e && e?.response) {
+          if (e.response.data.status === undefined) {
+            errorNotification('It seems like server is down, Please try after sometime');
+          } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
+            errorNotification('Internal server error');
+          }
+        }
+      });
+  };
+};
+
+export const resetFilterData = data => {
+  console.log(data);
+  return dispatch => {
+    DashboardService.getTotalSales(data)
+      .then(response => {
+        console.log(response);
+        if (response.data.status === 'SUCCESS') {
+          dispatch({
+            type: DASHBOARD_REDUX_CONSTANT.TOTAL_SALES_REDUX_CONSTANT,
+            data: response.data,
+          });
+        }
+      })
+      .catch(e => {
+        if (e.response.data.status === undefined) {
+          errorNotification('It seems like server is down, Please try after sometime');
+        } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
+          errorNotification('Internal server error');
+        }
+      });
+  };
+};
+
+export const resetDashboardGraphData = dispatch => {
+  dispatch({
+    type: DASHBOARD_REDUX_CONSTANT.RESET_PIPELINE_GRAPH_DATA,
+  });
+  dispatch({
+    type: DASHBOARD_REDUX_CONSTANT.RESET_TOTAL_SALES_GRAPH_DATA,
+  });
 };

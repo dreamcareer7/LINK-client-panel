@@ -18,17 +18,13 @@ export const checkingCookiee = () => {
       .catch(e => {
         if (e.response.data.status === undefined) {
           errorNotification('It seems like server is down, Please try after sometime');
-        }
-        if (e.response.data.status === 'ERROR') {
-          errorNotification('Internal server error');
-        }
-        if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
-          errorNotification('Internal server error');
         } else if (e.response.data.status === 'READ_ERROR_MESSAGE') {
           dispatch({
             type: POPUP_REDUX_CONSTANT.POP_UP_MESSAGE,
             data: e.response.data.message,
           });
+        } else {
+          errorNotification('Internal server error');
         }
       });
   };
