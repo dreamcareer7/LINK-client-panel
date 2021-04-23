@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import './Dashboard.scss';
 import DatePicker from 'react-datepicker';
 import { Bar } from 'react-chartjs-2';
@@ -70,20 +70,14 @@ const Dashboard = () => {
     datasets: [
       {
         backgroundColor: ['#6699ff'],
-        data: totalSales?.data?.data ? [totalSales?.data?.data?.salesGenerated] : [],
+        data:
+          totalSales?.data?.data?.salesGenerated !== 0
+            ? [totalSales?.data?.data?.salesGenerated]
+            : [],
       },
     ],
   };
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getDashboardData());
-    dispatch(fetchPipeLine());
-    dispatch(totalSalesDateFilter());
-    return () => {
-      dispatch(resetDashboardGraphData);
-    };
-  }, []);
 
   const pipelineOptions = {
     paddingTop: 20,
@@ -208,48 +202,56 @@ const Dashboard = () => {
       },
     },
   };
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
 
-  const changeStartDate = startingDate => {
-    setStartDate(startingDate);
-    if (endDate && moment(endDate).isBefore(startingDate)) {
-      errorNotification('Please enter a valid date range');
-    } else {
-      const today = new Date();
-      today.setHours(23, 59, 59);
-      const data = {
-        startDate: moment(startingDate).toISOString(),
-        endDate: moment(today).toISOString(),
-      };
+  useEffect(() => {
+    dispatch(getDashboardData());
+    dispatch(fetchPipeLine());
+    dispatch(totalSalesDateFilter());
+    return () => {
+      dispatch(resetDashboardGraphData);
+      setStartDate('');
+      setEndDate('');
+    };
+  }, []);
+
+  const changeStartDate = useCallback(
+    startingDate => {
+      setStartDate(startingDate);
       dispatch(changeStartDateValue(startingDate));
+    },
+    [startDate, setStartDate]
+  );
+
+  const changeEndDate = useCallback(
+    endingDate => {
+      setEndDate(endingDate);
+      dispatch(changeEndDateValue(endingDate));
+    },
+    [endDate, setEndDate]
+  );
+
+  useEffect(() => {
+    if (startDate !== '' && endDate !== '') {
+      if (startDate && endDate && moment(endDate).isBefore(startDate)) {
+        errorNotification('Please enter a valid date range');
+      }
+      endDate.setHours(23, 59, 59);
+      const data = {
+        startDate: moment(startDate).toISOString(),
+        endDate: moment(endDate).toISOString(),
+      };
       dispatch(totalSalesDateFilter(data));
     }
-  };
+  }, [startDate, endDate, setStartDate, setEndDate]);
 
-  const changeEndDate = endingDate => {
-    setEndDate(endingDate);
-    if (endingDate) {
-      if (endingDate && moment(endingDate).isBefore(startDate)) {
-        errorNotification('Please enter a valid date range');
-      } else {
-        const today = new Date();
-        today.setHours(23, 59, 59);
-        const data = {
-          startDate: moment(endingDate).toISOString(),
-          endDate: moment(today).toISOString(),
-        };
-        dispatch(changeEndDateValue(endingDate));
-        dispatch(totalSalesDateFilter(data));
-      }
-    }
-  };
   const resetTotalSalesFilter = () => {
     setStartDate('');
     setEndDate('');
     const data = {
-      startDate: '',
-      endDate: '',
+      startDate,
+      endDate,
     };
     dispatch(changeStartDateValue(data.startDate));
     dispatch(changeEndDateValue(data.endDate));
@@ -356,7 +358,7 @@ const Dashboard = () => {
             <div className="dashboard-pipeline-filter-container">
               <div className="common-subtitle">SALES BETWEEN</div>
               <DatePicker
-                placeholderText="dd/mm/yyyy"
+                placeholderText={startDate === ' ' ? 'dd/mm/yyyy' : 'dd/mm/yyyy'}
                 dateFormat="dd/MM/yyyy"
                 selected={startDate}
                 onChange={changeStartDate}
@@ -387,15 +389,25 @@ const Dashboard = () => {
               </button>
             </div>
           </div>
-          <div className="pipeline-graph-container">
-            <Bar options={pipelineOptions} data={pipelineState} />
+          <div className="pipeline-graph-container dashboard-graph">
+            {pipeline.data.data.length > 0 ? (
+              <Bar options={pipelineOptions} data={pipelineState} />
+            ) : (
+              <div className="no-data-style">
+                Looks like you haven&apos;t added any opportunities in order for the graphs to
+                populate.
+              </div>
+            )}
           </div>
-          <div>
-            <Bar
-              id="totalSales"
-              options={totalSalesOptions}
-              data={!totalSalesData ? 'No Data Available' : totalSalesData}
-            />
+          <div className="dashboard-graph">
+            {totalSales.data.salesGenerated === 0 ? (
+              <Bar id="totalSales" options={totalSalesOptions} data={totalSalesData} />
+            ) : (
+              <div className="no-data-style">
+                Looks like you haven&apos;t added any opportunities in order for the graphs to
+                populate.
+              </div>
+            )}
           </div>
         </div>
       </div>

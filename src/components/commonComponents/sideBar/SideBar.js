@@ -5,10 +5,13 @@ import linkfluencer from '../../../assets/images/linkfluencer.png';
 import dashboard from '../../../assets/home.svg';
 import strategy from '../../../assets/images/horse-chess-piece.png';
 import crm from '../../../assets/crm.svg';
-import reporting from '../../../assets/reporting.svg';
 import calendar from '../../../assets/calendar.svg';
+import support from '../../../assets/headset.svg';
 
 function SideBar() {
+  const onHelpClick = () => {
+    window.open('https://support.linkfluencer.com/hc/en-us', '_blank');
+  };
   return (
     <div>
       <div className="">
@@ -34,9 +37,9 @@ function SideBar() {
             <img alt="crm" src={strategy} /> <span>Strategy</span>
           </NavLink>
 
-          <NavLink className="menu-item menu-link" to="/reporting" replace>
-            <img alt="reporting" src={reporting} /> <span>Reporting</span>
-          </NavLink>
+          <div className="menu-item menu-link" onClick={onHelpClick} replace>
+            <img alt="support" src={support} /> <span>Support</span>
+          </div>
         </div>
         <div className="copyright">Copyright 2021. linkfluencer Pty Ltd</div>
       </div>

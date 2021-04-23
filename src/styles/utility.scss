@@ -511,13 +511,13 @@ input::placeholder {
   height: calc(100% - 100px);
   width: 100%;
   flex: 1;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: italic;
+  color: $placeholder-color;
   span {
     max-width: 300px;
     padding-top: 20px;
-    font-size: 14px;
-    font-weight: 400;
-    font-style: italic;
-    color: $placeholder-color;
     text-align: center;
   }
 }

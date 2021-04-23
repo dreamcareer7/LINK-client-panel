@@ -12,7 +12,6 @@ import downArrow from '../../../assets/images/arrow_down.png';
 import logout from '../../../assets/images/logout.svg';
 import notification from '../../../assets/images/notification.svg';
 import account from '../../../assets/images/account.svg';
-import help from '../../../assets/images/lifesaver.svg';
 import FollowUpService from '../../../services/follow-up-service/FollowUpSevice';
 import { getClientInfo, logoutUser } from '../../../redux/actions/accountAction/AccountAction';
 import { useOnClickOutside } from '../../../helpers/UseClickOutsideHook';
@@ -156,9 +155,6 @@ function UpperHeader() {
   const onAccountClick = () => {
     history.replace('/account');
   };
-  const onHelpClick = () => {
-    window.open('https://support.linkfluencer.com/hc/en-us', '_blank');
-  };
   const selectDateRange = () => {
     setDateRangePicker(!dateRangePicker);
   };
@@ -242,10 +238,6 @@ function UpperHeader() {
                 <div className="dropdown-option" onClick={onAccountClick}>
                   <img src={account} />
                   <span>Account</span>
-                </div>
-                <div className="dropdown-option" onClick={onHelpClick}>
-                  <img src={help} />
-                  <span>Help & Support</span>
                 </div>
                 <div className="dropdown-option" onClick={onLogOut}>
                   <img src={logout} />
