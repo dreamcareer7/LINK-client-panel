@@ -19,7 +19,6 @@
   color: $secondary-font-color;
   font-family: 'Roboto', 'sans-serif' !important;
   position: relative;
-  margin-bottom: 20px;
   max-height: 63px;
   overflow: hidden;
 }
@@ -42,6 +41,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 400px);
+  min-height: 100%;
   textAlign: 'center'
+}
+.video-script-style{
+  padding-top:20px;
 }

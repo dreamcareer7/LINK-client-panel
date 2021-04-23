@@ -14,13 +14,17 @@ const Strategy = () => {
   }, []);
 
   return (
-    <div className="strategy-container">
-      {strategyData ? (
-        strategyData?.map((step, index) => <CardBox step={step} index={index} />)
+    <>
+      {strategyData.length !== 0 ? (
+        <div className="strategy-container">
+          {strategyData?.map((step, index) => (
+            <CardBox step={step} index={index} />
+          ))}
+        </div>
       ) : (
         <div className="no-data-in-strategy">No Data Available</div>
       )}
-    </div>
+    </>
   );
 };
 export default Strategy;
@@ -94,7 +98,7 @@ function CardBox(props) {
           </span>
         )}
       </span>
-      <div style={{ borderRadius: '10px' }}>
+      <div className="video-script-style">
         <div
           dangerouslySetInnerHTML={{
             __html: step.videoScript,

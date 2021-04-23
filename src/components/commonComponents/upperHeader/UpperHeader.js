@@ -143,8 +143,7 @@ function UpperHeader() {
           };
           dispatch(resetFilterData(dealData));
           dispatch(getUpcomingActions(1, 9, data));
-          /*   history.push('/followups');
-          window.location.reload(true); */
+          history.push('/followups');
         }
       })
       .catch(e => console.log(e));

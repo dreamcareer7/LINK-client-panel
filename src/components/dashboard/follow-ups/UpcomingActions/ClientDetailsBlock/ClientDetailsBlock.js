@@ -29,6 +29,7 @@ function ClientDetailsBlock({ opportunity }) {
   } = opportunity;
   const today = moment(Date.now()).format('DD/MM/YYYY');
   const followUpDate = moment(followUp).format('DD/MM/YYYY');
+
   return (
     <div
       className={`common-block upcoming-action-block-size cursor-pointer ${getLabelFromValues(
@@ -47,7 +48,7 @@ function ClientDetailsBlock({ opportunity }) {
                 {firstName} {lastName}
               </div>
               <div className="common-content client-designation placeholder-color ">
-                {title?.length > 124 ? (
+                {title?.length > 70 ? (
                   <div className="hide-detail">
                     {title}
                     {`${title && companyName ? ', ' : ''}`}

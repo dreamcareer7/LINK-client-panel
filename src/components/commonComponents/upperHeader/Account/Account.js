@@ -518,11 +518,11 @@ function Account() {
             <div className="actions" />
           </div>
           {invoiceData &&
-            invoiceData.map((invoice, index) => (
+            invoiceData?.map((invoice, index) => (
               <InvoicesList key={index.toString()} invoice={invoice} />
             ))}
 
-          {invoices && invoices.data.total > 4 && (
+          {invoices && invoices?.data?.total > 4 && (
             <Pagination
               activePage={activePage}
               itemsCountPerPage={4}

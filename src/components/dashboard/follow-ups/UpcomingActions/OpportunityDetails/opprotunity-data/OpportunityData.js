@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import DatePicker from 'react-datepicker';
 
 import '../OpportunityDetails.scss';
@@ -82,9 +82,12 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
     }
   };
   const decimalRegex = new RegExp(/(^[0-9]{0,9}(\.\d{0,2})?$)/);
-  const handleDealSizeChange = e => {
-    if (decimalRegex.test(e.target.value)) setDealSizeVal(e.target.value);
-  };
+  const handleDealSizeChange = useCallback(
+    e => {
+      if (decimalRegex.test(e.target.value)) setDealSizeVal(e.target.value);
+    },
+    [decimalRegex]
+  );
   return (
     <div className="common-block opportunity-detail-block blue">
       <div className="status-color" />
@@ -163,11 +166,11 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
             <select
               className="common-select common-select-white mt-5"
               value={
-                allConversationData && allConversationData.changeStageToInConversation
+                allConversationData && allConversationData?.changeStageToInConversation
                   ? 'IN_CONVERSION'
                   : stageValue
               }
-              onChange={e => onChangeStage(e)}
+              onChange={onChangeStage}
             >
               <option value="SELECT">Select</option>
               <option value="INITIAL_CONTACT">Initial Contact</option>
@@ -185,9 +188,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
               className="common-input common-input-white mt-5"
               placeholder="$0"
               value={dealSizeVal}
-              onChange={e => {
-                handleDealSizeChange(e);
-              }}
+              onChange={handleDealSizeChange}
               onFocus={e => {
                 e.target.placeholder = '';
               }}
