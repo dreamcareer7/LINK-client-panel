@@ -16,7 +16,7 @@ function AuthRedirect({ ...options }) {
       {opportunityId ? (
         <Redirect to={`/followups/opportunityDetails/${opportunityId}`} />
       ) : (
-        <Redirect to={redirectTo ? `/${redirectTo}` : '/home'} />
+        <Redirect to={redirectTo ? `/${redirectTo}` : '/dashboard'} />
       )}
     </Route>
   );
