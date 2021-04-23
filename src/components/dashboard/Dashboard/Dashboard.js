@@ -270,7 +270,7 @@ const Dashboard = () => {
                 Total Invites <br />
                 Sent
               </div>
-              <div className="dashboard-data-value">{inviteSent}</div>
+              <div className="dashboard-data-value mt-1">{inviteSent}</div>
             </div>
           </div>
           <div className="dashboard-data-row-item">
@@ -281,7 +281,7 @@ const Dashboard = () => {
                 <br />
                 Accepted
               </div>
-              <div className="dashboard-data-value">{inviteAccepted}</div>
+              <div className="dashboard-data-value mt-1">{inviteAccepted}</div>
             </div>
           </div>
           <div className="dashboard-data-row-item">
@@ -292,7 +292,7 @@ const Dashboard = () => {
                 <br />
                 Rate
               </div>
-              <div className="dashboard-data-value">{acceptanceRate}%</div>
+              <div className="dashboard-data-value mt-1">{acceptanceRate}%</div>
             </div>
           </div>
         </div>
@@ -333,18 +333,23 @@ const Dashboard = () => {
         <div className="dashboard-graphs-container">
           <div>
             <div className="title">Total Pipeline Value</div>
-            <img src={totalPipelineValues} />
-            <span className="dashboard-data-value ml-10">
-              {usdConverter(pipeline?.data?.totalDealAmount ?? 0)}
-            </span>
+            <div className="d-flex align-items-center">
+              <img src={totalPipelineValues} />
+              <span className="dashboard-data-value ml-10">
+                {usdConverter(pipeline?.data?.totalDealAmount ?? 0)}
+              </span>
+            </div>
           </div>
 
           <div>
             <div className="title">Total Sales Generated</div>
-            <img src={totalSalesGeneratedImg} />
-            <span className="dashboard-data-value ml-10">
-              {usdConverter(totalSalesGenerated ?? 0)}
-            </span>
+            <div className="d-flex align-items-center">
+              <img src={totalSalesGeneratedImg} />
+              <span className="dashboard-data-value ml-10">
+                {usdConverter(totalSalesGenerated ?? 0)}
+              </span>
+            </div>
+
             <div className="dashboard-pipeline-filter-container">
               <div className="common-subtitle">SALES BETWEEN</div>
               <DatePicker
