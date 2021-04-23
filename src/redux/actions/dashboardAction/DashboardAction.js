@@ -155,7 +155,7 @@ export const totalSalesDateFilter = data => {
 };
 
 export const resetFilterData = data => {
-  console.log(data);
+
   return dispatch => {
     DashboardService.getTotalSales(data)
       .then(response => {
