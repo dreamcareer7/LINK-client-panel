@@ -39,7 +39,7 @@ function ClientDetailsBlock({ opportunity }) {
     >
       <div className="status-color" />
       <div className="common-block--detail-container">
-        <div className="DP-name-container">
+        <div className="DP-name-container container-height">
           <img className="user-dp" src={profilePicUrl || defaultUser} />
           <div>
             <div>

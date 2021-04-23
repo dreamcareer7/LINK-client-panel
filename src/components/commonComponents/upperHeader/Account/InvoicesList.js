@@ -2,27 +2,19 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import eye from '../../../../assets/images/visibility.svg';
 import download from '../../../../assets/images/down-arrow.svg';
 import { errorNotification } from '../../../../constants/Toast';
 import { getLabelFromValues } from '../../../../helpers/chartHelper';
 import { subTypeObject } from '../../../../helpers/Mappers';
 
 function InvoicesList({ invoice }) {
-  const { createdAt, totalAmount, receiptNumber, paymentId, downloadUrl, hostUrl } = invoice;
+  const { createdAt, totalAmount, receiptNumber, paymentId, downloadUrl } = invoice;
 
   const downloadInvoice = () => {
     if (downloadUrl) {
       window.location = downloadUrl;
     } else {
       errorNotification('Invoice not available for download');
-    }
-  };
-  const watchInvoice = () => {
-    if (hostUrl) {
-      window.open(hostUrl, '_blank');
-    } else {
-      errorNotification('Invoice not available for watch');
     }
   };
   return (
@@ -32,7 +24,6 @@ function InvoicesList({ invoice }) {
       <div>{getLabelFromValues(paymentId.planType, subTypeObject)}</div>
       <div>{receiptNumber}</div>
       <div className="actions">
-        <img src={eye} onClick={watchInvoice} />
         <img src={download} onClick={downloadInvoice} />
       </div>
     </div>

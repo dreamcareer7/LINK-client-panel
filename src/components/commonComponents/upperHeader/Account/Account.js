@@ -506,7 +506,7 @@ function Account() {
                 className="button primary-button mt-5"
                 onClick={onDownloadFullHistory}
               >
-                DOWNLOAD FULL HISTORY
+                DOWNLOAD
               </button>
             </div>
           </div>

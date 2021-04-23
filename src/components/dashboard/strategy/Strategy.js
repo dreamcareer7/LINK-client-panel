@@ -15,9 +15,11 @@ const Strategy = () => {
 
   return (
     <div className="strategy-container">
-      {strategyData?.map((step, index) => (
-        <CardBox step={step} index={index} />
-      ))}
+      {strategyData ? (
+        strategyData?.map((step, index) => <CardBox step={step} index={index} />)
+      ) : (
+        <div className="no-data-in-strategy">No Data Available</div>
+      )}
     </div>
   );
 };

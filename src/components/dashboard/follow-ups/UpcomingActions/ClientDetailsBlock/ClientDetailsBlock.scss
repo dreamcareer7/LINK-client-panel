@@ -5,6 +5,9 @@
   grid-template-columns: 40px calc(100% - 40px);
   column-gap: 10px;
 }
+.container-height{
+  min-height: 60px;
+}
 
 .client-name {
   text-transform: uppercase;
