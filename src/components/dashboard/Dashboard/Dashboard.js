@@ -26,6 +26,7 @@ import { getLabelFromValues } from '../../../helpers/chartHelper';
 import { chartPotentialMapperObject } from '../../../helpers/Mappers';
 import { usdConverter } from '../../../helpers/usdConverter';
 import { errorNotification } from '../../../constants/Toast';
+import { NumberCommaSeparator } from '../../../helpers/NumberCommaSeparator';
 
 const Dashboard = () => {
   const accountInfo = useSelector(state => state?.AccountReducer);
@@ -40,6 +41,7 @@ const Dashboard = () => {
     percentOfLeadsClosed,
     totalSalesGenerated,
   } = useMemo(() => dashboardData?.data ?? [], [dashboardData]);
+
   const pipelineState = {
     labels:
       pipeline && pipeline?.data && pipeline?.data?.data
@@ -71,9 +73,14 @@ const Dashboard = () => {
       {
         backgroundColor: ['#6699ff'],
         data:
-          totalSales?.data?.data?.salesGenerated !== 0
+          totalSales?.data?.data?.salesGenerated > 0
             ? [totalSales?.data?.data?.salesGenerated]
-            : [],
+            : [0],
+      },
+      {
+        label: 'remaining',
+        backgroundColor: ['#e0e0e0'],
+        data: [totalSalesGenerated - totalSales?.data?.data?.salesGenerated],
       },
     ],
   };
@@ -121,6 +128,7 @@ const Dashboard = () => {
           },
           ticks: {
             display: false,
+            beginAtZero: true,
           },
         },
       ],
@@ -138,6 +146,7 @@ const Dashboard = () => {
       },
     },
   };
+
   const totalSalesOptions = {
     layout: {
       padding: {
@@ -153,6 +162,7 @@ const Dashboard = () => {
     scales: {
       xAxes: [
         {
+          stacked: true,
           barPercentage: 1.1,
           categorySpacing: 0,
           gridLines: {
@@ -172,6 +182,7 @@ const Dashboard = () => {
       ],
       yAxes: [
         {
+          stacked: true,
           gridLines: {
             display: true,
             drawBorder: false,
@@ -183,8 +194,6 @@ const Dashboard = () => {
             display: false,
             paddingTop: 30,
             beginAtZero: true,
-            min: 0,
-            max: totalSalesGenerated + 30,
           },
         },
       ],
@@ -193,7 +202,7 @@ const Dashboard = () => {
       labels: {
         position: 'default',
         render: args => {
-          const value = usdConverter(args.value);
+          const value = args.dataset?.label === 'remaining' ? '' : usdConverter(args.value);
           return value;
         },
         fontSize: '14',
@@ -270,28 +279,30 @@ const Dashboard = () => {
         <div className="dashboard-data-row">
           <div className="dashboard-data-row-item">
             <img src={totalInvites} />
-            <div className="ml-10">
+            <div className="first-row-content">
               <div className="dashboard-data-title">
                 Total Invites <br />
                 Sent
               </div>
-              <div className="dashboard-data-value mt-1">{inviteSent}</div>
+              <div className="dashboard-data-value mt-1">{NumberCommaSeparator(inviteSent)}</div>
             </div>
           </div>
           <div className="dashboard-data-row-item">
             <img src={invitesAccepted} />
-            <div className="ml-10">
+            <div className="first-row-content">
               <div className="dashboard-data-title">
                 Invites
                 <br />
                 Accepted
               </div>
-              <div className="dashboard-data-value mt-1">{inviteAccepted}</div>
+              <div className="dashboard-data-value mt-1">
+                {NumberCommaSeparator(inviteAccepted)}
+              </div>
             </div>
           </div>
           <div className="dashboard-data-row-item">
             <img src={acceptanceRateImg} />
-            <div className="ml-10">
+            <div className="first-row-content">
               <div className="dashboard-data-title">
                 Acceptance
                 <br />
@@ -310,7 +321,7 @@ const Dashboard = () => {
                 <br />
                 Leads
               </div>
-              <div className="dashboard-data-value">{opportunityCount}</div>
+              <div className="dashboard-data-value">{NumberCommaSeparator(opportunityCount)}</div>
             </div>
           </div>
           <div className="dashboard-data-row-item">
@@ -320,7 +331,9 @@ const Dashboard = () => {
                 Hours Spent <br />
                 on LinkedIn
               </div>
-              <div className="dashboard-data-value">{timeSpentInLinkedIn}</div>
+              <div className="dashboard-data-value">
+                {NumberCommaSeparator(timeSpentInLinkedIn)}
+              </div>
             </div>
           </div>
           <div className="dashboard-data-row-item">
@@ -351,14 +364,14 @@ const Dashboard = () => {
             <div className="d-flex align-items-center">
               <img src={totalSalesGeneratedImg} />
               <span className="dashboard-data-value ml-10">
-                {usdConverter(totalSalesGenerated ?? 0)}
+                {usdConverter(totalSalesGenerated)}
               </span>
             </div>
 
             <div className="dashboard-pipeline-filter-container">
               <div className="common-subtitle">SALES BETWEEN</div>
               <DatePicker
-                placeholderText={startDate === ' ' ? 'dd/mm/yyyy' : 'dd/mm/yyyy'}
+                placeholderText={startDate === '' ? 'dd/mm/yyyy' : 'dd/mm/yyyy'}
                 dateFormat="dd/MM/yyyy"
                 selected={startDate}
                 onChange={changeStartDate}
@@ -372,7 +385,7 @@ const Dashboard = () => {
               />
               <div className="common-subtitle">TO</div>
               <DatePicker
-                placeholderText="dd/mm/yyyy"
+                placeholderText={endDate === '' ? 'dd/mm/yyyy' : 'dd/mm/yyyy'}
                 dateFormat="dd/MM/yyyy"
                 selected={endDate}
                 onChange={changeEndDate}
@@ -390,7 +403,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="pipeline-graph-container dashboard-graph">
-            {pipeline.data.data.length > 0 ? (
+            {pipeline?.data?.data?.length > 0 ? (
               <Bar options={pipelineOptions} data={pipelineState} />
             ) : (
               <div className="no-data-style">
@@ -400,8 +413,12 @@ const Dashboard = () => {
             )}
           </div>
           <div className="dashboard-graph">
-            {totalSales.data.salesGenerated === 0 ? (
-              <Bar id="totalSales" options={totalSalesOptions} data={totalSalesData} />
+            {totalSales?.data?.salesGenerated !== 0 ? (
+              <Bar
+                key={Math.random().toString()}
+                options={totalSalesOptions}
+                data={totalSalesData}
+              />
             ) : (
               <div className="no-data-style">
                 Looks like you haven&apos;t added any opportunities in order for the graphs to

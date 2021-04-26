@@ -1,7 +1,17 @@
 import DASHBOARD_REDUX_CONSTANTS from '../../constants/dashboardReduxConstant/DashboardReduxConstant';
 
 const initialValue = {
-  dashboardData: { data: [] },
+  dashboardData: {
+    data: {
+      timeSpentInLinkedIn: 0,
+      inviteSent: 0,
+      inviteAccepted: 0,
+      acceptanceRate: 0,
+      opportunityCount: 0,
+      percentOfLeadsClosed: 0,
+      totalSalesGenerated: 0,
+    },
+  },
   opportunity: {
     data: [],
   },

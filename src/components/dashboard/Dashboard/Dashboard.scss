@@ -39,12 +39,18 @@
   }
 }
 
+.first-row-content {
+  margin-left: 20px;
+  text-align: center;
+}
+
 .dashboard-data-second-row {
   margin: 0 -15px;
 }
 
 .dashboard-second-row-content {
   display: flex;
+  align-items: center;
   gap: 0 10px;
 }
 .dashboard-data-row-item {
