@@ -8,7 +8,7 @@ export const fetchOpportunity = () => {
   return dispatch => {
     DashboardService.getOpportunity()
       .then(response => {
-        if (response.data.status === 'SUCCESS') {
+        if (response?.data?.status === 'SUCCESS') {
           dispatch({
             type: DASHBOARD_REDUX_CONSTANT.OPPRTUNITIES_REDUX_CONSTANT,
             data: response.data.data,
@@ -16,7 +16,7 @@ export const fetchOpportunity = () => {
         }
       })
       .catch(e => {
-        if (e.response.data.status === undefined) {
+        if (e.response?.data?.status === undefined) {
           errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
           errorNotification('Internal server error');
@@ -29,7 +29,7 @@ export const getDashboardData = () => {
   return dispatch => {
     DashboardService.getDashboardData()
       .then(response => {
-        if (response.data.status === 'SUCCESS') {
+        if (response?.data?.status === 'SUCCESS') {
           dispatch({
             type: DASHBOARD_REDUX_CONSTANT.DASHBOARD_DATA,
             data: response.data.data,
@@ -52,7 +52,7 @@ export const fetchPipeLine = () => {
   return dispatch => {
     DashboardService.getPipeline()
       .then(response => {
-        if (response.data.status === 'SUCCESS') {
+        if (response?.data?.status === 'SUCCESS') {
           dispatch({
             type: DASHBOARD_REDUX_CONSTANT.PIPELINE_REDUX_CONSTANT,
             data: response.data,
@@ -75,7 +75,7 @@ export const fetchClientQuote = () => {
   return dispatch => {
     DashboardService.getDailyQuote()
       .then(response => {
-        if (response.data.status === 'SUCCESS') {
+        if (response?.data?.status === 'SUCCESS') {
           dispatch({
             type: DASHBOARD_REDUX_CONSTANT.CLIENT_QUOTE,
             data: response.data.data,
@@ -83,7 +83,7 @@ export const fetchClientQuote = () => {
         }
       })
       .catch(e => {
-        if (e.response.data.status === undefined) {
+        if (e.response?.data?.status === undefined) {
           errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
           errorNotification('Internal server error');
@@ -135,7 +135,7 @@ export const totalSalesDateFilter = data => {
   return dispatch => {
     DashboardService.getTotalSales(data)
       .then(response => {
-        if (response.data.status === 'SUCCESS') {
+        if (response?.data?.status === 'SUCCESS') {
           dispatch({
             type: DASHBOARD_REDUX_CONSTANT.TOTAL_SALES_REDUX_CONSTANT,
             data: response.data,
@@ -155,12 +155,12 @@ export const totalSalesDateFilter = data => {
 };
 
 export const resetFilterData = data => {
-  console.log(data);
+
   return dispatch => {
     DashboardService.getTotalSales(data)
       .then(response => {
         console.log(response);
-        if (response.data.status === 'SUCCESS') {
+        if (response?.data?.status === 'SUCCESS') {
           dispatch({
             type: DASHBOARD_REDUX_CONSTANT.TOTAL_SALES_REDUX_CONSTANT,
             data: response.data,
@@ -168,7 +168,7 @@ export const resetFilterData = data => {
         }
       })
       .catch(e => {
-        if (e.response.data.status === undefined) {
+        if (e.response?.data?.status === undefined) {
           errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
           errorNotification('Internal server error');

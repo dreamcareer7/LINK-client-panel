@@ -7,7 +7,7 @@ export const getUpcomingActions = (page, limits = 9, data) => {
   return dispatch => {
     FollowUpService.getUpcomingActions(page, limits, data)
       .then(response => {
-        if (response.data.status === 'SUCCESS') {
+        if (response?.data?.status === 'SUCCESS') {
           dispatch({
             type: FOLLOW_UP_REDUX_CONSTANT.GET_FILTERED_FOLLOW_UPS,
             data: response.data.data,
@@ -15,7 +15,7 @@ export const getUpcomingActions = (page, limits = 9, data) => {
         }
       })
       .catch(e => {
-        if (e.response.data.status === undefined) {
+        if (e.response?.data?.status === undefined) {
           errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
           errorNotification('Internal server error');
