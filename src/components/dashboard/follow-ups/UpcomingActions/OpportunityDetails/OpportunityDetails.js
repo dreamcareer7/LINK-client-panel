@@ -30,8 +30,6 @@ function OpportunityDetails() {
   const filterData = useSelector(state => state.filterReducer);
   const followupData = useSelector(state => state.followUps);
 
-  console.log('filterData', filterData);
-
   const dealSizes = useMemo(
     () =>
       followupData && followupData.dealSize && followupData.dealSize[0]
