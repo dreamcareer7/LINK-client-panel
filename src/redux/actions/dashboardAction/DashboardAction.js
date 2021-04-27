@@ -154,12 +154,11 @@ export const totalSalesDateFilter = data => {
   };
 };
 
+// eslint-disable-next-line no-unused-vars
 export const resetFilterData = data => {
-
   return dispatch => {
-    DashboardService.getTotalSales(data)
+    DashboardService.getTotalSales({ startDate: '', endDate: '' })
       .then(response => {
-        console.log(response);
         if (response?.data?.status === 'SUCCESS') {
           dispatch({
             type: DASHBOARD_REDUX_CONSTANT.TOTAL_SALES_REDUX_CONSTANT,

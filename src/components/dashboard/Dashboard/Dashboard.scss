@@ -117,8 +117,11 @@
   margin-top: 17px;
 }
 
-.dashboard-graph .no-data-style{
+.dashboard-graph.no-data-style{
+  display: flex;
+  align-items: center;
   min-height: 200px;
+  height: unset;
   padding: 30px;
   text-align: center;
   font-style: italic;

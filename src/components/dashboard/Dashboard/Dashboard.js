@@ -163,7 +163,7 @@ const Dashboard = () => {
       xAxes: [
         {
           stacked: true,
-          barPercentage: 1.1,
+          barPercentage: 1.15,
           categorySpacing: 0,
           gridLines: {
             display: false,
@@ -248,14 +248,14 @@ const Dashboard = () => {
       }
       endDate.setHours(23, 59, 59);
       const data = {
-        startDate: moment(startDate).toISOString(),
-        endDate: moment(endDate).toISOString(),
+        startDate: startDate !== '' ? moment(startDate).toISOString() : '',
+        endDate: endDate !== '' ? moment(endDate).toISOString() : '',
       };
       dispatch(totalSalesDateFilter(data));
     }
   }, [startDate, endDate, setStartDate, setEndDate]);
 
-  const resetTotalSalesFilter = () => {
+  const resetTotalSalesFilter = useCallback(() => {
     setStartDate('');
     setEndDate('');
     const data = {
@@ -265,7 +265,13 @@ const Dashboard = () => {
     dispatch(changeStartDateValue(data.startDate));
     dispatch(changeEndDateValue(data.endDate));
     dispatch(resetFilterData(data));
-  };
+    console.log(
+      startDate.toString().trim().length === 0
+        ? `its zero  ${startDate.toString().trim().length}`
+        : `no its not zero ${startDate}`
+    );
+  }, [startDate, endDate, setStartDate, setEndDate]);
+
   return (
     <>
       <div className="welcome-container">
@@ -402,17 +408,25 @@ const Dashboard = () => {
               </button>
             </div>
           </div>
-          <div className="pipeline-graph-container dashboard-graph">
-            {pipeline?.data?.data?.length > 0 ? (
+          <div
+            className={`pipeline-graph-container dashboard-graph ${
+              pipeline?.data?.data?.length === 0 && 'no-data-style'
+            }`}
+          >
+            {pipeline?.data?.data?.length !== 0 ? (
               <Bar options={pipelineOptions} data={pipelineState} />
             ) : (
-              <div className="no-data-style">
+              <>
                 Looks like you haven&apos;t added any opportunities in order for the graphs to
                 populate.
-              </div>
+              </>
             )}
           </div>
-          <div className="dashboard-graph">
+          <div
+            className={`dashboard-graph ${
+              totalSales?.data?.salesGenerated === 0 && 'no-data-style'
+            }`}
+          >
             {totalSales?.data?.salesGenerated !== 0 ? (
               <Bar
                 key={Math.random().toString()}
@@ -420,10 +434,10 @@ const Dashboard = () => {
                 data={totalSalesData}
               />
             ) : (
-              <div className="no-data-style">
+              <>
                 Looks like you haven&apos;t added any opportunities in order for the graphs to
                 populate.
-              </div>
+              </>
             )}
           </div>
         </div>
