@@ -209,6 +209,7 @@ function Crm() {
           },
           ticks: {
             beingAtZero: true,
+            min: 0,
             fontSize: 14,
             fontStyle: 700,
             fontColor: '#212152',
