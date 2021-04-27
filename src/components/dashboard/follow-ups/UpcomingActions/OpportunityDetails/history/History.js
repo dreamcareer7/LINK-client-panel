@@ -45,8 +45,8 @@ function History() {
     if (chatContainer.current && allConversation.data && allConversation.data.length > 0) {
       if (prevChatLength.current === 0) {
         setTimeout(() => {
-          const scrollHeights = chatContainer.current.scrollHeight;
-          const height = chatContainer.current.clientHeight;
+          const scrollHeights = chatContainer?.current?.scrollHeight;
+          const height = chatContainer?.current?.clientHeight;
           const maxScrollTop = scrollHeights - height;
           chatContainer.current.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
         }, 300);
@@ -54,10 +54,6 @@ function History() {
       prevChatLength.current = allConversation.length;
     }
   }, [allConversation.data]);
-
-  /* if (allConversation.isLoading) {
-    return <div className="loader ajax-global-spin" />;
-  } */
 
   return (
     <div className="opportunity-right history-container common-block blue">

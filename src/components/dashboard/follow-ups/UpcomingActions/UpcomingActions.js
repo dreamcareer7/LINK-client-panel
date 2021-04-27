@@ -26,8 +26,9 @@ function UpcomingActions() {
     };
     dispatch(getUpcomingActions(1, limits, data));
   }, [limits]);
+
   const onOpportunityClick = id => {
-    history.push(`/followups/opportunityDetails/${id}`);
+    history.push(`/followups/opportunityDetails/${id}?from=followUps`);
   };
 
   const handlePageChange = useCallback(

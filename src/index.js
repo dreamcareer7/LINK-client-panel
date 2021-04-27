@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { store } from './redux/store';
+import { persistStoreData, store } from './redux/store';
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
@@ -20,7 +21,9 @@ if ('serviceWorker' in navigator) {
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <PersistGate loading={null} persistor={persistStoreData}>
+        <App />
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
 

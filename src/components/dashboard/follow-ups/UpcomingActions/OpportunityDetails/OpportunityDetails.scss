@@ -220,3 +220,14 @@
 .btn-size{
   height: 44px;
 }
+.prev-next-row{
+  display: flex;
+  flex-direction: row;
+  width:100px;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.button-disable{
+  cursor: not-allowed;
+  border:none !important;
+}

@@ -193,23 +193,6 @@ function Account() {
     // dispatch(getClientInfo());
   };
 
-  /* const onCancelScriptRun = () => {
-      try {
-        window.barecancel.params = {
-          access_token_id: 'f3f1ef18-d0de-46c2-9038-31eb84adc7a4', // Your Cancellation API public key
-          customer_oid: client.data.stripeCustomerId, // The provider id of this customer. For example, the Stripe Customer ID
-          callback_send(data) {
-            console.log(data);
-          },
-          callback_error(error) {
-            console.error(error);
-          },
-        };
-        dispatch(getClientInfo());
-      } catch (e) {
-        console.log(e);
-      }
-    }; */
   const callBack = () => {
     dispatch(getClientInfo());
     AccountService.cancelSubscription()
@@ -363,31 +346,6 @@ function Account() {
             UPDATE
           </button>
         </div>
-        {/* <div className='dashed-container'>
-          <div className='absolute-position-title'>CHANGED PASSWORD</div>
-          <div className='success-message'>
-            <span>!</span>
-            <span>Password updated Successfully.</span>
-          </div>
-
-          <div className="dashed-flex">
-            <div>
-              <span className="field-title">Current Password</span>
-              <input type="password" className="common-input" />
-            </div>
-            <div>
-              <span className="field-title">New Password</span>
-              <input type="password" className="common-input" />
-            </div>
-            <div>
-              <span className="field-title">Confirm Password</span>
-              <input type="password" className="common-input" />
-            </div>
-          </div>
-          <button type="submit" className="button success-button mt-20">
-            UPDATE
-          </button>
-        </div> */}
 
         <div className="dashed-container notifications-container">
           <div className="absolute-position-title">NOTIFICATIONS</div>
@@ -495,7 +453,7 @@ function Account() {
                     e.target.placeholder = '';
                   }}
                   onBlur={e => {
-                    e.target.placeholder = 'From date';
+                    e.target.placeholder = 'To date';
                   }}
                 />
               </div>

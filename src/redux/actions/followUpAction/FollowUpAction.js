@@ -31,7 +31,7 @@ export const getOpportunity = id => {
     dispatch(clearOpportunity);
     FollowUpService.getOpportunity(id)
       .then(response => {
-        if (response.data.status === 'SUCCESS') {
+        if (response?.data?.status === 'SUCCESS') {
           dispatch({
             type: FOLLOW_UP_REDUX_CONSTANT.GET_OPPORTUNITY_DETAIL,
             data: response.data.data,
@@ -40,7 +40,7 @@ export const getOpportunity = id => {
       })
       .catch(e => {
         console.log(e);
-        if (e.response.data.status === undefined) {
+        if (e.response?.data?.status === undefined) {
           errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
           errorNotification('Internal server error');
@@ -48,6 +48,29 @@ export const getOpportunity = id => {
       });
   };
 };
+export const getOpportunityWithPrevNext = data => {
+  return dispatch => {
+    dispatch(clearOpportunity);
+    FollowUpService.getOpportunityWithPrevNext(data)
+      .then(response => {
+        if (response?.data?.status === 'SUCCESS') {
+          dispatch({
+            type: FOLLOW_UP_REDUX_CONSTANT.GET_OPPORTUNITY_DETAIL,
+            data: response.data.data,
+          });
+        }
+      })
+      .catch(e => {
+        console.log(e);
+        if (e.response?.data?.status === undefined) {
+          errorNotification('It seems like server is down, Please try after sometime');
+        } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
+          errorNotification('Internal server error');
+        }
+      });
+  };
+};
+
 // In sync we have to store data on get opportunity constant
 export const syncWithLinkedIn = id => {
   return dispatch => {

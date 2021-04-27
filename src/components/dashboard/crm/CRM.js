@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import './CRM.scss';
 import { Bar } from 'react-chartjs-2';
 import moment from 'moment';
@@ -77,6 +77,8 @@ function Crm() {
   const [page, setPage] = useState(1);
   const [filter, dispatchFilter] = useReducer(filterReducer, initialFilterState);
   const [dataAdd, setDataAdd] = useState(false);
+  const startDateRef = useRef();
+  const endDateRef = useRef();
 
   const docs = useMemo(() => (crmsData && crmsData.docs ? crmsData.docs : null), [crmsData]);
   const dealSizes = useMemo(
@@ -298,6 +300,9 @@ function Crm() {
       startDate: null,
       endDate: null,
     };
+    startDateRef.current.input.placeholder = 'From date';
+    endDateRef.current.input.placeholder = 'To date';
+
     setRangeState({
       min: dealSizes?.minDealValue || 1,
       max: dealSizes?.maxDealValue || 999999999,
@@ -379,6 +384,7 @@ function Crm() {
           <div className="d-flex">
             <DatePicker
               placeholderText="From date"
+              ref={startDateRef}
               dateFormat="dd/MM/yyyy"
               className="common-input mt-5"
               selected={startDate}
@@ -392,6 +398,7 @@ function Crm() {
             />
             <DatePicker
               placeholderText="To date"
+              ref={endDateRef}
               dateFormat="dd/MM/yyyy"
               className="common-input mt-5 ml-10"
               selected={endDate}

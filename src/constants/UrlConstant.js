@@ -17,6 +17,7 @@ export const API_METHODS = {
 export const FOLLOW_UP_URL = {
   FOLLOW_UP_FILTER_URL: `${BASE_URL}client-follow-ups/filters/`,
   GET_INDIVIDUAL_OPPORTUNITY_URL: `${BASE_URL}opportunity/get-opportunity/`,
+  GET_INDIVIDUAL_OPPORTUNITY_WITH_PREV_NEXT_URL: `${BASE_URL}opportunity/get-opportunity-with-prev-next`,
   UPDATE_OPPORTUNITY_URL: `${BASE_URL}opportunity/update-opportunity/`,
   DELETE_OPPORTUNITY_URL: `${BASE_URL}opportunity/delete-opportunity/`,
   SYNC_OPPORTUNITY_WITH_LINKEDIN_URL: `${BASE_URL}opportunity/sync-with-linkedIn/`,

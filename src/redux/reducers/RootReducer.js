@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import { followUps, opportunityDetail } from './follow-up-reducer/FollowUpReducer';
 import { opportunityNotes } from './follow-up-reducer/notesReducer/NotesReducer';
 import { opportunityHistory } from './follow-up-reducer/historyReducer/HistoryReducer';
@@ -38,4 +40,13 @@ const rootReducer = combineReducers({
   filterReducer,
   strategy,
 });
-export default rootReducer;
+
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['filterReducer'],
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export default persistedReducer;

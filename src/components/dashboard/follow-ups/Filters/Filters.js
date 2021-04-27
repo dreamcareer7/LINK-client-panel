@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import './Filters.scss';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -26,13 +26,9 @@ const numberToUSD = new Intl.NumberFormat('en-US', {
 
 function Filters() {
   const dispatch = useDispatch();
-  /* const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null); */
-
   const followupData = useSelector(state => state.followUps);
 
   const [limits, setLimits] = useState(9);
-  // startDeal, endDeal,
   const {
     stageInitialState,
     potentialInitialState,
@@ -41,7 +37,8 @@ function Filters() {
     startDate,
     endDate,
   } = useSelector(({ filterReducer }) => filterReducer);
-
+  const startDateRef = useRef();
+  const endDateRef = useRef();
   const dealSizes = useMemo(
     () =>
       followupData && followupData.dealSize && followupData.dealSize[0]
@@ -87,17 +84,17 @@ function Filters() {
         startDate: startDate.value ? startDate.value.toISOString() : undefined,
         endDate: endDate.value ? endDate.value.toISOString() : undefined,
       };
-
       dispatch(getUpcomingActions(followupData.docs.page, limits, data));
     }
   };
   const resetFilters = () => {
-    /* setStartDate(null);
-    setEndDate(null); */
     const dealData = {
       endDealValue: dealSizes?.maxDealValue || 999999999,
       startDealValue: dealSizes?.minDealValue || 1,
     };
+    startDateRef.current.placeholder = 'From date';
+    endDateRef.current.placeholder = 'To date';
+
     dispatch(resetFilterData(dealData));
     const data = {
       stages: [],
@@ -105,6 +102,10 @@ function Filters() {
     };
     dispatch(getUpcomingActions(1, limits, data));
   };
+
+  useEffect(() => {
+    resetFilters();
+  }, []);
 
   const onChangeCheckbox = useCallback(e => {
     dispatch(changeCheckbox({ name: e.target.name, value: e.target.checked }));
@@ -121,9 +122,10 @@ function Filters() {
         <div className="common-title">Follow Up Date </div>
         <DatePicker
           className="mt-10"
+          ref={startDateRef}
           placeholderText="From date"
           dateFormat="dd/MM/yyyy"
-          selected={startDate.value}
+          selected={startDate.value ? new Date(startDate.value) : ''}
           onChange={changeStartDate}
           onFocus={e => {
             e.target.placeholder = '';
@@ -134,9 +136,10 @@ function Filters() {
         />
         <DatePicker
           className="mt-10"
+          ref={endDateRef}
           placeholderText="To date"
           dateFormat="dd/MM/yyyy"
-          selected={endDate.value}
+          selected={endDate.value ? new Date(endDate.value) : ''}
           onChange={changeEndDate}
           onFocus={e => {
             e.target.placeholder = '';

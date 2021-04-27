@@ -6,6 +6,7 @@ import {
   clearOpportunity,
   deleteOpportunity,
   getOpportunity,
+  getOpportunityWithPrevNext,
   syncWithLinkedIn,
 } from '../../../../../redux/actions/followUpAction/FollowUpAction';
 import OpportunityData from './opprotunity-data/OpportunityData';
@@ -15,6 +16,7 @@ import Notes from './notes/Notes';
 import Modal from '../../../../commonComponents/Modal/Modal';
 import Loader from '../../../../commonComponents/Loader/Loader';
 import { resetFilterData } from '../../../../../redux/actions/filterAction/FilterAction';
+import { useQueryParams } from '../../../../../helpers/GetQueryParamHook';
 
 function OpportunityDetails() {
   const history = useHistory();
@@ -25,7 +27,10 @@ function OpportunityDetails() {
   const { id } = useParams();
   const [isModelOpen, setIsModelOpen] = useState(false);
   const opportunity = useSelector(state => state.opportunityDetail);
+  const filterData = useSelector(state => state.filterReducer);
   const followupData = useSelector(state => state.followUps);
+
+  console.log('filterData', filterData);
 
   const dealSizes = useMemo(
     () =>
@@ -46,8 +51,42 @@ function OpportunityDetails() {
     };
   }, []);
 
+  const { from } = useQueryParams();
+
   useEffect(() => {
-    dispatch(getOpportunity(id));
+    if (from !== undefined && from === 'followUps' && filterData) {
+      const dataVal = {
+        currentOpportunityId: id,
+        startDeal: filterData?.startDeal?.value ?? null,
+        endDeal: filterData?.endDeal?.value ?? null,
+        startDate: filterData?.startDate?.value ?? null,
+        endDate: filterData?.endDate?.value ?? null,
+        stages:
+          Object.entries(filterData?.stageInitialState)
+            .filter(data => data[1].value)
+            .map(data => data[0]) ?? [],
+        likelyHoods:
+          Object.entries(filterData?.potentialInitialState)
+            .filter(data => data[1].value)
+            .map(data => data[0]) ?? [],
+      };
+      dispatch(getOpportunityWithPrevNext(dataVal));
+    }
+  }, [
+    id,
+    filterData,
+    filterData.startDate.value,
+    filterData.endDate.value,
+    filterData.startDeal.value,
+    filterData.endDeal.value,
+    filterData.stageInitialState,
+    filterData.potentialInitialState,
+  ]);
+
+  useEffect(() => {
+    if (from === undefined && from !== 'followUps') {
+      dispatch(getOpportunity(id));
+    }
     return () => {
       dispatch(clearOpportunity);
     };
@@ -70,6 +109,25 @@ function OpportunityDetails() {
   const onDeleteData = () => {
     setIsModelOpen(false);
     deleteOpportunity(id, history.goBack);
+  };
+
+  const prevOpportunityFetch = () => {
+    const prevOpportunityId = opportunity?.prevId ?? null;
+    if (prevOpportunityId) {
+      history.push({
+        pathname: opportunity?.prevId,
+        search: 'from=followUps',
+      });
+    }
+  };
+  const nextOpportunityFetch = () => {
+    const nextOpportunityId = opportunity?.nextId ?? null;
+    if (nextOpportunityId) {
+      history.push({
+        pathname: opportunity?.nextId,
+        search: 'from=followUps',
+      });
+    }
   };
 
   return (
@@ -111,6 +169,26 @@ function OpportunityDetails() {
             <div className="opportunity-left">
               <OpportunityData opportunityData={opportunity} goToLinkedIn={goToLinkedInProfile} />
               <Notes />
+              {from === 'followUps' && (
+                <div className="prev-next-row">
+                  <button
+                    type="button"
+                    className={`${!opportunity?.prevId ? 'button-disable' : 'page-link'}`}
+                    onClick={prevOpportunityFetch}
+                    disabled={!opportunity?.prevId}
+                  >
+                    prev
+                  </button>
+                  <button
+                    type="button"
+                    className={`${!opportunity?.nextId ? 'button-disable' : 'page-link'}`}
+                    onClick={nextOpportunityFetch}
+                    disabled={!opportunity?.nextId}
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
             </div>
             <History />
           </div>

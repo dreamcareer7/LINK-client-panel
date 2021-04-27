@@ -48,7 +48,7 @@ function ClientDetailsBlock({ opportunity }) {
                 {firstName} {lastName}
               </div>
               <div className="common-content client-designation placeholder-color ">
-                {title?.length > 70 ? (
+                {title?.length + companyName?.length > 100 ? (
                   <div className="hide-detail">
                     {title}
                     {`${title && companyName ? ', ' : ''}`}

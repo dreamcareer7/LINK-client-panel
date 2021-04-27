@@ -38,27 +38,16 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
   const allConversationData = useSelector(state => state.opportunityHistory);
 
   const onChangeStage = e => {
-    /* if (e.target.value === 'CLOSED' || e.target.value === 'LOST') {
-      setFollowUpDate(null);
-      setDateAgain(followUpDate);
-    }
-    if (e.target.value !== 'CLOSED' && e.target.value !== 'LOST') {
-      if (!followUpDate) setFollowUpDate(dateAgain);
-      else setFollowUpDate(followUpDate);
-    } */
     setStageValue(e.target.value);
   };
 
   const onSaveOpportunityData = () => {
     if (!dealSizeVal) {
-      setDealSizeVal('');
-      // errorNotification('Please enter deal size before save');
+      errorNotification('Please enter deal size before save');
     } else if (potentialValue === 'SELECT') {
-      // errorNotification('Please select likelihood before save');
-      setPotentialValue('');
+      errorNotification('Please select likelihood before save');
     } else if (stageValue === 'SELECT') {
-      // errorNotification('Please select stage before save');
-      setStageValue('');
+      errorNotification('Please select stage before save');
       // eslint-disable-next-line no-restricted-globals
     } else if (dealSizeVal && isNaN(dealSizeVal) === true) {
       errorNotification('Deal size should only be in numbers');
