@@ -119,6 +119,7 @@ const Dashboard = () => {
           },
           ticks: {
             beginAtZero: true,
+            min: 0,
             fontSize: 14,
             fontStyle: 700,
             fontColor: '#464646',
@@ -137,6 +138,7 @@ const Dashboard = () => {
           ticks: {
             display: false,
             beginAtZero: true,
+            min: 0,
           },
         },
       ],
