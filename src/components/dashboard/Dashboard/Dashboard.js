@@ -28,6 +28,10 @@ import { errorNotification } from '../../../constants/Toast';
 import { NumberCommaSeparator } from '../../../helpers/NumberCommaSeparator';
 
 const Dashboard = () => {
+  useEffect(() => {
+    document.title = 'Dashboard';
+  }, []);
+
   const accountInfo = useSelector(state => state?.AccountReducer);
   const { dashboardData, pipeline, totalSales, startDate, endDate } = useSelector(
     ({ dashboardReducer }) => dashboardReducer ?? {}
