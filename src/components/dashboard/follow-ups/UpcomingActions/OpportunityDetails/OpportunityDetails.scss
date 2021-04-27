@@ -231,3 +231,12 @@
   cursor: not-allowed;
   border:none !important;
 }
+
+.opportunity-error-placeholder::placeholder {
+  color: $danger-color!important;
+}
+
+.opportunity-error-placeholder {
+  color: $danger-color!important;
+  caret-color: #444444!important;
+}

@@ -41,7 +41,10 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
     setStageValue(e.target.value);
   };
 
+  const [isSave, setIsSave] = useState(false);
+
   const onSaveOpportunityData = () => {
+    setIsSave(true);
     if (!dealSizeVal) {
       errorNotification('Please enter deal size before save');
     } else if (potentialValue === 'SELECT') {
@@ -68,6 +71,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
         followUp: followUpDate || null,
       };
       dispatch(updateOpportunity(_id, data));
+      setIsSave(false);
     }
   };
   const decimalRegex = new RegExp(/(^[0-9]{0,9}(\.\d{0,2})?$)/);
@@ -77,6 +81,17 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
     },
     [decimalRegex]
   );
+
+  const onChangePotentialValue = useCallback(
+    event => {
+      setPotentialValue(event.target.value);
+      if (event.target.value !== 'SELECT') {
+        event?.classList?.remove('opportunity-error-placeholder');
+      }
+    },
+    [setPotentialValue]
+  );
+
   return (
     <div className="common-block opportunity-detail-block blue">
       <div className="status-color" />
@@ -153,7 +168,9 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
           <div>
             <div className="common-subtitle">STAGE</div>
             <select
-              className="common-select common-select-white mt-5"
+              className={`common-select common-select-white mt-5 ${
+                stageValue === 'SELECT' && isSave && 'opportunity-error-placeholder'
+              }`}
               value={
                 allConversationData && allConversationData?.changeStageToInConversation
                   ? 'IN_CONVERSION'
@@ -174,7 +191,9 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
           <div>
             <div className="common-subtitle">DEAL SIZE</div>
             <input
-              className="common-input common-input-white mt-5"
+              className={`common-input common-input-white mt-5 ${
+                !dealSizeVal && isSave && 'opportunity-error-placeholder'
+              }`}
               placeholder="$0"
               value={dealSizeVal}
               onChange={handleDealSizeChange}
@@ -189,9 +208,11 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
           <div>
             <div className="common-subtitle">LIKELIHOOD</div>
             <select
-              className="common-select common-select-white mt-5"
+              className={`common-select common-select-white mt-5 ${
+                potentialValue === 'SELECT' && isSave && 'opportunity-error-placeholder'
+              }`}
               value={potentialValue}
-              onChange={e => setPotentialValue(e.target.value)}
+              onChange={e => onChangePotentialValue(e)}
             >
               <option value="SELECT">Select</option>
               <option value="VERY_LIKELY">Very Likely Deals</option>
@@ -202,7 +223,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
           <div>
             <div className="common-subtitle">FOLLOW UP DATE</div>
             <DatePicker
-              className="mt-5"
+              className={`mt-5 ${!followUpDate && isSave && 'opportunity-error-placeholder'}`}
               placeholderText="Set a date"
               onFocus={e => {
                 e.target.placeholder = '';
