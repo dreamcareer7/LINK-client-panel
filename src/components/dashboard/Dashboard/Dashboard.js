@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import './Dashboard.scss';
 import DatePicker from 'react-datepicker';
 import { Bar } from 'react-chartjs-2';
@@ -14,8 +14,7 @@ import percentageOfLeads from '../../../assets/images/percentage_of_leads.png';
 import totalPipelineValues from '../../../assets/images/total_pipeline_value.png';
 import totalSalesGeneratedImg from '../../../assets/images/total_sales_generated.png';
 import {
-  changeEndDateValue,
-  changeStartDateValue,
+  changeDashboardDateValue,
   fetchPipeLine,
   getDashboardData,
   resetDashboardGraphData,
@@ -30,7 +29,12 @@ import { NumberCommaSeparator } from '../../../helpers/NumberCommaSeparator';
 
 const Dashboard = () => {
   const accountInfo = useSelector(state => state?.AccountReducer);
-  const { dashboardData, pipeline, totalSales } = useSelector(state => state?.dashboardReducer);
+  const { dashboardData, pipeline, totalSales, startDate, endDate } = useSelector(
+    ({ dashboardReducer }) => dashboardReducer ?? {}
+  );
+
+  const startDateRef = useRef();
+  const endDateRef = useRef();
 
   const {
     inviteSent,
@@ -211,8 +215,6 @@ const Dashboard = () => {
       },
     },
   };
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
 
   useEffect(() => {
     dispatch(getDashboardData());
@@ -220,57 +222,40 @@ const Dashboard = () => {
     dispatch(totalSalesDateFilter());
     return () => {
       dispatch(resetDashboardGraphData);
-      setStartDate('');
-      setEndDate('');
+      dispatch(changeDashboardDateValue('startDate', null));
+      dispatch(changeDashboardDateValue('endDate', null));
     };
   }, []);
 
-  const changeStartDate = useCallback(
-    startingDate => {
-      setStartDate(startingDate);
-      dispatch(changeStartDateValue(startingDate));
-    },
-    [startDate, setStartDate]
-  );
+  const changeStartDate = useCallback(newDate => {
+    dispatch(changeDashboardDateValue('startDate', newDate));
+  }, []);
 
-  const changeEndDate = useCallback(
-    endingDate => {
-      setEndDate(endingDate);
-      dispatch(changeEndDateValue(endingDate));
-    },
-    [endDate, setEndDate]
-  );
+  const changeEndDate = useCallback(newDate => {
+    dispatch(changeDashboardDateValue('endDate', newDate));
+  }, []);
 
   useEffect(() => {
-    if (startDate !== '' && endDate !== '') {
+    if (startDate && endDate) {
       if (startDate && endDate && moment(endDate).isBefore(startDate)) {
         errorNotification('Please enter a valid date range');
       }
       endDate.setHours(23, 59, 59);
       const data = {
-        startDate: startDate !== '' ? moment(startDate).toISOString() : '',
-        endDate: endDate !== '' ? moment(endDate).toISOString() : '',
+        startDate: startDate ? moment(startDate).toISOString() : '',
+        endDate: endDate ? moment(endDate).toISOString() : '',
       };
       dispatch(totalSalesDateFilter(data));
     }
-  }, [startDate, endDate, setStartDate, setEndDate]);
+  }, [startDate, endDate]);
 
   const resetTotalSalesFilter = useCallback(() => {
-    setStartDate('');
-    setEndDate('');
-    const data = {
-      startDate,
-      endDate,
-    };
-    dispatch(changeStartDateValue(data.startDate));
-    dispatch(changeEndDateValue(data.endDate));
-    dispatch(resetFilterData(data));
-    console.log(
-      startDate.toString().trim().length === 0
-        ? `its zero  ${startDate.toString().trim().length}`
-        : `no its not zero ${startDate}`
-    );
-  }, [startDate, endDate, setStartDate, setEndDate]);
+    dispatch(changeDashboardDateValue('startDate', null));
+    dispatch(changeDashboardDateValue('endDate', null));
+    dispatch(resetFilterData());
+    startDateRef.current.input.placeholder = 'dd/mm/yyyy';
+    endDateRef.current.input.placeholder = 'dd/mm/yyyy';
+  }, [startDate, endDate, startDateRef.current, endDateRef.current]);
 
   return (
     <>
@@ -377,7 +362,8 @@ const Dashboard = () => {
             <div className="dashboard-pipeline-filter-container">
               <div className="common-subtitle">SALES BETWEEN</div>
               <DatePicker
-                placeholderText={startDate === '' ? 'dd/mm/yyyy' : 'dd/mm/yyyy'}
+                ref={startDateRef}
+                placeholderText="dd/mm/yyyy"
                 dateFormat="dd/MM/yyyy"
                 selected={startDate}
                 onChange={changeStartDate}
@@ -391,7 +377,8 @@ const Dashboard = () => {
               />
               <div className="common-subtitle">TO</div>
               <DatePicker
-                placeholderText={endDate === '' ? 'dd/mm/yyyy' : 'dd/mm/yyyy'}
+                ref={endDateRef}
+                placeholderText="dd/mm/yyyy"
                 dateFormat="dd/MM/yyyy"
                 selected={endDate}
                 onChange={changeEndDate}
@@ -416,10 +403,7 @@ const Dashboard = () => {
             {pipeline?.data?.data?.length !== 0 ? (
               <Bar options={pipelineOptions} data={pipelineState} />
             ) : (
-              <>
-                Looks like you haven&apos;t added any opportunities in order for the graphs to
-                populate.
-              </>
+              'Looks like you haven&apos;t added any opportunities in order for the graphs to populate.'
             )}
           </div>
           <div
@@ -429,15 +413,12 @@ const Dashboard = () => {
           >
             {totalSales?.data?.salesGenerated !== 0 ? (
               <Bar
-                key={Math.random().toString()}
+                key="totalSalesDataSalesGenerated"
                 options={totalSalesOptions}
                 data={totalSalesData}
               />
             ) : (
-              <>
-                Looks like you haven&apos;t added any opportunities in order for the graphs to
-                populate.
-              </>
+              'Looks like you haven&apos;t added any opportunities in order for the graphs to populate.'
             )}
           </div>
         </div>

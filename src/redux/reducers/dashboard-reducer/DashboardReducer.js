@@ -21,14 +21,8 @@ const initialValue = {
   totalSales: {
     data: [],
   },
-  startDate: {
-    name: 'startDate',
-    value: null,
-  },
-  endDate: {
-    name: 'endDate',
-    value: null,
-  },
+  startDate: null,
+  endDate: null,
   clientQuote: {
     data: [],
   },
@@ -39,8 +33,8 @@ export const dashboardReducer = (state = initialValue, action) => {
     case DASHBOARD_REDUX_CONSTANTS.OPPRTUNITIES_REDUX_CONSTANT:
       return {
         ...state,
-        opportunity: {
-          ...state.opportunity,
+        [action.name]: {
+          ...state[action.name],
           data: action.data,
         },
       };
@@ -92,22 +86,10 @@ export const dashboardReducer = (state = initialValue, action) => {
     case DASHBOARD_REDUX_CONSTANTS.RESET_TOTAL_SALES_GRAPH_DATA:
       return { ...state, totalSales: { ...state.totalSales } };
 
-    case DASHBOARD_REDUX_CONSTANTS.UPDATE_START_DATE_VALUE:
+    case DASHBOARD_REDUX_CONSTANTS.UPDATE_DASHBOARD_DATE_VALUE:
       return {
         ...state,
-        startDate: {
-          name: 'startDate',
-          value: action.value,
-        },
-      };
-
-    case DASHBOARD_REDUX_CONSTANTS.UPDATE_END_DATE_VALUE:
-      return {
-        ...state,
-        endDate: {
-          name: 'endDate',
-          value: action.value,
-        },
+        [action.name]: action.value,
       };
 
     default:

@@ -113,19 +113,11 @@ export const fetchClientQuote = () => {
 //   };
 // };
 
-export const changeStartDateValue = value => {
+export const changeDashboardDateValue = (name, value) => {
   return dispatch => {
     dispatch({
-      type: DASHBOARD_REDUX_CONSTANT.UPDATE_START_DATE_VALUE,
-      value,
-    });
-  };
-};
-
-export const changeEndDateValue = value => {
-  return dispatch => {
-    dispatch({
-      type: DASHBOARD_REDUX_CONSTANT.UPDATE_END_DATE_VALUE,
+      type: DASHBOARD_REDUX_CONSTANT.UPDATE_DASHBOARD_DATE_VALUE,
+      name,
       value,
     });
   };
@@ -155,9 +147,9 @@ export const totalSalesDateFilter = data => {
 };
 
 // eslint-disable-next-line no-unused-vars
-export const resetFilterData = data => {
+export const resetFilterData = (data = {}) => {
   return dispatch => {
-    DashboardService.getTotalSales({ startDate: '', endDate: '' })
+    DashboardService.getTotalSales(data)
       .then(response => {
         if (response?.data?.status === 'SUCCESS') {
           dispatch({
