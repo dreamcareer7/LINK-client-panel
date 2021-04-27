@@ -175,7 +175,7 @@ function OpportunityDetails() {
                     onClick={prevOpportunityFetch}
                     disabled={!opportunity?.prevId}
                   >
-                    prev
+                    Prev
                   </button>
                   <button
                     type="button"
