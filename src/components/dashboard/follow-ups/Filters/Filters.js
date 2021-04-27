@@ -92,8 +92,8 @@ function Filters() {
       endDealValue: dealSizes?.maxDealValue || 999999999,
       startDealValue: dealSizes?.minDealValue || 1,
     };
-    startDateRef.current.placeholder = 'From date';
-    endDateRef.current.placeholder = 'To date';
+    startDateRef.current.input.placeholder = 'From date';
+    endDateRef.current.input.placeholder = 'To date';
 
     dispatch(resetFilterData(dealData));
     const data = {
