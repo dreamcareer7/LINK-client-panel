@@ -1,10 +1,19 @@
 import { STRATEGY_URL } from '../../../constants/UrlConstant';
 
 // eslint-disable-next-line import/prefer-default-export
-export const strategy = (state = [], action) => {
+const initialState = {
+  strategyData: [],
+  isLoading: true,
+};
+
+// eslint-disable-next-line import/prefer-default-export
+export const strategy = (state = initialState, action) => {
   switch (action.type) {
     case STRATEGY_URL.GET_STRATEGY_URL:
-      return action.data;
+      return {
+        isLoading: false,
+        strategyData: action.data,
+      };
     default:
       return state;
   }

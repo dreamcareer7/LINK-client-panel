@@ -4,10 +4,11 @@ import './Strategy.scss';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { getStrategies } from '../../../redux/actions/strategyAction/StrategyAction';
+import Loader from '../../commonComponents/Loader/Loader';
 
 const Strategy = () => {
   const dispatch = useDispatch();
-  const strategyData = useSelector(({ strategy }) => strategy);
+  const { strategyData, isLoading } = useSelector(({ strategy }) => strategy ?? {});
 
   useEffect(() => {
     dispatch(getStrategies());
@@ -15,14 +16,19 @@ const Strategy = () => {
 
   return (
     <>
-      {strategyData.length !== 0 ? (
-        <div className="strategy-container">
-          {strategyData?.map((step, index) => (
-            <CardBox step={step} index={index} />
-          ))}
-        </div>
+      {/* eslint-disable-next-line no-nested-ternary */}
+      {strategyData && !isLoading ? (
+        strategyData.length !== 0 ? (
+          <div className="strategy-container">
+            {strategyData?.map((step, index) => (
+              <CardBox step={step} index={index} />
+            ))}
+          </div>
+        ) : (
+          <div className="no-data-in-strategy">No Data Available</div>
+        )
       ) : (
-        <div className="no-data-in-strategy">No Data Available</div>
+        <Loader />
       )}
     </>
   );
