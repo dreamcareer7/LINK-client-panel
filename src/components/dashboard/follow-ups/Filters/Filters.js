@@ -53,7 +53,7 @@ function Filters() {
     } else {
       setLimits(9);
     }
-  }, []);
+  }, [setLimits]);
 
   const handleRangePickerChange = value => {
     dispatch(changeDealValue(value));
