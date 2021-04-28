@@ -29,7 +29,7 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
   const [followUpDate, setFollowUpDate] = useState(followUp);
   const [phoneVal, setPhoneVal] = useState(phone);
   const [mail, setMail] = useState(email);
-  const [stageValue, setStageValue] = useState(stage);
+  const [stageValue, setStageValue] = useState(stage !== undefined ? stage : 'SELECT');
   const [potentialValue, setPotentialValue] = useState(
     likelyHood !== undefined ? likelyHood : 'SELECT'
   );
@@ -45,17 +45,8 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
 
   const onSaveOpportunityData = () => {
     setIsSave(true);
-    if (!dealSizeVal) {
-      errorNotification('Please enter deal size before save');
-    } else if (potentialValue === 'SELECT') {
-      errorNotification('Please select likelihood before save');
-    } else if (stageValue === 'SELECT') {
-      errorNotification('Please select stage before save');
-      // eslint-disable-next-line no-restricted-globals
-    } else if (dealSizeVal && isNaN(dealSizeVal) === true) {
-      errorNotification('Deal size should only be in numbers');
-    } else if (!followUpDate) {
-      errorNotification('Please enter follow up date before save');
+    if (!dealSizeVal || potentialValue === 'SELECT' || stageValue === 'SELECT' || !followUpDate) {
+      errorNotification('Please fill out the sections highlighted below in red');
     } else {
       const data = {
         firstName,
@@ -78,8 +69,9 @@ function OpportunityData({ opportunityData, goToLinkedIn }) {
   const handleDealSizeChange = useCallback(
     e => {
       if (decimalRegex.test(e.target.value)) setDealSizeVal(e.target.value);
+      else setDealSizeVal('');
     },
-    [decimalRegex]
+    [decimalRegex, setDealSizeVal]
   );
 
   const onChangePotentialValue = useCallback(
