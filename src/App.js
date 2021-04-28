@@ -23,6 +23,7 @@ import { SOCKET_URL } from './constants/UrlConstant';
 import { logoutUser } from './redux/actions/accountAction/AccountAction';
 import Strategy from './components/dashboard/strategy/Strategy';
 import Dashboard from './components/dashboard/Dashboard/Dashboard';
+// import Home from './components/dashboard/Home';
 
 const PrivateRoute = ({ component, ...options }) => {
   const isLoggedIn =
@@ -56,15 +57,9 @@ function App() {
     dispatch(getClientError());
   }, []);
   useEffect(() => {
-    let socket = null;
-    async function setSocketConnection() {
-      if (localStorage.getItem('userToken') !== null) {
-        socket = await socketIOClient(`${SOCKET_URL}?token=${localStorage.getItem('userToken')}`);
-      }
-    }
-    setSocketConnection().then(r => {
+    if (localStorage.getItem('userToken') !== null) {
+      const socket = socketIOClient(`${SOCKET_URL}?token=${localStorage.getItem('userToken')}`);
       if (socket) {
-        console.log('r->', r);
         socket.on('FromAPI', data => {
           if (data.type === 'LOGOUT_USER') {
             logoutUser();
@@ -72,7 +67,7 @@ function App() {
           }
         });
       }
-    });
+    }
   }, []);
 
   return (
