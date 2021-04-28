@@ -33,7 +33,7 @@ function SideBar() {
             <img alt="crm" src={crm} /> <span>CRM</span>
           </NavLink>
 
-          {/*  <NavLink className="menu-item menu-link" to="/strategy" replace>
+          {/*    <NavLink className="menu-item menu-link" to="/strategy" replace>
             <img alt="crm" src={strategy} /> <span>Strategy</span>
           </NavLink> */}
 

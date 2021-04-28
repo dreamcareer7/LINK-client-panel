@@ -6,8 +6,9 @@ export const BASE_URL = 'https://jayla.linkfluencer.com/app/'; // <-- Production
 export const LINKEDIN_CLIENT_ID = '86mz67ydcyjqc2'; // <-- client
 // export const LINKEDIN_CLIENT_ID = '776gktki6ukrgj';
 
-export const SOCKET_URL = 'wss://link.dev.gradlesol.com/'; // <-- Dev
-// export const SOCKET_URL = 'wss://jayla.linkfluencer.com/'; // <-- Production
+// export const SOCKET_URL = 'wss://link.dev.gradlesol.com/'; // <-- Dev
+export const SOCKET_URL = 'wss://jayla.linkfluencer.com/'; // <-- Production
+// export const SOCKET_URL = 'wss://link.test.humanpixel.com.au/'; // <-- test
 export const API_METHODS = {
   GET: 'GET',
   POST: 'POST',
