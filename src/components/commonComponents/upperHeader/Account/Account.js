@@ -461,6 +461,7 @@ function Account() {
             <div className="d-flex justify-content-center w-100">
               <button
                 type="button"
+                style={{ marginRight: '-20px' }}
                 className="button primary-button"
                 onClick={onDownloadFullHistory}
               >
