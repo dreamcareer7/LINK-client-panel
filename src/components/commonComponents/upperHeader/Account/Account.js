@@ -458,10 +458,10 @@ function Account() {
                 />
               </div>
             </div>
-            <div className="d-flex justify-content-end w-100">
+            <div className="d-flex justify-content-center w-100">
               <button
                 type="button"
-                className="button primary-button mt-5"
+                className="button primary-button"
                 onClick={onDownloadFullHistory}
               >
                 DOWNLOAD
@@ -472,7 +472,7 @@ function Account() {
             <div>Date</div>
             <div>Amount</div>
             <div>Plan</div>
-            <div>Receipt No.</div>
+            <div>Transaction No.</div>
             <div className="actions" />
           </div>
           {invoiceData &&
