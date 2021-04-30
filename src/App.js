@@ -95,7 +95,7 @@ function App() {
             </Layout>
           </Switch>
         </Route>
-      </Router>{' '}
+      </Router>
     </div>
   );
 }
