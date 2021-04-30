@@ -414,22 +414,18 @@ const Dashboard = () => {
               {pipeline?.data?.data?.length !== 0 ? (
                 <Bar options={pipelineOptions} data={pipelineState} />
               ) : (
-                'Looks like you haven&apos;t added any opportunities in order for the graphs to populate.'
+                "Looks like you haven't added any opportunities in order for the graphs to populate."
               )}
             </div>
-            <div
-              className={`dashboard-graph ${
-                totalSales?.data?.salesGenerated === 0 && 'no-data-style'
-              }`}
-            >
-              {totalSales?.data?.salesGenerated !== 0 ? (
+            <div className={`dashboard-graph ${totalSalesGenerated === 0 && 'no-data-style'}`}>
+              {totalSalesGenerated !== 0 ? (
                 <Bar
                   key="totalSalesDataSalesGenerated"
                   options={totalSalesOptions}
                   data={totalSalesData}
                 />
               ) : (
-                'Looks like you haven&apos;t added any opportunities in order for the graphs to populate.'
+                "Looks like you haven't added any opportunities in order for the graphs to populate."
               )}
             </div>
           </div>
