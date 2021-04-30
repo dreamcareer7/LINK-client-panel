@@ -22,21 +22,26 @@ import { SOCKET_URL } from './constants/UrlConstant';
 import { logoutUser } from './redux/actions/accountAction/AccountAction';
 import Strategy from './components/dashboard/strategy/Strategy';
 import Dashboard from './components/dashboard/Dashboard/Dashboard';
-// import Home from './components/dashboard/Home';
 
 const PrivateRoute = ({ component, ...options }) => {
   const isLoggedIn =
     localStorage.getItem('userToken') !== null && localStorage.getItem('userToken').length !== 0;
 
   const finalComponent = isLoggedIn ? component : SignupWithLinkedIn;
-  if ((options.path === '/' || !options.path) && isLoggedIn) {
+
+  if (isLoggedIn && !component) {
     return (
       <Route {...options}>
         <Redirect to="/dashboard" />
       </Route>
     );
   }
-  return <Route {...options} component={finalComponent} />;
+
+  return (
+    <Layout>
+      <Route {...options} component={finalComponent} />
+    </Layout>
+  );
 };
 PrivateRoute.propTypes = {
   component: PropTypes.func,
@@ -80,19 +85,20 @@ function App() {
             <Route exact path="/signUp" component={SignupWithLinkedIn} />
             <Route exact path="/auth-verify" component={AuthRedirect} />
             <PrivateRoute exact path="/" />
-            <Layout>
-              <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              <PrivateRoute component={Dashboard} />
-              <PrivateRoute exact path="/followups" component={FollowUps} />
-              <PrivateRoute exact path="/crm" component={Crm} />
-              <PrivateRoute exact path="/strategy" component={Strategy} />
-              <PrivateRoute
-                exact
-                path="/followups/opportunityDetails/:id"
-                component={OpportunityDetails}
-              />
-              <PrivateRoute exact path="/account" component={Account} />
-            </Layout>
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            <PrivateRoute exact path="/followups" component={FollowUps} />
+            <PrivateRoute exact path="/crm" component={Crm} />
+            <PrivateRoute exact path="/strategy" component={Strategy} />
+            <PrivateRoute
+              exact
+              path="/followups/opportunityDetails/:id"
+              component={OpportunityDetails}
+            />
+            <PrivateRoute exact path="/account" component={Account} />
+
+            <Route>
+              <Redirect to="/dashboard" />
+            </Route>
           </Switch>
         </Route>
       </Router>

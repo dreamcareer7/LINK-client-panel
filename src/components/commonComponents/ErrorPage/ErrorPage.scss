@@ -1,0 +1,29 @@
+@import '../../../index';
+@import '../../../../src/styles/color-palette';
+
+.error-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 400px;
+
+  img {
+    height: 200px;
+  }
+}
+
+.invalid-url {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 400;
+  color: $primary-variant-color;
+}
+
+.page-does-not-exist {
+  margin-top: 10px;
+  font-size: 24px;
+  font-weight: 400;
+  color: $primary-color;
+}
