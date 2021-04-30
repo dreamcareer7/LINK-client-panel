@@ -29,6 +29,18 @@
   font-weight: 500;
 }
 
+.dashboard-data-graph-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 3rem 0 3rem;
+}
+
+.dashboard-data-container {
+  max-width: 1600px;
+  width: 100%;
+}
+
 .dashboard-data-row {
   display: flex;
   justify-content: space-between;
@@ -85,6 +97,7 @@
   display: grid;
   grid-template-columns: repeat(2,1fr);
   gap: 0 10%;
+  width: 100%;
   margin-top: 40px;
 
   .title {
