@@ -77,6 +77,7 @@ const Dashboard = () => {
     ],
   };
   const totalSalesData = {
+    labels: [''],
     datasets: [
       {
         backgroundColor: ['#6699ff'],
@@ -95,10 +96,9 @@ const Dashboard = () => {
   const dispatch = useDispatch();
 
   const pipelineOptions = {
-    paddingTop: 20,
     layout: {
       padding: {
-        top: 30,
+        top: 20,
       },
     },
     legend: {
@@ -412,7 +412,7 @@ const Dashboard = () => {
               }`}
             >
               {pipeline?.data?.data?.length !== 0 ? (
-                <Bar options={pipelineOptions} data={pipelineState} />
+                <Bar height={100} options={pipelineOptions} data={pipelineState} />
               ) : (
                 "Looks like you haven't added any opportunities in order for the graphs to populate."
               )}
@@ -420,6 +420,7 @@ const Dashboard = () => {
             <div className={`dashboard-graph ${totalSalesGenerated === 0 && 'no-data-style'}`}>
               {totalSalesGenerated !== 0 ? (
                 <Bar
+                  height={100}
                   key="totalSalesDataSalesGenerated"
                   options={totalSalesOptions}
                   data={totalSalesData}
