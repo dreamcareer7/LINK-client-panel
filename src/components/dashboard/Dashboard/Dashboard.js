@@ -76,6 +76,12 @@ const Dashboard = () => {
       },
     ],
   };
+
+  const highestPipeLineValue = pipeline?.data?.data
+    ?.map(element => element.totalDealValue)
+    .reduce((a, b) => {
+      return Math.max(a, b);
+    });
   const totalSalesData = {
     labels: [''],
     datasets: [
@@ -98,7 +104,7 @@ const Dashboard = () => {
   const pipelineOptions = {
     layout: {
       padding: {
-        top: 20,
+        top: 30,
       },
     },
     legend: {
@@ -139,6 +145,7 @@ const Dashboard = () => {
             display: false,
             beginAtZero: true,
             min: 0,
+            max: highestPipeLineValue,
           },
         },
       ],
@@ -160,7 +167,7 @@ const Dashboard = () => {
   const totalSalesOptions = {
     layout: {
       padding: {
-        top: 20,
+        top: 30,
       },
     },
     legend: {
@@ -204,6 +211,8 @@ const Dashboard = () => {
             display: false,
             paddingTop: 30,
             beginAtZero: true,
+            min: 0,
+            max: totalSalesGenerated,
           },
         },
       ],
