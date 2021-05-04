@@ -188,7 +188,16 @@ function OpportunityDetails() {
                 </div>
               )}
             </div>
+            <div>
             <History />
+            <div className="button-to-navigate">
+              <button
+                      type="button"
+                      className="button primary-button slim-button mt-10 button-to-navigate-text" >
+                switch to sales navigator
+              </button>
+            </div>
+            </div>
           </div>
         </>
       ) : (
