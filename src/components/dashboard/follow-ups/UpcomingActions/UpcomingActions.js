@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
 import ClientDetailsBlock from './ClientDetailsBlock/ClientDetailsBlock';
 import { getUpcomingActions } from '../../../../redux/actions/followUpAction/FollowUpAction';
+import Loader from '../../../commonComponents/Loader/Loader';
 
 function UpcomingActions() {
   const dispatch = useDispatch();
@@ -48,32 +49,35 @@ function UpcomingActions() {
   );
   const upComingActions = useMemo(() => (docs && docs.docs ? docs.docs : []), [docs]);
   const activePage = useMemo(() => (docs && docs.page ? docs.page : 1), [docs]);
-
   return (
     <div>
       <div className="common-title">Sales Opportunities</div>
       <div className="client-detail-page">
-        {upComingActions && upComingActions.length > 0 && (
-          <div className="client-detail-blocks-container">
-            {upComingActions?.map(opportunity => (
-              <div onClick={() => onOpportunityClick(opportunity._id)}>
-                <ClientDetailsBlock key={opportunity._id} opportunity={opportunity} />
-              </div>
-            ))}
-          </div>
-        )}
-        {upComingActions && docs !== null && upComingActions.length === 0 && (
-          <div className="upcoming-action--no-record">
-            <span>
-              There are no opportunities set to follow up, either add new ones via LinkedIn or
-              change your search filter. If there are prospects that haven’t been filled out with
-              the right data, search for them in the CRM section and update them for it to appear in
-              this area.
-            </span>
-          </div>
+        {/* eslint-disable-next-line no-nested-ternary */}
+        {upComingActions && docs ? (
+          upComingActions.length > 0 ? (
+            <div className="client-detail-blocks-container">
+              {upComingActions?.map(opportunity => (
+                <div onClick={() => onOpportunityClick(opportunity._id)}>
+                  <ClientDetailsBlock key={opportunity._id} opportunity={opportunity} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="upcoming-action--no-record">
+              <span>
+                There are no opportunities set to follow up, either add new ones via LinkedIn or
+                change your search filter. If there are prospects that haven’t been filled out with
+                the right data, search for them in the CRM section and update them for it to appear
+                in this area.
+              </span>
+            </div>
+          )
+        ) : (
+          <Loader />
         )}
       </div>
-      {upComingActions.length ? (
+      {upComingActions.length > 0 ? (
         <Pagination
           activePage={activePage}
           itemsCountPerPage={limits}
