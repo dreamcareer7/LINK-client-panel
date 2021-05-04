@@ -42,7 +42,7 @@ function History() {
   };
 
   useEffect(() => {
-    if (chatContainer.current && allConversation?.data?.length > 0) {
+    if (chatContainer?.current && allConversation?.data?.length > 0) {
       if (prevChatLength.current === 0) {
         setTimeout(() => {
           const scrollHeights = chatContainer?.current?.scrollHeight;
