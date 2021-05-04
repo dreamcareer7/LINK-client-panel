@@ -77,11 +77,9 @@ const Dashboard = () => {
     ],
   };
 
-  const highestPipeLineValue = pipeline?.data?.data
-    ?.map(element => element.totalDealValue)
-    .reduce((previous, current) => {
+  const highestPipeLineValue = pipeline?.data?.data?.map(element => element?.totalDealValue)?.reduce((previous, current) => {
       return Math.max(previous, current);
-    });
+    },0);
   const totalSalesData = {
     labels: [''],
     datasets: [
