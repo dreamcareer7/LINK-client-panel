@@ -62,28 +62,28 @@ function History() {
       <div className="common-block--detail-container chat-history">
         <div className="common-subtitle">HISTORY</div>
         <div className="whole-chat-container" ref={chatContainer} onScroll={handleScroll}>
-          {allConversation && allConversation.data && allConversation.data.length > 0 ? (
-            allConversation.data.map(convo => (
+          {allConversation && allConversation?.data?.length > 0 ? (
+            allConversation?.data?.map(convo => (
               <div className="chat-container" key={Math.random()}>
                 {convo.id === '2' ? (
                   <div className="left-conversation">
-                    <img className="chat-dp" src={convo.profilePicUrl || defaultUser} />
+                    <img className="chat-dp" src={convo?.profilePicUrl || defaultUser} />
                     <div className="chat-bubble">
-                      {convo.message ? convo.message : 'This message is deleted'}
+                      {convo?.message ? convo.message : 'This message is deleted'}
                       <span className="chat-time-stamp">
-                        {moment(convo.createdAt).format('DD/MM/YYYY | hh:mm A')}
+                        {moment(convo?.createdAt).format('DD/MM/YYYY | hh:mm A')}
                       </span>
                     </div>
                   </div>
                 ) : (
                   <div className="right-conversation">
                     <div className="chat-bubble user-bubble">
-                      {convo.message ? convo.message : 'This message is deleted'}
+                      {convo?.message ? convo?.message : 'This message is deleted'}
                       <span className="chat-time-stamp right-date-time">
                         {moment(convo.createdAt).format('DD/MM/YYYY | hh:mm A')}
                       </span>
                     </div>
-                    <img className="chat-dp" src={convo.profilePicUrl || defaultUser} />
+                    <img className="chat-dp" src={convo?.profilePicUrl || defaultUser} />
                   </div>
                 )}
               </div>
