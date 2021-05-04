@@ -17,32 +17,32 @@ function History() {
   const prevChatLength = useRef(0);
 
   useEffect(() => {
-    dispatch(fetchConversation(id));
+    dispatch(fetchConversation(id, null, { chatFor: 'linkedIn' }));
     return () => {
       dispatch(clearConversation());
     };
   }, []);
 
-  const allConversationData = useSelector(state => state.opportunityHistory);
+  const allConversationData = useSelector(({ opportunityHistory }) => opportunityHistory ?? {});
   const allConversation = useMemo(
     () => (allConversationData && allConversationData.data ? allConversationData.data : []),
     [allConversationData]
   );
 
   const handleScroll = e => {
-    const targetVal = e.target;
-    if (targetVal.scrollTop < 1) {
+    const targetVal = e?.target;
+    if (targetVal?.scrollTop < 1) {
       const data = {
-        createdAt: allConversation.data[0].createdAt,
+        createdAt: allConversation?.data?.[0]?.createdAt,
       };
-      if (!allConversationData.isAllDataLoaded) {
-        dispatch(fetchConversation(id, data));
+      if (!allConversationData?.isAllDataLoaded) {
+        dispatch(fetchConversation(id, data, { chatFor: allConversationData?.chatFor }));
       }
     }
   };
 
   useEffect(() => {
-    if (chatContainer.current && allConversation.data && allConversation.data.length > 0) {
+    if (chatContainer.current && allConversation?.data?.length > 0) {
       if (prevChatLength.current === 0) {
         setTimeout(() => {
           const scrollHeights = chatContainer?.current?.scrollHeight;
