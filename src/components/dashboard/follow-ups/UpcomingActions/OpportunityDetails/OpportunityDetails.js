@@ -17,6 +17,10 @@ import Modal from '../../../../commonComponents/Modal/Modal';
 import Loader from '../../../../commonComponents/Loader/Loader';
 import { resetFilterData } from '../../../../../redux/actions/filterAction/FilterAction';
 import { useQueryParams } from '../../../../../helpers/GetQueryParamHook';
+import {
+  fetchConversation,
+  getChatHistoryFromSalesNavOrLinkedIn,
+} from '../../../../../redux/actions/followUpAction/historyAction/HistoryAction';
 
 function OpportunityDetails() {
   const history = useHistory();
@@ -29,6 +33,7 @@ function OpportunityDetails() {
   const opportunity = useSelector(state => state.opportunityDetail);
   const filterData = useSelector(state => state.filterReducer);
   const followupData = useSelector(state => state.followUps);
+  const getChatFor = useSelector(({ opportunityHistory }) => opportunityHistory ?? {});
 
   const dealSizes = useMemo(
     () =>
@@ -37,6 +42,7 @@ function OpportunityDetails() {
         : null,
     [followupData]
   );
+  const [fetchDataFromSalesNav, setFetchDataFromSalesNav] = useState(true);
 
   useEffect(() => {
     document.title = 'Opportunity Details';
@@ -94,9 +100,9 @@ function OpportunityDetails() {
     window.open(`${opportunity.linkedInUrl}`, '_blank');
   };
 
-  const onSyncClick = () => {
-    dispatch(syncWithLinkedIn(id));
-    // dispatch(fetchConversation(id, ''));
+  const onSyncClick = async () => {
+    await dispatch(syncWithLinkedIn(id));
+    dispatch(fetchConversation(id, null, {chatFor:getChatFor?.chatFor}));
   };
   const deleteSyncClick = () => {
     setIsModelOpen(true);
@@ -126,6 +132,13 @@ function OpportunityDetails() {
         search: 'from=followUps',
       });
     }
+  };
+  const onClickSwitchHistory = async () => {
+    await setFetchDataFromSalesNav(e => !e);
+    dispatch(getChatHistoryFromSalesNavOrLinkedIn(fetchDataFromSalesNav ? 'salesNav' : 'linkedIn'));
+    dispatch(
+      fetchConversation(id, null, { chatFor: fetchDataFromSalesNav ? 'salesNav' : 'linkedIn' })
+    );
   };
 
   return (
@@ -189,14 +202,16 @@ function OpportunityDetails() {
               )}
             </div>
             <div>
-            <History />
-            <div className="button-to-navigate">
-              <button
-                      type="button"
-                      className="button primary-button slim-button mt-10 button-to-navigate-text" >
-                switch to sales navigator
-              </button>
-            </div>
+              <History />
+              <div className="button-to-navigate">
+                <button
+                  type="button"
+                  className="button primary-button slim-button mt-10 button-to-navigate-text"
+                  onClick={onClickSwitchHistory}
+                >
+                  {fetchDataFromSalesNav ? 'switch to sales navigator' : 'switch to linked in'}
+                </button>
+              </div>
             </div>
           </div>
         </>
