@@ -4,7 +4,7 @@ const initialDataFetch = {
   isLoading: true,
   isAllDataLoaded: false,
   data: null,
-  chatFor: 'linkedIn',
+  chatFor: 'LINKED_IN',
 };
 // eslint-disable-next-line import/prefer-default-export
 export const opportunityHistory = (state = initialDataFetch, action) => {

@@ -17,7 +17,7 @@ function History() {
   const prevChatLength = useRef(0);
 
   useEffect(() => {
-    dispatch(fetchConversation(id, null, { chatFor: 'linkedIn' }));
+    dispatch(fetchConversation(id, null, { chatFor: 'LINKED_IN' }));
     return () => {
       dispatch(clearConversation());
     };

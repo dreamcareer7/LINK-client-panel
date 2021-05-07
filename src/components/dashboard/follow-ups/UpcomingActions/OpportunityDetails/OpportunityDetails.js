@@ -135,9 +135,9 @@ function OpportunityDetails() {
   };
   const onClickSwitchHistory = async () => {
     await setFetchDataFromSalesNav(e => !e);
-    dispatch(getChatHistoryFromSalesNavOrLinkedIn(fetchDataFromSalesNav ? 'salesNav' : 'linkedIn'));
+    dispatch(getChatHistoryFromSalesNavOrLinkedIn(fetchDataFromSalesNav ? 'SALES_NAVIGATOR' : 'LINKED_IN'));
     dispatch(
-      fetchConversation(id, null, { chatFor: fetchDataFromSalesNav ? 'salesNav' : 'linkedIn' })
+      fetchConversation(id, null, { chatFor: fetchDataFromSalesNav ? 'SALES_NAVIGATOR' : 'LINKED_IN' })
     );
   };
 
