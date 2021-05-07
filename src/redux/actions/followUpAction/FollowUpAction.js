@@ -39,7 +39,6 @@ export const getOpportunity = id => {
         }
       })
       .catch(e => {
-        console.log(e);
         if (e.response?.data?.status === undefined) {
           errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
@@ -61,7 +60,6 @@ export const getOpportunityWithPrevNext = data => {
         }
       })
       .catch(e => {
-        console.log(e);
         if (e.response?.data?.status === undefined) {
           errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
@@ -73,7 +71,6 @@ export const getOpportunityWithPrevNext = data => {
 
 // In sync we have to store data on get opportunity constant
 export const syncWithLinkedIn = id => {
-  console.log('sync with linkedin',id);
   return dispatch => {
     return new Promise((resolve, reject) => {
       dispatch(clearOpportunity);
@@ -118,7 +115,6 @@ export const updateOpportunity = (id, data) => {
         }
       })
       .catch(e => {
-        console.log(e);
         if (e.response.data.status === undefined) {
           errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
