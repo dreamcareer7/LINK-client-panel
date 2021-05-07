@@ -16,8 +16,10 @@ function History() {
   const chatContainer = useRef(null);
   const prevChatLength = useRef(0);
 
+  const getChatFor = useSelector(({ opportunityHistory }) => opportunityHistory ?? {});
+
   useEffect(() => {
-    dispatch(fetchConversation(id, null, { chatFor: 'LINKED_IN' }));
+    dispatch(fetchConversation(id, null, { chatFor: getChatFor?.chatFor }));
     return () => {
       dispatch(clearConversation());
     };

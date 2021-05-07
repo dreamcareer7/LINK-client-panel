@@ -73,6 +73,7 @@ export const getOpportunityWithPrevNext = data => {
 
 // In sync we have to store data on get opportunity constant
 export const syncWithLinkedIn = id => {
+  console.log('sync with linkedin',id);
   return dispatch => {
     return new Promise((resolve, reject) => {
       dispatch(clearOpportunity);
