@@ -32,12 +32,12 @@ export const fetchConversation = (id, data, params ={}) => {
             type: POPUP_REDUX_CONSTANT.POP_UP_MESSAGE,
             data: e.response.data.message,
           });
-        } else if (e.response.data.status === undefined) {
+        } else if (e?.response?.data?.status === undefined) {
           dispatch({
             type: HISTORY_REDUX_CONSTANT.ERROR_OPPORTUNITY_CONVERSATION,
           });
           errorNotification('It seems like server is down, Please try after sometime');
-        } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
+        } else if (e?.response?.data?.status === 'INTERNAL_SERVER_ERROR') {
           dispatch({
             type: HISTORY_REDUX_CONSTANT.ERROR_OPPORTUNITY_CONVERSATION,
           });
