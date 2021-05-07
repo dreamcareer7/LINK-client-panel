@@ -16,10 +16,13 @@ function History() {
   const chatContainer = useRef(null);
   const prevChatLength = useRef(0);
 
-  const getChatFor = useSelector(({ opportunityHistory }) => opportunityHistory ?? {});
+  const historyData = useSelector(({ opportunityHistory }) => opportunityHistory ?? {});
+  const { salesNavigatorObj } = useSelector(
+    ({ opportunityHistory }) => opportunityHistory.data ?? {}
+  );
 
   useEffect(() => {
-    dispatch(fetchConversation(id, null, { chatFor: getChatFor?.chatFor }));
+    dispatch(fetchConversation(id, null, { chatFor: historyData?.chatFor }));
     return () => {
       dispatch(clearConversation());
     };
@@ -34,11 +37,22 @@ function History() {
   const handleScroll = e => {
     const targetVal = e?.target;
     if (targetVal?.scrollTop < 1) {
-      const data = {
-        createdAt: allConversation?.data?.[0]?.createdAt,
-      };
-      if (!allConversationData?.isAllDataLoaded) {
-        dispatch(fetchConversation(id, data, { chatFor: allConversationData?.chatFor }));
+      if (salesNavigatorObj && historyData?.chatFor === 'SALES_NAVIGATOR') {
+        const data = {
+          createdAt: allConversation?.data?.[0]?.createdAt,
+          salesNavigatorObj: salesNavigatorObj ?? {},
+        };
+        if (!allConversationData?.isAllDataLoaded) {
+          dispatch(fetchConversation(id, data, { chatFor: allConversationData?.chatFor }));
+        }
+      }
+      else{
+        const data = {
+          createdAt: allConversation?.data?.[0]?.createdAt,
+        };
+        if (!allConversationData?.isAllDataLoaded) {
+          dispatch(fetchConversation(id, data, { chatFor: allConversationData?.chatFor }));
+        }
       }
     }
   };
