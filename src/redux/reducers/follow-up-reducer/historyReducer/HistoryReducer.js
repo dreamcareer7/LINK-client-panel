@@ -31,7 +31,7 @@ export const opportunityHistory = (state = initialDataFetch, action) => {
         ...state,
         isLoading: false,
         isAllDataLoaded: action.data.data.length === 0,
-        data: { data: [...action.data.data, ...state.data.data] },
+        data: { ...action.data, data: [...action.data.data, ...state.data.data] },
       };
     case HISTORY_REDUX_CONSTANT.ERROR_OPPORTUNITY_CONVERSATION:
       return {

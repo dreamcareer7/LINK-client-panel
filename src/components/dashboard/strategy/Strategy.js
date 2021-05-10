@@ -25,6 +25,7 @@ const Strategy = () => {
     }, [isReadMoreNeeded]); */
 
   useEffect(() => {
+    document.title = 'Strategy';
     dispatch(getStrategies());
   }, []);
 

@@ -20,7 +20,6 @@ function History() {
   const { salesNavigatorObj } = useSelector(
     ({ opportunityHistory }) => opportunityHistory.data ?? {}
   );
-
   useEffect(() => {
     dispatch(fetchConversation(id, null, { chatFor: historyData?.chatFor }));
     return () => {
@@ -45,8 +44,7 @@ function History() {
         if (!allConversationData?.isAllDataLoaded) {
           dispatch(fetchConversation(id, data, { chatFor: allConversationData?.chatFor }));
         }
-      }
-      else{
+      } else {
         const data = {
           createdAt: allConversation?.data?.[0]?.createdAt,
         };
