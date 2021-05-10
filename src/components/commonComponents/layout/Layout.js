@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import is from 'is_js';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 import SideBar from '../sideBar/SideBar';
 import UpperHeader from '../upperHeader/UpperHeader';
 import './layout.scss';
-import { getAuthTokenLocalStorage } from '../../../helpers/LocalStorageHelper';
-import { addFCMListner } from '../../../redux/actions/fcmAction/FcmAction';
-import { checkingCookiee } from '../../../redux/actions/cookieeAction/CookieeAction';
-import { getClientError } from '../../../redux/actions/clientErrorAction/ClientErrorAction';
+import {getAuthTokenLocalStorage} from '../../../helpers/LocalStorageHelper';
+import {addFCMListner} from '../../../redux/actions/fcmAction/FcmAction';
+import {checkingCookiee} from '../../../redux/actions/cookieeAction/CookieeAction';
+import {getClientError} from '../../../redux/actions/clientErrorAction/ClientErrorAction';
 import PopUp from '../PopUp/PopUp';
 import POPUP_REDUX_CONSTANT from '../../../redux/constants/popUpConstant/PopUpConstant';
 
