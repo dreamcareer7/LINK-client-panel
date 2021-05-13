@@ -78,9 +78,11 @@ const Dashboard = () => {
     ],
   };
 
-  const highestPipeLineValue = pipeline?.data?.data?.map(element => element?.totalDealValue)?.reduce((previous, current) => {
+  const highestPipeLineValue = pipeline?.data?.data
+    ?.map(element => element?.totalDealValue)
+    ?.reduce((previous, current) => {
       return Math.max(previous, current);
-    },0);
+    }, 0);
   const totalSalesData = {
     labels: [''],
     datasets: [
@@ -425,16 +427,12 @@ const Dashboard = () => {
                 "Looks like you haven't added any opportunities in order for the graphs to populate."
               )}
             </div>
-            <div className={`dashboard-graph ${totalSalesGenerated === 0 && 'no-data-style'}`}>
-              {totalSalesGenerated !== 0 ? (
-                <Bar
-                  key="totalSalesDataSalesGenerated"
-                  options={totalSalesOptions}
-                  data={totalSalesData}
-                />
-              ) : (
-                "Looks like you haven't added any opportunities in order for the graphs to populate."
-              )}
+            <div className="dashboard-graph">
+              <Bar
+                key="totalSalesDataSalesGenerated"
+                options={totalSalesOptions}
+                data={totalSalesData}
+              />
             </div>
           </div>
         </div>
