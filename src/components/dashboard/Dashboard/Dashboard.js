@@ -95,12 +95,14 @@ const Dashboard = () => {
       {
         label: 'remaining',
         backgroundColor: ['#e0e0e0'],
-        data: [totalSalesGenerated - totalSales?.data?.data?.salesGenerated],
+        data:
+          totalSalesGenerated - totalSales?.data?.data?.salesGenerated !== 0
+            ? [totalSalesGenerated - totalSales?.data?.data?.salesGenerated]
+            : [1 - totalSales?.data?.data?.salesGenerated],
       },
     ],
   };
   const dispatch = useDispatch();
-
   const pipelineOptions = {
     layout: {
       padding: {
