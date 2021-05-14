@@ -55,7 +55,7 @@ function ClientDetailsBlock({ opportunity }) {
                     {companyName}
                   </div>
                 ) : (
-                  <div>
+                  <div className="hide-detail">
                     {title}
                     {`${title && companyName ? ', ' : ''}`}
                     {companyName}
