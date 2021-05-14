@@ -26,6 +26,7 @@ import { chartPotentialMapperObject } from '../../../helpers/Mappers';
 import { usdConverter } from '../../../helpers/usdConverter';
 import { errorNotification } from '../../../constants/Toast';
 import { NumberCommaSeparator } from '../../../helpers/NumberCommaSeparator';
+import Loader from '../../commonComponents/Loader/Loader';
 
 const Dashboard = () => {
   useEffect(() => {
@@ -37,10 +38,8 @@ const Dashboard = () => {
   const { dashboardData, pipeline, totalSales, startDate, endDate } = useSelector(
     ({ dashboardReducer }) => dashboardReducer ?? {}
   );
-
   const startDateRef = useRef();
   const endDateRef = useRef();
-
   const {
     inviteSent,
     inviteAccepted,
@@ -105,6 +104,7 @@ const Dashboard = () => {
   };
   const dispatch = useDispatch();
   const pipelineOptions = {
+    maintainAspectRatio: false,
     layout: {
       padding: {
         top: 30,
@@ -168,6 +168,7 @@ const Dashboard = () => {
   };
 
   const totalSalesOptions = {
+    maintainAspectRatio: false,
     layout: {
       padding: {
         top: 30,
@@ -196,7 +197,7 @@ const Dashboard = () => {
             fontSize: 14,
             fontStyle: 700,
             fontColor: '#464646',
-            padding: 10,
+            padding: 3,
           },
         },
       ],
@@ -277,168 +278,181 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="welcome-container">
-        <div>
-          <div className="welcome-back-line">Welcome Back {accountInfo.client.data.firstName}</div>
-          <div className="welcome-text">Here is a breakdown of your LinkedIn activity.</div>
-        </div>
-        <img src={dashboardLady} />
-      </div>
-      <div className="dashboard-data-graph-container">
-        <div className="dashboard-data-container">
-          <div className="dashboard-data-row">
-            <div className="dashboard-data-row-item">
-              <img src={totalInvites} />
-              <div className="first-row-content">
-                <div className="dashboard-data-title">
-                  Total Invites <br />
-                  Sent
-                </div>
-                <div className="dashboard-data-value mt-1">{NumberCommaSeparator(inviteSent)}</div>
-              </div>
-            </div>
-            <div className="dashboard-data-row-item">
-              <img src={invitesAccepted} />
-              <div className="first-row-content">
-                <div className="dashboard-data-title">
-                  Invites
-                  <br />
-                  Accepted
-                </div>
-                <div className="dashboard-data-value mt-1">
-                  {NumberCommaSeparator(inviteAccepted)}
-                </div>
-              </div>
-            </div>
-            <div className="dashboard-data-row-item">
-              <img src={acceptanceRateImg} />
-              <div className="first-row-content">
-                <div className="dashboard-data-title">
-                  Acceptance
-                  <br />
-                  Rate
-                </div>
-                <div className="dashboard-data-value mt-1">{acceptanceRate}%</div>
-              </div>
-            </div>
-          </div>
-          <div className="dashboard-data-row dashboard-data-second-row">
-            <div className="dashboard-data-row-item">
-              <img src={totalLeadsImg} />
-              <div className="dashboard-second-row-content ml-10">
-                <div className="dashboard-data-title">
-                  Total
-                  <br />
-                  Leads
-                </div>
-                <div className="dashboard-data-value">{NumberCommaSeparator(opportunityCount)}</div>
-              </div>
-            </div>
-            <div className="dashboard-data-row-item">
-              <img src={hoursSpent} />
-              <div className="dashboard-second-row-content ml-10">
-                <div className="dashboard-data-title">
-                  Hours Spent <br />
-                  on LinkedIn
-                </div>
-                <div className="dashboard-data-value">
-                  {NumberCommaSeparator(timeSpentInLinkedIn)}
-                </div>
-              </div>
-            </div>
-            <div className="dashboard-data-row-item">
-              <img src={percentageOfLeads} />
-              <div className="dashboard-second-row-content ml-10">
-                <div className="dashboard-data-title">
-                  Percentage of
-                  <br />
-                  Leads Closed
-                </div>
-                <div className="dashboard-data-value">{percentOfLeadsClosed}%</div>
-              </div>
-            </div>
-          </div>
-          <div className="dashboard-graphs-container">
+      {Object.entries(dashboardData).length > 0 ? (
+        <>
+          <div className="welcome-container">
             <div>
-              <div className="title">Total Pipeline Value</div>
-              <div className="d-flex align-items-center">
-                <img src={totalPipelineValues} />
-                <span className="dashboard-data-value ml-10">
-                  {usdConverter(pipeline?.data?.totalDealAmount ?? 0)}
-                </span>
+              <div className="welcome-back-line">
+                Welcome Back {accountInfo.client.data.firstName}
               </div>
+              <div className="welcome-text">Here is a breakdown of your LinkedIn activity.</div>
             </div>
-
-            <div>
-              <div className="title">Total Sales Generated</div>
-              <div className="d-flex align-items-center">
-                <img src={totalSalesGeneratedImg} />
-                <span className="dashboard-data-value ml-10">
-                  {usdConverter(totalSalesGenerated)}
-                </span>
+            <img src={dashboardLady} />
+          </div>
+          <div className="dashboard-data-graph-container">
+            <div className="dashboard-data-container">
+              <div className="dashboard-data-row">
+                <div className="dashboard-data-row-item">
+                  <img src={totalInvites} />
+                  <div className="first-row-content">
+                    <div className="dashboard-data-title">
+                      Total Invites <br />
+                      Sent
+                    </div>
+                    <div className="dashboard-data-value mt-1">
+                      {NumberCommaSeparator(inviteSent)}
+                    </div>
+                  </div>
+                </div>
+                <div className="dashboard-data-row-item">
+                  <img src={invitesAccepted} />
+                  <div className="first-row-content">
+                    <div className="dashboard-data-title">
+                      Invites
+                      <br />
+                      Accepted
+                    </div>
+                    <div className="dashboard-data-value mt-1">
+                      {NumberCommaSeparator(inviteAccepted)}
+                    </div>
+                  </div>
+                </div>
+                <div className="dashboard-data-row-item">
+                  <img src={acceptanceRateImg} />
+                  <div className="first-row-content">
+                    <div className="dashboard-data-title">
+                      Acceptance
+                      <br />
+                      Rate
+                    </div>
+                    <div className="dashboard-data-value mt-1">{acceptanceRate}%</div>
+                  </div>
+                </div>
               </div>
+              <div className="dashboard-data-row dashboard-data-second-row">
+                <div className="dashboard-data-row-item">
+                  <img src={totalLeadsImg} />
+                  <div className="dashboard-second-row-content ml-10">
+                    <div className="dashboard-data-title">
+                      Active
+                      <br />
+                      Leads
+                    </div>
+                    <div className="dashboard-data-value">
+                      {NumberCommaSeparator(opportunityCount)}
+                    </div>
+                  </div>
+                </div>
+                <div className="dashboard-data-row-item">
+                  <img src={hoursSpent} />
+                  <div className="dashboard-second-row-content ml-10">
+                    <div className="dashboard-data-title">
+                      Hours Spent <br />
+                      on LinkedIn
+                    </div>
+                    <div className="dashboard-data-value">
+                      {NumberCommaSeparator(timeSpentInLinkedIn)}
+                    </div>
+                  </div>
+                </div>
+                <div className="dashboard-data-row-item">
+                  <img src={percentageOfLeads} />
+                  <div className="dashboard-second-row-content ml-10">
+                    <div className="dashboard-data-title">
+                      Percentage of
+                      <br />
+                      Leads Closed
+                    </div>
+                    <div className="dashboard-data-value">{percentOfLeadsClosed}%</div>
+                  </div>
+                </div>
+              </div>
+              <div className="dashboard-graphs-container">
+                <div>
+                  <div className="title">Total Pipeline Value</div>
+                  <div className="d-flex align-items-center">
+                    <img src={totalPipelineValues} />
+                    <span className="dashboard-data-value ml-10">
+                      {usdConverter(pipeline?.data?.totalDealAmount ?? 0)}
+                    </span>
+                  </div>
+                </div>
 
-              <div className="dashboard-pipeline-filter-container">
-                <div className="common-subtitle">SALES BETWEEN</div>
-                <DatePicker
-                  ref={startDateRef}
-                  placeholderText="dd/mm/yyyy"
-                  dateFormat="dd/MM/yyyy"
-                  selected={startDate}
-                  onChange={changeStartDate}
-                  className="common-input"
-                  onFocus={e => {
-                    e.target.placeholder = '';
-                  }}
-                  onBlur={e => {
-                    e.target.placeholder = 'dd/mm/yyyy';
-                  }}
-                />
-                <div className="common-subtitle">TO</div>
-                <DatePicker
-                  ref={endDateRef}
-                  placeholderText="dd/mm/yyyy"
-                  dateFormat="dd/MM/yyyy"
-                  selected={endDate}
-                  onChange={changeEndDate}
-                  className="common-input"
-                  onFocus={e => {
-                    e.target.placeholder = '';
-                  }}
-                  onBlur={e => {
-                    e.target.placeholder = 'dd/mm/yyyy';
-                  }}
-                />
-                <button
-                  type="submit"
-                  className="button slim-button"
-                  onClick={resetTotalSalesFilter}
+                <div>
+                  <div className="title">Total Sales Generated</div>
+                  <div className="d-flex align-items-center">
+                    <img src={totalSalesGeneratedImg} />
+                    <span className="dashboard-data-value ml-10">
+                      {usdConverter(totalSalesGenerated)}
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className={`dashboard-graph ${
+                    pipeline?.data?.data?.length === 0 && 'no-data-style'
+                  }`}
                 >
-                  RESET
-                </button>
+                  {pipeline?.data?.data?.length !== 0 ? (
+                    <Bar options={pipelineOptions} data={pipelineState} />
+                  ) : (
+                    "Looks like you haven't added any opportunities in order for the graphs to populate."
+                  )}
+                </div>
+                <div>
+                  <div className="dashboard-total-sales-filter-container">
+                    <div className="common-subtitle">SALES BETWEEN</div>
+                    <DatePicker
+                      ref={startDateRef}
+                      placeholderText="dd/mm/yyyy"
+                      dateFormat="dd/MM/yyyy"
+                      selected={startDate}
+                      onChange={changeStartDate}
+                      className="common-input"
+                      onFocus={e => {
+                        e.target.placeholder = '';
+                      }}
+                      onBlur={e => {
+                        e.target.placeholder = 'dd/mm/yyyy';
+                      }}
+                    />
+                    <div className="common-subtitle">TO</div>
+                    <DatePicker
+                      ref={endDateRef}
+                      placeholderText="dd/mm/yyyy"
+                      dateFormat="dd/MM/yyyy"
+                      selected={endDate}
+                      onChange={changeEndDate}
+                      className="common-input"
+                      onFocus={e => {
+                        e.target.placeholder = '';
+                      }}
+                      onBlur={e => {
+                        e.target.placeholder = 'dd/mm/yyyy';
+                      }}
+                    />
+                    <button
+                      type="submit"
+                      className="button slim-button"
+                      onClick={resetTotalSalesFilter}
+                    >
+                      RESET
+                    </button>
+                  </div>
+                  <div className="dashboard-graph total-sales-graph-container">
+                    <Bar
+                      key="totalSalesDataSalesGenerated"
+                      options={totalSalesOptions}
+                      data={totalSalesData}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-            <div
-              className={`pipeline-graph-container dashboard-graph ${
-                pipeline?.data?.data?.length === 0 && 'no-data-style'
-              }`}
-            >
-              {pipeline?.data?.data?.length !== 0 ? (
-                <Bar options={pipelineOptions} data={pipelineState} />
-              ) : (
-                "Looks like you haven't added any opportunities in order for the graphs to populate."
-              )}
-            </div>
-            <div className="dashboard-graph">
-              <Bar
-                key="totalSalesDataSalesGenerated"
-                options={totalSalesOptions}
-                data={totalSalesData}
-              />
-            </div>
           </div>
-        </div>
-      </div>
+        </>
+      ) : (
+        <Loader />
+      )}
     </>
   );
 };
