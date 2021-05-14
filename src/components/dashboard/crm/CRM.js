@@ -148,9 +148,9 @@ function Crm() {
 
   const chartClickCallback = useCallback(
     (event, element) => {
-      const el = document.getElementById('crmList');
-      el.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });
       if (element.length > 0) {
+        const el = document.getElementById('crmList');
+        el.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });
         const index = element[0]._index;
         handleStageChange(index);
       }
