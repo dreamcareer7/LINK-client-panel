@@ -218,9 +218,11 @@ input {
   color: $secondary-font-color;
 }
 .hide-detail{
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .content-title {

@@ -294,7 +294,7 @@ function Crm() {
 
   const handleFilterApplyClick = () => {
     setDataAdd(true);
-    reloadCRMData(page);
+    reloadCRMData(1);
   };
 
   const handleResetClick = () => {
@@ -313,7 +313,7 @@ function Crm() {
       type: CRM_FILTER_REDUCER_ACTIONS.RESET_STATE,
     });
 
-    dispatch(getFilteredCRMSAction(page, data));
+    dispatch(getFilteredCRMSAction(1, data));
   };
 
   const handleEditCRMUser = id => {
