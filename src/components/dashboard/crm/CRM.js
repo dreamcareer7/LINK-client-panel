@@ -150,9 +150,9 @@ function Crm() {
     (event, element) => {
       if (element.length > 0) {
         const el = document.getElementById('crmList');
-        el.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });
         const index = element[0]._index;
         handleStageChange(index);
+        el.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });
       }
     },
     [crmsChartState]
@@ -364,8 +364,8 @@ function Crm() {
         ) : (
           <div className="no-data-style pt-4">
             <div className="w-50 text-center">
-              No results found in your search, add more opportunities for the stages to display.
-              Head to your LinkedIn account to get started. Good luck!
+              No results found, add opportunities for the stages to display. Head to your LinkedIn
+              account to get started. Good luck!
             </div>
           </div>
         )}
@@ -572,8 +572,8 @@ function Crm() {
         <>
           <div className="no-data-style pt-4">
             <div className="w-50 text-center">
-              No results found in your search, either add opportunities on LinkedIn or hit the reset
-              button and change the criteria within the filters. All the best!
+              No results found, either add opportunities on LinkedIn or change the criteria within
+              the search filters.
             </div>
           </div>
         </>
