@@ -39,7 +39,6 @@ export const getOpportunity = id => {
         }
       })
       .catch(e => {
-        console.log(e);
         if (e.response?.data?.status === undefined) {
           errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
@@ -61,7 +60,6 @@ export const getOpportunityWithPrevNext = data => {
         }
       })
       .catch(e => {
-        console.log(e);
         if (e.response?.data?.status === undefined) {
           errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
@@ -74,29 +72,33 @@ export const getOpportunityWithPrevNext = data => {
 // In sync we have to store data on get opportunity constant
 export const syncWithLinkedIn = id => {
   return dispatch => {
-    dispatch(clearOpportunity);
-    FollowUpService.syncWithLinkedIn(id)
-      .then(response => {
-        if (response.data.status === 'SUCCESS') {
-          dispatch({
-            type: FOLLOW_UP_REDUX_CONSTANT.GET_OPPORTUNITY_DETAIL,
-            data: response.data.data,
-          });
-          successNotification('Data has been successfully synced');
-        }
-      })
-      .catch(e => {
-        if (e.response.data.status === 'READ_ERROR_MESSAGE') {
-          dispatch({
-            type: POPUP_REDUX_CONSTANT.POP_UP_MESSAGE,
-            data: e.response.data.message,
-          });
-        } else if (e.response.data.status === undefined) {
-          errorNotification('It seems like server is down, Please try after sometime');
-        } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
-          errorNotification('Internal server error');
-        }
-      });
+    return new Promise((resolve, reject) => {
+      dispatch(clearOpportunity);
+      FollowUpService.syncWithLinkedIn(id)
+        .then(response => {
+          if (response.data.status === 'SUCCESS') {
+            dispatch({
+              type: FOLLOW_UP_REDUX_CONSTANT.GET_OPPORTUNITY_DETAIL,
+              data: response.data.data,
+            });
+            successNotification('Data has been successfully synced');
+            resolve();
+          }
+        })
+        .catch(e => {
+          if (e.response.data.status === 'READ_ERROR_MESSAGE') {
+            dispatch({
+              type: POPUP_REDUX_CONSTANT.POP_UP_MESSAGE,
+              data: e.response.data.message,
+            });
+          } else if (e.response.data.status === undefined) {
+            errorNotification('It seems like server is down, Please try after sometime');
+          } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {
+            errorNotification('Internal server error');
+          }
+          reject();
+        });
+    });
   };
 };
 
@@ -113,7 +115,6 @@ export const updateOpportunity = (id, data) => {
         }
       })
       .catch(e => {
-        console.log(e);
         if (e.response.data.status === undefined) {
           errorNotification('It seems like server is down, Please try after sometime');
         } else if (e.response.data.status === 'INTERNAL_SERVER_ERROR') {

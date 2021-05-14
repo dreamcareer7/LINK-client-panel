@@ -6,6 +6,7 @@ import UpcomingActions from './UpcomingActions/UpcomingActions';
 function FollowUps() {
   useEffect(() => {
     document.title = 'Follow Ups';
+    document.getElementsByClassName('common-area')?.[0]?.scrollTo(0, 0);
   }, []);
   return (
     <div className="follow-ups-container">

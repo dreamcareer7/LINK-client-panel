@@ -29,9 +29,7 @@ instance.interceptors.response.use(
     return response;
   },
   error => {
-    console.log(error);
     if (error && error.response && error.response.status === 401) {
-      console.log('redirect to sign up');
       clearAuthToken();
       window.location.href = '/signUp';
       return false;
@@ -50,8 +48,8 @@ const ApiService = {
   postData(url, data) {
     return instance.post(url, data);
   },
-  putData(url, data) {
-    return instance.put(url, data);
+  putData(url, data ,configs) {
+    return instance.put(url, data, configs);
   },
   patchData(url, data) {
     return instance.patch(url, data);

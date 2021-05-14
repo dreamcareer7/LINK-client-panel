@@ -233,6 +233,7 @@ function Crm() {
 
   useEffect(() => {
     document.title = 'CRM';
+    document.getElementsByClassName('common-area')?.[0]?.scrollTo(0, 0);
   }, []);
   useEffect(() => {
     const data = {

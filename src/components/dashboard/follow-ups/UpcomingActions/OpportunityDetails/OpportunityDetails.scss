@@ -241,3 +241,12 @@
   caret-color: #444444!important;
   background-color: #fefefe!important;
 }
+.button-to-navigate{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  .button-to-navigate-text{
+    text-transform: uppercase;
+  }
+}

@@ -84,7 +84,7 @@ function Filters() {
         startDate: startDate.value ? startDate.value.toISOString() : undefined,
         endDate: endDate.value ? endDate.value.toISOString() : undefined,
       };
-      dispatch(getUpcomingActions(followupData.docs.page, limits, data));
+      dispatch(getUpcomingActions(/* followupData.docs.page */ 1, limits, data));
     }
   };
   const resetFilters = () => {

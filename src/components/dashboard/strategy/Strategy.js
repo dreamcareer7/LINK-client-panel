@@ -25,6 +25,8 @@ const Strategy = () => {
     }, [isReadMoreNeeded]); */
 
   useEffect(() => {
+    document.title = 'Strategy';
+    document.getElementsByClassName('common-area')?.[0]?.scrollTo(0, 0);
     dispatch(getStrategies());
   }, []);
 

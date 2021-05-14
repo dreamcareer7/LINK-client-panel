@@ -16,33 +16,47 @@ function History() {
   const chatContainer = useRef(null);
   const prevChatLength = useRef(0);
 
+  const historyData = useSelector(({ opportunityHistory }) => opportunityHistory ?? {});
+  const { salesNavigatorObj } = useSelector(
+    ({ opportunityHistory }) => opportunityHistory.data ?? {}
+  );
   useEffect(() => {
-    dispatch(fetchConversation(id));
+    dispatch(fetchConversation(id, null, { chatFor: historyData?.chatFor }));
     return () => {
       dispatch(clearConversation());
     };
   }, []);
 
-  const allConversationData = useSelector(state => state.opportunityHistory);
+  const allConversationData = useSelector(({ opportunityHistory }) => opportunityHistory ?? {});
   const allConversation = useMemo(
     () => (allConversationData && allConversationData.data ? allConversationData.data : []),
     [allConversationData]
   );
 
   const handleScroll = e => {
-    const targetVal = e.target;
-    if (targetVal.scrollTop < 1) {
-      const data = {
-        createdAt: allConversation.data[0].createdAt,
-      };
-      if (!allConversationData.isAllDataLoaded) {
-        dispatch(fetchConversation(id, data));
+    const targetVal = e?.target;
+    if (targetVal?.scrollTop < 1) {
+      if (salesNavigatorObj && historyData?.chatFor === 'SALES_NAVIGATOR') {
+        const data = {
+          createdAt: allConversation?.data?.[0]?.createdAt,
+          salesNavigatorObj: salesNavigatorObj ?? {},
+        };
+        if (!allConversationData?.isAllDataLoaded) {
+          dispatch(fetchConversation(id, data, { chatFor: allConversationData?.chatFor }));
+        }
+      } else {
+        const data = {
+          createdAt: allConversation?.data?.[0]?.createdAt,
+        };
+        if (!allConversationData?.isAllDataLoaded) {
+          dispatch(fetchConversation(id, data, { chatFor: allConversationData?.chatFor }));
+        }
       }
     }
   };
 
   useEffect(() => {
-    if (chatContainer.current && allConversation.data && allConversation.data.length > 0) {
+    if (chatContainer?.current && allConversation?.data?.length > 0) {
       if (prevChatLength.current === 0) {
         setTimeout(() => {
           const scrollHeights = chatContainer?.current?.scrollHeight;
@@ -62,28 +76,28 @@ function History() {
       <div className="common-block--detail-container chat-history">
         <div className="common-subtitle">HISTORY</div>
         <div className="whole-chat-container" ref={chatContainer} onScroll={handleScroll}>
-          {allConversation && allConversation.data && allConversation.data.length > 0 ? (
-            allConversation.data.map(convo => (
+          {allConversation && allConversation?.data?.length > 0 ? (
+            allConversation?.data?.map(convo => (
               <div className="chat-container" key={Math.random()}>
                 {convo.id === '2' ? (
                   <div className="left-conversation">
-                    <img className="chat-dp" src={convo.profilePicUrl || defaultUser} />
+                    <img className="chat-dp" src={convo?.profilePicUrl || defaultUser} />
                     <div className="chat-bubble">
-                      {convo.message ? convo.message : 'This message is deleted'}
+                      {convo?.message ? convo.message : 'This message is deleted'}
                       <span className="chat-time-stamp">
-                        {moment(convo.createdAt).format('DD/MM/YYYY | hh:mm A')}
+                        {moment(convo?.createdAt).format('DD/MM/YYYY | hh:mm A')}
                       </span>
                     </div>
                   </div>
                 ) : (
                   <div className="right-conversation">
                     <div className="chat-bubble user-bubble">
-                      {convo.message ? convo.message : 'This message is deleted'}
+                      {convo?.message ? convo?.message : 'This message is deleted'}
                       <span className="chat-time-stamp right-date-time">
                         {moment(convo.createdAt).format('DD/MM/YYYY | hh:mm A')}
                       </span>
                     </div>
-                    <img className="chat-dp" src={convo.profilePicUrl || defaultUser} />
+                    <img className="chat-dp" src={convo?.profilePicUrl || defaultUser} />
                   </div>
                 )}
               </div>

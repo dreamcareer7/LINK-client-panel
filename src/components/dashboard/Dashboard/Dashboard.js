@@ -30,6 +30,7 @@ import { NumberCommaSeparator } from '../../../helpers/NumberCommaSeparator';
 const Dashboard = () => {
   useEffect(() => {
     document.title = 'Dashboard';
+    document.getElementsByClassName('common-area')?.[0]?.scrollTo(0, 0);
   }, []);
 
   const accountInfo = useSelector(state => state?.AccountReducer);
