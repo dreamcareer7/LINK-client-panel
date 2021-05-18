@@ -386,19 +386,6 @@ const Dashboard = () => {
                       {usdConverter(totalSalesGenerated)}
                     </span>
                   </div>
-                </div>
-                <div
-                  className={`dashboard-graph ${
-                    pipeline?.data?.data?.length === 0 && 'no-data-style'
-                  }`}
-                >
-                  {pipeline?.data?.data?.length !== 0 ? (
-                    <Bar options={pipelineOptions} data={pipelineState} />
-                  ) : (
-                    "Looks like you haven't added any opportunities in order for the graphs to populate."
-                  )}
-                </div>
-                <div>
                   <div className="dashboard-total-sales-filter-container">
                     <div className="common-subtitle">SALES BETWEEN</div>
                     <DatePicker
@@ -438,6 +425,19 @@ const Dashboard = () => {
                       RESET
                     </button>
                   </div>
+                </div>
+                <div
+                  className={`dashboard-graph ${
+                    pipeline?.data?.data?.length === 0 && 'no-data-style'
+                  }`}
+                >
+                  {pipeline?.data?.data?.length !== 0 ? (
+                    <Bar options={pipelineOptions} data={pipelineState} />
+                  ) : (
+                    "Looks like you haven't added any opportunities in order for the graphs to populate."
+                  )}
+                </div>
+                <div>
                   <div className="dashboard-graph total-sales-graph-container">
                     <Bar
                       key="totalSalesDataSalesGenerated"
