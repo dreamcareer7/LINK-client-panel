@@ -11,7 +11,7 @@ import datePicker from '../../../assets/images/datepicker.svg';
 import downArrow from '../../../assets/images/arrow_down.png';
 import logout from '../../../assets/images/Logout.png';
 import notification from '../../../assets/images/notification.svg';
-import account from '../../../assets/images/Profile.png';
+// import account from '../../../assets/images/Profile.png';
 import FollowUpService from '../../../services/follow-up-service/FollowUpSevice';
 import { getClientInfo, logoutUser } from '../../../redux/actions/accountAction/AccountAction';
 import { useOnClickOutside } from '../../../helpers/UseClickOutsideHook';
@@ -152,9 +152,9 @@ function UpperHeader() {
     logoutUser();
     history.push('/signUp');
   };
-  const onAccountClick = () => {
-    history.replace('/account');
-  };
+  // const onAccountClick = () => {
+  //   history.replace('/account');
+  // };
   const selectDateRange = () => {
     setDateRangePicker(!dateRangePicker);
   };
@@ -235,10 +235,10 @@ function UpperHeader() {
             <img src={downArrow} onClick={onDropDownClick} />
             {dropDown && (
               <div className="user-dropdown" ref={ref}>
-                <div className="dropdown-option" onClick={onAccountClick}>
+                {/* <div className="dropdown-option" onClick={onAccountClick}>
                   <img src={account} />
                   <span>Account</span>
-                </div>
+                </div> */}
                 <div className="dropdown-option" onClick={onLogOut}>
                   <img src={logout} />
                   <span>Logout</span>
